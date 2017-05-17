@@ -26,6 +26,9 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'figaro'
+gem 'faraday'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -44,6 +47,13 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

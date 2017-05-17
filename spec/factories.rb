@@ -47,5 +47,5 @@ FactoryGirl.define do
     role 1
     active? false
   end
-  
+
 end

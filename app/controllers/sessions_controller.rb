@@ -1,11 +1,10 @@
 class SessionsController < ApplicationController
 
   def create
-    require "pry"; binding.pry
-    if user = User.from_omniauth(request.env["omniauth.auth"])
+    if user = User.from_google_omniauth(request.env["omniauth.auth"])
 
       session[:user_id] = user.id
-      redirect_to dashboard_path
+      redirect_to edit_user_path(user)
     else
       redirect_to signup_path
     end

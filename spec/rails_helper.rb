@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'awesome_print'
 require 'support/factory_girl'
 require 'database_cleaner'
+require 'google_helper'
 
 DatabaseCleaner.strategy = :truncation
 RSpec.configure do |c|

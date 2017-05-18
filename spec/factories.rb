@@ -9,11 +9,13 @@ FactoryGirl.define do
     last_name Faker::Music.instrument
     image_url Faker::Fillmurray.image
     email Faker::Internet.email
-    phone_number "MyString"
+    phone_number "123-456-7899"
     description Faker::RuPaul.quote
     hometown "MyString"
     role 0
     active? false
+    facebook_token ENV['FACEBOOK_USER_TOKEN']
+    uid 123
   end
 
   factory :property_availability do

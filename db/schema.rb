@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 20170517234338) do
     t.string   "image_url"
     t.time     "check_in_time"
     t.time     "check_out_time"
-    t.boolean  "active?"
+    t.integer  "status",           default: 0
     t.integer  "owner_id"
     t.integer  "room_type_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["owner_id"], name: "index_properties_on_owner_id", using: :btree
     t.index ["room_type_id"], name: "index_properties_on_room_type_id", using: :btree
   end

@@ -8,7 +8,7 @@ RSpec.feature "User can authenticate with Google by" do
 
     click_on "Sign Up"
 
-    expect(current_path).to eq(sign_up_path)
+    expect(current_path).to eq(signup_path)
 
     click_on "Sign up with Google"
 

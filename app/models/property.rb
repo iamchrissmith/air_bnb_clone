@@ -5,5 +5,5 @@ class Property < ApplicationRecord
   has_many :reservations
   has_many :property_availabilities
 
-  enum status: %w(pending confirmed in_progress finished declined)
+  enum status: %w(pending active archived)
 end

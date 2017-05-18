@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517212301) do
+ActiveRecord::Schema.define(version: 20170517234338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20170517212301) do
     t.decimal  "lat"
     t.decimal  "long"
     t.string   "image_url"
-    t.datetime "check_in_time"
-    t.datetime "check_out_time"
+    t.time     "check_in_time"
+    t.time     "check_out_time"
     t.integer  "status",           default: 0
     t.integer  "owner_id"
     t.integer  "room_type_id"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 20170517212301) do
 
   create_table "reservations", force: :cascade do |t|
     t.decimal  "total_price"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date     "start_date"
+    t.date     "end_date"
     t.integer  "number_of_guests"
     t.integer  "property_id"
     t.integer  "renter_id"

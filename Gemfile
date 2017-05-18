@@ -21,7 +21,8 @@ gem 'omniauth-google-oauth2'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
-
+gem 'devise'
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'byebug', platform: :mri

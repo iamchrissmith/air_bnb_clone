@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517020118) do
+ActiveRecord::Schema.define(version: 20170517212301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 20170517020118) do
     t.string   "image_url"
     t.datetime "check_in_time"
     t.datetime "check_out_time"
-    t.boolean  "active?"
+    t.integer  "status",           default: 0
     t.integer  "owner_id"
     t.integer  "room_type_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["owner_id"], name: "index_properties_on_owner_id", using: :btree
     t.index ["room_type_id"], name: "index_properties_on_room_type_id", using: :btree
   end

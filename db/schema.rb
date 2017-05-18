@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517234338) do
+ActiveRecord::Schema.define(version: 20170518164526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,10 +77,13 @@ ActiveRecord::Schema.define(version: 20170517234338) do
     t.string   "phone_number"
     t.text     "description"
     t.string   "hometown"
-    t.integer  "role",         default: 0
+    t.integer  "role",                    default: 0
     t.boolean  "active?"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "google_uid"
+    t.string   "google_oauth_token"
+    t.datetime "google_oauth_expires_at"
   end
 
   add_foreign_key "properties", "room_types"

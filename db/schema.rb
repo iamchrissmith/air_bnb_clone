@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518181648) do
+ActiveRecord::Schema.define(version: 20170518213240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "uid"
+    t.string   "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
+  end
 
   create_table "properties", force: :cascade do |t|
     t.string   "name"
@@ -77,14 +86,18 @@ ActiveRecord::Schema.define(version: 20170518181648) do
     t.string   "phone_number"
     t.text     "description"
     t.string   "hometown"
-    t.integer  "role",           default: 0
-    t.boolean  "active?",        default: true
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.string   "uid"
+    t.integer  "role",                    default: 0
+    t.boolean  "active?",                 default: true
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "google_uid"
+    t.string   "google_oauth_token"
+    t.datetime "google_oauth_expires_at"
+    t.string   "facebook_uid"
     t.string   "facebook_token"
   end
 
+  add_foreign_key "identities", "users"
   add_foreign_key "properties", "room_types"
   add_foreign_key "properties", "users", column: "owner_id"
   add_foreign_key "property_availabilities", "properties"

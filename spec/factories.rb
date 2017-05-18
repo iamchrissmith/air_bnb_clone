@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :identity do
+    user nil
+  end
 
   factory :room_type do
     name 0

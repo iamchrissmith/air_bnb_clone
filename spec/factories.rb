@@ -8,12 +8,14 @@ FactoryGirl.define do
     first_name Faker::User.name
     last_name Faker::Music.instrument
     image_url Faker::Fillmurray.image
-    email Faker::Internet.email
+    sequence(:email) { |n| Faker::Internet.email("sample#{n}") }
+
     phone_number "MyString"
     description Faker::RuPaul.quote
     hometown "MyString"
     role 0
     active? false
+    password "password"
   end
 
   factory :property_availability do

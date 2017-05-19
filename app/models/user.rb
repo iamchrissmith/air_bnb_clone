@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable
 
   # validates :first_name, :last_name, presence: true
 
@@ -18,24 +18,31 @@ class User < ApplicationRecord
 
   def self.from_fb_omniauth(auth_info)
     where(facebook_uid: auth_info[:uid]).first_or_create do |user|
-      user.uid            = auth_info.uid
+      user.facebook_uid   = auth_info.uid
       user.first_name     = auth_info.info.name.split(' ')[0]
       user.last_name      = auth_info.info.name.split(' ')[1]
       user.email          = auth_info.info.email
       user.image_url      = auth_info.info.image
       user.facebook_token = auth_info.credentials.token
+      user.password       = Devise.friendly_token[0,20]
     end
+  end
+
+  def self.from_omniauth(auth_info)
+    return from_google_omniauth(auth_info) if auth_info.provider == "google_oauth2"
+    return from_fb_omniauth(auth_info) if auth_info.provider == "facebook"
   end
 
   def self.from_google_omniauth(auth_info)
     where(google_uid: auth_info[:uid]).first_or_create do |new_user|
       new_user.google_uid                   = auth_info.uid
-      new_user.email                        = auth_info.email
+      new_user.email                        = auth_info.info.email
       new_user.first_name                   = auth_info.info.first_name
       new_user.last_name                    = auth_info.info.last_name
       new_user.image_url                    = auth_info.info.image
       new_user.google_oauth_token           = auth_info.credentials.token
       new_user.google_oauth_expires_at      = auth_info.credentials.expires_at
+      new_user.password                     = Devise.friendly_token[0,20]
     end
   end
 end

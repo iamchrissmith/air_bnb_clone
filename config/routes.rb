@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users
   root 'home#index'
 
   get '/sign_up', to: 'signup#index'
@@ -7,9 +7,10 @@ Rails.application.routes.draw do
 
   get '/auth/facebook', as: :facebook_login
 
-  get '/auth/google', as: :google_login
+  # get '/auth/google', as: :google_login
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   get '/auth/:provider/callback', to: 'sessions#create'
-
+  # get '/users/auth/google_oauth2/callback', to: 'sessions#create'
   get  '/dashboard', to: 'dashboard#index'
   delete '/logout', to: 'sessions#destroy'
 

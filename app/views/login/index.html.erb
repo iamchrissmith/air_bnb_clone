@@ -1,9 +1,9 @@
 <div class="well">
+  <%= link_to "Log in with Facebook", user_facebook_omniauth_authorize_path %>
+</div>
+<div class="well">
+  <%= link_to "Log in with Google", user_google_oauth2_omniauth_authorize_path %>
+</div>
+<div class="well">
   <%= link_to "Log in with Email", new_user_session_path %>
-</div>
-<div class="well">
-  <%= link_to "Log in with Google", google_login_path %>
-</div>
-<div class="well">
-  <%= link_to "Log in with Facebook", facebook_login_path %>
 </div>

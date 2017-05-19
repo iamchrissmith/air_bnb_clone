@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     end
 
     if @identity.provider == "facebook"
+      binding.pry
       if user = User.from_fb_omniauth(auth)
         session[:user_id] = user.id
         if current_user.phone_number.nil?

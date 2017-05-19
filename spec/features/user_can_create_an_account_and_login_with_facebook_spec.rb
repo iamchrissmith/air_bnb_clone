@@ -7,7 +7,7 @@ feature "Facebook login" do
     @already_created_user = create(:user)
   end
 
-  context "User can create an account with thier facebook login" do
+  context "User can create an account with their facebook login" do
 
 
     scenario "visit sign up page", vcr: true do
@@ -19,8 +19,8 @@ feature "Facebook login" do
     end
 
     scenario "begins building an account profile with facebook info", vcr: true do
-      allow(User).to receive(:from_omniauth).and_return(User.last)
-
+      # allow(User).to receive(:from_omniauth).and_return(User.last)
+      user = User.new(first_name: "Colleen", last_name: "Ward", email: "ward.colleen.a")
       visit sign_up_path
 
       click_on "Sign up with Facebook"
@@ -44,17 +44,17 @@ feature "Facebook login" do
     end
   end
 
-  context "User can log in with thier facebook login" do
-    scenario "vitsts login page" do
+  context "User can log in with their facebook login" do
+    scenario "visits login page" do
       visit root_path
-      click_on "Log in"
+      click_on "Log In"
 
-      expect(current_path).to eq(login_path)
+      expect(current_path).to eq(log_in_path)
   end
 
     scenario "user can login with facebook credentials" do
       allow(User).to receive(:from_omniauth).and_return(User.last)
-      visit login_path
+      visit log_in_path
 
       click_on "Log in with Facebook"
 
@@ -63,4 +63,8 @@ feature "Facebook login" do
       expect(page).to have_content("hello #{already_created_user.first_name}")
     end
   end
+
+    xscenario "user has same email for facebook and google" do
+
+    end
 end

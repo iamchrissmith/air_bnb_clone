@@ -1,10 +1,6 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
-
-  # validates :first_name, :last_name, presence: true
 
   has_many :reservations, foreign_key: "renter_id"
   has_many :properties, foreign_key: "owner_id"
@@ -14,6 +10,11 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def self.from_omniauth(auth_info)
+    return from_google_omniauth(auth_info) if auth_info.provider == "google_oauth2"
+    return from_fb_omniauth(auth_info) if auth_info.provider == "facebook"
   end
 
   def self.from_fb_omniauth(auth_info)
@@ -26,11 +27,6 @@ class User < ApplicationRecord
       user.facebook_token = auth_info.credentials.token
       user.password       = Devise.friendly_token[0,20]
     end
-  end
-
-  def self.from_omniauth(auth_info)
-    return from_google_omniauth(auth_info) if auth_info.provider == "google_oauth2"
-    return from_fb_omniauth(auth_info) if auth_info.provider == "facebook"
   end
 
   def self.from_google_omniauth(auth_info)

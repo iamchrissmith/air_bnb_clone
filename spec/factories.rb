@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :identity do
+    user nil
+  end
 
   factory :room_type do
     name 0
@@ -9,13 +12,14 @@ FactoryGirl.define do
     last_name Faker::Music.instrument
     image_url Faker::Fillmurray.image
     sequence(:email) { |n| Faker::Internet.email("sample#{n}") }
-
-    phone_number "MyString"
+    phone_number Faker::PhoneNumber.cell_phone
     description Faker::RuPaul.quote
-    hometown "MyString"
+    hometown Faker::Address.city
     role 0
     active? false
     password "password"
+    facebook_token ENV['FACEBOOK_USER_TOKEN']
+    uid 123
   end
 
   factory :property_availability do

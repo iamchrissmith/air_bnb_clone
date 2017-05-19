@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'awesome_print'
 require 'support/factory_girl'
 require 'database_cleaner'
+require 'google_helper'
 
 DatabaseCleaner.strategy = :truncation
 RSpec.configure do |c|
@@ -35,6 +36,28 @@ VCR.configure do |config|
   config.filter_sensitive_data('<GOOGLE_CLIENT_SECRET>') { ENV['GOOGLE_CLIENT_SECRET'] }
   config.filter_sensitive_data('<GOOGLE_USER_TOKEN>') { ENV['GOOGLE_USER_TOKEN'] }
   config.allow_http_connections_when_no_cassette = true
+end
+
+def stub_facebook
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+    privider: 'facebook',
+    uid: '12345',
+    info:{
+      email: 'ward.colleen.a@gmail.com',
+      first_name: 'Colleen',
+      last_name: 'Ward',
+      image: "http://graph.facebook.com/v2.6/10100295829467675/picture",
+      verified: true
+    },
+    credentials: {
+      token: ENV['FACEBOOK_USER_TOKEN'],
+      expires_at: 1500312576,
+      expires: true
+    }
+    })
+
 end
 
 ActiveRecord::Migration.maintain_test_schema!

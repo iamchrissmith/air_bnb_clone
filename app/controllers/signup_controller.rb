@@ -1,2 +1,6 @@
 class SignupController < ApplicationController
-end 
+
+  def index
+  end
+  
+end

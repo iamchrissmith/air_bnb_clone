@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     context "user is valid with all attributes" do
       # it { should validate_presence_of(:first_name) }
       # it { should validate_presence_of(:last_name) }
-      it { should validate_presence_of(:email) }
+      # it { should validate_presence_of(:email) }
     end
 
     # context "invalid" do
@@ -23,14 +23,14 @@ RSpec.describe User, type: :model do
     #     expect(user).to_not be_valid
     #   end
     # end
-
-    context "invalid" do
-      it "is invalid without email" do
-        user = build(:user, email: nil)
-
-        expect(user).to_not be_valid
-      end
-    end
+    #
+    # context "invalid" do
+    #   it "is invalid without email" do
+    #     user = build(:user, email: nil)
+    #
+    #     expect(user).to_not be_valid
+    #   end
+    # end
 
     context "invalid with non-unique email" do
       it "is invalid without email" do

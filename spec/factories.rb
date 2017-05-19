@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :identity do
-    user nil
-  end
+  # factory :identity do
+  #   user nil
+  # end
 
   factory :room_type do
     name 0
@@ -19,7 +19,7 @@ FactoryGirl.define do
     active? false
     password "password"
     facebook_token ENV['FACEBOOK_USER_TOKEN']
-    uid 123
+    # uid 123
   end
 
   factory :property_availability do

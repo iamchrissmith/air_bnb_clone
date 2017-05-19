@@ -12,16 +12,19 @@ feature "Facebook login" do
 
     scenario "visit sign up page", vcr: true do
       visit root_path
-      click_on "Sign up"
 
-      expect(current_path).to eq(signup_path)
-  end
+      click_on "Sign Up"
+
+      expect(current_path).to eq(sign_up_path)
+    end
 
     scenario "begins building an account profile with facebook info", vcr: true do
-      visit signup_path
+      allow(User).to receive(:from_omniauth).and_return(User.last)
+
+      visit sign_up_path
+
       click_on "Sign up with Facebook"
 
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(User.last)
       expect(current_path).to eq(edit_user_path(User.last))
       expect(page).to have_content("Edit profile")
       expect(find_field("First name").value).to eq("Colleen")
@@ -50,7 +53,7 @@ feature "Facebook login" do
   end
 
     scenario "user can login with facebook credentials" do
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(already_created_user)
+      allow(User).to receive(:from_omniauth).and_return(User.last)
       visit login_path
 
       click_on "Log in with Facebook"

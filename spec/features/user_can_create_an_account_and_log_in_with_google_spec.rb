@@ -30,7 +30,7 @@ RSpec.feature "User can authenticate with Google by" do
 
   scenario "logging in with Google" do
 
-    visit login_path
+    visit log_in_path
 
     click_on "Log in with Google"
 

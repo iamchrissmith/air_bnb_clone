@@ -3,26 +3,26 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "validations" do
     context "user is valid with all attributes" do
-      it { should validate_presence_of(:first_name) }
-      it { should validate_presence_of(:last_name) }
+      # it { should validate_presence_of(:first_name) }
+      # it { should validate_presence_of(:last_name) }
       it { should validate_presence_of(:email) }
     end
 
-    context "invalid" do
-      it "is invalid without first_name" do
-        user = build(:user, first_name: nil)
-
-        expect(user).to_not be_valid
-      end
-    end
-
-    context "invalid" do
-      it "is invalid without last_name" do
-        user = build(:user, last_name: nil)
-
-        expect(user).to_not be_valid
-      end
-    end
+    # context "invalid" do
+    #   it "is invalid without first_name" do
+    #     user = build(:user, first_name: nil)
+    #
+    #     expect(user).to_not be_valid
+    #   end
+    # end
+    #
+    # context "invalid" do
+    #   it "is invalid without last_name" do
+    #     user = build(:user, last_name: nil)
+    #
+    #     expect(user).to_not be_valid
+    #   end
+    # end
 
     context "invalid" do
       it "is invalid without email" do

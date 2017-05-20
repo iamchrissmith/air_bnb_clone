@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # validates :first_name, :last_name, :email, :phone_number, :image_url, presence: true
-
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
@@ -15,12 +13,13 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth_info)
+
     return from_google_omniauth(auth_info) if auth_info.provider == "google_oauth2"
     return from_fb_omniauth(auth_info) if auth_info.provider == "facebook"
   end
 
   def self.from_fb_omniauth(auth_info)
-    where(facebook_uid: auth_info[:uid]).first_or_create do |user|
+    where(email: auth_info[:info][:email]).first_or_create do |user|
       user.facebook_uid   = auth_info.uid
       user.first_name     = auth_info.info.name.split(' ')[0]
       user.last_name      = auth_info.info.name.split(' ')[1]
@@ -32,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def self.from_google_omniauth(auth_info)
-    where(google_uid: auth_info[:uid]).first_or_create do |new_user|
+    where(email: auth_info[:info][:email]).first_or_create do |new_user|
       new_user.google_uid                   = auth_info.uid
       new_user.email                        = auth_info.info.email
       new_user.first_name                   = auth_info.info.first_name

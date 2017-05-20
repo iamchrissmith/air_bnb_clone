@@ -13,6 +13,8 @@ RSpec.feature "guest can login with email" do
     fill_in :user_first_name, with: "Erin"
     fill_in :user_last_name, with: "B"
     fill_in :user_email, with: "erin@erin.net"
+    fill_in :user_phone_number, with: "123-456-7899"
+    fill_in :user_image_url, with: "https://fakeimage.jpg"
     fill_in :user_password, with: "password"
     fill_in :user_password_confirmation, with: "password"
     click_on "Sign up"

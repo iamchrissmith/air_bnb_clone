@@ -5,8 +5,7 @@ feature "Facebook login" do
   let(:already_created_user) {create(:user)}
 
   context "User can create an account with their facebook login" do
-
-
+    
     scenario "visit sign up page", vcr: true do
       visit root_path
       click_on "Sign Up"
@@ -59,7 +58,4 @@ feature "Facebook login" do
     end
   end
 
-    xscenario "user has same email for facebook and google" do
-
-    end
 end

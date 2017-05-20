@@ -5,4 +5,75 @@
       <p>Book unique homes and experience a city like a local.</p>
     </div>
   </div>
+
+  <div class="container">
+    <div class="search_bar">
+      <form class="form-inline">
+          <div class="form-group">
+          <%= form_tag(properties_path, :method => 'get') do %>
+            <%= label_tag(:city, "Where") %><br>
+            <%= text_field_tag(:city) %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:check_in, "When") %><br>
+            <%= text_field_tag(:check_in) %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:guests, "Guests") %><br>
+            <%= text_field_tag(:guests) %>
+          </div>
+          <div class="form-group">
+            <br>
+            <%= submit_tag "Search", :class => "btn btn-default" %>
+          <% end %>
+          </div>
+      </form>
+    </div>
+  </div>
+  <br><br>
+
+  <div class="container">
+    <div class="all_homes">
+      <!-- begin card deck -->
+      <h2>Homes</h2>
+      <div class="card-deck">
+        <% @featured_properties.each do |property| %>
+        <div class="card">
+          <!-- <img class="card-img-top" src="<%#= property.image_url%>" alt="Card image cap">
+          <%#= image_tag "#{rando.photo}", class: "thumbnail", size: "304x236" %> -->
+          <%= image_tag property.image_url, class: "card-img-top", size: "250x250" %>
+          <div class="card-block">
+            <!-- <h4 class="card-title"><%= property.name[0..28] %></h4> -->
+            <p class="card-text"><%= property.name[0..28] %></p>
+            <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+          </div>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+        <% end %>
+      </div>
+      <!-- end card deck -->
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="featured_cities">
+      <!-- begin card deck -->
+      <h2>Featured Cities</h2>
+      <div class="card-deck">
+        <% @featured_properties.each do |property| %>
+        <div class="card">
+          <!-- <img class="card-img-top" src="<%#= property.image_url%>" alt="Card image cap">
+          <%#= image_tag "#{rando.photo}", class: "thumbnail", size: "304x236" %> -->
+          <%= image_tag property.image_url, class: "card-img-top", size: "250x250" %>
+          <div class="card-block">
+            <!-- <h4 class="card-title"><%= property.name[0..28] %></h4> -->
+            <p class="card-text"><%= property.city[0..28] %></p>
+            <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+          </div>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+        <% end %>
+      </div>
+      <!-- end card deck -->
+    </div>
+  </div>
+
 <% end %>

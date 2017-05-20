@@ -1,9 +1,17 @@
-<div class="well">
-  <%= link_to "Sign up with Facebook", user_facebook_omniauth_authorize_path %>
-</div>
-<div class="well">
-  <%= link_to "Sign up with Google", user_google_oauth2_omniauth_authorize_path  %>
-</div>
-<div class="well">
+
+<div class="text-center">
+  <a class="btn btn-social-icon btn-facebook">
+    <span class="fa fa-facebook"></span></a>
+   <%= link_to "Sign up with Facebook", user_facebook_omniauth_authorize_path %>
+</div><br>
+
+<div class="text-center">
+  <a class="btn btn-social-icon btn-google">
+    <span class="fa fa-google"></span></a>
+    <%= link_to "Sign up with Google", user_google_oauth2_omniauth_authorize_path %>
+</div><br>
+
+<div class="text-center">
+  <span class="glyphicon glyphicon-envelope"></span>
   <%= link_to "Sign Up with Email", new_user_registration_path %>
 </div>

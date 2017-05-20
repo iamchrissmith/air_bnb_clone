@@ -26,6 +26,8 @@ gem 'simplecov', :require => false, :group => :test
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

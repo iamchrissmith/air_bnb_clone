@@ -25,7 +25,7 @@ RSpec.feature "User can authenticate with Google by" do
     expect(page.body).to have_content("First name: Joe")
     expect(page.body).to have_content("Last name: Schmoe")
     expect(page.body).to have_content("Email address: JoeSchmoe123@gmail.com")
-    expect(page.body).to have_link("Log out")
+    expect(page.body).to have_link("Log Out")
   end
 
   scenario "logging in with Google" do

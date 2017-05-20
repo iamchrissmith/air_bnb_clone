@@ -1,15 +1,14 @@
 # class SessionsController < ApplicationController
-# 
+#
 #   def create
 #     auth = request.env['omniauth.auth']
 #     @identity = Identity.find_with_omniauth(auth)
-# 
+#
 #     if @identity.nil?
 #       @identity = Identity.create_with_omniauth(auth)
 #     end
-# 
+#
 #     if @identity.provider == "facebook"
-#       binding.pry
 #       if user = User.from_fb_omniauth(auth)
 #         session[:user_id] = user.id
 #         if current_user.phone_number.nil?
@@ -28,9 +27,9 @@
 #         end
 #       end
 #     end
-# 
+#
 #   end
-# 
+#
 #   def destroy
 #     session[:user_id] = nil
 #     redirect_to root_path

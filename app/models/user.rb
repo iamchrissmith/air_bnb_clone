@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # validates :first_name, :last_name, :email, :phone_number, :image_url, presence: true
-
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
@@ -15,6 +13,7 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth_info)
+
     return from_google_omniauth(auth_info) if auth_info.provider == "google_oauth2"
     return from_fb_omniauth(auth_info) if auth_info.provider == "facebook"
   end

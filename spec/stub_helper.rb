@@ -1,4 +1,26 @@
-def stub_google_oauth
+def stub_facebook
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+    privider: 'facebook',
+    uid: '12345',
+    info:{
+      email: 'ward.colleen.a@gmail.com',
+      first_name: 'Colleen',
+      last_name: 'Ward',
+      image: "http://graph.facebook.com/v2.6/10100295829467675/picture",
+      verified: true
+    },
+    credentials: {
+      token: ENV['FACEBOOK_USER_TOKEN'],
+      expires_at: 1500312576,
+      expires: true
+    }
+    })
+
+end
+
+def stub_google
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
     provider: 'google',

@@ -19,7 +19,7 @@ FactoryGirl.define do
     active? false
     password "password"
     facebook_token ENV['FACEBOOK_USER_TOKEN']
-    # uid 123
+
   end
 
   factory :property_availability do

@@ -1,4 +1,6 @@
-<h3><%= @properties.first.city %></h3>
+<h3>Properties in <%= @properties.first.city %></h3>
+<h4><%="Properties with #{@number_of_guests} or more guests allowed" if @number_of_guests%></h4>
+
 <div class="results">
   <% @properties.each do |property| %>
   <%= property.name %><br>

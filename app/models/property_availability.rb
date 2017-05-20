@@ -1,4 +1,4 @@
 class PropertyAvailability < ApplicationRecord
-  validates :date, :reserved?, presence: true
+  validates :date, presence: true
   belongs_to :property
 end

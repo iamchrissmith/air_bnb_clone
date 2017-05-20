@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 

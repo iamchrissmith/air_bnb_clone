@@ -19,18 +19,18 @@ feature "Facebook login" do
     end
 
     scenario "begins building an account profile with facebook info", vcr: true do
-      # allow(User).to receive(:from_omniauth).and_return(User.last)
-      user = User.new(first_name: "Colleen", last_name: "Ward", email: "ward.colleen.a")
+      @already_created_user.update(phone_number: nil)
+      allow(User).to receive(:from_omniauth).and_return(@already_created_user)
+      
       visit sign_up_path
 
       click_on "Sign up with Facebook"
-
-      expect(current_path).to eq(edit_user_path(User.last))
+      expect(current_path).to eq(edit_user_path(@already_created_user))
       expect(page).to have_content("Edit profile")
-      expect(find_field("First name").value).to eq("Colleen")
-      expect(find_field("Last name").value).to eq("Ward")
-      expect(find_field("Email").value).to eq("ward.colleen.a@gmail.com")
-      expect(find_field("Image url").value).to eq("http://graph.facebook.com/v2.6/10100295829467675/picture")
+      expect(find_field("First name").value).to eq(@already_created_user.first_name)
+      expect(find_field("Last name").value).to eq(@already_created_user.last_name)
+      expect(find_field("Email").value).to eq(@already_created_user.email)
+      expect(find_field("Image url").value).to eq(@already_created_user.image_url)
 
       fill_in "Phone number", with: '555-555-555'
       fill_in "Description", with: 'HEY!'
@@ -39,8 +39,8 @@ feature "Facebook login" do
       click_on "Update Profile"
 
       expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content("hello Colleen")
-      expect(page).to have_css("img[src*='http://graph.facebook.com/v2.6/10100295829467675/picture']")
+      expect(page).to have_content("hello #{@already_created_user.first_name}")
+      expect(page).to have_css("img[src*='#{@already_created_user.image_url}']")
     end
   end
 
@@ -58,7 +58,6 @@ feature "Facebook login" do
 
       click_on "Log in with Facebook"
 
-# byebug
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("hello #{already_created_user.first_name}")
     end

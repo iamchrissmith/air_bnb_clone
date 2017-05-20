@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "Google login" do
-  stub_facebook
+  stub_google
   let(:already_created_user) {create(:user)}
 
   context "User can create an account with their google login" do

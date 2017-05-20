@@ -13,6 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.5'
 gem 'figaro'
 gem 'faraday'
@@ -21,7 +22,8 @@ gem 'omniauth-google-oauth2'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
-
+gem 'devise'
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'byebug', platform: :mri

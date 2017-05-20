@@ -19,7 +19,8 @@ class Seed
         description: Faker::Lorem.paragraph,
         hometown: Faker::Address.city,
         role: 0,
-        active?: true
+        active?: true,
+        password: "password"
         )
       puts "#{i} user created"
     end

@@ -1,21 +1,43 @@
 FactoryGirl.define do
-  
+  # factory :identity do
+  #   user nil
+  # end
+
+  factory :room_type do
+    name 0
+  end
+
+  factory :user do
+    first_name Faker::User.name
+    last_name Faker::Music.instrument
+    image_url Faker::Fillmurray.image
+    sequence(:email) { |n| Faker::Internet.email("sample#{n}") }
+    phone_number Faker::PhoneNumber.cell_phone
+    description Faker::RuPaul.quote
+    hometown Faker::Address.city
+    role 0
+    active? false
+    password "password"
+    facebook_token ENV['FACEBOOK_USER_TOKEN']
+
+  end
+
   factory :property_availability do
     date "2017-05-16"
     reserved? false
     property
   end
-  
+
   factory :reservation do
     total_price "9.99"
     start_date "2017-05-16"
     end_date "2017-05-17"
     number_of_guests 1
     property
-    user
-    status "MyString"
+    association :renter, factory: :user
+    status 1
   end
-  
+
   factory :property do
     name "MyString"
     number_of_guests 1
@@ -28,29 +50,14 @@ FactoryGirl.define do
     state "MyString"
     zip "MyString"
     lat "39.7392"
-    lon "104.9903"
-    room_type 1
+    long "104.9903"
+    room_type_id 1
     image_url "MyString"
     check_in_time "14:00:00"
     check_out_time "11:00:00"
-    active? false
-    user
+    status 1
+    association :owner, factory: :user
   end
-  
-  factory :room_type do
-    name 0
-  end
-  
-  factory :user do
-    first_name Faker::User.name
-    last_name Faker::Music.instrument
-    image_url Faker::Fillmurray.image
-    email Faker::Internet.email
-    phone_number "MyString"
-    description Faker::RuPaul.quote
-    hometown "MyString"
-    role 0
-    active? false
-  end
+
 
 end

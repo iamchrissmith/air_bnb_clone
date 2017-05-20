@@ -5,7 +5,7 @@ feature "Facebook login" do
   let(:already_created_user) {create(:user)}
 
   context "User can create an account with their facebook login" do
-    
+
     scenario "visit sign up page", vcr: true do
       visit root_path
       click_on "Sign Up"
@@ -16,7 +16,7 @@ feature "Facebook login" do
     scenario "begins building an account profile with facebook info", vcr: true do
       already_created_user.update(phone_number: nil)
       allow(User).to receive(:from_omniauth).and_return(already_created_user)
-      
+
       visit sign_up_path
 
       click_on "Sign up with Facebook"
@@ -34,7 +34,7 @@ feature "Facebook login" do
       click_on "Update Profile"
 
       expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content("hello #{already_created_user.first_name}")
+      expect(page).to have_content("#{already_created_user.first_name}")
       expect(page).to have_css("img[src*='#{already_created_user.image_url}']")
     end
   end
@@ -54,7 +54,7 @@ feature "Facebook login" do
       click_on "Log in with Facebook"
 
       expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content("hello #{already_created_user.first_name}")
+      expect(page).to have_content("#{already_created_user.first_name}")
     end
   end
 

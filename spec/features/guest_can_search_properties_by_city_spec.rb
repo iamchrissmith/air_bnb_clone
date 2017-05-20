@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "a guest can search" do
-  xscenario "properties by location" do
+  scenario "properties by location" do
     property = create(:property)
     property2 = create(:property, name: "cabin in the woods", city: "Denver")
     visit root_path

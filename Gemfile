@@ -25,6 +25,7 @@ gem 'simplecov', :require => false, :group => :test
 
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'devise'
+gem 'devise-authy'
 gem 'bootstrap-sass'
 
 group :development, :test do

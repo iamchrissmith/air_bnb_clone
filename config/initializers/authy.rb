@@ -1,3 +1,3 @@
 require 'yaml'
-Authy.api_key = Rails.application.secrets.authy_key
+Authy.api_key = ENV["AUTHY_API_KEY"]
 Authy.api_uri = 'https://api.authy.com/'

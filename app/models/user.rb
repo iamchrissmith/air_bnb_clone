@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :omniauthable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+         :recoverable, :rememberable, :trackable, :authy_authenticatable, :database_authenticatable
 
   has_many :reservations, foreign_key: "renter_id"
   has_many :properties, foreign_key: "owner_id"

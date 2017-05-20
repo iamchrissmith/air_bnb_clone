@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   get '/sign_up', to: 'signup#index'
   get '/log_in', to: 'login#index'
   get  '/dashboard', to: 'dashboard#index'
   delete '/logout', to: 'sessions#destroy'
+
+  devise_for :users,
+    :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"},
+    :path_names => {
+    	:verify_authy => "/verify-token",
+    	:enable_authy => "/enable-two-factor",
+    	:verify_authy_installation => "/verify-installation"
+      }
 
   resources :users, only: [:edit, :update]
 

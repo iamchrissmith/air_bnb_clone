@@ -1,13 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "validations" do
-    # context "user is valid with all attributes" do
-    #   it { should validate_presence_of(:first_name) }
-    #   it { should validate_presence_of(:last_name) }
-    #   it { should validate_presence_of(:email) }
-    # end
-    #
+  # describe "validations" do
+  #   context "user is valid with all attributes" do
+  #     xit { should validate_presence_of(:first_name) }
+  #     xit { should validate_presence_of(:last_name) }
+  #     xit { should validate_presence_of(:email) }
+  #     xit { should validate_presence_of(:phone_number) }
+  #     xit { should validate_presence_of(:image_url) }
+  #   end
+  # end
+
+  describe "relationships" do
+    context "has many reservations and properties" do
+      it { should have_many :reservations }
+      it { should have_many :properties }
+    end
+  end
+end
+
     # context "invalid" do
     #   it "is invalid without first_name" do
     #     user = build(:user, first_name: nil)
@@ -41,21 +52,3 @@ RSpec.describe User, type: :model do
     #     expect(user2).to_not be_valid
     #   end
     # end
-
-    describe "relationships" do
-      context "has many reservations and properties" do
-        it { should have_many :reservations }
-        it { should have_many :properties }
-      end
-    end
-
-    describe "attributes" do
-      it { should respond_to :image_url }
-      it { should respond_to :phone_number }
-      it { should respond_to :description }
-      it { should respond_to :hometown }
-      it { should respond_to :role }
-      it { should respond_to :active? }
-    end
-  end
-end

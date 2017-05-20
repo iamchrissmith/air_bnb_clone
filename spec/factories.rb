@@ -24,7 +24,7 @@ FactoryGirl.define do
 
   factory :property_availability do
     date "2017-05-16"
-    reserved? false
+    reserved? true
     property
   end
 

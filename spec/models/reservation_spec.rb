@@ -6,7 +6,6 @@ RSpec.describe Reservation, type: :model do
       room_type = create(:room_type)
       @property = create(:property, room_type: room_type)
       @user = create(:user)
-
     end
 
     it { should validate_presence_of(:total_price) }

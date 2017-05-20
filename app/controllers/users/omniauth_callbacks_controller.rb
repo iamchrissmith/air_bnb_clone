@@ -9,6 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @user.phone_number.nil?
         redirect_to edit_user_path(@user)
       else
+
         redirect_to dashboard_path
       end
     else
@@ -18,7 +19,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
+
     @user = User.from_omniauth(request.env["omniauth.auth"])
+
 
     if @user.persisted?
       sign_in @user, :event => :authentication
@@ -26,6 +29,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @user.phone_number.nil?
         redirect_to edit_user_path(@user)
       else
+
         redirect_to dashboard_path
       end
     else

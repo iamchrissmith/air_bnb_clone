@@ -61,7 +61,7 @@ end
     zip Faker::Address.zip
     lat "39.7392"
     long "104.9903"
-    room_type_id 1
+    room_type
     image_url {generate(:image_url)}
     check_in_time "14:00:00"
     check_out_time "11:00:00"

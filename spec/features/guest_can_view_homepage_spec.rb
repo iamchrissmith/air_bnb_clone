@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 feature "a guest can view homepage" do
+  attr_reader :properties
   before do
     room_type = create(:room_type)
-    property1, property2, property3, property4 = create_list(:property, 4, room_type: room_type)
+    @properties = create_list(:property, 4, room_type: room_type)
   end
   scenario "and sees search bar, featured homes and destinations" do
 
@@ -19,25 +20,25 @@ feature "a guest can view homepage" do
     end
 
     within(".all_homes")do
-      expect(page).to have_content(property1.image_url)
-      expect(page).to have_content(property1.name)
-      expect(page).to have_content(property2.image_url)
-      expect(page).to have_content(property2.name)
-      expect(page).to have_content(property3.image_url)
-      expect(page).to have_content(property3.name)
-      expect(page).to have_content(property4.image_url)
-      expect(page).to have_content(property4.name)
+      expect(page).to have_css("img[src*='#{properties.first.image_url}']")
+      expect(page).to have_content(properties.first.name)
+      expect(page).to have_css("img[src*='#{properties.second.image_url}']")
+      expect(page).to have_content(properties.second.name)
+      expect(page).to have_css("img[src*='#{properties[2].image_url}']")
+      expect(page).to have_content(properties[2].name)
+      expect(page).to have_css("img[src*='#{properties.last.image_url}']")
+      expect(page).to have_content(properties.last.name)
     end
 
     within(".featured_cities") do
-      expect(page).to have_content(property1.city)
-      expect(page).to have_content(property1.image_url)
-      expect(page).to have_content(property2.city)
-      expect(page).to have_content(property2.image_url)
-      expect(page).to have_content(property3.city)
-      expect(page).to have_content(property3.image_url)
-      expect(page).to have_content(property4.city)
-      expect(page).to have_content(property4.image_url)
+      expect(page).to have_content(properties.first.city)
+      expect(page).to have_css("img[src*='#{properties.first.image_url}']")
+      expect(page).to have_content(properties.second.city)
+      expect(page).to have_css("img[src*='#{properties.second.image_url}']")
+      expect(page).to have_content(properties[2].city)
+      expect(page).to have_css("img[src*='#{properties[2].image_url}']")
+      expect(page).to have_content(properties.last.city)
+      expect(page).to have_css("img[src*='#{properties.last.image_url}']")
     end
   end
 end

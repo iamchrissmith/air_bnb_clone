@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"},
     :path_names => {
     	:verify_authy => "/verify-token",
-    	:enable_authy => "/enable-two-factor",
+    	:enable_authy => "/enable_authy",
     	:verify_authy_installation => "/verify-installation"
       }
 

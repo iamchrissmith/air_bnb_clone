@@ -5,4 +5,29 @@
       <p>Book unique homes and experience a city like a local.</p>
     </div>
   </div>
+  <div class="container">
+    <div class="search_bar">
+      <form class="form-inline">
+          <div class="form-group">
+          <%= form_tag(properties_path, :method => 'get') do %>
+            <%= label_tag(:city, "Where") %><br>
+            <%= text_field_tag(:city) %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:check_in, "When") %><br>
+            <%= text_field_tag(:check_in) %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:guests, "Guests") %><br>
+            <%= text_field_tag(:guests) %>
+          </div>
+          <div class="form-group">
+            <br>
+            <%= submit_tag "Search", :class => "btn btn-default" %>
+          <% end %>
+          </div>
+      </form>
+    </div>
+  </div>
+
 <% end %>

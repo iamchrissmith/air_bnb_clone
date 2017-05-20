@@ -38,21 +38,31 @@ FactoryGirl.define do
     status 1
   end
 
+property_images= [
+'app/assets/images/beach_house.jpg',
+'app/assets/images/cabin_in_the_woods.jpg',
+'app/assets/images/urban_cottage.jpg'
+]
+
+sequence :image_url, property_images.cycle do |n|
+  "#{n}"
+end
+
   factory :property do
-    name "MyString"
+    name Faker::GameOfThrones.city
     number_of_guests 1
     number_of_beds 1
     number_of_rooms 1
-    description "MyText"
-    price_per_night "300"
-    address "MyString"
-    city "MyString"
-    state "MyString"
-    zip "MyString"
+    description Faker::Hipster.paragraph
+    price_per_night Faker::Commerce.price
+    address Faker::Address.street_address
+    city Faker::Address.city
+    state Faker::Address.state
+    zip Faker::Address.zip
     lat "39.7392"
     long "104.9903"
     room_type_id 1
-    image_url "MyString"
+    image_url {generate(:image_url)}
     check_in_time "14:00:00"
     check_out_time "11:00:00"
     status 1

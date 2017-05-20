@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates :first_name, :last_name, :email, :phone_number, :image_url, presence: true
+
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 

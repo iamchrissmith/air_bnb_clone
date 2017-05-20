@@ -24,7 +24,7 @@ FactoryGirl.define do
 
   factory :property_availability do
     date "2017-05-16"
-    reserved? false
+    reserved? true
     property
   end
 
@@ -51,7 +51,7 @@ FactoryGirl.define do
     zip "MyString"
     lat "39.7392"
     long "104.9903"
-    room_type_id 1
+    room_type
     image_url "MyString"
     check_in_time "14:00:00"
     check_out_time "11:00:00"

@@ -7,6 +7,7 @@ require 'awesome_print'
 require 'support/factory_girl'
 require 'database_cleaner'
 require 'stub_helper'
+require 'support/login_helper'
 
 DatabaseCleaner.strategy = :truncation
 RSpec.configure do |c|
@@ -45,4 +46,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+  config.include(LoginHelper)
 end

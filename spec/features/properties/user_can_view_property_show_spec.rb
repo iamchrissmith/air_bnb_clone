@@ -15,7 +15,7 @@ feature "user can view to a property show page" do
         expect(page).to have_content(property.state)
         expect(page).to have_content(property.owner.full_name)
       end
-      # It shows it's photo, city/state, number of beds, number of guests,
+      # It shows its photo, city/state, number of beds, number of guests,
       # number of rooms, room type, description, price per night, owner name,
       # owner photo, and a map with a general location of the property.
       # also a form where I can book reservation.

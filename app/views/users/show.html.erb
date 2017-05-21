@@ -12,9 +12,10 @@
 
         <div class="panel-body">
           <ul class="list-unstyled text-center">
-            <li>
-              <%= link_to "Edit Profile", edit_user_path(@user) %>
-            </li>
+            <% if @user == current_user %>
+              <li><%= link_to 'Edit Profile', edit_user_path(@user) %></li>
+            <% end %>
+
             <li> REVIEWS
               <!-- <%#= link_to "Reviews", user_reviews_path- or whatever %> -->
             </li>

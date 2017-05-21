@@ -125,11 +125,11 @@ feature "a guest can search" do
     expect(current_path).to eq(properties_path)
 
     within(".results") do
-      expect(page).to have_content(property.name)
-      expect(page).to have_css("img[src*='#{property.image_url}']")
       expect(page).to have_content(property4.name)
       expect(page).to have_css("img[src*='#{property4.image_url}']")
-      expect(page).to_not have_content(property2.name)
+      expect(page).to have_content(property3.name)
+      expect(page).to have_css("img[src*='#{property3.image_url}']")
+      expect(page).to_not have_content(property.name)
     end
   end
 

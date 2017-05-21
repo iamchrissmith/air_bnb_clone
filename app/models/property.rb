@@ -10,7 +10,31 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
-  def properties_in_city(city)
-    
+  def self.search_city_date_guests(city, date, guests)
+    joins(:property_availabilities).merge(PropertyAvailability.available).where("number_of_guests >= ? AND property_availabilities.date = ? AND city LIKE ?", guests, date, city)
+  end
+
+  def self.search_city_guests(city, guests)
+    where('city LIKE ? AND number_of_guests >= ?', city, guests)
+  end
+
+  def self.search_date_guests(date, guests)
+    joins(:property_availabilities).merge(PropertyAvailability.available).where("number_of_guests >= ? AND property_availabilities.date = ?", guests, date)
+  end
+
+  def self.search_date_city(date, city)
+    joins(:property_availabilities).merge(PropertyAvailability.available).where('city LIKE ? AND property_availabilities.date = ?', city, date)
+  end
+
+  def self.search_date(date)
+    joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date = ?', date)
+  end
+
+  def self.search_city(city)
+    where('city LIKE ?', city)
+  end
+
+  def self.search_guests(guests)
+    where("number_of_guests >= ?", guests)
   end
 end

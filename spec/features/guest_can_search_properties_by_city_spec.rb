@@ -11,7 +11,7 @@ feature "a guest can search" do
 
     expect(current_path).to eq(properties_path)
 
-    expect(page).to have_content(property.city)
+    expect(page).to have_content("Search Results")
 
     within(".results") do
       expect(page).to have_content(property.name)

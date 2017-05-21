@@ -9,4 +9,6 @@ class Property < ApplicationRecord
   has_many :property_availabilities
 
   enum status: %w(pending active archived)
+
+  
 end

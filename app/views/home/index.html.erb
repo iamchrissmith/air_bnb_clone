@@ -8,18 +8,19 @@
 
   <div class="container">
     <div class="search_bar">
+      <div class="form-inline">
       <div class="input-group">
           <%= form_tag("/properties", :method => "get") do %>
           <div class="form-group">
-            <%= label_tag(:city, "Where") %><br>
+            <%= label_tag(:city, "Where") %>
             <%= text_field_tag :city %>
           </div>
           <div class="form-group">
-            <%= label_tag(:check_in, "When") %><br>
-            <%= text_field_tag :check_in %>
+            <%= label_tag(:check_in, "When") %>
+            <%= date_field_tag :check_in %>
           </div>
           <div class="form-group">
-            <%= label_tag(:guests, "Guests") %><br>
+            <%= label_tag(:guests, "Guests") %>
             <%= text_field_tag :guests %>
           </div>
           <div class="form-group">
@@ -28,6 +29,7 @@
           </div>
           <% end %>
       </div>
+    </div>
     </div>
   </div>
   <br><br>

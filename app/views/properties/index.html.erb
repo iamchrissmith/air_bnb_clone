@@ -1,7 +1,7 @@
-<h3><%= @properties.first.city %></h3>
+<h3>Search Results</h3>
 <div class="results">
   <% @properties.each do |property| %>
   <%= property.name %><br>
-  <%= image_tag(property.image_url) %>
+  <%= image_tag(property.image_url) %><br><br>
   <% end %>
 </div>

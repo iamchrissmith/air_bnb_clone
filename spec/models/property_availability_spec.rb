@@ -10,7 +10,6 @@ RSpec.describe PropertyAvailability, type: :model do
     end
 
     it {should validate_presence_of(:date)}
-    it {should validate_presence_of(:reserved?)}
     it {should belong_to :property}
   end
 
@@ -19,8 +18,4 @@ RSpec.describe PropertyAvailability, type: :model do
     expect(property_availability).to_not be_valid
   end
 
-  it "is invalid without reserved status" do
-    property_availability = build(:property_availability, reserved?: nil, property: @property)
-    expect(property_availability).to_not be_valid
-  end
 end

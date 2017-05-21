@@ -5,6 +5,14 @@ class PropertiesController < ApplicationController
       @properties = Property.where('city LIKE ?', "%#{params[:city]}%")
     elsif params[:check_in].present?
       @properties = PropertyAvailability.find_available_properties((params[:check_in]).to_date)
+    if !params[:city].empty? && !params[:guests].empty?
+      @properties = Property.where('city LIKE ? AND number_of_guests >= ?', "%#{params[:city]}%", params[:guests])
+      @number_of_guests = params[:guests]
+    elsif !params[:city].empty?
+      @properties = Property.where('city LIKE ?', "%#{params[:city]}%")
+    elsif !params[:guests].empty?
+      @properties = Property.where("number_of_guests >= ?", params[:guests])
+      @number_of_guests = params[:guests]
     else
       @properties = Property.all
     end

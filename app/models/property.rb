@@ -10,5 +10,7 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
-  
+  def properties_in_city(city)
+    
+  end
 end

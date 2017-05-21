@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-8">
+    <h2><%= @property.name %></h2>
+    <p><%= "#{@property.city}, #{@property.state}" %></p>
+  </div>
+  <div class="col-md-4">
+    <img src="<%= @property.owner.image_url %>" alt="<%= @property.owner.full_name %>" height="100px">
+    <p><%= @property.owner.full_name %></p>
+  </div>
+</div>

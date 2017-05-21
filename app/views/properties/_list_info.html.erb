@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-3 text-center">
+    <%= image_tag("room_type.jpg", height: 70) %>
+    <h6><%= @property.room_type.name %></h6>
+  </div>
+  <div class="col-md-3 text-center">
+    <%= image_tag("guests.jpg", height: 70) %>
+    <h6><%= @property.number_of_guests %> Guests</h6>
+  </div>
+  <div class="col-md-3 text-center">
+    <%= image_tag("rooms.jpg", height: 70) %>
+    <h6><%= @property.number_of_rooms %> Room</h6>
+  </div>
+  <div class="col-md-3 text-center">
+    <%= image_tag("beds.jpg", height: 70) %>
+    <h6><%= @property.number_of_beds %> Beds</h6>
+  </div>
+</div>

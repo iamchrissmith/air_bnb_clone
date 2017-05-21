@@ -1,0 +1,66 @@
+<img class="property_image" src="<%= @property.image_url %>" alt="<%= @property.name %>">
+
+<hr>
+
+<div class="property row">
+  <!-- begin tabbed section -->
+  <div class="card col-md-9" id="toggle">
+    <div class="card_header">
+      <ul class = "nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#overview">Overview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#location">Location</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#reviews">Reviews</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#host">The Host</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="overview" role="tabpanel">
+          <%= render partial: 'property_header' %>
+          <hr>
+          <%= render partial: 'list_info' %>
+          <hr>
+          <h3>About this listing</h3>
+          <p><%= @property.description %></p>
+          <hr>
+          <h3>The space</h3>
+          <%= render partial: 'the_space' %>
+        </div>
+
+        <div class="tab-pane" id="location" role="tabpanel">
+          <%= render partial: 'property_header' %>
+          <hr>
+          <h3>The neighborhood</h3>
+        </div>
+
+        <div class="tab-pane" id="reviews" role="tabpanel">
+          <%= render partial: 'property_header' %>
+          <hr>
+          <h3>Reviews</h3>
+        </div>
+
+        <div class="tab-pane" id="host" role="tabpanel">
+          <%= render partial: 'property_header' %>
+          <hr>
+          <h3>Hosted by <%= @property.owner.full_name %></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="booking-price">
+      <h4>$<%= @property.price_per_night %> per night</h4>
+    </div>
+    <div class="booking-box">
+      <%= render partial: 'booking' %>
+    </div>
+  </div>
+</div>

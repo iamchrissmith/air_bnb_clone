@@ -1,27 +1,63 @@
-Edit profile
 
-<%= form_for(@user) do |f| %>
+<div class="row">
+  <h2>Edit Profile</h2>
+  <hr>
+    <%= form_for(@user, :html => {:class => 'form-horizontal'}) do |f| %>
 
-<%= f.label :first_name %>
-<%= f.text_field :first_name%><br>
+      <div class="form-group">
+        <%= f.label :first_name, :class =>"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_field :first_name, :class => "form-control", :placeholder => "First name"%>
+        </div>
+      </div>
 
-<%= f.label :last_name %>
-<%= f.text_field :last_name%><br>
+      <div class="form-group">
+        <%= f.label :last_name, :class =>"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_field :last_name, :class => "form-control", :placeholder => "Last name"%>
+        </div>
+      </div>
 
-<%= f.label :email %>
-<%= f.text_field :email %><br>
+      <div class="form-group">
+        <%= f.label :email, :class =>"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_field :email, :class => "form-control", :placeholder => "email"%>
+        </div>
+      </div>
 
-<%= f.label :phone_number %>
-<%= f.text_field :phone_number%><br>
+      <div class="form-group">
+        <%= f.label :phone_number, :class =>"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_field :phone_number, :class => "form-control", :placeholder => "phone number"%>
+        </div>
+      </div>
 
-<%= f.label :description %>
-<%= f.text_area :description%><br>
+      <div class="form-group">
+        <%= f.label :hometown, :class =>"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_field :hometown, :class => "form-control", :placeholder => "hometown"%>
+        </div>
+      </div>
 
-<%= f.label :hometown %>
-<%= f.text_field :hometown%><br>
+      <div class="form-group">
+        <%= f.label :description, :class =>"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_area :description, :class => "form-control", :placeholder => "Tell other users about you."%>
+        </div>
+      </div>
 
-<%= f.label :image_url %>
-<%= f.text_field :image_url %><br>
+      <div class="form-group">
+        <%= f.label :image_url, :class =>"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_area :image_url, :class => "form-control", :placeholder => "paste an image url here"%>
+        </div>
+      </div>
 
-<%= f.submit "Update Profile" %>
-<% end %>
+
+      <div class = "form-actions">
+        <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit "Update Profile", class: 'btn btn-custom' %>
+          </div>
+        <% end %>
+    </div>
+</div>

@@ -1,7 +1,8 @@
 <div class="row">
 
-
-
+  <div class="col-md-7">
+    <h1>Hey, I'm <%= @user.first_name %> <%= @user.last_name %>!</h1>
+  <hr>
   <div class="col-md-4">
     <div class="panel space-4">
         <div class="media media-photo-block">
@@ -9,24 +10,24 @@
             <%= image_tag @user.image_url + "?type=large" %>
           </div>
         </div>
-
+      </div>
         <div class="panel-body">
           <ul class="list-unstyled text-center">
-            <li>
-              <%= link_to "Edit Profile", edit_user_path(@user) %>
-            </li>
+            <% if @user == current_user %>
+              <li><%= link_to 'Edit Profile', edit_user_path(@user) %></li>
+            <% end %>
+
             <li> REVIEWS
               <!-- <%#= link_to "Reviews", user_reviews_path- or whatever %> -->
             </li>
           </ul>
         </div>
       </div>
-    </div>
+    <div class="col-md-8">
+    <h4> <%= @user.hometown %>  |   Member since <%= @user.created_at.strftime('%b %d, %Y') %><br><br>
+      About me: <%= @user.description %></h4>
+    <!-- <h4><%#= @user.email %></h4> -->
+  </div>
 
-  <div class="col-md-8">
-    <h1>Hey, I'm <%= @user.first_name %> <%= @user.last_name %>!</h1>
-    <h3> <%= @user.hometown %></h3>
-    <h3>About me: <%= @user.description %></h3>
-    <h4><%= @user.email %></h4>
   </div>
 </div>

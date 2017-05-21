@@ -1,12 +1,15 @@
 
 <h3>Search Results</h3>
-
-<h3>Properties in <%= @properties.first.city %></h3>
-<h4><%="Properties with #{@number_of_guests} or more guests allowed" if @number_of_guests%></h4>
-<h4><%=  "Looking for properties on #{@date}" if @date %></h4>
-<div class="results">
-  <% @properties.each do |property| %>
-  <%= property.name %><br>
-  <%= image_tag(property.image_url) %><br><br>
-  <% end %>
-</div>
+<% if @properties.empty? %>
+  There were no properties that matched your search criteria!
+<% else %>
+  <h3>Properties in <%= @properties.first.city %></h3>
+  <h4><%="Properties with #{@number_of_guests} or more guests allowed" if @number_of_guests%></h4>
+  <h4><%=  "Looking for properties on #{@date}" if @date %></h4>
+  <div class="results">
+    <% @properties.each do |property| %>
+    <%= property.name %><br>
+    <%= image_tag(property.image_url) %><br><br>
+    <% end %>
+  </div>
+<% end %>

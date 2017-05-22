@@ -29,7 +29,7 @@ feature "User can sign up with facebook, google, and email" do
     fill_in "Description", with: 'HEY!'
     fill_in "Hometown", with: 'STL'
 
-    click_on "Update Profile"
+    click_on "Submit Profile"
     click_on "Log Out"
 
     stub_google

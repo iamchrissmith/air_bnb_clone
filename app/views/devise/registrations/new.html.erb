@@ -1,4 +1,6 @@
-<% header "Sign Up" %>
+<div class="row">
+  <h2>Sign Up</h2>
+  <hr>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -6,7 +8,7 @@
   <div class="field">
     <%= f.label :first_name, :class =>"col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :first_name, :class => "form-control", autofocus: true %>
+      <%= f.text_field :first_name, :class => "form-control", autofocus: true, :placeholder => 'New fairbnb user' %>
     </div>
   </div>
 
@@ -15,7 +17,7 @@
   <div class="field">
     <%= f.label :last_name, :class =>"col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :last_name, :class => "form-control", autofocus: true %>
+      <%= f.text_field :last_name, :class => "form-control", autofocus: true, :placeholder => 'New fairbnb user' %>
     </div>
   </div>
 
@@ -24,7 +26,7 @@
   <div class="field">
     <%= f.label :email, :class =>"col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :email, :class => "form-control", autofocus: true %>
+      <%= f.text_field :email, :class => "form-control", autofocus: true, :placeholder => 'yourfriend@gmail.com' %>
     </div>
   </div>
 
@@ -33,7 +35,7 @@
   <div class="field">
     <%= f.label :phone_number, :class =>"col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :phone_number, :class => "form-control", autofocus: true %>
+      <%= f.text_field :phone_number, :class => "form-control", autofocus: true, :placeholder => 'I can be reached at...' %>
     </div>
   </div>
 
@@ -71,8 +73,11 @@
 
   <div class="field">
     <%= f.label :password_confirmation, :class =>"col-sm-2 control-label" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
     <div class="col-sm-10">
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <%= f.password_field :password_confirmation, :class => "form-control", autofocus: true %>
     </div>
   </div>
 
@@ -82,5 +87,6 @@
     <%= f.submit "Sign up", :class => "btn btn-custom" %>
   </div>
 <% end %>
+</div>
 
 <!-- <%#= render "devise/shared/links" %> -->

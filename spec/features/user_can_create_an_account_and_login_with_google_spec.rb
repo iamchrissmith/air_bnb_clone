@@ -21,7 +21,7 @@ feature "Google login" do
 
       click_on "Sign up with Google"
       expect(current_path).to eq(edit_user_path(already_created_user))
-      expect(page).to have_content("Edit profile")
+      expect(page).to have_content("Edit Profile")
       expect(find_field("First name").value).to eq(already_created_user.first_name)
       expect(find_field("Last name").value).to eq(already_created_user.last_name)
       expect(find_field("Email").value).to eq(already_created_user.email)
@@ -31,7 +31,7 @@ feature "Google login" do
       fill_in "Description", with: 'HEY!'
       fill_in "Hometown", with: 'STL'
 
-      click_on "Update Profile"
+      click_on "Submit Profile"
 
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("#{already_created_user.first_name}")

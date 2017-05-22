@@ -19,7 +19,7 @@ feature "as a logged in user" do
       fill_in 'Description', with: 'Something different'
       fill_in 'Hometown', with: 'I moved!'
 
-      click_on 'Update Profile'
+      click_on 'Submit Profile'
 
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content('New first name')

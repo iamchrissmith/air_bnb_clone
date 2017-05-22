@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get  '/dashboard', to: 'dashboard#index'
   delete '/logout', to: 'sessions#destroy'
 
+  namespace :admin do
+    resources :dashboard, only: [:index]
+  end
+
   resources :users, only: [:edit, :update, :show]
 
   resources :properties,  only: [:index, :show]

@@ -28,7 +28,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @user.phone_number.nil?
         redirect_to edit_user_path(@user)
       else
-
         redirect_to dashboard_path
       end
     else

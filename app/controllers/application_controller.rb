@@ -2,14 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def is_authy_present?
-    require "pry"; binding.pry
-    if @current_user.authy_id.present?
-      redirect_to root_path
-    else
-      user_enable_authy_path(user)
-    end
-  end
 
   protected
 

@@ -12,7 +12,6 @@ feature "Guest can authenticate account via text" do
 
     expect(current_path).to eq()
 
-
   end
 
 end

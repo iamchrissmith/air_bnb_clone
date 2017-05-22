@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # before_action :ensure_authy_enabled
 
   protected
 
@@ -10,16 +11,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:full_name])
   end
 
+  private
 
-  # helper_method :current_user
-  #
-  # def current_user
-  #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  # end
-  #
-  # def current_user=(user)
-  #   @current_user = user
-  #   session[:user_id] = user.nil? ? nil : user.id
-  # end
-
+  def ensure_authy_enabled
+   if current_user and !current_user.authy_enabled?
+     redirect_to user_enable_authy_path
+   end
+  end
 end

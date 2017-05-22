@@ -1,27 +1,5 @@
-Edit profile
-
-<%= form_for(@user) do |f| %>
-
-<%= f.label :first_name %>
-<%= f.text_field :first_name%><br>
-
-<%= f.label :last_name %>
-<%= f.text_field :last_name%><br>
-
-<%= f.label :email %>
-<%= f.text_field :email %><br>
-
-<%= f.label :phone_number %>
-<%= f.text_field :phone_number%><br>
-
-<%= f.label :description %>
-<%= f.text_area :description%><br>
-
-<%= f.label :hometown %>
-<%= f.text_field :hometown%><br>
-
-<%= f.label :image_url %>
-<%= f.text_field :image_url %><br>
-
-<%= f.submit "Update Profile" %>
-<% end %>
+<div class="row">
+  <h2>Edit Profile</h2>
+  <hr>
+    <%= render partial: 'form' %>
+</div>

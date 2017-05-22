@@ -1,3 +1,40 @@
-hello <%= @user.first_name %>
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel space-4">
+        <div class="media media-photo-block">
+          <div class="text-center">
+            <%= image_tag @user.image_url + "?type=large" %>
+          </div>
+        </div>
 
-<%= image_tag(@user.image_url, :height=> '200')  %>
+        <div class="panel-body">
+          <h2 class="text-center">
+            <%= @user.first_name %></h2>
+          <ul class="list-unstyled text-center">
+            <li>
+              <%= link_to "View Profile", user_path(@user) %>
+            </li>
+            <li>
+              <%= link_to "Edit Profile", edit_user_path(@user) %>
+            </li>
+            <li> REVIEWS
+              <!-- <%#= link_to "Reviews", user_reviews_path ...or whatever %> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <!-- <div class="panel space-4"> -->
+        <div class="panel-header">
+          <h4>NOTIFICATIONS</h4>
+        </div>
+        <div class="panel-body">
+          YOU HAVE (x) new messages (LINK TO MESSAGE INDEX)<br>
+          YOU HAVE (x) pending requests (LINK TO personal reservations, my properties' reservations)
+        </div>
+      <!-- </div> -->
+    </div>
+
+</div>

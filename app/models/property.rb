@@ -10,6 +10,14 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
+  def format_check_in_time
+    DateTime.parse(check_in_time).strftime("%l:%M%P")
+  end
+
+  def format_check_out_time
+    DateTime.parse(check_out_time).strftime("%l:%M%P")
+  end
+
   def self.search_city_date_guests(city, date, guests)
     joins(:property_availabilities).merge(PropertyAvailability.available).where("number_of_guests >= ? AND property_availabilities.date = ? AND city LIKE ?", guests, date, "%#{city}%")
   end

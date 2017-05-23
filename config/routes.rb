@@ -1,6 +1,23 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      namespace :users do
+        namespace :reservations do
+          get '/nights', to: 'nights#index'
+          get '/bookings', to: 'bookings#index'
+        end
+        namespace :properties do
+          get '/most_properties', to: 'most_properties#index'
+        end
+        namespace :money do
+          get '/most_spent', to: 'most_spent#index'
+        end
+      end
+    end
+  end
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   get '/sign_up', to: 'signup#index'
   get '/log_in', to: 'login#index'

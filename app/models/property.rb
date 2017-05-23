@@ -45,4 +45,5 @@ class Property < ApplicationRecord
   def self.search_guests(guests)
     where("number_of_guests >= ?", guests)
   end
+
 end

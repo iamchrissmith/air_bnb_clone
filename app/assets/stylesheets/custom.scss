@@ -2,6 +2,9 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+.user_nav {
+  display: flex;
+}
 
 .btn-custom {
     background:  #ff5a5f;

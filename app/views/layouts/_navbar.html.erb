@@ -23,3 +23,31 @@
     </div>
   </div>
 </nav>
+
+<% if user_signed_in? %>
+<nav class="user_nav">
+  <div class="container">
+      <ul class="sub_nav">
+          <li><%= link_to 'Dashboard', dashboard_path %></li>
+          <% if current_user.admin? %>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Admin Menu
+                <span class="caret"></span>
+                  </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li> <%= link_to "Users", admin_users_path %></li>
+                      <li> <%= link_to "Properties", admin_properties_path %></li>
+                    </ul>
+            </div>
+          <% end %>
+          <li><%= link_to 'Profile', dashboard_path %></li>
+          <li><%= link_to 'My Properties', dashboard_path %></li>
+          <li><%= link_to 'My Reservations', dashboard_path %></li>
+          <li><%= link_to 'Messages', dashboard_path %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<% end %>

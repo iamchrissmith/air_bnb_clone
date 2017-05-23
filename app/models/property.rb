@@ -10,6 +10,16 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
+  # geocoded_by :full_address,  :latitude  => :lat, :longitude => :long
+  # after_validation :geocode
+  def full_address
+    [address, city, state, zip].compact.join(', ')
+  end
+
+  def prepare_address
+    [address, city, state, zip].compact.join('+')
+  end
+
   def format_check_in_time
     DateTime.parse(check_in_time).strftime("%l:%M%P")
   end

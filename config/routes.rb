@@ -13,4 +13,8 @@ Rails.application.routes.draw do
 
   resources :reservations, only: [:new]
 
+  namespace :user do
+    resources :properties, only: [:index]
+  end
+
 end

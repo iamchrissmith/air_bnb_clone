@@ -36,6 +36,7 @@ VCR.configure do |config|
   config.filter_sensitive_data('<GOOGLE_CLIENT_ID>') { ENV['GOOGLE_CLIENT_ID'] }
   config.filter_sensitive_data('<GOOGLE_CLIENT_SECRET>') { ENV['GOOGLE_CLIENT_SECRET'] }
   config.filter_sensitive_data('<GOOGLE_USER_TOKEN>') { ENV['GOOGLE_USER_TOKEN'] }
+  config.filter_sensitive_data('<GOOGLE_API_KEY>') { ENV['GOOGLE_MAP_KEY'] }
   config.allow_http_connections_when_no_cassette = true
 end
 

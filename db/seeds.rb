@@ -41,6 +41,7 @@ class Seed
         number_of_guests: (num * 2),
         number_of_beds: (num + 2),
         number_of_rooms: num,
+        number_of_bathrooms: num,
         description: Faker::Hipster.paragraph,
         price_per_night: Faker::Commerce.price,
         address: Faker::Address.street_address,
@@ -51,7 +52,9 @@ class Seed
         long: Faker::Address.longitude,
         image_url: Faker::LoremPixel.image,
         status: 1,
-        room_type_id: Random.new.rand(1..3)
+        room_type_id: Random.new.rand(1..3),
+        check_in_time: "14:00:00",
+        check_out_time: "11:00:00"
         )
       puts "#{i} property created"
     end

@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   resources :properties,  only: [:index, :show]
 
+  resources :reservations, only: [:new]
+
 end

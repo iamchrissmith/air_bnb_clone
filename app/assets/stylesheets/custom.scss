@@ -6,6 +6,12 @@
   display: flex;
 }
 
+.show_cropping {
+  height: 450px;
+  background: url(paris_street.png);
+  background-size: 1140px 450px, cover;
+}
+
 .btn-custom {
     background:  #ff5a5f;
     color: #ffffff;
@@ -139,4 +145,25 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 15px;
+}
+
+.booking-box {
+  border-style: solid;
+  border-color: gray;
+  border-top: none;
+  border-width: 1px;
+  padding: 10px;
+}
+
+.booking-price {
+  background-color: #ff5a5f;
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+  padding: 10px;
+}
+
+.nav {
+  display: flex;
+  text-align: center;
 }

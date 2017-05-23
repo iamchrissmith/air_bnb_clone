@@ -1,5 +1,9 @@
 class PropertiesController < ApplicationController
 
+  def show
+    @property = Property.find(params[:id])
+  end
+
   def index
     if params[:city].present? && params[:guests].present? && params[:check_in].present?
       @properties = Property.search_city_date_guests(params[:city], params[:check_in].to_date, params[:guests])

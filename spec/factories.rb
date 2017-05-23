@@ -53,6 +53,7 @@ end
     number_of_guests 1
     number_of_beds 1
     number_of_rooms 1
+    number_of_bathrooms 1
     description Faker::Hipster.paragraph
     price_per_night Faker::Commerce.price
     address Faker::Address.street_address

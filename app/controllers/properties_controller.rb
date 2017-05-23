@@ -38,8 +38,8 @@ class PropertiesController < ApplicationController
   end
 
   def create
-    @room_types = RoomType.all
     @property = current_user.properties.new(properties_params)
+    @room_types = RoomType.all
     if @property.save
       flash[:success] = "Your rental property has been submitted for approval. You will be contacted as soon as your property is approved!"
 

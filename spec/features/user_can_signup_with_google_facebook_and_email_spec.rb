@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "User can sign up with facebook, google, and email" do
   let(:already_created_user) {create(:user)}
 
-  scenario "user can signup with same email for facebook and google" do
+  xscenario "user can signup with same email for facebook and google" do
     visit sign_up_path
     click_on "Sign up with Email"
 

@@ -17,7 +17,7 @@ RSpec.feature "guest can login with email" do
     fill_in :user_image_url, with: "https://fakeimage.jpg"
     fill_in :user_password, with: "password"
     fill_in :user_password_confirmation, with: "password"
-    click_on "Sign Up"
+    click_on "Sign up"
 
     within(".alert") do
       expect(page).to have_content("Welcome! You have signed up successfully.")

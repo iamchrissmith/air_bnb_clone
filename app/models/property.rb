@@ -12,12 +12,12 @@ class Property < ApplicationRecord
 
   # geocoded_by :full_address,  :latitude  => :lat, :longitude => :long
   # after_validation :geocode
-  def full_address
-    [address, city, state, zip].compact.join(', ')
-  end
-
   def prepare_address
     [address, city, state, zip].compact.join('+')
+  end
+
+  def two_digit_price
+    '%.2f' % price_per_night.to_f
   end
 
   def format_check_in_time

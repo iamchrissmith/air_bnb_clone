@@ -30,7 +30,7 @@
         <div class="tab-pane active" id="overview" role="tabpanel">
           <%= render partial: 'property_header' %>
           <div class="text-left">
-            <% if current_user.properties.include?(@property) %>
+            <% if @property.owner == current_user %>
             <%= link_to "Edit this property", edit_property_path(@property), class: 'btn btn-custom' %>
             <% end %>
         </div>
@@ -68,7 +68,7 @@
 
   <div class="col-md-3">
     <div class="booking-price">
-      <h4>$<%= @property.price_per_night %> per night</h4>
+      <h4>$<%= @property.two_digit_price %> per night</h4>
     </div>
     <div class="booking-box">
       <%= render partial: 'booking' %>

@@ -3,11 +3,12 @@ require 'rails_helper'
 feature "an owner can edit a rental property" do
   context "as a logged in user" do
 
-    attr_reader :user, :rando, :property, :rando_prop
+    attr_reader :user, :rando, :property, :rando_prop, :room_type
     before do
       @user = create(:user)
       @rando = create(:user)
-      @property = create(:property)
+      @room_type = create(:room_type)
+      @property = create(:property, room_type: @room_type)
       @rando_prop = create(:property)
       @user.properties << property
       @rando.properties << rando_prop
@@ -22,12 +23,12 @@ feature "an owner can edit a rental property" do
       expect(page).to_not have_link('Edit this property')
 
     end
-
-    xscenario "I can update one of my rental properties" do
+    
+    scenario "I can update one of my rental properties" do
       visit user_path(user)
       click_on 'Add a property'
-# save_and_open_page
-      check('room_type-2')
+
+      find(:css, "#room_type-#{room_type.id}").set(true)
       fill_in 'Name', with: 'Sweet Spot'
       fill_in 'Number of guests', with: '10'
       fill_in 'Number of beds', with: '6'
@@ -45,12 +46,12 @@ feature "an owner can edit a rental property" do
 
       click_on 'Submit property for review'
 
-      # expect(current_path).to eq(property_path(@user.properties.last))
-      expext(user.properties.last.status).to eq('pending')
-      expect(page).to have_content('Entire House')
-      expect(page).to have_content('20 Guests')
+      expect(current_path).to eq(property_path(@user.properties.last))
+      expect(user.properties.last.status).to eq('pending')
+      expect(page).to have_content('Shared Room')
+      expect(page).to have_content('10 Guests')
       expect(page).to have_content('6 Room')
-      expect(page).to have_content('12 Beds')
+      expect(page).to have_content('6 Beds')
       expect(page).to have_content('Sweet Spot')
       expect(page).to have_content('Accomodates: 10')
       expect(page).to have_content('Bathrooms: 4')

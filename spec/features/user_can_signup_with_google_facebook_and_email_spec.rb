@@ -5,7 +5,7 @@ feature "User can sign up with facebook, google, and email" do
 
   scenario "user can signup with same email for facebook and google" do
     visit sign_up_path
-    click_on "Sign Up with Email"
+    click_on "Sign up with Email"
 
     expect(current_path).to eq(new_user_registration_path)
     fill_in :user_first_name, with: "Erin"
@@ -15,7 +15,7 @@ feature "User can sign up with facebook, google, and email" do
     fill_in :user_image_url, with: "https://fakeimage.jpg"
     fill_in :user_password, with: "password"
     fill_in :user_password_confirmation, with: "password"
-    click_on "Sign up"
+    click_on "Sign Up"
     click_on "Log Out"
 
     stub_facebook

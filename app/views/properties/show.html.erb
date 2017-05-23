@@ -1,7 +1,7 @@
 <!-- <img class="property_image" src="prop_show_image.png" alt="<%#= @property.name %>"> -->
 <%#= image_tag("prop_show_image.png", width: 1140) %>
 <div class="show_cropping">
-  
+
 </div>
 <!-- <img class="property_image" src="<%#= @property.image_url %>" alt="<%#= @property.name %>"> -->
 
@@ -29,6 +29,11 @@
       <div class="tab-content">
         <div class="tab-pane active" id="overview" role="tabpanel">
           <%= render partial: 'property_header' %>
+          <div class="text-left">
+            <% if current_user.properties.include?(@property) %>
+            <%= link_to "Edit this property", edit_property_path(@property), class: 'btn btn-custom' %>
+            <% end %>
+        </div>
           <hr>
           <%= render partial: 'list_info' %>
           <hr>

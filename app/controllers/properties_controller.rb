@@ -19,9 +19,10 @@ class PropertiesController < ApplicationController
     elsif params[:check_in].present? && params[:city].present?
       @properties = Property.search_date_city(params[:check_in].to_date, params[:city])
       @date = params[:check_in].to_date
-    elsif params[:check_in].present?
-      @properties = Property.search_date(params[:check_in].to_date)
-      @date = params[:check_in].to_date
+    elsif params[:check_in].present? && params[:check_out].present?
+      @properties = Property.search_dates(params[:check_in].to_date, params[:check_out].to_date)
+      @check_in = params[:check_in].to_date
+      @check_out = params[:check_out].to_date
     elsif params[:city].present?
       @properties = Property.search_city(params[:city])
     elsif params[:guests].present?

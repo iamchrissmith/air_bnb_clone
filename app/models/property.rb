@@ -33,9 +33,12 @@ class Property < ApplicationRecord
   def self.search_date_city(date, city)
     joins(:property_availabilities).merge(PropertyAvailability.available).where('city LIKE ? AND property_availabilities.date = ?', "%#{city}%", date)
   end
-
-  def self.search_date(date)
-    joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date = ?', date)
+  
+  def self.search_dates(check_in_date, check_out_date)
+    prop_avails = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date)
+    array = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date).pluck(:id)
+    number_of_dates = check_out_date - check_in_date + 1
+    (prop_avails.select {|pa| array.count(pa.id) == number_of_dates}).uniq
   end
 
   def self.search_city(city)

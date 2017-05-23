@@ -20,7 +20,7 @@ feature "a guest can search" do
     end
   end
 
-  scenario "properties by date" do
+  xscenario "properties by date" do
     property = create(:property)
     property2 = create(:property, name: "cabin in the woods")
     property_availability = create(:property_availability, property: property, date: Date.today, reserved?: false)
@@ -158,6 +158,28 @@ feature "a guest can search" do
       expect(page).to have_css("img[src*='#{property4.image_url}']")
       expect(page).to_not have_content(property2.name)
       expect(page).to_not have_content(property.name)
+    end
+  end
+  
+  scenario "properties by range of dates" do
+    property = create(:property, name: "airstream")
+    property2 = create(:property)
+
+    property_availability = create(:property_availability, property: property, date: Date.today, reserved?: false)
+    property_availability = create(:property_availability, property: property, date: Date.tomorrow, reserved?: false)
+    property_availability = create(:property_availability, property: property2, date: Date.today, reserved?: true)
+    property_availability = create(:property_availability, property: property2, date: Date.tomorrow, reserved?: false)
+    visit root_path
+
+    fill_in :check_in, with:"#{Date.today}"
+    fill_in :check_out, with:"#{Date.tomorrow}"
+
+    click_on "Search"
+    expect(current_path).to eq(properties_path)
+    within(".results") do
+      expect(page).to have_content(property.name)
+      expect(page).to have_css("img[src*='#{property.image_url}']")
+      expect(page).to_not have_content(property2.name)
     end
   end
 end

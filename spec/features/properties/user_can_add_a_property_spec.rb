@@ -3,13 +3,14 @@ require 'rails_helper'
 feature "user can add a rental property to thier account" do
   context "as a logged in user" do
 
-    attr_reader :user
+    attr_reader :user, :rando, :property, :rando_prop, :room_type
     before do
       @user = create(:user)
+      @room_type = create(:room_type)
       login(user)
     end
 
-    xscenario "I can visit the new property form" do
+    scenario "I can visit the new property form" do
       visit user_path(user)
       expect(page).to have_link('Add a property')
 
@@ -17,11 +18,11 @@ feature "user can add a rental property to thier account" do
       expect(current_path).to eq(new_property_path)
     end
 
-    xscenario "I can add a rental property to my account" do
+    scenario "I can add a rental property to my account" do
       visit user_path(user)
       click_on 'Add a property'
-# save_and_open_page
-      choose 'Entire House'
+
+      find(:css, "#room_type-#{room_type.id}").set(true)
       fill_in 'Name', with: 'Sweet Spot'
       fill_in 'Number of guests', with: '10'
       fill_in 'Number of beds', with: '6'
@@ -39,12 +40,12 @@ feature "user can add a rental property to thier account" do
 
       click_on 'Submit property for review'
 
-      # expect(current_path).to eq(property_path(@user.properties.last))
-      # expext(user.properties.last.status).to eq('pending')
-      expect(page).to have_content('Entire House')
-      expect(page).to have_content('20 Guests')
+      expect(current_path).to eq(property_path(user.properties.last))
+      expect(user.properties.last.status).to eq('pending')
+      expect(page).to have_content('Shared Room')
+      expect(page).to have_content('10 Guests')
       expect(page).to have_content('6 Room')
-      expect(page).to have_content('12 Beds')
+      expect(page).to have_content('6 Beds')
       expect(page).to have_content('Sweet Spot')
       expect(page).to have_content('Accomodates: 10')
       expect(page).to have_content('Bathrooms: 4')

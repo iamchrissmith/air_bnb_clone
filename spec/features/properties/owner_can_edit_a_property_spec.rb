@@ -23,7 +23,7 @@ feature "an owner can edit a rental property" do
       expect(page).to_not have_link('Edit this property')
 
     end
-    
+
     scenario "I can update one of my rental properties" do
       visit user_path(user)
       click_on 'Add a property'

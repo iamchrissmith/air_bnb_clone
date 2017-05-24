@@ -3,8 +3,8 @@ require 'rails_helper'
 describe WeatherService do
   it "returns raw weather details" do
     property = create(:property, city: "Chickasha", state: "OK")
-    weather = WeatherService.new({city: property.city, state: property.state})
-    weather.find_by_location
+    service = WeatherService.new({city: property.city, state: property.state})
+    weather = service.find_by_location
 
     expect(weather).to be_a(Hash)
     expect(weather).to have_key(:weather)

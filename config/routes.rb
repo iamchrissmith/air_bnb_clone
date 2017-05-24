@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :properties do
         get 'most_guests', to: 'most_guests#index'
+        get 'most_expensive', to: 'most_expensive#index'
       end
       namespace :reservations do
         get '/by_month', to: 'month#index'

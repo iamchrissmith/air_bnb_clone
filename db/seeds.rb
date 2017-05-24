@@ -9,7 +9,7 @@ class Seed
   end
 
   def generate_users
-    10.times do |i|
+    1000.times do |i|
       User.create!(
         email: Faker::Internet.email,
         first_name: Faker::Name.first_name,
@@ -33,7 +33,7 @@ class Seed
   end
 
   def generate_properties_for_users
-    CSV.foreach("db/fairbnb_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
+    CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       num = Random.new.rand(1..10)
       user = User.find(Random.new.rand(1..User.count))
       user.properties.create!(

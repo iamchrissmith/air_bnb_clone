@@ -2,6 +2,10 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+.user_nav {
+  display: flex;
+}
+
 .show_cropping {
   height: 450px;
   background: url(paris_street.png);

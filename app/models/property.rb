@@ -10,6 +10,16 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
+  # geocoded_by :full_address,  :latitude  => :lat, :longitude => :long
+  # after_validation :geocode
+  def prepare_address
+    [address, city, state, zip].compact.join('+')
+  end
+
+  def two_digit_price
+    '%.2f' % price_per_night.to_f
+  end
+
   def format_check_in_time
     DateTime.parse(check_in_time).strftime("%l:%M%P")
   end
@@ -48,4 +58,5 @@ class Property < ApplicationRecord
   def self.search_guests(guests)
     where("number_of_guests >= ?", guests)
   end
+
 end

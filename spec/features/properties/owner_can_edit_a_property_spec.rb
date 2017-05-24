@@ -46,17 +46,8 @@ feature "an owner can edit a rental property" do
 
       click_on 'Submit property for review'
 
-      expect(current_path).to eq(property_path(@user.properties.last))
+      expect(current_path).to eq(new_property_property_availability_path(@user.properties.last))
       expect(user.properties.last.status).to eq('pending')
-      expect(page).to have_content('Shared Room')
-      expect(page).to have_content('10 Guests')
-      expect(page).to have_content('6 Room')
-      expect(page).to have_content('6 Beds')
-      expect(page).to have_content('Sweet Spot')
-      expect(page).to have_content('Accomodates: 10')
-      expect(page).to have_content('Bathrooms: 4')
-      expect(page).to have_content('Beds: 6')
-      expect(page).to have_content('$100.00 per night')
     end
   end
 end

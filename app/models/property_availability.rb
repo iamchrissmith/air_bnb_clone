@@ -1,5 +1,6 @@
 class PropertyAvailability < ApplicationRecord
   validates :date, presence: true
+  validates_uniqueness_of :date, :scope => :property_id
   belongs_to :property
 
   scope :available, -> {PropertyAvailability.where(reserved?: false)}

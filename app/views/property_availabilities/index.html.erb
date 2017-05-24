@@ -2,13 +2,14 @@
 
   <div class="col-md-7">
     <h3>Available Dates </h3>
+    <%= link_to "Add availability", new_property_property_availability_path(@property), class: 'btn btn-custom' %>
   <hr>
   <div class="col-md-4">
 <br>
 <% @property_availabilities.each do |pa| %>
   <h4><%= pa.date.strftime('%b %d, %Y') %></h4>
   <% if pa.property.owner == current_user %>
-  <%= button_to "Make unavailable", property_property_availability_path(@property, pa), method: :delete, class: 'btn btn-custom' %><br><br>
+  <%= button_to "Make unavailable", property_property_availability_path(@property, pa), method: :delete, class: 'btn btn-warning' %><br><br>
   <% end %>
 <% end %>
 <div>

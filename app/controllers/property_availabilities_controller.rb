@@ -12,14 +12,14 @@ class  PropertyAvailabilitiesController < ApplicationController
 
   def create
     @property_availabilities = @property.property_availabilities.set_availability(params[:first_available_date].to_date, params[:last_available_date].to_date)
-
-    if @property_availabilities.count == ((params[:last_available_date].to_date - params[:first_available_date].to_date).to_i + 1)
-
+    ids=[]
+    @property_availabilities.each {|prop| ids << prop.id}
+    if ids.include?(nil)
+      flash[:danger] = "Sorry! Something went wrong. Please check your dates and try again."
+      render :new
+    else
       flash[:success] = "Your available dates have been set."
       redirect_to property_path(@property)
-    else
-      flash[:danger] = "Sorry! Something went wrong. Please try again."
-      render :new
     end
   end
 

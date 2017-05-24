@@ -2,20 +2,23 @@ require 'rails_helper'
 
 feature "user can view map of locations on a property index page" do
   context "as a guest user" do
-    scenario "returns property map locations" do
 
-      property_1 = create(:property)
-      property_2 = create(:property)
-      property_3 = create(:property)
+    before do
+      @property_1 = create(:property, name: "Beth's Plac", address: "816 Acoma St", city: "Denver", state: "CO", zip: "80203")
+      @property_2 = create(:property, name: "Crossfit Broadway", address: "1025 Acoma St", city: "Denver", state: "CO", zip: "80203")
+      @property_3 = create(:property, name: "Lowdown", address: "800 Lincoln St", city: "Denver", state: "CO", zip: "80203")
+      @key = ENV['GOOGLE_MAP_KEY']
+    end
+
+    scenario "returns property map locations" do
 
       visit properties_path
 
-      within(".map-index") do
-        source = page.find('div.map-index iFrame')[:src]
-        expect(source).to matcher(property_1.address)
-        expect(source).to matcher(property_2.address)
-        expect(source).to matcher(property_3.address)
-      end
+      expect(page).to have_css('iframe#map-index')
+
+      expect(page).to have_css("iframe[src='https://www.google.com/maps/embed/v1/place?key=#{@key}&q=#{@property_1.prepare_address}']")
+      expect(page).to have_css("iframe[src='https://www.google.com/maps/embed/v1/place?key=#{@key}&q=#{@property_2.prepare_address}']")
+      expect(page).to have_css("iframe[src='https://www.google.com/maps/embed/v1/place?key=#{@key}&q=#{@property_3.prepare_address}']")
     end
   end
 end

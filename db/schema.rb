@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20170523185123) do
     t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string   "name"
     t.integer  "number_of_guests"
@@ -114,6 +122,7 @@ ActiveRecord::Schema.define(version: 20170523185123) do
   end
 
   add_foreign_key "identities", "users"
+  add_foreign_key "messages", "users"
   add_foreign_key "properties", "room_types"
   add_foreign_key "properties", "users", column: "owner_id"
   add_foreign_key "property_availabilities", "properties"

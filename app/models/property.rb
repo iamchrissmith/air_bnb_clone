@@ -1,4 +1,6 @@
 class Property < ApplicationRecord
+  extend FairBnb::PropertyApiHelpers
+
   validates :name, :number_of_guests, :number_of_beds, :number_of_rooms, :description, :price_per_night, presence: true
   validates :address, :city, :state, :zip, :image_url, :status, presence: true
 
@@ -46,16 +48,4 @@ class Property < ApplicationRecord
     where("number_of_guests >= ?", guests)
   end
 
-  def self.most_guests(params)
-    params[:limit] = 10 if params[:limit].nil?
-    unless params[:city].nil?
-      where(city: params[:city]).order_by_guests(params[:limit])
-    else
-      order_by_guests(params[:limit])
-    end
-  end
-
-  def self.order_by_guests(x)
-    order('number_of_guests DESC').limit(x)
-  end
 end

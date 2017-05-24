@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
+      namespace :properties do
+        get 'most_guests', to: 'most_guests#index'
+      end
       namespace :reservations do
         get '/by_month', to: 'month#index'
       end

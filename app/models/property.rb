@@ -45,4 +45,17 @@ class Property < ApplicationRecord
   def self.search_guests(guests)
     where("number_of_guests >= ?", guests)
   end
+
+  def self.most_guests(params)
+    params[:limit] = 10 if params[:limit].nil?
+    unless params[:city].nil?
+      where(city: params[:city]).order_by_guests(params[:limit])
+    else
+      order_by_guests(params[:limit])
+    end
+  end
+
+  def self.order_by_guests(x)
+    order('number_of_guests DESC').limit(x)
+  end
 end

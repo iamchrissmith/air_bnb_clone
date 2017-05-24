@@ -4,16 +4,6 @@ class PropertyAvailability < ApplicationRecord
 
   scope :available, -> {PropertyAvailability.where(reserved?: false)}
 
-  def self.open_property_availabilities(date)
-    where(date: date).where(reserved?: false)
-  end
-
-  def self.find_available_properties(date)
-    open_property_availabilities(date).map do |pa|
-      pa.property
-    end
-  end
-
   def self.build_avaialability_range(first_available_date, last_available_date)
     days = []
     i = 0

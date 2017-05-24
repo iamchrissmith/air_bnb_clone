@@ -1,0 +1,14 @@
+<div class="row">
+
+  <div class="col-md-7">
+    <h3>Available Dates </h3>
+  <hr>
+  <div class="col-md-4">
+<br>
+<% @property_availabilities.each do |pa| %>
+  <h4><%= pa.date.strftime('%b %d, %Y') %></h4>
+  <% if pa.property.owner == current_user %>
+  <%= button_to "Make unavailable", property_property_availability_path(@property, pa), method: :delete, class: 'btn btn-custom' %><br><br>
+  <% end %>
+<% end %>
+<div>

@@ -43,7 +43,8 @@ class PropertiesController < ApplicationController
     if @property.save
       flash[:success] = "Your rental property has been submitted for approval. You will be contacted as soon as your property is approved!"
 
-      redirect_to property_path(@property)
+      # redirect_to property_path(@property)
+      redirect_to new_property_property_availability_path(@property)
     else
       flash[:danger] = "Sorry! Something went wrong. Please try again."
       render :new

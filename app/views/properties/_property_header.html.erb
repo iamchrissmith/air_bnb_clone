@@ -2,6 +2,9 @@
   <div class="col-md-8">
     <h2><%= @property.name %></h2>
     <p><%= "#{@property.city}, #{@property.state}" %></p>
+    <p class="weather">
+      <!-- Current weather: <%#= "#{@ .current_weather(@property.city, @property.state)}" %> -->
+    </p>
   </div>
   <div class="col-md-4">
     <img src="<%= @property.owner.image_url %>" alt="<%= @property.owner.full_name %>" height="100px">

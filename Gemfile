@@ -34,7 +34,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry-rails'
   gem 'rspec-pride'
-  gem 'awesome_print'
+  gem 'awesome_print', require: 'ap'
   gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner'

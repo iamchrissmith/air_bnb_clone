@@ -43,4 +43,3 @@ RSpec.feature "as an admin " do
     end
   end
 end
-# As an admin, when i visit dashboard path, I see my dashboard information, including a list of pending properties, a link to all properties and a link to all users.

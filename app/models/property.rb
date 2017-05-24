@@ -1,5 +1,4 @@
 class Property < ApplicationRecord
-  paginates_per 25
 
   validates :name, :number_of_guests, :number_of_beds, :number_of_rooms, :description, :price_per_night, presence: true
   validates :address, :city, :state, :zip, :image_url, :status, presence: true
@@ -11,7 +10,6 @@ class Property < ApplicationRecord
   has_many :property_availabilities
 
   enum status: %w(pending active archived)
-
   # geocoded_by :full_address,  :latitude  => :lat, :longitude => :long
   # after_validation :geocode
   def prepare_address

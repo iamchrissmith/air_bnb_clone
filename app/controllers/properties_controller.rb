@@ -6,29 +6,29 @@ class PropertiesController < ApplicationController
 
   def index
     if params[:city].present? && params[:guests].present? && params[:check_in].present?
-      @properties = Property.search_city_date_guests(params[:city], params[:check_in].to_date, params[:guests])
+      @properties = Property.search_city_date_guests(params[:city], params[:check_in].to_date, params[:guests]).paginate(:page => params[:page], :per_page => 20)
       @number_of_guests = params[:guests]
       @date = params[:check_in].to_date
     elsif params[:city].present? && params[:guests].present?
-      @properties = Property.search_city_guests(params[:city], params[:guests])
+      @properties = Property.search_city_guests(params[:city], params[:guests]).paginate(:page => params[:page], :per_page => 20)
       @number_of_guests = params[:guests]
     elsif params[:check_in].present? && params[:guests].present?
-      @properties = Property.search_date_guests(params[:check_in].to_date, params[:guests])
+      @properties = Property.search_date_guests(params[:check_in].to_date, params[:guests]).paginate(:page => params[:page], :per_page => 20)
       @number_of_guests = params[:guests]
       @date = params[:check_in].to_date
     elsif params[:check_in].present? && params[:city].present?
-      @properties = Property.search_date_city(params[:check_in].to_date, params[:city])
+      @properties = Property.search_date_city(params[:check_in].to_date, params[:city]).paginate(:page => params[:page], :per_page => 20)
       @date = params[:check_in].to_date
     elsif params[:check_in].present?
-      @properties = Property.search_date(params[:check_in].to_date)
+      @properties = Property.search_date(params[:check_in].to_date).paginate(:page => params[:page], :per_page => 20)
       @date = params[:check_in].to_date
     elsif params[:city].present?
-      @properties = Property.search_city(params[:city])
+      @properties = Property.search_city(params[:city]).paginate(:page => params[:page], :per_page => 20)
     elsif params[:guests].present?
-      @properties = Property.search_guests(params[:guests])
+      @properties = Property.search_guests(params[:guests]).paginate(:page => params[:page], :per_page => 20)
       @number_of_guests = params[:guests]
     else
-      @properties = Property.all
+      @properties = Property.all.paginate(:page => params[:page], :per_page => 20)
     end
   end
 

@@ -1,4 +1,6 @@
 class Property < ApplicationRecord
+  paginates_per 25
+
   validates :name, :number_of_guests, :number_of_beds, :number_of_rooms, :description, :price_per_night, presence: true
   validates :address, :city, :state, :zip, :image_url, :status, presence: true
 

@@ -20,6 +20,7 @@ feature "as any kind of user, I can see where a property is located" do
 
     click_on'Location'
 
+
     expect(page).to have_css("iframe[src='https://www.google.com/maps/embed/v1/place?key=#{@key}&q=#{@property.prepare_address}']")
   end
 end

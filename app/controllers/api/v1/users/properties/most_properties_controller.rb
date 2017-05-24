@@ -1,6 +1,10 @@
 class Api::V1::Users::Properties::MostPropertiesController < ApplicationController
 
   def index
-    render json: User.most_properties(params[:limit])
+    if params[:limit]
+      render json: User.most_properties(params[:limit])
+    else
+      render json: User.most_properties
+    end
   end
 end

@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
+      namespace :reservations do
+        get '/by_month', to: 'month#index'
+      end
       namespace :users do
         namespace :reservations do
           get '/nights', to: 'nights#index'
@@ -13,6 +16,7 @@ Rails.application.routes.draw do
         end
         namespace :money do
           get '/most_spent', to: 'most_spent#index'
+          get '/most_revenue', to: 'most_revenue#index'
         end
       end
     end

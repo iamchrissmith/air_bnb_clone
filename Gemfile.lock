@@ -102,6 +102,7 @@ GEM
       thor (~> 0.14)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
+    geocoder (1.4.4)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashdiff (0.3.4)
@@ -293,6 +294,7 @@ DEPENDENCIES
   faraday
   figaro
   font-awesome-rails
+  geocoder
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks

@@ -7,7 +7,7 @@ RSpec.feature "guest can login with email" do
 
     expect(current_path).to eq(sign_up_path)
 
-    click_on "Sign Up with Email"
+    click_on "Sign up with Email"
 
     expect(current_path).to eq(new_user_registration_path)
     fill_in :user_first_name, with: "Erin"

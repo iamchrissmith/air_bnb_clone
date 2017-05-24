@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'property that accommodates most guests' do
+describe 'most expensive properties endpoint' do
   before :all do
     30.times do |n|
       if n.even?

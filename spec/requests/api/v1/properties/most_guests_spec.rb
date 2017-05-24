@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'property that accommodates most guests' do
+describe 'properties that accommodates most guests' do
   before :all do
     30.times do |n|
       if n.even?

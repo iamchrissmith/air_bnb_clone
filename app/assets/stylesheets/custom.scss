@@ -2,8 +2,9 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
-.user_nav {
+.nav {
   display: flex;
+  text-align: center;
 }
 
 .show_cropping {
@@ -162,12 +163,6 @@ footer ul li {
   border-width: 1px;
   padding: 10px;
 }
-
-.nav {
-  display: flex;
-  text-align: center;
-}
-
 
 .index_map {
   float: right;

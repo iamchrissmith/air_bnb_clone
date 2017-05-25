@@ -58,7 +58,7 @@ end
     price_per_night Faker::Commerce.price
     address Faker::Address.street_address
     city Faker::Address.city
-    state Faker::Address.state
+    state Faker::Address.state_abbr
     zip Faker::Address.zip
     lat "39.7392"
     long "104.9903"

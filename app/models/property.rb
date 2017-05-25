@@ -20,6 +20,16 @@ class Property < ApplicationRecord
     '%.2f' % price_per_night.to_f
   end
 
+  def get_weather
+    service = WeatherService.new({city: city, state: state})
+    raw_weather = service.find_by_location
+    if raw_weather == nil
+      "Invalid city name; no weather information available."
+    else
+    Weather.new(raw_weather)
+    end
+  end
+
   def format_check_in_time
     DateTime.parse(check_in_time).strftime("%l:%M%P")
   end

@@ -74,7 +74,7 @@ class Seed
   end
 
   def generate_reservations_for_users
-    10.times do |i|
+    500.times do |i|
       user = User.find(Random.new.rand(1..User.count))
       property = Property.find(Random.new.rand(1..Property.count))
       length_of_stay = Random.new.rand(1..5)

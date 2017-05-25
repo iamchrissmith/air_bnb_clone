@@ -15,6 +15,7 @@ module FairBnb
         .sum(:total_price) unless city.nil?
       group("TO_CHAR(start_date, 'MM-YYYY')").sum(:total_price)
     end
+
   end
 
   module PropertyApiHelpers
@@ -42,6 +43,16 @@ module FairBnb
 
     def order_by_price(x)
       order('price_per_night DESC').limit(x)
+    end
+
+    def highest_revenue_cities(params)
+      Property.select("properties.city, SUM(reservations.total_price) AS revenue")
+        .joins(:reservations)
+        .where(reservations: {start_date: "#{params[:year]}-#{params[:month]}-01"})
+        .group("properties.city")
+        .order("revenue DESC")
+        .limit(params[:limit])
+        .map(&:city)
     end
   end
 end

@@ -14,7 +14,7 @@
       <% @properties.each do |property| %>
         <% if property.city == city %>
           <h4><%= link_to property.name, property_path(property) %></h4>
-          <%= link_to image_tag(property.image_url), property_path(property) %><br><br>
+          <%= link_to image_tag(property.image_url, width: 500), property_path(property) %><br><br>
         <% end %>
       <% end %>
   <% end %>

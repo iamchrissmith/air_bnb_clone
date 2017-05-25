@@ -1,25 +1,10 @@
 class Weather
-  attr_reader :city, :state
+  attr_reader :conditions, :temperature, :wind
 
   def initialize(attributes={})
-    @city = attributes[:city]
-    @state = attributes[:state]
-  end
-
-  def self.get_weather(city, state)
-    WeatherService.find_by_location
-  end
-
-  def weather
-
-  end
-
-  def temperature
-    
-  end
-
-  def wind
-
+    @conditions = attributes[:weather]
+    @temperature = attributes[:temperature_string]
+    @wind = attributes[:wind_string]
   end
 
 end

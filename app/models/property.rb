@@ -10,6 +10,12 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
+  def get_weather
+    service = WeatherService.new({city: city, state: state})
+    raw_weather = service.find_by_location
+    Weather.new(raw_weather)
+  end
+
   def format_check_in_time
     DateTime.parse(check_in_time).strftime("%l:%M%P")
   end

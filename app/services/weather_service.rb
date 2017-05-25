@@ -1,7 +1,7 @@
 class WeatherService
 
   def initialize(params)
-    @city = params[:city]
+    @city = params[:city].parameterize(separator: '_')
     @state = params[:state]
     @token = ENV["WEATHER_KEY"]
     @_conn = Faraday.new("http://api.wunderground.com")

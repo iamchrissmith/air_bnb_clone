@@ -2,6 +2,7 @@ class PropertiesController < ApplicationController
 
   def show
     @property = Property.find(params[:id])
+    @weather = @property.get_weather
   end
 
   def index

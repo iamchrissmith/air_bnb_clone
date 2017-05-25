@@ -8,7 +8,7 @@ RSpec.feature "as an admin " do
 
     visit admin_dashboard_index_path
 
-    within(".sub_nav") do
+    within (".collapse") do
       click_on "Admin Menu"
       click_on "Properties"
     end

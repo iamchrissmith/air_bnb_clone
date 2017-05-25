@@ -1,10 +1,10 @@
 class Weather
   attr_reader :conditions, :temperature, :wind
 
-  def initialize(attributes={})
-    @conditions = attributes[:weather]
-    @temperature = attributes[:temperature_string]
-    @wind = attributes[:wind_string]
+  def initialize(raw_weather={})
+    @conditions = raw_weather[:weather]
+    @temperature = raw_weather[:temperature_string]
+    @wind = raw_weather[:wind_string]
   end
 
 end

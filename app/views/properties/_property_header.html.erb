@@ -3,7 +3,12 @@
     <h2><%= @property.name %></h2>
     <p><%= "#{@property.city}, #{@property.state}" %></p>
     <p class="weather">
-      <!-- Current weather: <%#= "#{@ .current_weather(@property.city, @property.state)}" %> -->
+      Current weather:<br>
+      <% if @weather.class == String %>
+      <%= @weather %>
+      <% else %>
+      Conditions: <%= "#{@weather.conditions}" %> |  Temp: <%= "#{@weather.temperature}" %> |  Wind: <%= "#{@weather.wind}" %>
+      <% end %>
     </p>
   </div>
   <div class="col-md-4">

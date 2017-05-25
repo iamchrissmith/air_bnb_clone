@@ -3,11 +3,11 @@
   <!-- <div class="col-md-7">
     
   <hr> -->
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="panel space-6">
         <div class="media media-photo-block">
           <div class="text-center">
-            <%= image_tag @user.image_url, class: "profile-pic-large" %>
+            <%= image_tag @user.image_url + "?type=large", class: "profile-pic-large" %>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <%= link_to "Add a property", new_property_path, class: 'btn btn-custom' %>
       </div>
       </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
     <h1>Hey, I'm <%= @user.first_name %>!</h1>
     <h4> <%= @user.hometown %>  |   Member since <%= @user.created_at.strftime('%b %d, %Y') %><br><br>
       About me: <%= @user.description %></h4>

@@ -16,7 +16,7 @@ feature "user can view map of locations on a property index page" do
       within(".index_map") do
 
       iframe = page.find('iframe')
-      
+
       expect(iframe[:src]).to eq("https://www.google.com/maps/embed/v1/place?key=#{@key}&q=[\"#{@property_1.prepare_address}\", \"#{@property_2.prepare_address}\", \"#{@property_3.prepare_address}\"]")
       end
     end

@@ -1,9 +1,9 @@
 <!-- <img class="property_image" src="prop_show_image.png" alt="<%#= @property.name %>"> -->
-<%#= image_tag("prop_show_image.png", width: 1140) %>
-<div class="show_cropping">
-  
-</div>
-<!-- <img class="property_image" src="<%#= @property.image_url %>" alt="<%#= @property.name %>"> -->
+<%= image_tag(@property.image_url, width: 1140) %>
+<!-- <div class="show_cropping"> -->
+
+<!-- </div> -->
+<!-- <img class="property_image" src="" alt="<%#= @property.name %>"> -->
 
 <hr>
 
@@ -29,6 +29,12 @@
       <div class="tab-content">
         <div class="tab-pane active" id="overview" role="tabpanel">
           <%= render partial: 'property_header' %>
+          <div class="text-left">
+            <% if @property.owner == current_user %>
+            <%= link_to "Edit this property", edit_property_path(@property), class: 'btn btn-custom' %><br><br>
+            <%= link_to "View property availability", property_property_availabilities_path(@property), class: 'btn btn-custom' %>
+            <% end %>
+        </div>
           <hr>
           <%= render partial: 'list_info' %>
           <hr>
@@ -43,6 +49,7 @@
           <%= render partial: 'property_header' %>
           <hr>
           <h3>The neighborhood</h3>
+          <%= render partial: 'the_neighborhood' %>
         </div>
 
         <div class="tab-pane" id="reviews" role="tabpanel">
@@ -62,10 +69,10 @@
 
   <div class="col-md-3">
     <div class="booking-price">
-      <h4>$<%= @property.price_per_night %> per night</h4>
+      <h4>$<%= @property.two_digit_price %> per night</h4>
     </div>
     <div class="booking-box">
       <%= render partial: 'booking' %>
-    </div>
+    </div><br>
   </div>
 </div>

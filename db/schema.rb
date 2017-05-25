@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520214016) do
+ActiveRecord::Schema.define(version: 20170524163616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20170520214016) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.decimal  "lat"
-    t.decimal  "long"
+    t.float    "lat"
+    t.float    "long"
     t.string   "image_url"
     t.string   "check_in_time"
     t.string   "check_out_time"
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 20170520214016) do
 
   create_table "property_availabilities", force: :cascade do |t|
     t.date     "date"
-    t.boolean  "reserved?"
+    t.boolean  "reserved?",   default: false
     t.integer  "property_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["property_id"], name: "index_property_availabilities_on_property_id", using: :btree
   end
 

@@ -4,7 +4,6 @@ class User < ApplicationRecord
 
   has_many :reservations, foreign_key: "renter_id"
   has_many :properties, foreign_key: "owner_id"
-  has_many :identities
 
   enum role: %w(registered_user admin)
 
@@ -13,7 +12,6 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth_info)
-
     return from_google_omniauth(auth_info) if auth_info.provider == "google_oauth2"
     return from_fb_omniauth(auth_info) if auth_info.provider == "facebook"
   end

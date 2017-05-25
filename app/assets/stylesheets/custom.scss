@@ -2,9 +2,14 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+.nav {
+  display: flex;
+  text-align: center;
+}
+
 .show_cropping {
   height: 450px;
-  background: url(paris_street.png);
+  // background: url(paris_street.png);
   background-size: 1140px 450px, cover;
 }
 
@@ -159,7 +164,6 @@ footer ul li {
   padding: 10px;
 }
 
-.nav {
-  display: flex;
-  text-align: center;
+.index_map {
+  float: right;
 }

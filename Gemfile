@@ -12,16 +12,16 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'active_model_serializers', '~> 0.10.0'
-
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.5'
+gem 'will_paginate', '~> 3.1.0'
 gem 'figaro'
 gem 'faraday'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'simplecov', :require => false, :group => :test
-
+gem 'geocoder'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
@@ -35,7 +35,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry-rails'
   gem 'rspec-pride'
-  gem 'awesome_print'
+  gem 'awesome_print', require: 'ap'
   gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner'

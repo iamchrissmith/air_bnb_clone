@@ -33,7 +33,20 @@ class Seed
   end
 
   def generate_properties_for_users
-    500.times do |i|
+    images = ["http://clv.h-cdn.co/assets/cm/15/09/54eb98794d090_-_windriver-house.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/15/Castel_Telvana_Borgo.jpg",
+      "http://media.architecturaldigest.com/photos/58051ed2cdff3c07101dee82/master/pass/matthew-mcconaughey-airstream-trailer-10.jpg",
+      "http://modelosdefachadasdecasas.com/wp-content/uploads/2015/11/modelo-fachada-de-casas-bonitas.jpg",
+      "http://www.yurts.com/wp-content/uploads/2015/07/24-Pacific-Yurt-With-Picnic-Table.jpg",
+      "http://www.newyorker.com/wp-content/uploads/2016/04/Manley-SoYoureaDudeWhoWantstoBuildaTreeHouse-1200.jpg",
+      "https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/01/21/12/treehouse-thailand.jpg",
+      "http://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2013/5/1/0/RX-HGMAG011_Brooks-Beachhouse-135-b-4x3.jpg.rend.hgtvcom.1280.960.jpeg",
+      "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iGLAXAV9HfdY/v0/1200x750.jpg",
+      "https://www.mohonk.com/wp-content/uploads/2017/01/Fact-Sheets-1680x1260.jpg",
+      "http://jjtravels.net/wp-content/uploads/2009/10/IMG_3705.JPG",
+      "http://www.letthedogin.com/wp-content/uploads/2012/09/DSC_0107.jpg"]
+
+    CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       num = Random.new.rand(1..10)
       user = User.find(Random.new.rand(1..1000))
       user.properties.create!(
@@ -44,26 +57,26 @@ class Seed
         number_of_bathrooms: num,
         description: Faker::Hipster.paragraph,
         price_per_night: Faker::Commerce.price,
-        address: Faker::Address.street_address,
-        city: Faker::Address.city,
-        state: Faker::Address.state,
-        zip: Faker::Address.zip,
-        lat: Faker::Address.latitude,
-        long: Faker::Address.longitude,
-        image_url: Faker::LoremPixel.image,
+        address: row[:street_address],
+        city: row[:city],
+        state: row[:state],
+        zip: row[:zip],
+        lat: row[:latitude],
+        long: row[:longitude],
+        image_url: images.sample,
         status: 1,
         room_type_id: Random.new.rand(1..3),
         check_in_time: "14:00:00",
         check_out_time: "11:00:00"
         )
-      puts "#{i} property created"
+      puts "#{row} property created"
     end
   end
 
   def generate_reservations_for_users
     500.times do |i|
-      user = User.find(Random.new.rand(1..1000))
-      property = Property.find(Random.new.rand(1..500))
+      user = User.find(Random.new.rand(1..User.count))
+      property = Property.find(Random.new.rand(1..Property.count))
       length_of_stay = Random.new.rand(1..5)
       total = (property.price_per_night * length_of_stay)
       begin_date = Faker::Date.forward(23)

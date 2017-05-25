@@ -16,31 +16,28 @@ class  PropertyAvailabilitiesController < ApplicationController
     @property_availabilities.each {|prop| ids << prop.id}
     if ids.include?(nil)
       flash[:danger] = "Sorry! Something went wrong. Please check your dates and try again."
-      render :new
+      redirect_to new_property_property_availability_path(@property)
     else
       flash[:success] = "Your available dates have been set."
       redirect_to property_path(@property)
     end
   end
 
-  def edit
-    @property_availabilities = @property.property_availabilities
-  end
 
-  def update
-
-    if params[:reserved] == "true"
-      @property_availability.update(reserved?: true)
-      if @property_availability.save
-        flash[:success] = "Your available dates have been changed."
-        redirect_to property_property_availability_path(@property)
-      else
-        render :index
-      end
-    else
-     render :index
-    end
-  end
+  # def update
+  #
+  #   if params[:reserved] == "true"
+  #     @property_availability.update(reserved?: true)
+  #     if @property_availability.save
+  #       flash[:success] = "Your available dates have been changed."
+  #       redirect_to property_property_availability_path(@property)
+  #     else
+  #       render :index
+  #     end
+  #   else
+  #    render :index
+  #   end
+  # end
 
   def destroy
     @property_availability = @property.property_availabilities.find(params[:id])

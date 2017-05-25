@@ -25,29 +25,19 @@ feature "an owner can edit a rental property" do
     end
 
     scenario "I can update one of my rental properties" do
-      visit user_path(user)
-      click_on 'Add a property'
+      visit property_path(property)
+      click_on 'Edit this property'
 
       find(:css, "#room_type-#{room_type.id}").set(true)
-      fill_in 'Name', with: 'Sweet Spot'
-      fill_in 'Number of guests', with: '10'
-      fill_in 'Number of beds', with: '6'
-      fill_in 'Number of rooms', with: '6'
-      fill_in 'Number of bathrooms', with: '4'
-      fill_in 'Description', with: 'Great'
+      fill_in 'Number of beds', with: '8'
+      fill_in 'Description', with: 'Have a Great time!'
       fill_in 'Check in time', with: '11:00 AM'
       fill_in 'Check out time', with: '4:00 PM'
-      fill_in 'Price per night', with: 100.00
-      fill_in 'Address', with: '500 W. Street St.'
-      fill_in 'City', with: 'Denver'
-      fill_in 'State', with: 'Colorodo'
-      fill_in 'Zip', with: '80230'
-      fill_in 'Image url', with: 'https://fakepictureofahouse'
 
       click_on 'Submit property for review'
 
-      expect(current_path).to eq(new_property_property_availability_path(@user.properties.last))
-      expect(user.properties.last.status).to eq('pending')
+      expect(current_path).to eq(property_path(property))
+      expect(page).to have_content("Your edits have beeen submitted for approval. You will receive a notice when property is updated.")
     end
   end
 end

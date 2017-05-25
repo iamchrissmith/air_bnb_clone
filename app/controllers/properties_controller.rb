@@ -63,7 +63,7 @@ class PropertiesController < ApplicationController
       flash[:success] = "Your edits have beeen submitted for approval. You will receive a notice when property is updated."
       redirect_to property_path(@property)
     else
-      render :edit
+      redirect_to edit_property_path(@property)
     end
   end
 

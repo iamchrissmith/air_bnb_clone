@@ -1,9 +1,9 @@
 <!-- <img class="property_image" src="prop_show_image.png" alt="<%#= @property.name %>"> -->
-<%#= image_tag("prop_show_image.png", width: 1140) %>
-<div class="show_cropping">
+<%= image_tag(@property.image_url, width: 1140) %>
+<!-- <div class="show_cropping"> -->
 
-</div>
-<!-- <img class="property_image" src="<%#= @property.image_url %>" alt="<%#= @property.name %>"> -->
+<!-- </div> -->
+<!-- <img class="property_image" src="" alt="<%#= @property.name %>"> -->
 
 <hr>
 
@@ -31,7 +31,8 @@
           <%= render partial: 'property_header' %>
           <div class="text-left">
             <% if @property.owner == current_user %>
-            <%= link_to "Edit this property", edit_property_path(@property), class: 'btn btn-custom' %>
+            <%= link_to "Edit this property", edit_property_path(@property), class: 'btn btn-custom' %><br><br>
+            <%= link_to "View property availability", property_property_availabilities_path(@property), class: 'btn btn-custom' %>
             <% end %>
         </div>
           <hr>
@@ -72,6 +73,6 @@
     </div>
     <div class="booking-box">
       <%= render partial: 'booking' %>
-    </div>
+    </div><br>
   </div>
 </div>

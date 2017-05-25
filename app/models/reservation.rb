@@ -1,4 +1,6 @@
 class Reservation < ApplicationRecord
+  extend FairBnb::ReservationApiHelpers
+  
   validates :total_price, :start_date, :end_date, :number_of_guests, :status, presence: true
 
   belongs_to :property

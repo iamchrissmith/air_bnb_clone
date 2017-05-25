@@ -3,8 +3,14 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
+      namespace :properties do
+        get 'most_guests', to: 'most_guests#index'
+        get 'most_expensive', to: 'most_expensive#index'
+      end
       namespace :reservations do
         get '/by_month', to: 'month#index'
+        get '/revenue_by_month', to: 'revenue_by_month#index'
+        get '/highest_revenue_cities', to: 'cities_revenue#index'
       end
       namespace :users do
         namespace :reservations do
@@ -45,7 +51,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:edit, :update, :show]
 
-  resources :properties,  only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :properties,  only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :property_availabilities, only: [:index, :new, :create, :edit, :update, :destroy]
+  end
 
   resources :reservations, only: [:new]
 

@@ -1,8 +1,7 @@
 <% content_for :top_content do %>
   <div class="jumbotron">
     <div class="container">
-      <h1>FairBnB</h1>
-      <p>Book unique homes and experience a city like a local.</p>
+      <span class="title">Fairbnb</span> <span class="subtitle"> &nbsp; Book unique homes and experience a city like a local. Fairly? :)</span>
     </div>
   </div>
 
@@ -12,24 +11,21 @@
       <div class="input-group">
           <%= form_tag("/properties", :method => "get") do %>
           <div class="form-group">
-            <%= label_tag(:city, "City") %>
-            <%= text_field_tag :city %>
-          </div>
+            <%= text_field_tag(:city, nil, placeholder: 'city') %>
+          </div> &nbsp;
           <div class="form-group">
-            <%= label_tag(:check_in, "From") %>
             <%= date_field_tag :check_in %>
-          </div>
+          </div> &nbsp;
           <div class="form-group">
-            <%= label_tag(:check_out, "Til") %>
+            <%= label_tag(:check_out, " til ") %>&nbsp;
             <%= date_field_tag :check_out %>
-          </div>
+          </div> &nbsp;
           <div class="form-group">
-            <%= label_tag(:guests, "Guests") %>
-            <%= text_field_tag :guests %>
-          </div>
+            <%= text_field_tag(:guests, nil, placeholder: 'guests')%>
+          </div> <br>
           <div class="form-group">
             <br>
-            <%= submit_tag "Search", name: nil %>
+            <%= submit_tag "Search", name: nil, class: "btn btn-custom" %>
           </div>
           <% end %>
       </div>
@@ -65,18 +61,38 @@
       <!-- begin card deck -->
       <h2>Featured Cities</h2>
       <div class="card-deck">
-        <% @featured_properties.each do |property| %>
         <div class="card">
-          <!-- <img class="card-img-top" src="<%#= property.image_url%>" alt="Card image cap">
-          <%#= image_tag "#{rando.photo}", class: "thumbnail", size: "304x236" %> -->
-          <%= image_tag property.image_url, class: "card-img-top", size: "250x250" %>
+
+          <%= image_tag "http://www.planetware.com/photos-tiles/colorado-denver-city-view-and-mountains.jpg", class: "card-img-top", size: "250x250" %>
           <div class="card-block">
-            <!-- <h4 class="card-title"><%= property.name[0..28] %></h4> -->
-            <p class="card-text"><%= property.city[0..28] %></p>
-            <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+            <p class="card-text"><%= link_to "Denver","/properties?utf8=✓&city=Denver&check_in=&check_out=&guests=" %></p>
           </div>
         </div>&nbsp;&nbsp;&nbsp;&nbsp;
-        <% end %>
+
+        <div class="card">
+
+          <%= image_tag "http://www.myhockeytournaments.com/img/sites/chicago/001.jpg", class: "card-img-top", size: "250x250" %>
+          <div class="card-block">
+            <p class="card-text"><%= link_to "Chicago","/properties?utf8=✓&city=Chicago&check_in=&check_out=&guests=" %></p>
+          </div>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div class="card">
+
+          <%= image_tag "http://www.visitflorida.com/content/dam/visitflorida/en-us/images/articles/2011/march/1300805920_miami_cocktail-hour-at-cafe-sambal_sm.jpg", class: "card-img-top", size: "250x250" %>
+          <div class="card-block">
+            <p class="card-text"><%= link_to "Miami","/properties?utf8=✓&city=Miami&check_in=&check_out=&guests=" %></p>
+          </div>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div class="card">
+
+          <%= image_tag "https://farm8.staticflickr.com/7386/13883313211_587c22bdae_b.jpg", class: "card-img-top", size: "250x250" %>
+          <div class="card-block">
+            <p class="card-text"><%= link_to "Wauwatosa","/properties?utf8=✓&city=Wauwatosa&check_in=&check_out=&guests=" %></p>
+          </div>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
       </div>
       <!-- end card deck -->
     </div>

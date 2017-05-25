@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="panel space-4">
         <div class="media media-photo-block">
           <div class="text-center">
-            <%= image_tag @user.image_url + "?type=large" %>
+            <%= image_tag @user.image_url, class: "profile-pic-large" %>
           </div>
         </div>
 
@@ -12,8 +12,8 @@
             <%= @user.first_name %></h2>
           <ul class="list-unstyled text-center">
             <li>
-              <%= link_to "View Profile", user_path(@user) %>
-            </li>
+              <%= link_to "View Profile", user_path(@user), class: "btn btn-custom" %>
+            </li><br>
             <li>
               <%= link_to "Edit Profile", edit_user_path(@user) %>
             </li>
@@ -25,7 +25,7 @@
       </div>
   </div>
 
-    <div class="col-md-9">
+    <div class="col-md-8">
       <!-- <div class="panel space-4"> -->
         <div class="panel-header">
           <h4>NOTIFICATIONS</h4>

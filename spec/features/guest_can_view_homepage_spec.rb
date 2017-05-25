@@ -13,10 +13,10 @@ feature "a guest can view homepage" do
     expect(page).to have_content("Book unique homes and experience a city like a local.")
 
     within(".search_bar") do
-      expect(page).to have_field("City")
-      expect(page).to have_field("From")
-      expect(page).to have_field("Til")
-      expect(page).to have_field("Guests")
+      expect(page).to have_field("city")
+      expect(page).to have_field("check_in")
+      expect(page).to have_field("check_out")
+      expect(page).to have_field("guests")
       expect(page).to have_selector(:link_or_button, 'Search')
     end
 

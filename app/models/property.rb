@@ -1,4 +1,5 @@
 class Property < ApplicationRecord
+  extend FairBnb::PropertyApiHelpers
 
   validates :name, :number_of_guests, :number_of_beds, :number_of_rooms, :description, :price_per_night, presence: true
   validates :address, :city, :state, :zip, :image_url, :status, presence: true
@@ -62,7 +63,7 @@ class Property < ApplicationRecord
     number_of_dates = check_out_date - check_in_date + 1
     (prop_avails.select {|pa| array.count(pa.id) == number_of_dates}).uniq
   end
-  
+
   def self.search_dates(check_in_date, check_out_date)
     prop_avails = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date)
     array = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date).pluck(:id)

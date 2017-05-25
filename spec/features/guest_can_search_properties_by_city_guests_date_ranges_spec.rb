@@ -6,11 +6,9 @@ feature "a guest can search" do
     property2 = create(:property, name: "cabin in the woods", city: "Denver")
     visit root_path
 
-    fill_in :city, with:"#{property.city}"
+    fill_in "city", with:"#{property.city}"
     click_on "Search"
-
     expect(current_path).to eq(properties_path)
-
     expect(page).to have_content("Search Results")
 
     within(".results") do

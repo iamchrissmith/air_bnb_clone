@@ -28,7 +28,6 @@ feature "as a logged in user" do
 
       expect(current_path).to eq(user_path(user))
       expect(page).to have_content('New first name')
-      expect(page).to have_content('New last name')
       expect(page).to have_content('Something different')
       expect(page).to have_content('I moved!')
     end

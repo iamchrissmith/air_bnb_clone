@@ -30,16 +30,5 @@ feature "a guest can view homepage" do
       expect(page).to have_css("img[src*='#{properties.last.image_url}']")
       expect(page).to have_content(properties.last.name)
     end
-
-    within(".featured_cities") do
-      expect(page).to have_content(properties.first.city)
-      expect(page).to have_css("img[src*='#{properties.first.image_url}']")
-      expect(page).to have_content(properties.second.city)
-      expect(page).to have_css("img[src*='#{properties.second.image_url}']")
-      expect(page).to have_content(properties[2].city)
-      expect(page).to have_css("img[src*='#{properties[2].image_url}']")
-      expect(page).to have_content(properties.last.city)
-      expect(page).to have_css("img[src*='#{properties.last.image_url}']")
-    end
   end
 end

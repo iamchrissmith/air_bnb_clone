@@ -1,13 +1,13 @@
 <div class="row">
 
-  <div class="col-md-7">
-    <h1>Hey, I'm <%= @user.first_name %> <%= @user.last_name %>!</h1>
-  <hr>
+  <!-- <div class="col-md-7">
+    
+  <hr> -->
   <div class="col-md-4">
-    <div class="panel space-4">
+    <div class="panel space-6">
         <div class="media media-photo-block">
           <div class="text-center">
-            <%= image_tag @user.image_url + "?type=large" %>
+            <%= image_tag @user.image_url, class: "profile-pic-large" %>
           </div>
         </div>
       </div>
@@ -27,6 +27,7 @@
       </div>
       </div>
     <div class="col-md-8">
+    <h1>Hey, I'm <%= @user.first_name %>!</h1>
     <h4> <%= @user.hometown %>  |   Member since <%= @user.created_at.strftime('%b %d, %Y') %><br><br>
       About me: <%= @user.description %></h4>
     <!-- <h4><%#= @user.email %></h4> -->

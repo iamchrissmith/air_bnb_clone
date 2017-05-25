@@ -2,6 +2,8 @@
 
 This is our Cloney Island Project!! ROMPHIM
 
+Production Site: https://fair-bnb.herokuapp.com/
+
 run `Bundle`
 
 run `rake db:reset`

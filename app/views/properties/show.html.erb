@@ -31,7 +31,8 @@
           <%= render partial: 'property_header' %>
           <div class="text-left">
             <% if @property.owner == current_user %>
-            <%= link_to "Edit this property", edit_property_path(@property), class: 'btn btn-custom' %>
+            <%= link_to "Edit this property", edit_property_path(@property), class: 'btn btn-custom' %><br><br>
+            <%= link_to "View property availability", property_property_availabilities_path(@property), class: 'btn btn-custom' %>
             <% end %>
         </div>
           <hr>
@@ -72,6 +73,6 @@
     </div>
     <div class="booking-box">
       <%= render partial: 'booking' %>
-    </div>
+    </div><br>
   </div>
 </div>

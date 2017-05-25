@@ -18,4 +18,32 @@ RSpec.describe PropertyAvailability, type: :model do
     expect(property_availability).to_not be_valid
   end
 
+  it "can scope to all property availabilities that are not reserved" do
+    pa = create(:property_availability, reserved?: false)
+    pa2 = create(:property_availability)
+    pa3 = create(:property_availability, reserved?: false)
+
+    pas = PropertyAvailability.available
+
+    expect(pas.count).to eq(2)
+    expect(pas.first.id).to eq(pa.id)
+  end
+
+  it "can create available date ranges" do
+    dates = PropertyAvailability.build_avaialability_range(Date.today, (Date.today + 5))
+
+    expect(dates).to be_an(Array)
+    expect(dates.count).to eq(6)
+    expect(dates.first).to be_a(Date)
+  end
+
+  it "can set available dates" do
+    property = create(:property)
+    avail_dates = property.property_availabilities.set_availability(Date.today, (Date.today + 5))
+
+    expect(avail_dates.count).to eq(6)
+    expect(PropertyAvailability.count).to eq(6)
+    expect(avail_dates.first).to be_a(PropertyAvailability)
+  end
+
 end

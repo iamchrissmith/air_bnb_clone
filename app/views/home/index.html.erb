@@ -11,24 +11,21 @@
       <div class="input-group">
           <%= form_tag("/properties", :method => "get") do %>
           <div class="form-group">
-            <%= label_tag(:city, "City") %>
-            <%= text_field_tag :city %>
-          </div>
+            <%= text_field_tag(:city, 'city') %>
+          </div> &nbsp;
           <div class="form-group">
-            <%= label_tag(:check_in, "From") %>
             <%= date_field_tag :check_in %>
-          </div>
+          </div> &nbsp;
           <div class="form-group">
-            <%= label_tag(:check_out, "Til") %>
+            <%= label_tag(:check_out, " til ") %>&nbsp;
             <%= date_field_tag :check_out %>
-          </div>
+          </div> &nbsp;
           <div class="form-group">
-            <%= label_tag(:guests, "Guests") %>
-            <%= text_field_tag :guests %>
-          </div>
+            <%= text_field_tag :guests, "# of guests"%>
+          </div> <br>
           <div class="form-group">
             <br>
-            <%= submit_tag "Search", name: nil %>
+            <%= submit_tag "Search", name: nil, class: "btn btn-custom" %>
           </div>
           <% end %>
       </div>

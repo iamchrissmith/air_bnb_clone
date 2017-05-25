@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520214016) do
+ActiveRecord::Schema.define(version: 20170524163616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20170520214016) do
     t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string   "name"
     t.integer  "number_of_guests"
@@ -35,8 +43,8 @@ ActiveRecord::Schema.define(version: 20170520214016) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.decimal  "lat"
-    t.decimal  "long"
+    t.float    "lat"
+    t.float    "long"
     t.string   "image_url"
     t.string   "check_in_time"
     t.string   "check_out_time"
@@ -52,10 +60,10 @@ ActiveRecord::Schema.define(version: 20170520214016) do
 
   create_table "property_availabilities", force: :cascade do |t|
     t.date     "date"
-    t.boolean  "reserved?"
+    t.boolean  "reserved?",   default: false
     t.integer  "property_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["property_id"], name: "index_property_availabilities_on_property_id", using: :btree
   end
 
@@ -83,19 +91,19 @@ ActiveRecord::Schema.define(version: 20170520214016) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "image_url"
-    t.string   "email",                   default: "",   null: false
+    t.string   "email",                   default: "",    null: false
     t.string   "phone_number"
     t.text     "description"
     t.string   "hometown"
     t.integer  "role",                    default: 0
     t.boolean  "active?",                 default: true
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "encrypted_password",      default: "",   null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "encrypted_password",      default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",           default: 0,    null: false
+    t.integer  "sign_in_count",           default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -105,11 +113,16 @@ ActiveRecord::Schema.define(version: 20170520214016) do
     t.datetime "google_oauth_expires_at"
     t.string   "facebook_uid"
     t.string   "facebook_token"
+    t.string   "authy_id"
+    t.datetime "last_sign_in_with_authy"
+    t.boolean  "authy_enabled",           default: false
+    t.index ["authy_id"], name: "index_users_on_authy_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   add_foreign_key "identities", "users"
+  add_foreign_key "messages", "users"
   add_foreign_key "properties", "room_types"
   add_foreign_key "properties", "users", column: "owner_id"
   add_foreign_key "property_availabilities", "properties"

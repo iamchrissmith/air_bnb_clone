@@ -22,6 +22,9 @@
             </li>
           </ul>
         </div>
+        <div class="text-center">
+        <%= link_to "Add a property", new_property_path, class: 'btn btn-custom' %>
+      </div>
       </div>
     <div class="col-md-8">
     <h4> <%= @user.hometown %>  |   Member since <%= @user.created_at.strftime('%b %d, %Y') %><br><br>

@@ -1,0 +1,5 @@
+My Properties<br>
+
+<% @properties.each do |property| %>
+<%= link_to property.name, property_path(property.id) %><br>
+<% end %>

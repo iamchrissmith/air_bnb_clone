@@ -1,0 +1,121 @@
+<%= form_for(@property, :html => {:class => 'form-horizontal'}) do |f| %>
+
+  <div class="form-group">
+    <br>
+    <%= f.label :room_type_id, :class =>"col-sm-2 control-label" %>
+    <% @room_types.each do |room_type| %>
+    <div class="col-sm-2">
+
+      <%= radio_button_tag( :room_type_ids, room_type.id, false,
+                          name: 'property[room_type_id]',
+                          id: "room_type-#{room_type.id}") %>
+
+        <%= room_type.name %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, :class => "form-control", :placeholder => "My awesome rental"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :number_of_guests, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :number_of_guests, :class => "form-control", :placeholder => "4"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :number_of_beds, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :number_of_beds, :class => "form-control", :placeholder => "2"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :number_of_rooms, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :number_of_rooms, :class => "form-control", :placeholder => "2"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :number_of_bathrooms, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :number_of_bathrooms, :class => "form-control", :placeholder => "1.5"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_area :description, :class => "form-control", :placeholder => "Tell us about your space!"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :check_in_time, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.time_field :check_in_time, :class => "form-control", :placeholder => "Tell us about your space!"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :check_out_time, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.time_field :check_out_time, :class => "form-control", :placeholder => "Tell us about your space!"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price_per_night, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :price_per_night, :class => "form-control", :placeholder => "50.00"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :address, :class => "form-control", :placeholder => "123 Main Street"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :city, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :city, :class => "form-control", :placeholder => "Denver"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :state, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :state, :class => "form-control", :placeholder => "Colorado"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :zip, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :zip, :class => "form-control", :placeholder => "80203"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :image_url, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+  <%= f.text_field :image_url, :class => "form-control", :placeholder => "paste an image link here"%>
+    </div>
+  </div>
+
+  <div class = "form-actions">
+    <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit "Submit property for review", class: 'btn btn-custom' %>
+      </div>
+    <% end %>
+</div>

@@ -39,5 +39,8 @@ def stub_google
       expires: true
     }
   })
+end
 
+def per_month_rev(mon)
+  "$#{(9.99*mon).round(2)}"
 end

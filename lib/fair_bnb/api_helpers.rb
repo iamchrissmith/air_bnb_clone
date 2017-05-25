@@ -1,6 +1,22 @@
 module FairBnb
   module ReservationApiHelpers
+    def revenue_by_month(params)
+      raw_revenue = calculate_revenue_by_location(params[:city])
+      raw_revenue.reduce(Hash.new(0)) do |t, (k, v)|
+        key = k.dup.prepend("01-").to_date.strftime("%b-%Y")
+        t[key] = "$#{'%.2f' % v.to_f.round(2)}"; t
+      end
+    end
+
+    def calculate_revenue_by_location(city)
+      return joins(:property)
+        .where('properties.city = ?', city)
+        .group("TO_CHAR(start_date, 'MM-YYYY')")
+        .sum(:total_price) unless city.nil?
+      group("TO_CHAR(start_date, 'MM-YYYY')").sum(:total_price)
+    end
   end
+
   module PropertyApiHelpers
     def most_guests(params)
       params[:limit] = 10 if params[:limit].nil?

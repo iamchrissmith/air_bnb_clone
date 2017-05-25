@@ -33,34 +33,37 @@ class Seed
   end
 
   def generate_properties_for_users
-    500.times do |i|
+    CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       num = Random.new.rand(1..10)
-      user = User.find(Random.new.rand(1..1000))
+      user = User.find(Random.new.rand(1..User.count))
       user.properties.create!(
         name: Faker::Company.name,
         number_of_guests: (num * 2),
         number_of_beds: (num + 2),
         number_of_rooms: num,
+        number_of_bathrooms: num,
         description: Faker::Hipster.paragraph,
         price_per_night: Faker::Commerce.price,
-        address: Faker::Address.street_address,
-        city: Faker::Address.city,
-        state: Faker::Address.state,
-        zip: Faker::Address.zip,
-        lat: Faker::Address.latitude,
-        long: Faker::Address.longitude,
+        address: row[:street_address],
+        city: row[:city],
+        state: row[:state],
+        zip: row[:zip],
+        lat: row[:latitude],
+        long: row[:longitude],
         image_url: Faker::LoremPixel.image,
         status: 1,
-        room_type_id: Random.new.rand(1..3)
+        room_type_id: Random.new.rand(1..3),
+        check_in_time: "14:00:00",
+        check_out_time: "11:00:00"
         )
-      puts "#{i} property created"
+      puts "#{row} property created"
     end
   end
 
   def generate_reservations_for_users
-    500.times do |i|
-      user = User.find(Random.new.rand(1..1000))
-      property = Property.find(Random.new.rand(1..500))
+    10.times do |i|
+      user = User.find(Random.new.rand(1..User.count))
+      property = Property.find(Random.new.rand(1..Property.count))
       length_of_stay = Random.new.rand(1..5)
       total = (property.price_per_night * length_of_stay)
       begin_date = Faker::Date.forward(23)

@@ -1,0 +1,14 @@
+<div class="pending_properties">
+  <h2>Pending Properties</h2>
+  <% @properties.where(status: :pending).each do |property| %>
+    <%= property.name %>
+    <%= button_to "Activate", admin_property_path(property), method: :put, params: {status: :active} %>
+    <% end %>
+</div>
+
+<div class="all_properties">
+  <h2>All Properties</h2>
+  <% @properties.where.not(status: :pending).each do |property| %>
+    <%= property.name %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= property.status %><br>
+    <% end %>
+</div>

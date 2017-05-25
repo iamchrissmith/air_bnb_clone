@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+    <p>Accomodates: <%= @property.number_of_guests %></p>
+    <p>Bathrooms: <%= @property.number_of_bathrooms %></p>
+    <p>Bedrooms: <%= @property.number_of_rooms %></p>
+    <p>Beds: <%= @property.number_of_beds %></p>
+  </div>
+  <div class="col-md-4">
+    <p>Check In: <%= @property.format_check_in_time %></p>
+    <p>Check Out: <%= @property.format_check_out_time %></p>
+    <p>Room type: <%= @property.room_type.name %></p>
+  </div>
+</div>

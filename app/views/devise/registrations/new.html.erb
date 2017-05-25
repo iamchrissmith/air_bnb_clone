@@ -1,49 +1,92 @@
-<% header "Sign Up" %>
+<div class="row">
+  <h2>Sign Up</h2>
+  <hr>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.label :first_name, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :first_name, :class => "form-control", autofocus: true, :placeholder => 'New fairbnb user' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
+  <br><br><br>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
+    <%= f.label :last_name, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :last_name, :class => "form-control", autofocus: true, :placeholder => 'New fairbnb user' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :image_url %><br />
-    <%= f.text_field :image_url %>
-  </div>
+  <br><br><br>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :email, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :email, :class => "form-control", autofocus: true, :placeholder => 'yourfriend@gmail.com' %>
+    </div>
+  </div>
+
+  <br><br><br>
+
+  <div class="field">
+    <%= f.label :phone_number, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :phone_number, :class => "form-control", autofocus: true, :placeholder => 'I can be reached at...' %>
+    </div>
+  </div>
+
+  <br><br><br>
+
+  <div class="field">
+    <%= f.label :description, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :description, :class => "form-control", autofocus: true, :placeholder => 'Tell others about yourself' %>
+    </div>
+  </div>
+
+  <br><br><br><br>
+
+  <div class="field">
+    <%= f.label :image_url, :class =>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :image_url, :class => "form-control", autofocus: true, :placeholder => 'Paste an image url here' %>
+    </div>
+  </div>
+
+  <br><br><br>
+
+  <div class="field">
+    <%= f.label :password, :class =>"col-sm-2 control-label" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <% end %>
+    <div class="col-sm-10">
+      <%= f.password_field :password, :class => "form-control", autofocus: true %>
+    </div>
   </div>
+
+  <br><br><br>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.label :password_confirmation, :class =>"col-sm-2 control-label" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
+    <div class="col-sm-10">
+      <%= f.password_field :password_confirmation, :class => "form-control", autofocus: true %>
+    </div>
   </div>
+
+  <br><br><br>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", :class => "btn btn-custom" %>
   </div>
 <% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+<!-- <%#= render "devise/shared/links" %> -->

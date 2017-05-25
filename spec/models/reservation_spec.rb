@@ -46,4 +46,12 @@ RSpec.describe Reservation, type: :model do
       expect(reservation).to_not be_valid
     end
 
+  context "#num_nights" do
+    it "can calculate number of night" do
+      reservation = create(:reservation, end_date: "2017-05-19")
+
+      expect(reservation.num_nights).to eq(3)
+    end
+  end
+
 end

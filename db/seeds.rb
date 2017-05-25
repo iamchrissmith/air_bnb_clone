@@ -48,7 +48,7 @@ class Seed
 
     CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       num = Random.new.rand(1..10)
-      user = User.find(Random.new.rand(1..User.count))
+      user = User.find(Random.new.rand(1..1000))
       user.properties.create!(
         name: Faker::Company.name,
         number_of_guests: (num * 2),

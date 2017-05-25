@@ -11,7 +11,7 @@
       <div class="input-group">
           <%= form_tag("/properties", :method => "get") do %>
           <div class="form-group">
-            <%= text_field_tag(:city, 'city') %>
+            <%= text_field_tag(:city, nil, placeholder: 'city') %>
           </div> &nbsp;
           <div class="form-group">
             <%= date_field_tag :check_in %>
@@ -21,7 +21,7 @@
             <%= date_field_tag :check_out %>
           </div> &nbsp;
           <div class="form-group">
-            <%= text_field_tag :guests, "# of guests"%>
+            <%= text_field_tag(:guests, nil, placeholder: 'guests')%>
           </div> <br>
           <div class="form-group">
             <br>

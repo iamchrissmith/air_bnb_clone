@@ -3,7 +3,9 @@
     <div class="panel space-4">
         <div class="media media-photo-block">
           <div class="text-center">
+            <% if @user.image_url != nil %>
             <%= image_tag @user.image_url + "?type=large", class: "profile-pic-large" %>
+            <% end %>
           </div>
         </div>
 

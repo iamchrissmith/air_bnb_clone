@@ -3,7 +3,7 @@
     <h2><%= @property.name %></h2>
     <p><%= "#{@property.city}, #{@property.state}" %></p><br>
     <p class="weather">
-      <b>Current weather</b><br>
+      <b>Current weather:</b><br>
       <% if @weather.class == String %>
       <%= @weather %>
       <% else %>

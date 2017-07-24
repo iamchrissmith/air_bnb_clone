@@ -69,13 +69,17 @@ feature "a guest can search" do
 
     expect(current_path).to eq(properties_path)
     expect(page).to have_content(property.city)
-    # expect(page).to have_content(property.number_of_guests)
+
 
     within(".results") do
       expect(page).to have_content(property.name)
       expect(page).to have_css("img[src*='#{property.image_url}']")
       expect(page).to_not have_content(property2.name)
     end
+  end
+
+  xscenario 'can see number of guests' do
+    # expect(page).to have_content(property.number_of_guests)
   end
 
   scenario "properties by city and date range" do
@@ -169,5 +173,5 @@ feature "a guest can search" do
       expect(page).to_not have_content(property.name)
     end
   end
-  
+
 end

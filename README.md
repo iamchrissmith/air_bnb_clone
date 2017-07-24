@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/iamchrissmith/air_bnb_clone.svg?branch=master)](https://travis-ci.org/iamchrissmith/air_bnb_clone) [![Known Vulnerabilities](https://snyk.io/test/github/snyk/goof/badge.svg)](https://snyk.io/test/github/snyk/goof)
+
 This is our Cloney Island Project!! ROMPHIM
 
 Production Site: https://fair-bnb.herokuapp.com/
@@ -39,4 +41,3 @@ The following api endpoints are available:
 *For reservations*
 
 `/api/v1/reservations/by_month` lists count of reservations by month. Can take a `city` param, that scopes to reservations by month for that city, default is for all reservations.
-

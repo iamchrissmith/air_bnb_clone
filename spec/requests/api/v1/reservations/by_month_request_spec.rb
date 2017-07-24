@@ -13,8 +13,10 @@ describe 'Reservations by month' do
     expect(response).to be_success
     reservations = JSON.parse(response.body)
 
+    first_month = (Date.today+30).strftime("%B")
+
     expect(reservations.count).to eq(2)
-    expect(reservations.first['month']).to eq('June     ')
+    expect(reservations.first['month']).to eq(first_month)
     expect(reservations.first['count']).to eq(1)
   end
 
@@ -31,10 +33,13 @@ describe 'Reservations by month' do
     expect(response).to be_success
     reservations = JSON.parse(response.body)
 
+    first_month = (Date.today+30).strftime("%B")
+    second_month = Date.today.strftime("%B")
+
     expect(reservations.count).to eq(2)
-    expect(reservations.first['month']).to eq('June     ')
+    expect(reservations.first['month']).to eq(first_month)
     expect(reservations.first['count']).to eq(1)
-    expect(reservations.second['month']).to eq('May      ')
+    expect(reservations.second['month']).to eq(second_month)
     expect(reservations.second['count']).to eq(2)
   end
 end

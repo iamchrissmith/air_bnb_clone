@@ -16,7 +16,7 @@ describe 'Reservations by month' do
     first_month = (Date.today+30).strftime("%B")
 
     expect(reservations.count).to eq(2)
-    expect(reservations.first['month']).to eq(first_month.ljust(9))
+    expect(reservations.first['month']).to eq(first_month)
     expect(reservations.first['count']).to eq(1)
   end
 
@@ -37,9 +37,9 @@ describe 'Reservations by month' do
     second_month = Date.today.strftime("%B")
 
     expect(reservations.count).to eq(2)
-    expect(reservations.first['month']).to eq(first_month.ljust(9))
+    expect(reservations.first['month']).to eq(first_month)
     expect(reservations.first['count']).to eq(1)
-    expect(reservations.second['month']).to eq(second_month.ljust(9))
+    expect(reservations.second['month']).to eq(second_month)
     expect(reservations.second['count']).to eq(2)
   end
 end

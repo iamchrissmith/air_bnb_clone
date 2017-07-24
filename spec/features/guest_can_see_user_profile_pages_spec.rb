@@ -12,8 +12,14 @@ feature "a guest can view user profile pages" do
     expect(page).to have_content("Hey, I'm #{@user.first_name}")
     expect(page).to have_content(@user.hometown)
     expect(page).to have_content(@user.description)
-    # expect(page).to have_content(@user.reviews)
     expect(page).not_to have_link('Edit Profile')
+  end
+
+  xscenario 'guest can see user reviews' do
+    # expect(page).to have_content(@user.reviews)
+  end
+
+  xscenario 'guest can message user' do
     # expect(page).to have_link('Message me')
   end
 end

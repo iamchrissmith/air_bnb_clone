@@ -22,11 +22,11 @@ feature "as a logged in user" do
 
   context "Within my notifications" do
 
-    scenario "I see the number of new messages with a link to messages" do
+    xscenario "I see the number of new messages with a link to messages" do
 
     end
 
-    scenario "I see the number of pending request with a link to pending reservations" do
+    xscenario "I see the number of pending request with a link to pending reservations" do
     end
   end
 end

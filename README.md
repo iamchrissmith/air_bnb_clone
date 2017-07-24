@@ -1,6 +1,6 @@
 # README
 
-[![Build Status](https://travis-ci.org/iamchrissmith/air_bnb_clone.svg?branch=master)](https://travis-ci.org/iamchrissmith/air_bnb_clone) [![Known Vulnerabilities](https://snyk.io/test/github/snyk/goof/badge.svg)](https://snyk.io/test/github/snyk/goof)
+[![Build Status](https://travis-ci.org/iamchrissmith/air_bnb_clone.svg?branch=master)](https://travis-ci.org/iamchrissmith/air_bnb_clone) [![Known Vulnerabilities](https://snyk.io/test/github/snyk/air_bnb_clone/badge.svg)](https://snyk.io/test/github/snyk/air_bnb_clone)
 
 This is our Cloney Island Project!! ROMPHIM
 

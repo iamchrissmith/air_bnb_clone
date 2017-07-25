@@ -8,19 +8,23 @@ feature "as any kind of user, I can see where a property is located" do
   end
 
   scenario "when I visit a property's 'location' tab, I see a map" do
-    visit property_path(@property)
+    VCR.use_cassette('property_weather_service', record: :new_episodes) do
+      visit property_path(@property)
 
-    click_on'Location'
+      click_on'Location'
 
-    expect(page).to have_css('iframe#map')
+      expect(page).to have_css('iframe#map')
+    end
   end
 
   scenario "a property's map includes a pin at the location" do
-    visit property_path(@property)
+    VCR.use_cassette('property_weather_service', record: :new_episodes) do
+      visit property_path(@property)
 
-    click_on'Location'
+      click_on'Location'
 
 
-    expect(page).to have_css("iframe[src='https://www.google.com/maps/embed/v1/place?key=#{@key}&q=#{@property.prepare_address}']")
+      expect(page).to have_css("iframe[src='https://www.google.com/maps/embed/v1/place?key=#{@key}&q=#{@property.prepare_address}']")
+    end
   end
 end

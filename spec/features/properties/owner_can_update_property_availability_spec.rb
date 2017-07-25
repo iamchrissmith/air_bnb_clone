@@ -15,17 +15,18 @@ feature "an owner can edit a property's availability" do
     end
 
     scenario "I can edit my property's availability" do
-      visit property_path(property)
-      click_on "View property availability"
+      VCR.use_cassette('property_weather_service', record: :new_episodes) do
+        visit property_path(property)
+        click_on "View property availability"
 
-      expect(current_path).to eq(property_property_availabilities_path(@property))
+        expect(current_path).to eq(property_property_availabilities_path(@property))
 
-      expect(page).to have_content("Available Dates")
-      expect(page).to have_content("#{(Date.today).strftime('%b %d, %Y')}")
-      click_on "Make unavailable"
+        expect(page).to have_content("Available Dates")
+        expect(page).to have_content("#{(Date.today).strftime('%b %d, %Y')}")
+        click_on "Make unavailable"
 
-      expect(page).to_not have_content("#{Date.today}")
-
+        expect(page).to_not have_content("#{Date.today}")
+      end
     end
 
   end

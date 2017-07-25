@@ -14,18 +14,20 @@ feature "an owner can create a property's availability" do
     end
 
     scenario "I can create new property availability" do
-      visit new_property_property_availability_path(@property)
+      VCR.use_cassette('property_weather_service', record: :new_episodes) do
+        visit new_property_property_availability_path(@property)
 
-      fill_in :first_available_date, with:"#{Date.today}"
-      fill_in :last_available_date, with:"#{(Date.today + 5)}"
-      click_on "Complete"
+        fill_in :first_available_date, with:"#{Date.today}"
+        fill_in :last_available_date, with:"#{(Date.today + 5)}"
+        click_on "Complete"
 
-      expect(current_path).to eq(property_path(@property))
-      expect(page).to have_content("Your available dates have been set.")
+        expect(current_path).to eq(property_path(@property))
+        expect(page).to have_content("Your available dates have been set.")
 
-      visit property_property_availabilities_path(@property)
+        visit property_property_availabilities_path(@property)
 
-      expect(page).to have_content("#{(Date.today).strftime('%b %d, %Y')}")
+        expect(page).to have_content("#{(Date.today).strftime('%b %d, %Y')}")
+      end
     end
 
     scenario "I can't create property availability for dates that I've already created" do

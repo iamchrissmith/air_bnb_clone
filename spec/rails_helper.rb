@@ -38,7 +38,7 @@ VCR.configure do |config|
   config.filter_sensitive_data('<GOOGLE_USER_TOKEN>') { ENV['GOOGLE_USER_TOKEN'] }
   config.filter_sensitive_data('<WEATHER_KEY>') { ENV['WEATHER_KEY'] }
   config.filter_sensitive_data('<GOOGLE_API_KEY>') { ENV['GOOGLE_MAP_KEY'] }
-  config.allow_http_connections_when_no_cassette = true
+  # config.allow_http_connections_when_no_cassette = true
 end
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -49,5 +49,5 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
   config.include(LoginHelper)
-  config.filter_gems_from_backtrace("omniauth", "warden", "rack-test", "rack", "railties", "capybara")
+  config.filter_gems_from_backtrace("omniauth", "warden", "rack-test", "rack", "railties", "capybara", "webmock", "vcr", "faraday")
 end

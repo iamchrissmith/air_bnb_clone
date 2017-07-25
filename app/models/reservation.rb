@@ -8,6 +8,8 @@ class Reservation < ApplicationRecord
 
   enum status: %w(pending confirmed in_progress finished declined)
 
+  before_validation :set_total_price
+
   def num_nights
     (end_date - start_date)
   end
@@ -27,4 +29,10 @@ class Reservation < ApplicationRecord
                       GROUP BY to_char(start_date, 'Month')
                       ORDER BY to_char(start_date, 'Month');", city])
   end
+
+  private
+
+    def set_total_price
+      self.total_price = property.price_per_night * (end_date - start_date)
+    end
 end

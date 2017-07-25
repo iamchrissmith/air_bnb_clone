@@ -47,7 +47,7 @@ class User < ApplicationRecord
                       JOIN reservations on users.id = reservations.renter_id
                       GROUP BY users.id
                       ORDER BY nights DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit)
   end
 
   def self.reservations_by_bookings(limit = 10)
@@ -56,7 +56,7 @@ class User < ApplicationRecord
                       JOIN reservations on users.id = reservations.renter_id
                       GROUP BY users.id
                       ORDER BY bookings DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit)
   end
 
   def self.most_properties(limit = 10)
@@ -65,7 +65,7 @@ class User < ApplicationRecord
                       JOIN properties ON users.id = properties.owner_id
                       GROUP BY users.id
                       ORDER BY props DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit)
   end
 
   def self.most_money_spent(limit = 10)
@@ -74,7 +74,7 @@ class User < ApplicationRecord
                       JOIN reservations ON users.id = reservations.renter_id
                       GROUP BY users.id
                       ORDER BY cost DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit)
   end
 
   def self.most_revenue(limit = 10)
@@ -84,6 +84,6 @@ class User < ApplicationRecord
                       JOIN reservations ON properties.id = reservations.property_id
                       GROUP BY users.id
                       ORDER BY cost DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit)
   end
 end

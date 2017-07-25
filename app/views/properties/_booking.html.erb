@@ -1,13 +1,19 @@
-<%= form_tag new_reservation_path, method: :get do %>
+<% if current_user %>
+  <%= form_tag new_reservation_path, method: :get do %>
 
-  <%= label_tag :check_in_time, "Check In" %>
-  <%= date_field_tag :check_in_time, class: "form-control" %>
+    <%= label_tag :check_in_time, "Check In" %>
+    <%= date_field_tag :check_in_time, class: "form-control" %>
 
-  <%= label_tag :check_out_time, "Check Out" %>
-  <%= date_field_tag :check_out_time, class: "form-control" %>
+    <%= label_tag :check_out_time, "Check Out" %>
+    <%= date_field_tag :check_out_time, class: "form-control" %>
 
-  <%= label_tag :guests, "Guests" %>
-  <%= number_field_tag :guests, "1", min: 1, class: "form-control" %>
-  <br>
-  <%= submit_tag "Request to Book", class: "btn btn-primary" %>
+    <%= label_tag :guests, "Guests" %>
+    <%= number_field_tag :guests, "1", min: 1, class: "form-control" %>
+    <br>
+    <%= submit_tag "Request to Book", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <h3>You must be logged in to reserve this property</h3>
+  <p><%= link_to 'Sign Up', sign_up_path %></p>
+  <p><%= link_to 'Log In', log_in_path %></p>
 <% end %>

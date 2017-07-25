@@ -7,22 +7,23 @@ class PropertyPresenter
 
   def set_attributes
     if all_search_params
-      @properties = Property.search_city_dates_guests(params[:city], params[:check_in].to_date, params[:check_out].to_date, params[:guests]).paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.search_city_dates_guests(params)
     elsif city_and_guest_search_params
-      @properties = Property.search_city_guests(params[:city], params[:guests]).paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.search_city_guests(params)
     elsif date_and_guest_search_params
-      @properties = Property.search_dates_guests(params[:check_in].to_date, params[:check_out].to_date, params[:guests]).paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.search_dates_guests(params)
     elsif date_and_city_search_params
-      @properties = Property.search_dates_city(params[:check_in].to_date, params[:check_out].to_date, params[:city]).paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.search_dates_city(params)
     elsif date_search_params
-      @properties = Property.search_dates(params[:check_in].to_date, params[:check_out].to_date).paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.search_dates(params)
     elsif city_search_param
-      @properties = Property.search_city(params[:city]).paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.search_city(params)
     elsif guest_search_param
-      @properties = Property.search_guests(params[:guests]).paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.search_guests(params)
     else
-      @properties = Property.all.paginate(:page => params[:page], :per_page => 20)
+      @properties = Property.all
     end
+    @properties = @properties.paginate(page: params[:page], per_page: 20)
     set_date
     set_num_guests
     set_cities

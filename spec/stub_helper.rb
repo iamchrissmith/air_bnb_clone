@@ -53,8 +53,6 @@ def find_city_revenue(cities, limit = 10, month = "", year = "")
         .where(city: city)
         .sum('reservations.total_price')
         .limit(limit)
-    # binding.pry
-    # revenue.sort
     end
   elsif (month == "")
     revenue = cities.map do |city|
@@ -75,6 +73,6 @@ def find_city_revenue(cities, limit = 10, month = "", year = "")
         .sum('reservations.total_price')
       t << [city, revenue]; t
     end
-    out.sort_by {|rev| rev[1]}.reverse.take(limit)
+    out.sort{|a,b| (a[1] <=> b[1]) == 0 ? (b[0] <=> a[0]) : (a[1] <=> b[1]) }.reverse.take(limit)
   end
 end

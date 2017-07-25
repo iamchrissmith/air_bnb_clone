@@ -19,7 +19,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'figaro'
 gem 'faraday'
 gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '<= 0.5.0'
 gem 'simplecov', :require => false, :group => :test
 gem 'geocoder'
 # gem 'bcrypt', '~> 3.1.7'

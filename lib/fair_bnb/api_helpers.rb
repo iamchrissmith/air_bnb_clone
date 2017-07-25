@@ -50,7 +50,7 @@ module FairBnb
         .joins(:reservations)
         .where(reservations: {start_date: "#{params[:year]}-#{params[:month]}-01"})
         .group("properties.city")
-        .order("revenue DESC")
+        .order("revenue DESC", "properties.city ASC")
         .limit(params[:limit])
         .map(&:city)
     end

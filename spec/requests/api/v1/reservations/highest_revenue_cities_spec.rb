@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 describe 'highest revenue cities endpoint' do
-  attr_reader :cities
+  attr_reader :seed_cities
   before :each do
-    @cities = ["Denver", "Tulsa", "San Francisco",
+    @seed_cities = ["Denver", "Tulsa", "San Francisco",
       "New York", "Boston", "Seattle",
       "Washington D.C.", "Atlanta", "Durham",
       "Los Angeles", "San Antonio", "Portland",
       "Austin", "Nashville", "Raleigh"
     ]
-    cities.each do |city|
+    seed_cities.each do |city|
       create(:property, city: city)
     end
     12.times do |n|
@@ -25,9 +25,11 @@ describe 'highest revenue cities endpoint' do
   end
   context "when user adds a limit, month, and year param" do
     it "returns top X cities by that year and month" do
-      limit = 6; month = 4; year = 2016
+      limit = 6
+      month = 4
+      year = 2016
 
-      city_revenues = find_city_revenue(cities, limit, month, year)
+      city_revenues = find_city_revenue(seed_cities, limit, month, year)
       get "/api/v1/reservations/highest_revenue_cities",
         params: {limit: limit, month: month, year: year}
 

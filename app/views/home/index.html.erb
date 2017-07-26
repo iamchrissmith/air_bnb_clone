@@ -4,35 +4,8 @@
       <span class="title">Fairbnb</span> <span class="subtitle"> &nbsp; Book unique homes and experience a city like a local. Fairly? :)</span>
     </div>
   </div>
-
-  <div class="container">
-    <div class="search_bar">
-      <div class="form-inline">
-      <div class="input-group">
-          <%= form_tag("/properties", :method => "get") do %>
-          <div class="form-group">
-            <%= text_field_tag(:city, nil, placeholder: 'city') %>
-          </div> &nbsp;
-          <div class="form-group">
-            <%= date_field_tag :check_in %>
-          </div> &nbsp;
-          <div class="form-group">
-            <%= label_tag(:check_out, " til ") %>&nbsp;
-            <%= date_field_tag :check_out %>
-          </div> &nbsp;
-          <div class="form-group">
-            <%= text_field_tag(:guests, nil, placeholder: 'guests')%>
-          </div> <br>
-          <div class="form-group">
-            <br>
-            <%= submit_tag "Search", name: nil, class: "btn btn-custom" %>
-          </div>
-          <% end %>
-      </div>
-    </div>
-    </div>
-  </div>
-  <br><br>
+  
+  <%= render partial: 'partials/search' %>
 
   <div class="container">
     <div class="all_homes">
@@ -97,5 +70,4 @@
       <!-- end card deck -->
     </div>
   </div>
-
 <% end %>

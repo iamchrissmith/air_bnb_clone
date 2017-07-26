@@ -1,13 +1,29 @@
-<%= form_tag new_reservation_path, method: :get do %>
+<% if current_user %>
+  <%= form_tag new_reservation_path, method: :get do %>
+    <%= hidden_field_tag 'reservation[renter_id]', current_user.id %>
 
-  <%= label_tag :check_in_time, "Check In" %>
-  <%= date_field_tag :check_in_time, class: "form-control" %>
+    <%= label_tag 'reservation[start_date]', "Check In" %>
+    <%= date_field_tag 'reservation[start_date]', class: "form-control" %>
 
-  <%= label_tag :check_out_time, "Check Out" %>
-  <%= date_field_tag :check_out_time, class: "form-control" %>
+    <%= label_tag 'reservation[end_date]', "Check Out" %>
+    <%= date_field_tag 'reservation[end_date]', class: "form-control" %>
 
-  <%= label_tag :guests, "Guests" %>
-  <%= number_field_tag :guests, "1", min: 1, class: "form-control" %>
-  <br>
-  <%= submit_tag "Request to Book", class: "btn btn-primary" %>
+    <%= label_tag 'reservation[number_of_guests]', "Guests" %>
+    <%= number_field_tag 'reservation[number_of_guests]', "1", min: 1, class: "form-control" %>
+    <br>
+    <%= submit_tag "Request to Book", class: "btn btn-primary" %>
+  <% end %>
+  <div id="reservation-success-message" style="display:none;">
+    <h3>Your Booking is pending</h3>
+    <p id="res-id">Reservation ID:</p>
+    <p><%= link_to "Your Reservations", dashboard_path %>
+  </div>
+<% else %>
+  <h3>You must be logged in to reserve this property</h3>
+  <p><%= link_to 'Sign Up', sign_up_path %></p>
+  <p><%= link_to 'Log In', log_in_path %></p>
+<% end %>
+
+<% content_for :foot do %>
+  <%= javascript_include_tag 'reservations/submit' %>
 <% end %>

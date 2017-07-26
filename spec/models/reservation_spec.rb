@@ -8,7 +8,7 @@ RSpec.describe Reservation, type: :model do
       @user = create(:user)
     end
 
-    it { should validate_presence_of(:total_price) }
+    # it { should validate_presence_of(:total_price) }
     it { should validate_presence_of(:start_date) }
     it { should validate_presence_of(:end_date) }
     it { should validate_presence_of(:number_of_guests) }
@@ -17,10 +17,10 @@ RSpec.describe Reservation, type: :model do
     it { should belong_to :renter }
   end
 
-    it "is invalid without total_price" do
-      reservation = build(:reservation, total_price: nil, renter: @user, property: @property)
-      expect(reservation).to_not be_valid
-    end
+    # it "is invalid without total_price" do
+    #   reservation = build(:reservation, total_price: nil, renter: @user, property: @property)
+    #   expect(reservation).to_not be_valid
+    # end
     it "is invalid without start_date" do
       reservation = build(:reservation, start_date: nil, renter: @user, property: @property)
       expect(reservation).to_not be_valid

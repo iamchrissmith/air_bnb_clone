@@ -4,3 +4,10 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+desc 'Scrub VCR Cassettes'
+namespace :vcr do
+  task :scrub do
+    sh %{ rm -rf spec/fixtures/vcr_cassettes/ }
+  end
+end

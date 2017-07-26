@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.11.0
+      - Faraday v0.12.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -25,25 +25,30 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Last-Modified:
-      - Thu, 25 May 2017 00:31:33 GMT
+      - Wed, 26 Jul 2017 20:10:12 GMT
       Server:
       - Apache/2.2.15 (CentOS)
       X-Creationtime:
-      - '0.151'
+      - '0.190'
       Vary:
       - Accept-Encoding
       Expires:
-      - Thu, 25 May 2017 00:33:00 GMT
+      - Wed, 26 Jul 2017 20:10:12 GMT
       Cache-Control:
       - max-age=0, no-cache
       Pragma:
       - no-cache
       Date:
-      - Thu, 25 May 2017 00:33:00 GMT
+      - Wed, 26 Jul 2017 20:10:12 GMT
       Content-Length:
-      - '2551'
+      - '2594'
       Connection:
       - keep-alive
+      Set-Cookie:
+      - DT=1501099812:65050:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
+        GMT; domain=.wunderground.com
+      - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
+        path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
     body:
       encoding: UTF-8
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
@@ -51,17 +56,18 @@ http_interactions:
         {\n\t\t\"image\": {\n\t\t\"url\":\"http://icons.wxug.com/graphics/wu2/logo_130x80.png\",\n\t\t\"title\":\"Weather
         Underground\",\n\t\t\"link\":\"http://www.wunderground.com\"\n\t\t},\n\t\t\"display_location\":
         {\n\t\t\"full\":\"Chickasha, OK\",\n\t\t\"city\":\"Chickasha\",\n\t\t\"state\":\"OK\",\n\t\t\"state_name\":\"Oklahoma\",\n\t\t\"country\":\"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"zip\":\"73018\",\n\t\t\"magic\":\"1\",\n\t\t\"wmo\":\"99999\",\n\t\t\"latitude\":\"35.04000092\",\n\t\t\"longitude\":\"-97.94999695\",\n\t\t\"elevation\":\"335.0\"\n\t\t},\n\t\t\"observation_location\":
-        {\n\t\t\"full\":\"Chickasha, Oklahoma\",\n\t\t\"city\":\"Chickasha\",\n\t\t\"state\":\"Oklahoma\",\n\t\t\"country\":\"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"latitude\":\"35.09999847\",\n\t\t\"longitude\":\"-97.97000122\",\n\t\t\"elevation\":\"1148
-        ft\"\n\t\t},\n\t\t\"estimated\": {\n\t\t},\n\t\t\"station_id\":\"KCHK\",\n\t\t\"observation_time\":\"Last
-        Updated on May 24, 7:15 PM CDT\",\n\t\t\"observation_time_rfc822\":\"Wed,
-        24 May 2017 19:15:00 -0500\",\n\t\t\"observation_epoch\":\"1495671300\",\n\t\t\"local_time_rfc822\":\"Wed,
-        24 May 2017 19:31:33 -0500\",\n\t\t\"local_epoch\":\"1495672293\",\n\t\t\"local_tz_short\":\"CDT\",\n\t\t\"local_tz_long\":\"America/Chicago\",\n\t\t\"local_tz_offset\":\"-0500\",\n\t\t\"weather\":\"Clear\",\n\t\t\"temperature_string\":\"77
-        F (25 C)\",\n\t\t\"temp_f\":77,\n\t\t\"temp_c\":25,\n\t\t\"relative_humidity\":\"39%\",\n\t\t\"wind_string\":\"From
-        the East at 6 MPH\",\n\t\t\"wind_dir\":\"East\",\n\t\t\"wind_degrees\":80,\n\t\t\"wind_mph\":6,\n\t\t\"wind_gust_mph\":0,\n\t\t\"wind_kph\":9,\n\t\t\"wind_gust_kph\":0,\n\t\t\"pressure_mb\":\"1005\",\n\t\t\"pressure_in\":\"29.68\",\n\t\t\"pressure_trend\":\"-\",\n\t\t\"dewpoint_string\":\"50
-        F (10 C)\",\n\t\t\"dewpoint_f\":50,\n\t\t\"dewpoint_c\":10,\n\t\t\"heat_index_string\":\"NA\",\n\t\t\"heat_index_f\":\"NA\",\n\t\t\"heat_index_c\":\"NA\",\n\t\t\"windchill_string\":\"NA\",\n\t\t\"windchill_f\":\"NA\",\n\t\t\"windchill_c\":\"NA\",\n\t\t\"feelslike_string\":\"77
-        F (25 C)\",\n\t\t\"feelslike_f\":\"77\",\n\t\t\"feelslike_c\":\"25\",\n\t\t\"visibility_mi\":\"N/A\",\n\t\t\"visibility_km\":\"N/A\",\n\t\t\"solarradiation\":\"--\",\n\t\t\"UV\":\"1\",\"precip_1hr_string\":\"-9999.00
-        in (-9999.00 mm)\",\n\t\t\"precip_1hr_in\":\"-9999.00\",\n\t\t\"precip_1hr_metric\":\"--\",\n\t\t\"precip_today_string\":\"0.00
-        in (0.0 mm)\",\n\t\t\"precip_today_in\":\"0.00\",\n\t\t\"precip_today_metric\":\"0.0\",\n\t\t\"icon\":\"clear\",\n\t\t\"icon_url\":\"http://icons.wxug.com/i/c/k/clear.gif\",\n\t\t\"forecast_url\":\"http://www.wunderground.com/US/OK/Chickasha.html\",\n\t\t\"history_url\":\"http://www.wunderground.com/history/airport/KCHK/2017/5/24/DailyHistory.html\",\n\t\t\"ob_url\":\"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=35.09999847,-97.97000122\",\n\t\t\"nowcast\":\"\"\n\t}\n}\n"
+        {\n\t\t\"full\":\"Sleepy Hollow, Chickasha, Oklahoma\",\n\t\t\"city\":\"Sleepy
+        Hollow, Chickasha\",\n\t\t\"state\":\"Oklahoma\",\n\t\t\"country\":\"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"latitude\":\"35.010368\",\n\t\t\"longitude\":\"-97.943085\",\n\t\t\"elevation\":\"1112
+        ft\"\n\t\t},\n\t\t\"estimated\": {\n\t\t},\n\t\t\"station_id\":\"KOKCHICK5\",\n\t\t\"observation_time\":\"Last
+        Updated on July 26, 3:09 PM CDT\",\n\t\t\"observation_time_rfc822\":\"Wed,
+        26 Jul 2017 15:09:55 -0500\",\n\t\t\"observation_epoch\":\"1501099795\",\n\t\t\"local_time_rfc822\":\"Wed,
+        26 Jul 2017 15:10:12 -0500\",\n\t\t\"local_epoch\":\"1501099812\",\n\t\t\"local_tz_short\":\"CDT\",\n\t\t\"local_tz_long\":\"America/Chicago\",\n\t\t\"local_tz_offset\":\"-0500\",\n\t\t\"weather\":\"Partly
+        Cloudy\",\n\t\t\"temperature_string\":\"99.0 F (37.2 C)\",\n\t\t\"temp_f\":99.0,\n\t\t\"temp_c\":37.2,\n\t\t\"relative_humidity\":\"42%\",\n\t\t\"wind_string\":\"Calm\",\n\t\t\"wind_dir\":\"SE\",\n\t\t\"wind_degrees\":124,\n\t\t\"wind_mph\":0.2,\n\t\t\"wind_gust_mph\":\"2.5\",\n\t\t\"wind_kph\":0,\n\t\t\"wind_gust_kph\":\"4.0\",\n\t\t\"pressure_mb\":\"1014\",\n\t\t\"pressure_in\":\"29.95\",\n\t\t\"pressure_trend\":\"+\",\n\t\t\"dewpoint_string\":\"72
+        F (22 C)\",\n\t\t\"dewpoint_f\":72,\n\t\t\"dewpoint_c\":22,\n\t\t\"heat_index_string\":\"109
+        F (43 C)\",\n\t\t\"heat_index_f\":109,\n\t\t\"heat_index_c\":43,\n\t\t\"windchill_string\":\"NA\",\n\t\t\"windchill_f\":\"NA\",\n\t\t\"windchill_c\":\"NA\",\n\t\t\"feelslike_string\":\"109
+        F (43 C)\",\n\t\t\"feelslike_f\":\"109\",\n\t\t\"feelslike_c\":\"43\",\n\t\t\"visibility_mi\":\"10.0\",\n\t\t\"visibility_km\":\"16.1\",\n\t\t\"solarradiation\":\"227\",\n\t\t\"UV\":\"3.0\",\"precip_1hr_string\":\"0.00
+        in ( 0 mm)\",\n\t\t\"precip_1hr_in\":\"0.00\",\n\t\t\"precip_1hr_metric\":\"
+        0\",\n\t\t\"precip_today_string\":\"0.00 in (0 mm)\",\n\t\t\"precip_today_in\":\"0.00\",\n\t\t\"precip_today_metric\":\"0\",\n\t\t\"icon\":\"partlycloudy\",\n\t\t\"icon_url\":\"http://icons.wxug.com/i/c/k/partlycloudy.gif\",\n\t\t\"forecast_url\":\"http://www.wunderground.com/US/OK/Chickasha.html\",\n\t\t\"history_url\":\"http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KOKCHICK5\",\n\t\t\"ob_url\":\"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=35.010368,-97.943085\",\n\t\t\"nowcast\":\"\"\n\t}\n}\n"
     http_version: 
-  recorded_at: Thu, 25 May 2017 00:33:00 GMT
+  recorded_at: Wed, 26 Jul 2017 20:10:12 GMT
 recorded_with: VCR 3.0.3

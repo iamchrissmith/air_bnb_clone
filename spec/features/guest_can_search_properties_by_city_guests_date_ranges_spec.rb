@@ -78,10 +78,6 @@ feature "a guest can search" do
     end
   end
 
-  xscenario 'can see number of guests' do
-    # expect(page).to have_content(property.number_of_guests)
-  end
-
   scenario "properties by city and date range" do
     property = create(:property, name: "airstream", city: "Denver")
     property2 = create(:property)

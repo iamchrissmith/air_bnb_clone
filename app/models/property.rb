@@ -25,6 +25,7 @@ class Property < ApplicationRecord
   def get_weather
     service = WeatherService.new({city: city, state: state})
     raw_weather = service.find_by_location
+    
     if raw_weather == nil
       "Invalid city name; no weather information available."
     else

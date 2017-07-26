@@ -5,7 +5,7 @@ class Api::V1::Properties::ReservationsController < ApplicationController
   def create
     reservation = @property.reservations.new(reservation_params)
     if reservation.save
-      render json: ["Reservation Created"], status: 200
+      render json: ["Reservation Created"], status: 201
     else
       render json: {error: "Missing Parameters"}, status: 400
     end

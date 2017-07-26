@@ -56,4 +56,182 @@ http_interactions:
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
     http_version: 
   recorded_at: Tue, 25 Jul 2017 20:56:35 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/WA/west_elroyshire.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 20:13:47 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.084'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 20:13:51 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 20:13:51 GMT
+      Content-Length:
+      - '1544'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t, \"results\": [\n\t\t{\n\t\t\"name\":
+        \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"ABR\",\n\t\t\"country\":
+        \"PH\",\n\t\t\"country_iso3166\":\"PH\",\n\t\t\"country_name\":\"Philippines\",\n\t\t\"zmw\":
+        \"00000.1286.98222\",\n\t\t\"l\": \"/q/zmw:00000.1286.98222\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"MS\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"39192.1.99999\",\n\t\t\"l\": \"/q/zmw:39192.1.99999\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"NC\",\n\t\t\"country\":
+        \"ZA\",\n\t\t\"country_iso3166\":\"ZA\",\n\t\t\"country_name\":\"South Africa\",\n\t\t\"zmw\":
+        \"00000.9.WFASS\",\n\t\t\"l\": \"/q/zmw:00000.9.WFASS\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"NI\",\n\t\t\"country\":
+        \"LI\",\n\t\t\"country_iso3166\":\"LR\",\n\t\t\"country_name\":\"Liberia\",\n\t\t\"zmw\":
+        \"00000.1351.61849\",\n\t\t\"l\": \"/q/zmw:00000.1351.61849\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"ON\",\n\t\t\"country\":
+        \"CA\",\n\t\t\"country_iso3166\":\"CA\",\n\t\t\"country_name\":\"Canada\",\n\t\t\"zmw\":
+        \"00000.67.71738\",\n\t\t\"l\": \"/q/zmw:00000.67.71738\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"TX\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"76691.1.99999\",\n\t\t\"l\": \"/q/zmw:76691.1.99999\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"WV\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"26055.11.99999\",\n\t\t\"l\": \"/q/zmw:26055.11.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 20:13:51 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/NJ/coryberg.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 20:14:56 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.024'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 20:14:59 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 20:14:59 GMT
+      Content-Length:
+      - '255'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
+        \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 20:14:59 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/MS/torphybury.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 20:53:04 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.026'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 20:53:04 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 20:53:04 GMT
+      Content-Length:
+      - '255'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - DT=1501102384:92262:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
+        GMT; domain=.wunderground.com
+      - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
+        path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
+        \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 20:53:04 GMT
 recorded_with: VCR 3.0.3

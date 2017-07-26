@@ -13,6 +13,11 @@
     <br>
     <%= submit_tag "Request to Book", class: "btn btn-primary" %>
   <% end %>
+  <div id="reservation-success-message" style="display:none;">
+    <h3>Your Booking is pending</h3>
+    <p id="res-id">Reservation ID:</p>
+    <p><%= link_to "Your Reservations", dashboard_path %>
+  </div>
 <% else %>
   <h3>You must be logged in to reserve this property</h3>
   <p><%= link_to 'Sign Up', sign_up_path %></p>

@@ -1,3 +1,9 @@
+function successfulReservation (response) {
+  $('.booking-box form').remove();
+  $('#reservation-success-message').show();
+  $('#res-id').append(" "+response.reservation.id)
+}
+
 $('form').submit(function(e) {
     e.preventDefault();
     var url = window.location.pathname;
@@ -9,7 +15,7 @@ $('form').submit(function(e) {
         data: valuesToSubmit,
         dataType: "JSON",
         success: function(response) {
-          console.log("success", response);
+          successfulReservation(response)
         },
         error: function(xhr, textStatus, errorThrown) {}
     });

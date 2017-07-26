@@ -14,5 +14,6 @@
 //= require bootstrap
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.validate
 //= require bootstrap/dropdown
 //= require_tree ./channels

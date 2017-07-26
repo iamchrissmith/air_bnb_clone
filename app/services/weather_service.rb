@@ -9,6 +9,7 @@ class WeatherService
 
   def find_by_location
     @response = conn.get("/api/#{token}/conditions/q/#{state}/#{city}.json")
+    parse
   end
 
   private

@@ -25,27 +25,27 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Last-Modified:
-      - Wed, 26 Jul 2017 20:09:58 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Server:
       - Apache/2.2.15 (CentOS)
       X-Creationtime:
-      - '0.018'
+      - '0.024'
       Vary:
       - Accept-Encoding
       Expires:
-      - Wed, 26 Jul 2017 20:09:58 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Cache-Control:
       - max-age=0, no-cache
       Pragma:
       - no-cache
       Date:
-      - Wed, 26 Jul 2017 20:09:58 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Content-Length:
       - '255'
       Connection:
       - keep-alive
       Set-Cookie:
-      - DT=1501099798:97833:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
+      - DT=1501104260:12756:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
         GMT; domain=.wunderground.com
       - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
         path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
@@ -55,7 +55,7 @@ http_interactions:
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
     http_version: 
-  recorded_at: Wed, 26 Jul 2017 20:09:58 GMT
+  recorded_at: Wed, 26 Jul 2017 21:24:20 GMT
 - request:
     method: get
     uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/WY/macgyverville.json
@@ -81,21 +81,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Last-Modified:
-      - Wed, 26 Jul 2017 20:09:58 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Server:
       - Apache/2.2.15 (CentOS)
       X-Creationtime:
-      - '0.018'
+      - '0.024'
       Vary:
       - Accept-Encoding
       Expires:
-      - Wed, 26 Jul 2017 20:09:59 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Cache-Control:
       - max-age=0, no-cache
       Pragma:
       - no-cache
       Date:
-      - Wed, 26 Jul 2017 20:09:59 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Content-Length:
       - '255'
       Connection:
@@ -106,5 +106,5 @@ http_interactions:
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
     http_version: 
-  recorded_at: Wed, 26 Jul 2017 20:09:59 GMT
+  recorded_at: Wed, 26 Jul 2017 21:24:20 GMT
 recorded_with: VCR 3.0.3

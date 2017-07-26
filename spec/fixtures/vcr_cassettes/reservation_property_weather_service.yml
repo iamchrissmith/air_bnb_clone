@@ -374,4 +374,165 @@ http_interactions:
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
     http_version: 
   recorded_at: Wed, 26 Jul 2017 21:03:48 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/WV/south_abnerview.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 21:26:18 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.020'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 21:26:21 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 21:26:21 GMT
+      Content-Length:
+      - '255'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
+        \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 21:26:21 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/VT/south_sasha.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 21:26:58 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.019'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 21:27:03 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 21:27:03 GMT
+      Content-Length:
+      - '255'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
+        \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 21:27:03 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/GA/north_ruthe.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 21:27:49 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.041'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 21:27:53 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 21:27:53 GMT
+      Content-Length:
+      - '757'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t, \"results\": [\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"AK\",\n\t\t\"country\":
+        \"NI\",\n\t\t\"country_iso3166\":\"NG\",\n\t\t\"country_name\":\"Nigeria\",\n\t\t\"zmw\":
+        \"00000.906.WDNIM\",\n\t\t\"l\": \"/q/zmw:00000.906.WDNIM\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"SC\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"29112.1.99999\",\n\t\t\"l\": \"/q/zmw:29112.1.99999\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"VA\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"23128.1.99999\",\n\t\t\"l\": \"/q/zmw:23128.1.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 21:27:53 GMT
 recorded_with: VCR 3.0.3

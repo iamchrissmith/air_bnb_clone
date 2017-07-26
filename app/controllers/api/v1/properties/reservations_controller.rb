@@ -1,13 +1,14 @@
-class Api::V1::Properties::ReservationsController < ApplicationController
+class Api::V1::Properties::ReservationsController < ApiController
 
   before_action :get_property, only: :create
 
   def create
+    # binding.pry
     reservation = @property.reservations.new(reservation_params)
     if reservation.save
-      render json: ["Reservation Created"], status: 201
+      render json: {success:"Reservation Created", reservation: reservation}, status: 201
     else
-      render json: {error: "Missing Parameters"}, status: 400
+      render json: {error: "Missing Parameters"}, status: 401
     end
   end
 

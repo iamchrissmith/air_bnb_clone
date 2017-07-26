@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Create Reservation API' do
-  context 'POST /api/v1/reservations/new' do
+  context 'POST /api/v1/reservations' do
     let(:user) { create(:user) }
     let(:property) { create(:property) }
     let(:availability_start) { create(:property_availability, reserved?: false, property: property) }

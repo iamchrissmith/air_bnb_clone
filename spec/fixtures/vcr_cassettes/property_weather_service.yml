@@ -560,4 +560,262 @@ http_interactions:
         \"25121.1.99999\",\n\t\t\"l\": \"/q/zmw:25121.1.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
     http_version: 
   recorded_at: Wed, 26 Jul 2017 21:56:12 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/MT/north_tillman.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 21:59:37 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.037'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 21:59:37 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 21:59:37 GMT
+      Content-Length:
+      - '757'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - DT=1501106377:106809:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
+        GMT; domain=.wunderground.com
+      - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
+        path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t, \"results\": [\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"AK\",\n\t\t\"country\":
+        \"NI\",\n\t\t\"country_iso3166\":\"NG\",\n\t\t\"country_name\":\"Nigeria\",\n\t\t\"zmw\":
+        \"00000.906.WDNIM\",\n\t\t\"l\": \"/q/zmw:00000.906.WDNIM\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"SC\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"29112.1.99999\",\n\t\t\"l\": \"/q/zmw:29112.1.99999\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"VA\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"23128.1.99999\",\n\t\t\"l\": \"/q/zmw:23128.1.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 21:59:37 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/MT/north_tillman.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 21:59:37 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.037'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 21:59:39 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 21:59:39 GMT
+      Content-Length:
+      - '757'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t, \"results\": [\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"AK\",\n\t\t\"country\":
+        \"NI\",\n\t\t\"country_iso3166\":\"NG\",\n\t\t\"country_name\":\"Nigeria\",\n\t\t\"zmw\":
+        \"00000.906.WDNIM\",\n\t\t\"l\": \"/q/zmw:00000.906.WDNIM\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"SC\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"29112.1.99999\",\n\t\t\"l\": \"/q/zmw:29112.1.99999\"\n\t\t}\n\t\t,\n\t\t{\n\t\t\"name\":
+        \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"VA\",\n\t\t\"country\":
+        \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
+        \"23128.1.99999\",\n\t\t\"l\": \"/q/zmw:23128.1.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 21:59:39 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/WY/cummingsville.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 22:03:49 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.067'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 22:03:49 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 22:03:49 GMT
+      Content-Length:
+      - '2634'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - DT=1501106629:94987:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
+        GMT; domain=.wunderground.com
+      - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
+        path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t}\n  ,\t\"current_observation\":
+        {\n\t\t\"image\": {\n\t\t\"url\":\"http://icons.wxug.com/graphics/wu2/logo_130x80.png\",\n\t\t\"title\":\"Weather
+        Underground\",\n\t\t\"link\":\"http://www.wunderground.com\"\n\t\t},\n\t\t\"display_location\":
+        {\n\t\t\"full\":\"Cummingsville, MA\",\n\t\t\"city\":\"Cummingsville\",\n\t\t\"state\":\"MA\",\n\t\t\"state_name\":\"Massachusetts\",\n\t\t\"country\":\"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"zip\":\"01801\",\n\t\t\"magic\":\"3\",\n\t\t\"wmo\":\"99999\",\n\t\t\"latitude\":\"42.47999954\",\n\t\t\"longitude\":\"-71.16999817\",\n\t\t\"elevation\":\"27.1\"\n\t\t},\n\t\t\"observation_location\":
+        {\n\t\t\"full\":\"woburn, Woburn, Massachusetts\",\n\t\t\"city\":\"woburn,
+        Woburn\",\n\t\t\"state\":\"Massachusetts\",\n\t\t\"country\":\"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"latitude\":\"42.482552\",\n\t\t\"longitude\":\"-71.154282\",\n\t\t\"elevation\":\"115
+        ft\"\n\t\t},\n\t\t\"estimated\": {\n\t\t},\n\t\t\"station_id\":\"KMAWOBUR4\",\n\t\t\"observation_time\":\"Last
+        Updated on July 26, 6:03 PM EDT\",\n\t\t\"observation_time_rfc822\":\"Wed,
+        26 Jul 2017 18:03:14 -0400\",\n\t\t\"observation_epoch\":\"1501106594\",\n\t\t\"local_time_rfc822\":\"Wed,
+        26 Jul 2017 18:03:49 -0400\",\n\t\t\"local_epoch\":\"1501106629\",\n\t\t\"local_tz_short\":\"EDT\",\n\t\t\"local_tz_long\":\"America/New_York\",\n\t\t\"local_tz_offset\":\"-0400\",\n\t\t\"weather\":\"Partly
+        Cloudy\",\n\t\t\"temperature_string\":\"75.7 F (24.3 C)\",\n\t\t\"temp_f\":75.7,\n\t\t\"temp_c\":24.3,\n\t\t\"relative_humidity\":\"48%\",\n\t\t\"wind_string\":\"From
+        the East at 3.1 MPH Gusting to 6.0 MPH\",\n\t\t\"wind_dir\":\"East\",\n\t\t\"wind_degrees\":93,\n\t\t\"wind_mph\":3.1,\n\t\t\"wind_gust_mph\":\"6.0\",\n\t\t\"wind_kph\":5.0,\n\t\t\"wind_gust_kph\":\"9.7\",\n\t\t\"pressure_mb\":\"1021\",\n\t\t\"pressure_in\":\"30.14\",\n\t\t\"pressure_trend\":\"-\",\n\t\t\"dewpoint_string\":\"55
+        F (13 C)\",\n\t\t\"dewpoint_f\":55,\n\t\t\"dewpoint_c\":13,\n\t\t\"heat_index_string\":\"NA\",\n\t\t\"heat_index_f\":\"NA\",\n\t\t\"heat_index_c\":\"NA\",\n\t\t\"windchill_string\":\"NA\",\n\t\t\"windchill_f\":\"NA\",\n\t\t\"windchill_c\":\"NA\",\n\t\t\"feelslike_string\":\"75.7
+        F (26 C)\",\n\t\t\"feelslike_f\":\"75.7\",\n\t\t\"feelslike_c\":\"26\",\n\t\t\"visibility_mi\":\"10.0\",\n\t\t\"visibility_km\":\"16.1\",\n\t\t\"solarradiation\":\"--\",\n\t\t\"UV\":\"2\",\"precip_1hr_string\":\"0.00
+        in ( 0 mm)\",\n\t\t\"precip_1hr_in\":\"0.00\",\n\t\t\"precip_1hr_metric\":\"
+        0\",\n\t\t\"precip_today_string\":\"0.00 in (0 mm)\",\n\t\t\"precip_today_in\":\"0.00\",\n\t\t\"precip_today_metric\":\"0\",\n\t\t\"icon\":\"partlycloudy\",\n\t\t\"icon_url\":\"http://icons.wxug.com/i/c/k/partlycloudy.gif\",\n\t\t\"forecast_url\":\"http://www.wunderground.com/US/MA/Cummingsville.html\",\n\t\t\"history_url\":\"http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KMAWOBUR4\",\n\t\t\"ob_url\":\"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=42.482552,-71.154282\",\n\t\t\"nowcast\":\"\"\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 22:03:49 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/WY/cummingsville.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Wed, 26 Jul 2017 22:03:49 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.067'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Wed, 26 Jul 2017 22:03:50 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Wed, 26 Jul 2017 22:03:50 GMT
+      Content-Length:
+      - '2634'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t}\n  ,\t\"current_observation\":
+        {\n\t\t\"image\": {\n\t\t\"url\":\"http://icons.wxug.com/graphics/wu2/logo_130x80.png\",\n\t\t\"title\":\"Weather
+        Underground\",\n\t\t\"link\":\"http://www.wunderground.com\"\n\t\t},\n\t\t\"display_location\":
+        {\n\t\t\"full\":\"Cummingsville, MA\",\n\t\t\"city\":\"Cummingsville\",\n\t\t\"state\":\"MA\",\n\t\t\"state_name\":\"Massachusetts\",\n\t\t\"country\":\"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"zip\":\"01801\",\n\t\t\"magic\":\"3\",\n\t\t\"wmo\":\"99999\",\n\t\t\"latitude\":\"42.47999954\",\n\t\t\"longitude\":\"-71.16999817\",\n\t\t\"elevation\":\"27.1\"\n\t\t},\n\t\t\"observation_location\":
+        {\n\t\t\"full\":\"woburn, Woburn, Massachusetts\",\n\t\t\"city\":\"woburn,
+        Woburn\",\n\t\t\"state\":\"Massachusetts\",\n\t\t\"country\":\"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"latitude\":\"42.482552\",\n\t\t\"longitude\":\"-71.154282\",\n\t\t\"elevation\":\"115
+        ft\"\n\t\t},\n\t\t\"estimated\": {\n\t\t},\n\t\t\"station_id\":\"KMAWOBUR4\",\n\t\t\"observation_time\":\"Last
+        Updated on July 26, 6:03 PM EDT\",\n\t\t\"observation_time_rfc822\":\"Wed,
+        26 Jul 2017 18:03:14 -0400\",\n\t\t\"observation_epoch\":\"1501106594\",\n\t\t\"local_time_rfc822\":\"Wed,
+        26 Jul 2017 18:03:49 -0400\",\n\t\t\"local_epoch\":\"1501106629\",\n\t\t\"local_tz_short\":\"EDT\",\n\t\t\"local_tz_long\":\"America/New_York\",\n\t\t\"local_tz_offset\":\"-0400\",\n\t\t\"weather\":\"Partly
+        Cloudy\",\n\t\t\"temperature_string\":\"75.7 F (24.3 C)\",\n\t\t\"temp_f\":75.7,\n\t\t\"temp_c\":24.3,\n\t\t\"relative_humidity\":\"48%\",\n\t\t\"wind_string\":\"From
+        the East at 3.1 MPH Gusting to 6.0 MPH\",\n\t\t\"wind_dir\":\"East\",\n\t\t\"wind_degrees\":93,\n\t\t\"wind_mph\":3.1,\n\t\t\"wind_gust_mph\":\"6.0\",\n\t\t\"wind_kph\":5.0,\n\t\t\"wind_gust_kph\":\"9.7\",\n\t\t\"pressure_mb\":\"1021\",\n\t\t\"pressure_in\":\"30.14\",\n\t\t\"pressure_trend\":\"-\",\n\t\t\"dewpoint_string\":\"55
+        F (13 C)\",\n\t\t\"dewpoint_f\":55,\n\t\t\"dewpoint_c\":13,\n\t\t\"heat_index_string\":\"NA\",\n\t\t\"heat_index_f\":\"NA\",\n\t\t\"heat_index_c\":\"NA\",\n\t\t\"windchill_string\":\"NA\",\n\t\t\"windchill_f\":\"NA\",\n\t\t\"windchill_c\":\"NA\",\n\t\t\"feelslike_string\":\"75.7
+        F (26 C)\",\n\t\t\"feelslike_f\":\"75.7\",\n\t\t\"feelslike_c\":\"26\",\n\t\t\"visibility_mi\":\"10.0\",\n\t\t\"visibility_km\":\"16.1\",\n\t\t\"solarradiation\":\"--\",\n\t\t\"UV\":\"2\",\"precip_1hr_string\":\"0.00
+        in ( 0 mm)\",\n\t\t\"precip_1hr_in\":\"0.00\",\n\t\t\"precip_1hr_metric\":\"
+        0\",\n\t\t\"precip_today_string\":\"0.00 in (0 mm)\",\n\t\t\"precip_today_in\":\"0.00\",\n\t\t\"precip_today_metric\":\"0\",\n\t\t\"icon\":\"partlycloudy\",\n\t\t\"icon_url\":\"http://icons.wxug.com/i/c/k/partlycloudy.gif\",\n\t\t\"forecast_url\":\"http://www.wunderground.com/US/MA/Cummingsville.html\",\n\t\t\"history_url\":\"http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KMAWOBUR4\",\n\t\t\"ob_url\":\"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=42.482552,-71.154282\",\n\t\t\"nowcast\":\"\"\n\t}\n}\n"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 22:03:50 GMT
 recorded_with: VCR 3.0.3

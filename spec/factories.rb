@@ -1,7 +1,18 @@
 FactoryGirl.define do
+  factory :conversation do
+    user
+    title 'Trip 1'
+  end
+
   # factory :identity do
   #   user nil
   # end
+
+  factory :message do
+    user
+    conversation
+    content "Say Hello to My Little Friend."
+  end
 
   factory :room_type do
     name 0

@@ -11,8 +11,6 @@ FactoryGirl.define do
     city 'Knoxville'
     state 'TN'
     zip '37912'
-    lat "36.009756"
-    long "-83.996487"
     room_type
     image_url 'app/assets/images/beach_house.jpg'
     check_in_time "14:00:00"

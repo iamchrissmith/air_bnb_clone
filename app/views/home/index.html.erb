@@ -4,18 +4,13 @@
       <span class="title">Fairbnb</span> <span class="subtitle"> &nbsp; Book unique homes and experience a city like a local. Fairly? :)</span>
     </div>
   </div>
-  
-  <%= render partial: 'partials/search' %>
-
+  <%= render partial: 'partials/search_home' %>
   <div class="container">
     <div class="all_homes">
-      <!-- begin card deck -->
       <h2>Homes</h2>
       <div class="card-deck">
         <% @featured_properties.each do |property| %>
         <div class="card">
-          <!-- <img class="card-img-top" src="<%#= property.image_url%>" alt="Card image cap">
-          <%#= image_tag "#{rando.photo}", class: "thumbnail", size: "304x236" %> -->
           <%= image_tag property.image_url, class: "card-img-top", size: "250x250" %>
           <div class="card-block">
             <!-- <h4 class="card-title"><%= property.name[0..28] %></h4> -->

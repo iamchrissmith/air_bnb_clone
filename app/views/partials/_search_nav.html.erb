@@ -1,0 +1,26 @@
+<div class="container nav-search">
+  <div class="search_bar">
+    <div class="form-inline">
+      <div class="input-group">
+        <%= form_tag("/properties", :method => "get") do %>
+          <div class="form-group">
+            <%= text_field_tag(:place_search, nil, placeholder: 'location') %>
+          </div> &nbsp;
+          <div class="form-group">
+            <%= date_field_tag :check_in %>
+          </div> &nbsp;
+          <div class="form-group">
+            <%= label_tag(:check_out, " til ") %>&nbsp;
+            <%= date_field_tag :check_out %>
+          </div> &nbsp;
+          <div class="form-group">
+            <%= text_field_tag(:guests, nil, placeholder: 'guests')%>
+          </div>
+          <div class="form-group">
+            <%= submit_tag "Search", name: nil, class: "btn btn-custom", id: 'search-button' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

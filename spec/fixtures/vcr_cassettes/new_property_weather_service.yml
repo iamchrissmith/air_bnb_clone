@@ -25,27 +25,27 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Last-Modified:
-      - Wed, 26 Jul 2017 21:24:24 GMT
+      - Thu, 27 Jul 2017 17:40:32 GMT
       Server:
       - Apache/2.2.15 (CentOS)
       X-Creationtime:
-      - '0.199'
+      - '0.109'
       Vary:
       - Accept-Encoding
       Expires:
-      - Wed, 26 Jul 2017 21:24:24 GMT
+      - Thu, 27 Jul 2017 17:40:32 GMT
       Cache-Control:
       - max-age=0, no-cache
       Pragma:
       - no-cache
       Date:
-      - Wed, 26 Jul 2017 21:24:24 GMT
+      - Thu, 27 Jul 2017 17:40:32 GMT
       Content-Length:
       - '2919'
       Connection:
       - keep-alive
       Set-Cookie:
-      - DT=1501104264:7253:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
+      - DT=1501177232:12251:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
         GMT; domain=.wunderground.com
       - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
         path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
@@ -96,5 +96,5 @@ http_interactions:
         \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
         \"26444.6.99999\",\n\t\t\"l\": \"/q/zmw:26444.6.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
     http_version: 
-  recorded_at: Wed, 26 Jul 2017 21:24:24 GMT
+  recorded_at: Thu, 27 Jul 2017 17:40:32 GMT
 recorded_with: VCR 3.0.3

@@ -14,7 +14,7 @@ RSpec.describe "Properties API", type: :request do
   it "returns a 200 along with properties searched for" do
     create(:property, city: 'Denver')
 
-    get "/api/v1/properties/properties.json", city: 'Denver'
+    get "/api/v1/properties/properties.json", params: { city: 'Denver' }
     result = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to have_http_status(200)
@@ -24,7 +24,7 @@ RSpec.describe "Properties API", type: :request do
 
   it "returns a 400 status if api call is bad" do
     create(:property, city: 'Denver')
-    get "/api/v1/properties/properties.json", city: 'Boulder'
+    get "/api/v1/properties/properties.json", params: { city: 'Boulder' }
 
     expect(response).to have_http_status(200)
   end

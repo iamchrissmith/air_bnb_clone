@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Property, type: :model do
-  context "property is valid with all attributes" do
-    before do
-      @room_type = create(:room_type)
-      @owner = create(:user)
-    end
+
+  context "Validations" do
+
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:number_of_guests) }
     it { should validate_presence_of(:number_of_beds) }
@@ -18,9 +16,6 @@ RSpec.describe Property, type: :model do
     it { should validate_presence_of(:zip) }
     it { should validate_presence_of(:image_url) }
     it { should validate_presence_of(:status) }
-    it { should belong_to :owner }
-    it { should belong_to :room_type }
-  end
 
     it "is invalid without name" do
       property = build(:property, name: nil, owner: @owner, room_type: @room_type)
@@ -91,4 +86,19 @@ RSpec.describe Property, type: :model do
       property = build(:property, room_type: nil, owner: @owner)
       expect(property).to_not be_valid
     end
+  end
+
+  context "Relationships" do
+    it { should belong_to :owner }
+    it { should belong_to :room_type }
+  end
+
+  describe 'Callbacks' do
+    it 'geocodes lat long from address' do
+      property = create(:property, lat: '', long: '')
+
+      expect(property.lat).to eq(36.0097558)
+      expect(property.long).to eq(-83.9964866)
+    end
+  end
 end

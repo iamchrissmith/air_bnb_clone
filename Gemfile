@@ -25,7 +25,8 @@ gem 'simplecov', :require => false, :group => :test
 gem 'geocoder'
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
+# , :git => 'git://github.com/stympy/faker.git', :branch => 'master'
+gem 'faker'
 gem 'devise'
 gem 'devise-authy'
 gem 'bootstrap-sass'

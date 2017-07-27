@@ -13,7 +13,7 @@ feature "a guest can view homepage" do
     expect(page).to have_content("Book unique homes and experience a city like a local.")
 
     within(".search_bar") do
-      expect(page).to have_field("city")
+      expect(page).to have_field("place_search")
       expect(page).to have_field("check_in")
       expect(page).to have_field("check_out")
       expect(page).to have_field("guests")

@@ -18,6 +18,11 @@
 
 # Ignore application configuration
 /config/application.yml
+
 .DS_Store
+
 #ignore coverage
 coverage
+
+#make your own cassettes!
+spec/fixtures/vcr_cassettes

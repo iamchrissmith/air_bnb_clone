@@ -40,6 +40,12 @@
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#confirmed">Confirmed Reservations</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#finished">Past Reservations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#declined">Declined Reservations</a>
+            </li>
           </ul>
 
           <div class="tab-content">
@@ -48,35 +54,13 @@
               YOU HAVE (x) pending requests (LINK TO personal reservations, my properties' reservations)
             </div>
 
-            <div class="tab-pane" id="pending" role="tabpanel">
-              <table class="table table-striped">
-                <tr>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Property</th>
-                  <th>Total Price</th>
-                  <th>Status</th>
-                </tr>
-                <tbody>
-                  <%= render partial: 'reservations/reservation', collection: @user.pending_reservations %>
-                </tbody>
-              </table>
-            </div>
+            <%= render partial: 'reservations/reservations', locals: {status: 'pending', user: @user} %>
 
-            <div class="tab-pane" id="confirmed" role="tabpanel">
-              <table class="table table-striped">
-                <tr>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Property</th>
-                  <th>Total Price</th>
-                  <th>Status</th>
-                </tr>
-                <tbody>
-                  <%= render partial: 'reservations/reservation', collection: @user.confirmed_reservations %>
-                </tbody>
-              </table>
-            </div>
+            <%= render partial: 'reservations/reservations', locals: {status: 'confirmed', user: @user} %>
+
+            <%= render partial: 'reservations/reservations', locals: {status: 'finished', user: @user} %>
+
+            <%= render partial: 'reservations/reservations', locals: {status: 'declined', user: @user} %>
           </div>
         </div>
       </div>

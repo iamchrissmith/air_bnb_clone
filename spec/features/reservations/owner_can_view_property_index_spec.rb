@@ -38,15 +38,37 @@ RSpec.feature 'Owner can view properties index' do
 
       visit user_properties_path
 
-      expect(page).to have_content "Pending Requests"
-      expect(page).to have_css('.nav-tabs a[href="#pending"]')
-      expect(page).to have_css('.tab-content #pending')
-      within ('.tab-content #pending') do
-        expect(page).to have_css("#request-#{pending_request.id}")
-        expect(page).not_to have_css("#request-#{confirmed_request.id}")
-        expect(page).not_to have_css("#request-#{in_progress_request.id}")
-        expect(page).not_to have_css("#request-#{finished_request.id}")
-        expect(page).not_to have_css("#request-#{declined_request.id}")
+      expect(page).to have_content "My Properties"
+      within ("#property-#{property1.id}") do
+        expect(page).to have_content property1.name
+        expect(page).to have_content property1.status
+        expect(page).to have_content "$#{property1.price_per_night}"
+        expect(page).to have_content "Guests: #{property1.number_of_guests}"
+        expect(page).to have_content "Beds: #{property1.number_of_beds}"
+        expect(page).to have_content "Rooms: #{property1.number_of_rooms}"
+        expect(page).to have_content "Bathrooms: #{property1.number_of_bathrooms}"
+        expect(page).to have_content "Total Reservation Requests: 3"
+        expect(page).to have_content "In Progress 1"
+        expect(page).to have_content "Pending 1"
+        expect(page).to have_content "Confirmed 1"
+        expect(page).to have_content "Past 0"
+        expect(page).to have_content "Declined 0"
+      end
+
+      within ("#property-#{property2.id}") do
+        expect(page).to have_content property2.name
+        expect(page).to have_content property2.status
+        expect(page).to have_content "$#{property2.price_per_night}"
+        expect(page).to have_content "Guests: #{property2.number_of_guests}"
+        expect(page).to have_content "Beds: #{property2.number_of_beds}"
+        expect(page).to have_content "Rooms: #{property2.number_of_rooms}"
+        expect(page).to have_content "Bathrooms: #{property2.number_of_bathrooms}"
+        expect(page).to have_content "Total Reservation Requests: 2"
+        expect(page).not_to have_content "In Progress"
+        expect(page).not_to have_content "Pending"
+        expect(page).to have_content "Confirmed 0"
+        expect(page).to have_content "Past 1"
+        expect(page).to have_content "Declined 1"
       end
     end
   end

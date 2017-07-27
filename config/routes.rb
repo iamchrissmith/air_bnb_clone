@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         scope ':property_id' do
           resources :reservations, only: [:create]
         end
-        
+
         resources :properties, only: [:index]
       end
       namespace :reservations do
@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   resources :reservations, only: [:new]
 
   namespace :user do
-    resources :properties, only: [:index]
+    resources :properties, only: [:index, :show]
   end
 
 end

@@ -1,6 +1,4 @@
-
 class Seed
-
   def initialize
     generate_users
     generate_room_types
@@ -11,6 +9,7 @@ class Seed
   def generate_users
     1000.times do |i|
       User.create!(
+        username: "username#{i}",
         email: Faker::Internet.email,
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
@@ -46,9 +45,11 @@ class Seed
       "http://jjtravels.net/wp-content/uploads/2009/10/IMG_3705.JPG",
       "http://www.letthedogin.com/wp-content/uploads/2012/09/DSC_0107.jpg"]
 
+    user_count = User.count
+    n = 1
     CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       num = Random.new.rand(1..10)
-      user = User.find(Random.new.rand(1..1000))
+      user = User.find(n)
       user.properties.create!(
         name: Faker::Company.name,
         number_of_guests: (num * 2),
@@ -61,15 +62,17 @@ class Seed
         city: row[:city],
         state: row[:state],
         zip: row[:zip],
-        lat: row[:latitude],
-        long: row[:longitude],
         image_url: images.sample,
         status: 1,
-        room_type_id: Random.new.rand(1..3),
+        room_type_id: [1,2,3].sample,
         check_in_time: "14:00:00",
         check_out_time: "11:00:00"
         )
-      puts "#{row} property created"
+      puts "#{row} property created for user_id: #{user.id}"
+      n += 1
+      if n == user_count
+        break
+      end
     end
   end
 

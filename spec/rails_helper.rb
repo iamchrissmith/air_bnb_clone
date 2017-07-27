@@ -9,7 +9,10 @@ require 'database_cleaner'
 require 'stub_helper'
 require 'support/login_helper'
 
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
 DatabaseCleaner.strategy = :truncation
+
 RSpec.configure do |c|
   c.before(:all) do
     DatabaseCleaner.clean
@@ -51,3 +54,5 @@ RSpec.configure do |config|
   config.include(LoginHelper)
   config.filter_gems_from_backtrace("omniauth", "warden", "rack-test", "rack", "railties", "capybara", "webmock", "vcr", "faraday")
 end
+
+

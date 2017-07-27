@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :authy_authenticatable, :database_authenticatable
 
   has_many :reservations, foreign_key: "renter_id"
+
   has_many :properties, foreign_key: "owner_id"
   has_many :messages
   has_many :conversations

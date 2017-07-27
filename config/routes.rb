@@ -9,6 +9,8 @@ Rails.application.routes.draw do
         scope ':property_id' do
           resources :reservations, only: [:create]
         end
+        
+        resources :properties, only: [:index]
       end
       namespace :reservations do
         get '/by_month', to: 'month#index'

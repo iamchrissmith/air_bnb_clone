@@ -17,13 +17,14 @@ class PropertyPresenter
     elsif date_search_params
       @properties = Property.search_dates(params)
     elsif city_search_param
+      params[:city] = params[:place_search] # This is temporary. I promise
       @properties = Property.search_city(params)
     elsif guest_search_param
       @properties = Property.search_guests(params)
     else
-      @properties = Property.all
+      @properties = Property.order("RANDOM()")
     end
-    @properties = @properties.paginate(page: params[:page], per_page: 20)
+    @properties = @properties.paginate(page: params[:page], per_page: 10)
     set_date
     set_num_guests
     set_cities
@@ -70,7 +71,7 @@ class PropertyPresenter
     end
 
     def city_search_param
-      params[:city].present?
+      params[:place_search].present?
     end
 
     def guest_search_param

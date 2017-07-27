@@ -3,10 +3,11 @@ require 'rails_helper'
 feature "a guest can search" do
   scenario "properties by location" do
     property = create(:property)
-    property2 = create(:property, name: "cabin in the woods", city: "Denver")
+
+    property2 = create(:property, name: "cabin in the woods", city: "Milford")
     visit root_path
 
-    fill_in "city", with:"#{property.city}"
+    fill_in "place_search", with: property.city
     click_on "Search"
     expect(current_path).to eq(properties_path)
     expect(page).to have_content("Search Results")
@@ -63,7 +64,7 @@ feature "a guest can search" do
     property2 = create(:property)
     visit root_path
 
-    fill_in :city, with:"#{property.city}"
+    fill_in :place_search, with:"#{property.city}"
     fill_in :guests, with:"#{property.number_of_guests}"
     click_on "Search"
 
@@ -92,7 +93,7 @@ feature "a guest can search" do
     property_availability = create(:property_availability, property: property4, date: Date.tomorrow, reserved?: false)
     visit root_path
 
-    fill_in :city, with:"#{property.city}"
+    fill_in :place_search, with:"#{property.city}"
     fill_in :check_in, with:"#{Date.today}"
     fill_in :check_out, with:"#{Date.tomorrow}"
     click_on "Search"
@@ -153,7 +154,7 @@ feature "a guest can search" do
     property_availability = create(:property_availability, property: property4, date: Date.tomorrow, reserved?: false)
     visit root_path
 
-    fill_in :city, with:"#{property4.city}"
+    fill_in :place_search, with:"#{property4.city}"
     fill_in :check_in, with:"#{Date.today}"
     fill_in :check_out, with:"#{Date.tomorrow}"
     fill_in :guests, with:"#{property4.number_of_guests}"

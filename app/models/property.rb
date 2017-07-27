@@ -1,19 +1,21 @@
 class Property < ApplicationRecord
   extend FairBnb::PropertyApiHelpers
 
-  validates :name, :number_of_guests, :number_of_beds, :number_of_rooms, :description, :price_per_night, presence: true
-  validates :address, :city, :state, :zip, :image_url, :status, presence: true
-
   belongs_to :room_type
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
 
   has_many :reservations
   has_many :property_availabilities
 
+  validates :name, :number_of_guests, :number_of_beds, :number_of_rooms,
+            :description, :price_per_night, :address, :city, :state, :zip,
+            :image_url, :status, presence: true
+
+  geocoded_by :prepare_address,  :latitude  => :lat, :longitude => :long
+  after_validation :geocode
+
   enum status: %w(pending active archived)
 
-  # geocoded_by :full_address,  :latitude  => :lat, :longitude => :long
-  # after_validation :geocode
   def prepare_address
     [address, city, state, zip].compact.join('+')
   end
@@ -25,7 +27,7 @@ class Property < ApplicationRecord
   def get_weather
     service = WeatherService.new({city: city, state: state})
     raw_weather = service.find_by_location
-    
+
     if raw_weather == nil
       "Invalid city name; no weather information available."
     else

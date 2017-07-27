@@ -6,12 +6,12 @@ RSpec.feature "as an admin" do
 
     visit log_in_path
 
-    click_on "Log in with Email"
+    click_on "Log in with Username or Email"
 
     expect(current_path).to eq(new_user_session_path)
 
-    fill_in :user_email, with: "#{admin.email}"
-    fill_in :user_password, with: "#{admin.password}"
+    fill_in "Username or email", with: "#{admin.email}"
+    fill_in "Password", with: "password"
     click_on "Log in"
 
     expect(current_path).to eq(root_path)

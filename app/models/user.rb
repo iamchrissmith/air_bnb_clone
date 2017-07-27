@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :authy_authenticatable, :database_authenticatable
 
@@ -6,6 +7,9 @@ class User < ApplicationRecord
   has_many :properties, foreign_key: "owner_id"
 
   enum role: %w(registered_user admin)
+
+  validates :username, presence: true, uniqueness: true, case_sensitive: false
+  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
 
   def full_name
     "#{first_name} #{last_name}"
@@ -27,6 +31,27 @@ class User < ApplicationRecord
       user.password       = Devise.friendly_token[0,20]
     end
   end
+
+  def login=(login)
+    @login = login
+  end
+
+  def login
+    @login || self.username || self.email
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { value: login.downcase }]).first
+    else
+      if conditions[:username].nil?
+        where(conditions).first
+      else
+        where(username: conditions[:username]).first
+      end
+    end
+  end 
 
   def self.from_google_omniauth(auth_info)
     where(email: auth_info[:info][:email]).first_or_create do |new_user|

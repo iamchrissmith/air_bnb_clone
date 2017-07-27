@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :login
 
-  # before_action :authenticate_user!
-
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :database_authenticatable
 

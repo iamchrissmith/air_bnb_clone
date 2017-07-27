@@ -40,7 +40,6 @@ FactoryGirl.define do
   end
 
   factory :reservation do
-    total_price "9.99"
     start_date "2017-05-16"
     end_date "2017-05-17"
     number_of_guests 1

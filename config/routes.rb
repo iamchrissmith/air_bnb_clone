@@ -65,4 +65,5 @@ Rails.application.routes.draw do
     resources :conversations, only: [:index, :show, :new, :create]
   end
 
+  mount ActionCable.server => '/cable'
 end

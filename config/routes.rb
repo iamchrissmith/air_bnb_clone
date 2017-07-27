@@ -59,6 +59,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :properties, only: [:index]
+    resources :conversations, only: [:index, :show]
   end
 
 end

@@ -1,15 +1,10 @@
 class User::ConversationsController < ApplicationController
   def index
-    if current_user
       @conversations = current_user.conversations
-    else
-      redirect_to '/'
-    end
   end
 
   def show
     @conversation = current_user.conversations.includes(:messages).find(params[:id])
-    # @conversation = Converation.includes(:messages).find(params[:id])
   end
 
   def new

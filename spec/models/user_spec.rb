@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
 
   context "relationships" do
       it { should have_many :reservations }
+      it { should delegate_method(:pending).to(:reservations) }
       it { should have_many :properties }
   end
 

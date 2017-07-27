@@ -13,20 +13,46 @@ feature "as a logged in user" do
       expect(page).to have_link('View Profile')
       expect(page).to have_link('Edit Profile')
     end
+
     scenario "I see my pending reservations" do
       reservation = create(:reservation, renter: user, status: 0)
+      confirmed_res = create(:reservation, renter: user)
       login(user)
 
       visit dashboard_path
 
-      expect(page).to have_content("Your Pending Reservations")
-      expect(page).to have_css('.reservations .nav-tabs a[data-toggle="pending"]')
-      expect(page).to have_css('.reservations .tab-content #pending')
-      within ('.reservations .tab-content #pending') do
-        expect(page).to have_content reservation.start_date
-        expect(page).to have_content reservation.end_date
+      expect(page).to have_content("Pending Reservations")
+      expect(page).to have_css('.nav-tabs a[href="#pending"]')
+      expect(page).to have_css('.tab-content #pending')
+      within ('.tab-content #pending') do
+        expect(page).to have_css("#reservation-#{reservation.id}")
+        expect(page).to have_content reservation.start_date.to_formatted_s(:short)
+        expect(page).to have_content reservation.end_date.to_formatted_s(:short)
         expect(page).to have_link(reservation.property.name, href: property_path(reservation.property))
-        expect(page).to have_content "Requested on: #{reservation.created_at}"
+        expect(page).to have_content "$#{reservation.total_price}"
+        expect(page).to have_content "Requested: #{reservation.created_at.to_formatted_s(:short)}"
+        expect(page).not_to have_css("#reservation-#{confirmed_res.id}")
+      end
+    end
+
+    scenario "I see my confirmed reservations" do
+      reservation = create(:reservation, renter: user, status: 0)
+      confirmed_res = create(:reservation, renter: user)
+      login(user)
+
+      visit dashboard_path
+
+      expect(page).to have_content("Confirmed Reservations")
+      expect(page).to have_css('.nav-tabs a[href="#confirmed"]')
+      expect(page).to have_css('.tab-content #confirmed')
+      within ('.tab-content #confirmed') do
+        expect(page).to have_css("#reservation-#{confirmed_res.id}")
+        expect(page).to have_content confirmed_res.start_date.to_formatted_s(:short)
+        expect(page).to have_content confirmed_res.end_date.to_formatted_s(:short)
+        expect(page).to have_link(confirmed_res.property.name, href: property_path(confirmed_res.property))
+        expect(page).to have_content "$#{confirmed_res.total_price}"
+        expect(page).to have_content "Requested: #{confirmed_res.created_at.to_formatted_s(:short)}"
+        expect(page).not_to have_css("#reservation-#{reservation.id}")
       end
     end
   end

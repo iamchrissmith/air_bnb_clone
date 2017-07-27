@@ -28,15 +28,57 @@
   </div>
 
     <div class="col-md-9">
-      <!-- <div class="panel space-4"> -->
-        <div class="panel-header">
-          <h4>NOTIFICATIONS</h4>
-        </div>
-        <div class="panel-body">
-          YOU HAVE (x) new messages (LINK TO MESSAGE INDEX)<br>
-          YOU HAVE (x) pending requests (LINK TO personal reservations, my properties' reservations)
-        </div>
-      <!-- </div> -->
-    </div>
+      <div class="card col-md-12" id="toggle">
+        <div class="card_header">
+          <ul class = "nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#notifications">Notifcations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#pending">Pending Reservations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#confirmed">Confirmed Reservations</a>
+            </li>
+          </ul>
 
+          <div class="tab-content">
+            <div class="tab-pane active" id="notifications" role="tabpanel">
+              YOU HAVE (x) new messages (LINK TO MESSAGE INDEX)<br>
+              YOU HAVE (x) pending requests (LINK TO personal reservations, my properties' reservations)
+            </div>
+
+            <div class="tab-pane" id="pending" role="tabpanel">
+              <table class="table table-striped">
+                <tr>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Property</th>
+                  <th>Total Price</th>
+                  <th>Status</th>
+                </tr>
+                <tbody>
+                  <%= render partial: 'reservations/reservation', collection: @user.pending_reservations %>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="tab-pane" id="confirmed" role="tabpanel">
+              <table class="table table-striped">
+                <tr>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Property</th>
+                  <th>Total Price</th>
+                  <th>Status</th>
+                </tr>
+                <tbody>
+                  <%= render partial: 'reservations/reservation', collection: @user.confirmed_reservations %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

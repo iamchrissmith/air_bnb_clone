@@ -3,13 +3,13 @@
     <%= hidden_field_tag 'reservation[renter_id]', current_user.id %>
 
     <%= label_tag 'reservation[start_date]', "Check In" %>
-    <%= date_field_tag 'reservation[start_date]', class: "form-control" %>
+    <%= date_field_tag 'reservation[start_date]', nil, class: "form-control", :required => true %>
 
     <%= label_tag 'reservation[end_date]', "Check Out" %>
-    <%= date_field_tag 'reservation[end_date]', class: "form-control" %>
+    <%= date_field_tag 'reservation[end_date]', nil, class: "form-control", :required => true %>
 
     <%= label_tag 'reservation[number_of_guests]', "Guests" %>
-    <%= number_field_tag 'reservation[number_of_guests]', "1", min: 1, class: "form-control" %>
+    <%= number_field_tag 'reservation[number_of_guests]', "1", min: 1, class: "form-control", :required => true %>
     <br>
     <%= submit_tag "Request to Book", class: "btn btn-primary" %>
   <% end %>

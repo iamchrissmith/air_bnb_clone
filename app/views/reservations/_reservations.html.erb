@@ -1,0 +1,14 @@
+<div class="tab-pane" id="<%= status %>" role="tabpanel">
+  <table class="table table-striped">
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Property</th>
+      <th>Total Price</th>
+      <th>Status</th>
+    </tr>
+    <tbody>
+      <%= render partial: 'reservations/reservation', collection: user.reservations.send(status) %>
+    </tbody>
+  </table>
+</div>

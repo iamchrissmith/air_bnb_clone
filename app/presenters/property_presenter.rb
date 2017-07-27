@@ -22,9 +22,9 @@ class PropertyPresenter
     elsif guest_search_param
       @properties = Property.search_guests(params)
     else
-      @properties = Property.all
+      @properties = Property.order("RANDOM()")
     end
-    @properties = @properties.paginate(page: params[:page], per_page: 20)
+    @properties = @properties.paginate(page: params[:page], per_page: 10)
     set_date
     set_num_guests
     set_cities

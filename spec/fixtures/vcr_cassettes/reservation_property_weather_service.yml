@@ -54,7 +54,7 @@ http_interactions:
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Tue, 25 Jul 2017 20:56:35 GMT
 - request:
     method: get
@@ -125,7 +125,7 @@ http_interactions:
         \"West\",\n\t\t\"city\": \"West\",\n\t\t\"state\": \"WV\",\n\t\t\"country\":
         \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
         \"26055.11.99999\",\n\t\t\"l\": \"/q/zmw:26055.11.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 20:13:51 GMT
 - request:
     method: get
@@ -176,7 +176,7 @@ http_interactions:
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 20:14:59 GMT
 - request:
     method: get
@@ -232,7 +232,7 @@ http_interactions:
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 20:53:04 GMT
 - request:
     method: get
@@ -321,7 +321,7 @@ http_interactions:
         \"Lake\",\n\t\t\"city\": \"Lake\",\n\t\t\"state\": \"WV\",\n\t\t\"country\":
         \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
         \"25121.1.99999\",\n\t\t\"l\": \"/q/zmw:25121.1.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 20:57:32 GMT
 - request:
     method: get
@@ -372,7 +372,7 @@ http_interactions:
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 21:03:48 GMT
 - request:
     method: get
@@ -423,7 +423,7 @@ http_interactions:
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 21:26:21 GMT
 - request:
     method: get
@@ -474,7 +474,7 @@ http_interactions:
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 21:27:03 GMT
 - request:
     method: get
@@ -533,7 +533,7 @@ http_interactions:
         \"North\",\n\t\t\"city\": \"North\",\n\t\t\"state\": \"VA\",\n\t\t\"country\":
         \"US\",\n\t\t\"country_iso3166\":\"US\",\n\t\t\"country_name\":\"USA\",\n\t\t\"zmw\":
         \"23128.1.99999\",\n\t\t\"l\": \"/q/zmw:23128.1.99999\"\n\t\t}\n\t\t]\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 21:27:53 GMT
 - request:
     method: get
@@ -584,7 +584,7 @@ http_interactions:
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 22:15:18 GMT
 - request:
     method: get
@@ -649,7 +649,7 @@ http_interactions:
         \"Port\",\n\t\t\"city\": \"Port\",\n\t\t\"state\": \"SJ\",\n\t\t\"country\":
         \"RO\",\n\t\t\"country_iso3166\":\"RO\",\n\t\t\"country_name\":\"Romania\",\n\t\t\"zmw\":
         \"00000.24.15095\",\n\t\t\"l\": \"/q/zmw:00000.24.15095\"\n\t\t}\n\t\t]\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Jul 2017 23:03:27 GMT
 - request:
     method: get
@@ -696,7 +696,7 @@ http_interactions:
            "results" : [],
            "status" : "ZERO_RESULTS"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 27 Jul 2017 16:53:52 GMT
 - request:
     method: get
@@ -759,7 +759,7 @@ http_interactions:
         F (25 C)\",\n\t\t\"feelslike_f\":\"77\",\n\t\t\"feelslike_c\":\"25\",\n\t\t\"visibility_mi\":\"19.0\",\n\t\t\"visibility_km\":\"30.0\",\n\t\t\"solarradiation\":\"--\",\n\t\t\"UV\":\"-1\",\"precip_1hr_string\":\"0.00
         in (0 mm)\",\n\t\t\"precip_1hr_in\":\"0.00\",\n\t\t\"precip_1hr_metric\":\"0\",\n\t\t\"precip_today_string\":\"0.05
         in (1 mm)\",\n\t\t\"precip_today_in\":\"0.05\",\n\t\t\"precip_today_metric\":\"1\",\n\t\t\"icon\":\"partlycloudy\",\n\t\t\"icon_url\":\"http://icons.wxug.com/i/c/k/nt_partlycloudy.gif\",\n\t\t\"forecast_url\":\"http://www.wunderground.com/global/stations/56671.html\",\n\t\t\"history_url\":\"http://www.wunderground.com/history/airport/56671/2017/7/27/DailyHistory.html\",\n\t\t\"ob_url\":\"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=26.64999962,102.25000000\",\n\t\t\"nowcast\":\"\"\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Thu, 27 Jul 2017 16:53:52 GMT
 - request:
     method: get
@@ -881,7 +881,7 @@ http_interactions:
            ],
            "status" : "OK"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 27 Jul 2017 17:25:48 GMT
 - request:
     method: get
@@ -951,6 +951,6 @@ http_interactions:
         F (34 C)\",\n\t\t\"feelslike_f\":\"93\",\n\t\t\"feelslike_c\":\"34\",\n\t\t\"visibility_mi\":\"10.0\",\n\t\t\"visibility_km\":\"16.1\",\n\t\t\"solarradiation\":\"654\",\n\t\t\"UV\":\"7.0\",\"precip_1hr_string\":\"0.00
         in ( 0 mm)\",\n\t\t\"precip_1hr_in\":\"0.00\",\n\t\t\"precip_1hr_metric\":\"
         0\",\n\t\t\"precip_today_string\":\"0.00 in (0 mm)\",\n\t\t\"precip_today_in\":\"0.00\",\n\t\t\"precip_today_metric\":\"0\",\n\t\t\"icon\":\"partlycloudy\",\n\t\t\"icon_url\":\"http://icons.wxug.com/i/c/k/partlycloudy.gif\",\n\t\t\"forecast_url\":\"http://www.wunderground.com/US/TN/Knoxville.html\",\n\t\t\"history_url\":\"http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KTNKNOXV206\",\n\t\t\"ob_url\":\"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=35.952084,-83.881912\",\n\t\t\"nowcast\":\"\"\n\t}\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Thu, 27 Jul 2017 17:25:48 GMT
 recorded_with: VCR 3.0.3

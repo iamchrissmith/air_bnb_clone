@@ -10,6 +10,7 @@ FactoryGirl.define do
   factory :user do
     first_name Faker::User.name
     last_name Faker::Music.instrument
+    sequence(:username) { |n| "username#{n}" }
     image_url Faker::Fillmurray.image
     sequence(:email) { |n| Faker::Internet.email("sample#{n}") }
     phone_number Faker::PhoneNumber.cell_phone
@@ -19,7 +20,6 @@ FactoryGirl.define do
     active? false
     password "password"
     facebook_token ENV['FACEBOOK_USER_TOKEN']
-
   end
 
   factory :property_availability do

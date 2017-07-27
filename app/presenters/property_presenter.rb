@@ -17,6 +17,7 @@ class PropertyPresenter
     elsif date_search_params
       @properties = Property.search_dates(params)
     elsif city_search_param
+      params[:city] = params[:place_search] # This is temporary. I promise
       @properties = Property.search_city(params)
     elsif guest_search_param
       @properties = Property.search_guests(params)
@@ -70,7 +71,7 @@ class PropertyPresenter
     end
 
     def city_search_param
-      params[:city].present?
+      params[:place_search].present?
     end
 
     def guest_search_param

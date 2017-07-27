@@ -64,7 +64,9 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :properties, only: [:index]
-    resources :conversations, only: [:index, :show, :new, :create]
+    resources :conversations, only: [:index, :show, :new, :create] do
+      resources :messages, only: [:show]
+    end
   end
 
   mount ActionCable.server => '/cable'

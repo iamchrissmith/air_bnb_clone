@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :conversation do
     user
-    title 'Trip 1'
+    message
+    title 'Trip to Austin'
   end
 end

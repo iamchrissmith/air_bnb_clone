@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-md-11">
+        <p class="card-text">
+          <span class="text-muted"><%= @conversation.messages.first.user.first_name %> at <%= @conversation.messages.first.timestamp %> says</span><br>
+          <%= @conversation.messages.first.content %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

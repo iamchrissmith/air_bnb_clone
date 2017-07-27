@@ -651,4 +651,105 @@ http_interactions:
         \"00000.24.15095\",\n\t\t\"l\": \"/q/zmw:00000.24.15095\"\n\t\t}\n\t\t]\n\t}\n}\n"
     http_version: 
   recorded_at: Wed, 26 Jul 2017 23:03:27 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/SD/floberg.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Thu, 27 Jul 2017 16:52:16 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.102'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Thu, 27 Jul 2017 16:52:23 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Thu, 27 Jul 2017 16:52:23 GMT
+      Content-Length:
+      - '2573'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        CnsKICAicmVzcG9uc2UiOiB7CiAgInZlcnNpb24iOiIwLjEiLAogICJ0ZXJtc29mU2VydmljZSI6Imh0dHA6Ly93d3cud3VuZGVyZ3JvdW5kLmNvbS93ZWF0aGVyL2FwaS9kL3Rlcm1zLmh0bWwiLAogICJmZWF0dXJlcyI6IHsKICAiY29uZGl0aW9ucyI6IDEKICB9Cgl9CiAgLAkiY3VycmVudF9vYnNlcnZhdGlvbiI6IHsKCQkiaW1hZ2UiOiB7CgkJInVybCI6Imh0dHA6Ly9pY29ucy53eHVnLmNvbS9ncmFwaGljcy93dTIvbG9nb18xMzB4ODAucG5nIiwKCQkidGl0bGUiOiJXZWF0aGVyIFVuZGVyZ3JvdW5kIiwKCQkibGluayI6Imh0dHA6Ly93d3cud3VuZGVyZ3JvdW5kLmNvbSIKCQl9LAoJCSJkaXNwbGF5X2xvY2F0aW9uIjogewoJCSJmdWxsIjoiRmxvYmVyZywgTm9yd2F5IiwKCQkiY2l0eSI6IkZsb2JlcmciLAoJCSJzdGF0ZSI6IjA0IiwKCQkic3RhdGVfbmFtZSI6Ik5vcndheSIsCgkJImNvdW50cnkiOiJOTyIsCgkJImNvdW50cnlfaXNvMzE2NiI6Ik5PIiwKCQkiemlwIjoiMDAwMDAiLAoJCSJtYWdpYyI6IjkiLAoJCSJ3bW8iOiIwMTM5MiIsCgkJImxhdGl0dWRlIjoiNjAuNTk5OTk4NDciLAoJCSJsb25naXR1ZGUiOiIxMi4wMjk5OTk3MyIsCgkJImVsZXZhdGlvbiI6IjE2MC4wIgoJCX0sCgkJIm9ic2VydmF0aW9uX2xvY2F0aW9uIjogewoJCSJmdWxsIjoiw4VzbmVzLCBLamVya2VtbywgMDQiLAoJCSJjaXR5Ijoiw4VzbmVzLCBLamVya2VtbyIsCgkJInN0YXRlIjoiMDQiLAoJCSJjb3VudHJ5IjoiTk8iLAoJCSJjb3VudHJ5X2lzbzMxNjYiOiJOTyIsCgkJImxhdGl0dWRlIjoiNjAuNTI5ODM5IiwKCQkibG9uZ2l0dWRlIjoiMTIuMDAwMjk3IiwKCQkiZWxldmF0aW9uIjoiNTE4IGZ0IgoJCX0sCgkJImVzdGltYXRlZCI6IHsKCQl9LAoJCSJzdGF0aW9uX2lkIjoiSTA0S0pFUksyIiwKCQkib2JzZXJ2YXRpb25fdGltZSI6Ikxhc3QgVXBkYXRlZCBvbiBKdWx5IDI3LCA2OjQ2IFBNIENFU1QiLAoJCSJvYnNlcnZhdGlvbl90aW1lX3JmYzgyMiI6IlRodSwgMjcgSnVsIDIwMTcgMTg6NDY6NDggKzAyMDAiLAoJCSJvYnNlcnZhdGlvbl9lcG9jaCI6IjE1MDExNzQwMDgiLAoJCSJsb2NhbF90aW1lX3JmYzgyMiI6IlRodSwgMjcgSnVsIDIwMTcgMTg6NTI6MTYgKzAyMDAiLAoJCSJsb2NhbF9lcG9jaCI6IjE1MDExNzQzMzYiLAoJCSJsb2NhbF90el9zaG9ydCI6IkNFU1QiLAoJCSJsb2NhbF90el9sb25nIjoiRXVyb3BlL09zbG8iLAoJCSJsb2NhbF90el9vZmZzZXQiOiIrMDIwMCIsCgkJIndlYXRoZXIiOiJSYWluIiwKCQkidGVtcGVyYXR1cmVfc3RyaW5nIjoiNjEuNSBGICgxNi40IEMpIiwKCQkidGVtcF9mIjo2MS41LAoJCSJ0ZW1wX2MiOjE2LjQsCgkJInJlbGF0aXZlX2h1bWlkaXR5IjoiODklIiwKCQkid2luZF9zdHJpbmciOiJGcm9tIHRoZSBOVyBhdCAxLjIgTVBIIEd1c3RpbmcgdG8gMy4xIE1QSCIsCgkJIndpbmRfZGlyIjoiTlciLAoJCSJ3aW5kX2RlZ3JlZXMiOjMyNiwKCQkid2luZF9tcGgiOjEuMiwKCQkid2luZF9ndXN0X21waCI6IjMuMSIsCgkJIndpbmRfa3BoIjoxLjksCgkJIndpbmRfZ3VzdF9rcGgiOiI1LjAiLAoJCSJwcmVzc3VyZV9tYiI6IjEwMDIiLAoJCSJwcmVzc3VyZV9pbiI6IjI5LjU5IiwKCQkicHJlc3N1cmVfdHJlbmQiOiIwIiwKCQkiZGV3cG9pbnRfc3RyaW5nIjoiNTggRiAoMTUgQykiLAoJCSJkZXdwb2ludF9mIjo1OCwKCQkiZGV3cG9pbnRfYyI6MTUsCgkJImhlYXRfaW5kZXhfc3RyaW5nIjoiTkEiLAoJCSJoZWF0X2luZGV4X2YiOiJOQSIsCgkJImhlYXRfaW5kZXhfYyI6Ik5BIiwKCQkid2luZGNoaWxsX3N0cmluZyI6Ik5BIiwKCQkid2luZGNoaWxsX2YiOiJOQSIsCgkJIndpbmRjaGlsbF9jIjoiTkEiLAoJCSJmZWVsc2xpa2Vfc3RyaW5nIjoiNjEuNSBGICgxNi40IEMpIiwKCQkiZmVlbHNsaWtlX2YiOiI2MS41IiwKCQkiZmVlbHNsaWtlX2MiOiIxNi40IiwKCQkidmlzaWJpbGl0eV9taSI6IjYuMiIsCgkJInZpc2liaWxpdHlfa20iOiIxMC4wIiwKCQkic29sYXJyYWRpYXRpb24iOiItLSIsCgkJIlVWIjoiMSIsInByZWNpcF8xaHJfc3RyaW5nIjoiMC4wNSBpbiAoIDEgbW0pIiwKCQkicHJlY2lwXzFocl9pbiI6IjAuMDUiLAoJCSJwcmVjaXBfMWhyX21ldHJpYyI6IiAxIiwKCQkicHJlY2lwX3RvZGF5X3N0cmluZyI6IjAuMjYgaW4gKDcgbW0pIiwKCQkicHJlY2lwX3RvZGF5X2luIjoiMC4yNiIsCgkJInByZWNpcF90b2RheV9tZXRyaWMiOiI3IiwKCQkiaWNvbiI6InJhaW4iLAoJCSJpY29uX3VybCI6Imh0dHA6Ly9pY29ucy53eHVnLmNvbS9pL2Mvay9yYWluLmdpZiIsCgkJImZvcmVjYXN0X3VybCI6Imh0dHA6Ly93d3cud3VuZGVyZ3JvdW5kLmNvbS9nbG9iYWwvc3RhdGlvbnMvMDEzOTIuaHRtbCIsCgkJImhpc3RvcnlfdXJsIjoiaHR0cDovL3d3dy53dW5kZXJncm91bmQuY29tL3dlYXRoZXJzdGF0aW9uL1dYRGFpbHlIaXN0b3J5LmFzcD9JRD1JMDRLSkVSSzIiLAoJCSJvYl91cmwiOiJodHRwOi8vd3d3Lnd1bmRlcmdyb3VuZC5jb20vY2dpLWJpbi9maW5kd2VhdGhlci9nZXRGb3JlY2FzdD9xdWVyeT02MC41Mjk4MzksMTIuMDAwMjk3IiwKCQkibm93Y2FzdCI6IiIKCX0KfQo=
+    http_version: 
+  recorded_at: Thu, 27 Jul 2017 16:52:23 GMT
+- request:
+    method: get
+    uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/UT/champlinstad.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Last-Modified:
+      - Thu, 27 Jul 2017 17:16:58 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Creationtime:
+      - '0.018'
+      Vary:
+      - Accept-Encoding
+      Expires:
+      - Thu, 27 Jul 2017 17:17:01 GMT
+      Cache-Control:
+      - max-age=0, no-cache
+      Pragma:
+      - no-cache
+      Date:
+      - Thu, 27 Jul 2017 17:17:01 GMT
+      Content-Length:
+      - '255'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
+        \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
+        \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
+    http_version: 
+  recorded_at: Thu, 27 Jul 2017 17:17:01 GMT
 recorded_with: VCR 3.0.3

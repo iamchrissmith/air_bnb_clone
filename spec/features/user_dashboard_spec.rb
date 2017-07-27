@@ -55,6 +55,48 @@ feature "as a logged in user" do
         expect(page).not_to have_css("#reservation-#{reservation.id}")
       end
     end
+
+    scenario "I see my finished reservations" do
+      reservation = create(:reservation, renter: user, status: 3)
+      confirmed_res = create(:reservation, renter: user)
+      login(user)
+
+      visit dashboard_path
+
+      expect(page).to have_content("Past Reservations")
+      expect(page).to have_css('.nav-tabs a[href="#finished"]')
+      expect(page).to have_css('.tab-content #finished')
+      within ('.tab-content #finished') do
+        expect(page).to have_css("#reservation-#{reservation.id}")
+        expect(page).to have_content reservation.start_date.to_formatted_s(:short)
+        expect(page).to have_content reservation.end_date.to_formatted_s(:short)
+        expect(page).to have_link(reservation.property.name, href: property_path(reservation.property))
+        expect(page).to have_content "$#{reservation.total_price}"
+        expect(page).to have_content "Requested: #{reservation.created_at.to_formatted_s(:short)}"
+        expect(page).not_to have_css("#reservation-#{confirmed_res.id}")
+      end
+    end
+
+    scenario "I see my declined reservations" do
+      reservation = create(:reservation, renter: user, status: 4)
+      confirmed_res = create(:reservation, renter: user)
+      login(user)
+
+      visit dashboard_path
+
+      expect(page).to have_content("Declined Reservations")
+      expect(page).to have_css('.nav-tabs a[href="#declined"]')
+      expect(page).to have_css('.tab-content #declined')
+      within ('.tab-content #declined') do
+        expect(page).to have_css("#reservation-#{reservation.id}")
+        expect(page).to have_content reservation.start_date.to_formatted_s(:short)
+        expect(page).to have_content reservation.end_date.to_formatted_s(:short)
+        expect(page).to have_link(reservation.property.name, href: property_path(reservation.property))
+        expect(page).to have_content "$#{reservation.total_price}"
+        expect(page).to have_content "Requested: #{reservation.created_at.to_formatted_s(:short)}"
+        expect(page).not_to have_css("#reservation-#{confirmed_res.id}")
+      end
+    end
   end
   #Need to figure out messages...
   context "Within my notifications" do

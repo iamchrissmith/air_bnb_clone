@@ -40,6 +40,12 @@
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#confirmed">Confirmed Reservations</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#finished">Past Reservations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#declined">Declined Reservations</a>
+            </li>
           </ul>
 
           <div class="tab-content">
@@ -51,6 +57,10 @@
             <%= render partial: 'reservations/reservations', locals: {status: 'pending', user: @user} %>
 
             <%= render partial: 'reservations/reservations', locals: {status: 'confirmed', user: @user} %>
+
+            <%= render partial: 'reservations/reservations', locals: {status: 'finished', user: @user} %>
+
+            <%= render partial: 'reservations/reservations', locals: {status: 'declined', user: @user} %>
           </div>
         </div>
       </div>

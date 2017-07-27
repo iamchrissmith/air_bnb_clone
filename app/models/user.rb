@@ -1,14 +1,8 @@
 class User < ApplicationRecord
-  extend Forwardable
-
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :authy_authenticatable, :database_authenticatable
 
   has_many :reservations, foreign_key: "renter_id"
-  def_delegators :reservations, :pending
-  def_delegator :reservations, :pending, :pending_reservations
-  def_delegators :reservations, :confirmed
-  def_delegator :reservations, :confirmed, :confirmed_reservations
 
   has_many :properties, foreign_key: "owner_id"
 

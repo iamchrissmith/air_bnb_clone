@@ -4,9 +4,10 @@
     <th>End Date</th>
     <th>Property</th>
     <th>Total Price</th>
-    <th>Status</th>
+    <th>Renter</th>
+    <th>Action</th>
   </tr>
   <tbody>
-    <%= render partial: 'reservations/reservation', collection: user.reservations.send(status) %>
+    <%= render partial: 'reservations/request', collection: properties.reservations.send(status) %>
   </tbody>
 </table>

@@ -1,5 +1,8 @@
-My Properties<br>
-
+<h2>My Properties</h2>
 <% @properties.each do |property| %>
 <%= link_to property.name, property_path(property.id) %><br>
+Property Price Per Night
+Property Location
+Count of Types of Requests
+Link to User/Property/Show
 <% end %>

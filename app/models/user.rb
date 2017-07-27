@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :database_authenticatable
 
   has_many :reservations, foreign_key: "renter_id"
+
   has_many :properties, foreign_key: "owner_id"
 
   enum role: %w(registered_user admin)
@@ -70,49 +71,49 @@ class User < ApplicationRecord
   end
 
   def self.reservations_by_night(limit = 10)
-    self.find_by_sql("SELECT users.*, sum(reservations.end_date - reservations.start_date) AS nights
+    self.find_by_sql(["SELECT users.*, sum(reservations.end_date - reservations.start_date) AS nights
                       FROM users
                       JOIN reservations on users.id = reservations.renter_id
                       GROUP BY users.id
                       ORDER BY nights DESC
-                      LIMIT(#{limit});")
+                      LIMIT ?;", limit])
   end
 
   def self.reservations_by_bookings(limit = 10)
-    self.find_by_sql("SELECT users.*, sum(reservations.id) AS bookings
+    self.find_by_sql(["SELECT users.*, sum(reservations.id) AS bookings
                       FROM users
                       JOIN reservations on users.id = reservations.renter_id
                       GROUP BY users.id
                       ORDER BY bookings DESC
-                      LIMIT(#{limit});")
+                      LIMIT ?", limit])
   end
 
   def self.most_properties(limit = 10)
-    self.find_by_sql("SELECT users.*, sum(properties.id) AS props
+    self.find_by_sql(["SELECT users.*, sum(properties.id) AS props
                       FROM users
                       JOIN properties ON users.id = properties.owner_id
                       GROUP BY users.id
                       ORDER BY props DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit])
   end
 
   def self.most_money_spent(limit = 10)
-    self.find_by_sql("SELECT users.*, sum(reservations.total_price) AS cost
+    self.find_by_sql(["SELECT users.*, sum(reservations.total_price) AS cost
                       FROM users
                       JOIN reservations ON users.id = reservations.renter_id
                       GROUP BY users.id
                       ORDER BY cost DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit])
   end
 
   def self.most_revenue(limit = 10)
-    self.find_by_sql("SELECT users.*, sum(reservations.total_price) AS cost
+    self.find_by_sql(["SELECT users.*, sum(reservations.total_price) AS cost
                       FROM users
                       JOIN properties ON users.id = properties.owner_id
                       JOIN reservations ON properties.id = reservations.property_id
                       GROUP BY users.id
                       ORDER BY cost DESC
-                      LIMIT(#{limit});")
+                      LIMIT(?);", limit])
   end
 
   protected

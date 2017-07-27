@@ -39,25 +39,27 @@ feature "user can add a rental property to thier account" do
       fill_in 'Image url', with: 'https://fakepictureofahouse'
 
       click_on 'Submit property for review'
+      VCR.use_cassette('new_property_weather_service', record: :new_episodes) do
 
-      expect(current_path).to eq(new_property_property_availability_path(user.properties.last))
+        expect(current_path).to eq(new_property_property_availability_path(user.properties.last))
 
-      fill_in :first_available_date, with:"#{Date.today}"
-      fill_in :last_available_date, with:"#{(Date.today + 5)}"
-      click_on "Complete"
+        fill_in :first_available_date, with:"#{Date.today}"
+        fill_in :last_available_date, with:"#{(Date.today + 5)}"
+        click_on "Complete"
 
-      expect(current_path).to eq(property_path(user.properties.last))
+        expect(current_path).to eq(property_path(user.properties.last))
 
-      expect(user.properties.last.status).to eq('pending')
-      expect(page).to have_content('Shared Room')
-      expect(page).to have_content('10 Guests')
-      expect(page).to have_content('6 Room')
-      expect(page).to have_content('6 Beds')
-      expect(page).to have_content('Sweet Spot')
-      expect(page).to have_content('Accomodates: 10')
-      expect(page).to have_content('Bathrooms: 4')
-      expect(page).to have_content('Beds: 6')
-      expect(page).to have_content('$100.00 per night')
+        expect(user.properties.last.status).to eq('pending')
+        expect(page).to have_content('Shared Room')
+        expect(page).to have_content('10 Guests')
+        expect(page).to have_content('6 Room')
+        expect(page).to have_content('6 Beds')
+        expect(page).to have_content('Sweet Spot')
+        expect(page).to have_content('Accomodates: 10')
+        expect(page).to have_content('Bathrooms: 4')
+        expect(page).to have_content('Beds: 6')
+        expect(page).to have_content('$100.00 per night')
+      end
     end
 
     scenario "new rental property is not created without all fields" do

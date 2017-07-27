@@ -1,0 +1,7 @@
+<tr id="reservation-<%= reservation.id %>">
+  <td><%= reservation.start_date.to_formatted_s(:short) %></td>
+  <td><%= reservation.end_date.to_formatted_s(:short) %></td>
+  <td><%= link_to reservation.property.name, reservation.property %></td>
+  <td><%= number_to_currency reservation.total_price %>
+  <td>Requested: <%= reservation.created_at.to_formatted_s(:short) %></td>
+</tr>

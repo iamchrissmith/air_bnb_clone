@@ -1,0 +1,35 @@
+input#city {
+  text-align: center;
+  color: #b7b7b7
+}
+
+input#check_in {
+  text-align: center;
+  color: #b7b7b7
+}
+
+input#check_out {
+  text-align: center;
+  color: #b7b7b7
+}
+
+input#guests {
+  text-align: center;
+  color: #b7b7b7
+}
+
+input, select, option {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+input, select {
+  width: 200px;
+  height: 40px;
+  border: 1px #ccc solid;
+  vertical-align: middle;
+}
+
+.search_bar {
+  text-align: center;
+}

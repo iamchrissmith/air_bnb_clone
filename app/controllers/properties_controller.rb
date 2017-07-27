@@ -6,46 +6,8 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    if params[:city].present? && params[:guests].present? && params[:check_in].present? && params[:check_out].present?
-      @properties = Property.search_city_dates_guests(params[:city], params[:check_in].to_date, params[:check_out].to_date, params[:guests]).paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-      @number_of_guests = params[:guests]
-      @check_in = params[:check_in].to_date
-      @check_out = params[:check_out].to_date
-    elsif params[:city].present? && params[:guests].present?
-      @properties = Property.search_city_guests(params[:city], params[:guests]).paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-      @number_of_guests = params[:guests]
-    elsif params[:check_in].present? && params[:check_out].present? && params[:guests].present?
-      @properties = Property.search_dates_guests(params[:check_in].to_date, params[:check_out].to_date, params[:guests]).paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-      @number_of_guests = params[:guests]
-      @check_in = params[:check_in].to_date
-      @check_out = params[:check_out].to_date
-    elsif params[:check_in].present? && params[:check_out].present? && params[:city].present?
-      @properties = Property.search_dates_city(params[:check_in].to_date, params[:check_out].to_date, params[:city]).paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-      @check_in = params[:check_in].to_date
-      @check_out = params[:check_out].to_date
-    elsif params[:check_in].present? && params[:check_out].present?
-      @properties = Property.search_dates(params[:check_in].to_date, params[:check_out].to_date).paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-      @check_in = params[:check_in].to_date
-      @check_out = params[:check_out].to_date
-    elsif params[:city].present?
-      @properties = Property.search_city(params[:city]).paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-    elsif params[:guests].present?
-      @properties = Property.search_guests(params[:guests]).paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-      @number_of_guests = params[:guests]
-    elsif params[:check_in].present? && !params[:check_out].present? || !params[:check_in].present? && params[:check_out].present?
-      flash[:danger] = "You must select both a check-in & check-out date. Please try again."
-      redirect_to root_path
-    else
-      @properties = Property.all.paginate(:page => params[:page], :per_page => 20)
-      @cities = @properties.pluck(:city).uniq
-    end
+    @presenter = PropertyPresenter.new(params)
+    @presenter.set_attributes
   end
 
   def new
@@ -58,8 +20,6 @@ class PropertiesController < ApplicationController
     @room_types = RoomType.all
     if @property.save
       flash[:success] = "Your rental property has been submitted for approval. You will be contacted as soon as your property is approved!"
-
-      # redirect_to property_path(@property)
       redirect_to new_property_property_availability_path(@property)
     else
       flash[:danger] = "Sorry! Something went wrong. Please try again."
@@ -91,5 +51,4 @@ class PropertiesController < ApplicationController
                                      :city, :state, :zip, :image_url, :room_type_id ,:check_in, :guests,
                                      :check_in_time, :check_out_time)
     end
-
 end

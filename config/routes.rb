@@ -6,6 +6,11 @@ Rails.application.routes.draw do
       namespace :properties do
         get 'most_guests', to: 'most_guests#index'
         get 'most_expensive', to: 'most_expensive#index'
+        scope ':property_id' do
+          resources :reservations, only: [:create]
+        end
+        
+        resources :properties, only: [:index]
       end
       namespace :reservations do
         get '/by_month', to: 'month#index'

@@ -8,12 +8,16 @@ class WeatherService
   end
 
   def find_by_location
-    response = conn.get("/api/#{token}/conditions/q/#{state}/#{city}.json")
-    JSON.parse(response.body, symbolize_names: true)[:current_observation]
+    @response = conn.get("/api/#{token}/conditions/q/#{state}/#{city}.json")
+    parse
   end
 
   private
-    attr_reader :city, :state, :token
+    attr_reader :city, :state, :token, :response
+
+  def parse
+    JSON.parse(response.body, symbolize_names: true)[:current_observation]
+  end
 
   def conn
     @_conn

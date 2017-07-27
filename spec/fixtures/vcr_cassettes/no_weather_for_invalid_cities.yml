@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.11.0
+      - Faraday v0.12.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -25,27 +25,27 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Last-Modified:
-      - Thu, 25 May 2017 01:41:13 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Server:
       - Apache/2.2.15 (CentOS)
       X-Creationtime:
-      - '0.020'
+      - '0.024'
       Vary:
       - Accept-Encoding
       Expires:
-      - Thu, 25 May 2017 01:41:13 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Cache-Control:
       - max-age=0, no-cache
       Pragma:
       - no-cache
       Date:
-      - Thu, 25 May 2017 01:41:13 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Content-Length:
       - '255'
       Connection:
       - keep-alive
       Set-Cookie:
-      - DT=1495676473:118924:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
+      - DT=1501104260:12756:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
         GMT; domain=.wunderground.com
       - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
         path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
@@ -55,7 +55,7 @@ http_interactions:
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
     http_version: 
-  recorded_at: Thu, 25 May 2017 01:41:13 GMT
+  recorded_at: Wed, 26 Jul 2017 21:24:20 GMT
 - request:
     method: get
     uri: http://api.wunderground.com/api/<WEATHER_KEY>/conditions/q/WY/macgyverville.json
@@ -64,7 +64,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.11.0
+      - Faraday v0.12.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -81,35 +81,30 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Last-Modified:
-      - Thu, 25 May 2017 01:44:26 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Server:
       - Apache/2.2.15 (CentOS)
       X-Creationtime:
-      - '0.017'
+      - '0.024'
       Vary:
       - Accept-Encoding
       Expires:
-      - Thu, 25 May 2017 01:44:26 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Cache-Control:
       - max-age=0, no-cache
       Pragma:
       - no-cache
       Date:
-      - Thu, 25 May 2017 01:44:26 GMT
+      - Wed, 26 Jul 2017 21:24:20 GMT
       Content-Length:
       - '255'
       Connection:
       - keep-alive
-      Set-Cookie:
-      - DT=1495676666:35830:ip-10-226-237-178; path=/; expires=Fri, 01-Jan-2020 00:00:00
-        GMT; domain=.wunderground.com
-      - Prefs=FAVS:1|WXSN:1|PWSOBS:1|WPHO:1|PHOT:1|RADC:0|RADALL:0|HIST0:NULL|GIFT:1|PHOTOTHUMBS:50|;
-        path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com
     body:
       encoding: UTF-8
       string: "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n
         \ \"features\": {\n  \"conditions\": 1\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\":
         \"querynotfound\"\n\t\t,\"description\": \"No cities match your search query\"\n\t}\n\t}\n}\n"
     http_version: 
-  recorded_at: Thu, 25 May 2017 01:44:26 GMT
+  recorded_at: Wed, 26 Jul 2017 21:24:20 GMT
 recorded_with: VCR 3.0.3

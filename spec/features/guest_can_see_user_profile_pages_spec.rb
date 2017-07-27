@@ -2,9 +2,11 @@ require 'rails_helper'
 
 feature "a guest can view user profile pages" do
   attr_reader :properties
+  
   before do
     @user = create(:user)
   end
+
   scenario "and can see user info" do
 
     visit user_path(@user)

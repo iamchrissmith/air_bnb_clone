@@ -1,6 +1,8 @@
 class User < ApplicationRecord
+  attr_accessor :login
+
   devise :omniauthable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :authy_authenticatable, :database_authenticatable
+         :recoverable, :rememberable, :trackable, :database_authenticatable
 
   has_many :reservations, foreign_key: "renter_id"
 
@@ -9,6 +11,9 @@ class User < ApplicationRecord
   has_many :messages, through: :conversations
 
   enum role: %w(registered_user admin)
+
+  validates :username, presence: true, uniqueness: true, case_sensitive: false
+  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
 
   def full_name
     "#{first_name} #{last_name}"
@@ -28,6 +33,27 @@ class User < ApplicationRecord
       user.image_url      = auth_info.info.image
       user.facebook_token = auth_info.credentials.token
       user.password       = Devise.friendly_token[0,20]
+    end
+  end
+
+  def login=(login)
+    @login = login
+  end
+
+  def login
+    @login || self.username || self.email
+  end
+
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      if conditions[:username].nil?
+        where(conditions).first
+      else
+        where(username: conditions[:username]).first
+      end
     end
   end
 
@@ -89,4 +115,43 @@ class User < ApplicationRecord
                       ORDER BY cost DESC
                       LIMIT(?);", limit])
   end
+
+  protected
+
+    def self.send_reset_password_instructions attributes = {}
+      recoverable = find_recoverable_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+      recoverable.send_reset_password_instructions if recoverable.persisted?
+      recoverable
+    end
+
+    def self.find_recoverable_or_initialize_with_errors required_attributes, attributes, error = :invalid
+      (case_insensitive_keys || []).each {|k| attributes[k].try(:downcase!)}
+
+      attributes = attributes.slice(*required_attributes)
+      attributes.delete_if {|_key, value| value.blank?}
+
+      if attributes.size == required_attributes.size
+        if attributes.key?(:login)
+          login = attributes.delete(:login)
+          record = find_record(login)
+        else
+          record = where(attributes).first
+        end
+      end
+
+      unless record
+        record = new
+
+        required_attributes.each do |key|
+          value = attributes[key]
+          record.send("#{key}=", value)
+          record.errors.add(key, value.present? ? error : :blank)
+        end
+      end
+      record
+    end
+
+    def self.find_record login
+      where(["username = :value OR email = :value", {value: login}]).first
+    end
 end

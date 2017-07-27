@@ -3,3 +3,13 @@
 <div id="messages">
   <%= render @conversation.messages %>
 </div>
+
+<%= form_for @message, url: '#' do |f| %>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' %>
+    <small class="text-muted">From 2 to 1000 characters</small>
+  </div>
+
+  <%= f.submit "Post", class: 'btn btn-primary btn-lg' %>
+<% end %>

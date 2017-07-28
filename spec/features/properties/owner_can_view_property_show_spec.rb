@@ -41,19 +41,28 @@ RSpec.feature 'Owner can view properties index' do
 
       expect(page).to have_css('#in-progress-requests')
       within ('#in-progress-requests') do
-        expect(page).to have_css("#request-#{pending_request.id}")
+        expect(page).to have_css("#request-#{in_progress_request.id}")
+        expect(page).to have_content in_progress_request.start_date.to_formatted_s(:short)
+        expect(page).to have_content in_progress_request.end_date.to_formatted_s(:short)
+        expect(page).to have_link in_progress_request.renter.full_name, href: user_path(in_progress_request.renter)
+        expect(page).to have_content "$#{in_progress_request.total_price}"
+        expect(page).to have_content "Message User"
       end
       expect(page).to have_css('#pending-requests')
       within ('#pending-requests') do
-        expect(page).to have_css("#request-#{confirmed_request.id}")
+        expect(page).to have_css("#request-#{pending_request.id}")
+        expect(page).to have_content "Approve Request"
+        expect(page).to have_content "Message User"
       end
       expect(page).to have_css('#confirmed-requests')
       within ('#confirmed-requests') do
-        expect(page).to have_css("#request-#{in_progress_request.id}")
+        expect(page).to have_css("#request-#{confirmed_request.id}")
+        expect(page).to have_content "Message User"
       end
       expect(page).to have_css('#finished-requests')
       within ('#finished-requests') do
         expect(page).to have_css("#request-#{finished_request.id}")
+        expect(page).to have_content "Review User"
       end
       expect(page).to have_css('#declined-requests')
       within ('#declined-requests') do

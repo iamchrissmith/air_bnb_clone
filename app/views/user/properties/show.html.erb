@@ -21,8 +21,8 @@
   </div>
 </div>
 <% if @property.reservations.in_progress.count > 0 %>
-  <div class="well well-lg">
-
+  <div class="well well-lg" id="in-progress-requests">
+    <%= render partial: 'reservations/requests', locals: {status: 'in_progress', property: @property} %>
   </div>
 <% end %>
 <% if @property.reservations.in_progress.count > 0 %>

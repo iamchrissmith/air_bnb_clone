@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     resources :property_availabilities, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
-  resources :reservations, only: [:new]
+  resources :reservations, only: [:new, :update]
 
   namespace :user do
     resources :properties, only: [:index, :show]

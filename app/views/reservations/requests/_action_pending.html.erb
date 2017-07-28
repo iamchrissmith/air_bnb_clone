@@ -1,3 +1,17 @@
-Approve Request
-Decline Request
-Message User
+<div class="btn-group btn-group-lg" role="group">
+  <%= link_to "Approve Request",
+              reservation_path(
+                request,
+                res_action: "confirmed"
+              ),
+              method: :patch,
+              class: "btn btn-success" %>
+  <%= link_to "Decline Request",
+              reservation_path(
+                request,
+                res_action: "declined"
+              ),
+              method: :patch,
+              class: "btn btn-danger" %>
+  <a href="#" class="btn btn-primary">Message User</a>
+</div>

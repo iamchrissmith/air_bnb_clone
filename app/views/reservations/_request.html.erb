@@ -3,5 +3,5 @@
   <td><%= request.end_date.to_formatted_s(:short) %></td>
   <td><%= link_to request.renter.full_name, request.renter %></td>
   <td><%= number_to_currency request.total_price %></td>
-  <td><%= render partial: "reservations/requests/action_#{request.status}" %></td>
+  <td><%= render partial: "reservations/requests/action_#{request.status}", locals: {request: request} %></td>
 </tr>

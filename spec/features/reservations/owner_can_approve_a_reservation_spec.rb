@@ -33,7 +33,7 @@ RSpec.feature 'Owner can update a pending property reservation request' do
       end
     end
 
-    xscenario 'owner can click a button to update the request from pending to declined' do
+    scenario 'owner can click a button to update the request from pending to declined' do
       login(owner)
 
       visit user_property_path(property)

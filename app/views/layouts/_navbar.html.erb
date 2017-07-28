@@ -1,21 +1,19 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
+  <div class="override-bootstrap-nav">
     <div class="navbar-header">
       <%= link_to image_tag("fairbnb_logo.png", :class => 'nav-logo'), root_path %>
     </div>
-    <% unless request.path == root_path %>
-      <%= render partial: 'partials/search_nav' %>
-    <% end %>
-    <div id="navbar">
-      <ul class="nav navbar-nav pull-right">
+      <% unless request.path == root_path %>
+        <%= render partial: 'partials/search_nav' %>
+      <% end %>
+      <div class='session-nav'>
         <% if user_signed_in? %>
           <% if current_user.admin? %>
-            <li><%= link_to 'Admin Dashboard', admin_dashboard_index_path %></li>
-            <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+            <div><%= link_to 'Admin Dashboard', admin_dashboard_index_path %></div>
+            <div><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></div>
           <% else %>
-            <li><%= link_to 'Dashboard', dashboard_path %></li>
-            <li>&nbsp;&nbsp;&nbsp;</li>
-            <li class="dropdown">
+            <div><%= link_to 'Dashboard', dashboard_path %></div>
+            <div class="dropdown">
               <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
               <img src="<%= current_user.image_url %>" class="img-circle special-img"><b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -23,15 +21,14 @@
                 <li class="divider"></li>
                 <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
               </ul>
-            </li>
+            </div>
           <% end %>
         <% else %>
-          <li><%= link_to 'Sign Up', sign_up_path %></li>
-          <li><%= link_to 'Log In', log_in_path %></li>
+          <%= link_to 'Sign Up', sign_up_path %>
+          <%= link_to 'Log In', log_in_path %>
         <% end %>
-      </ul>
+      </div>
     </div>
-  </div>
 </nav>
 
 <% if user_signed_in? %>
@@ -58,3 +55,7 @@
     </div>
   </nav>
 <% end %>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />

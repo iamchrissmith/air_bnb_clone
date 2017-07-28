@@ -1,44 +1,74 @@
-.nav-search {
+.override-bootstrap-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-  input#place_search {
-    max-width: 150px;
-    text-align: center;
-    color: #b7b7b7
+  .nav-search {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    max-width: max-content;
+    margin: 0;
+
+    form {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .form-group {
+      margin: 0;
+    }
+
+    input#place_search {
+      max-width: 200px;
+      min-width: 200px;
+      text-align: center;
+      color: #b7b7b7
+    }
+
+    input#date_range {
+      max-width: 200px;
+      min-width: 200px;
+      text-align: center;
+      color: #b7b7b7
+    }
+
+    input#guests {
+      max-width: 50px;
+      min-width: 50px;
+      text-align: center;
+      color: #b7b7b7
+    }
+
+    input, select, option {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    input, select {
+      width: 100px;
+      border: 1px #ccc solid;
+      vertical-align: middle;
+    }
+
+    .search_bar {
+      margin-left: 50px;
+      text-align: left;
+    }
   }
 
-  input#check_in {
-    max-width: 100px;
-    text-align: center;
-    color: #b7b7b7
-  }
+  .session-nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 
-  input#check_out {
-    max-width: 100px;
-    text-align: center;
-    color: #b7b7b7
-  }
+    justify-content: flex-end;
+    align-items: center;
 
-  input#guests {
-    max-width: 100px;
-    text-align: center;
-    color: #b7b7b7
-  }
-
-  input, select, option {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  
-  input, select {
-    width: 100px;
-    height: 40px;
-    border: 1px #ccc solid;
-    vertical-align: middle;
-  }
-
-  .search_bar {
-    margin-left: 50px;
-    text-align: left;
+    a {
+      padding: 10px;
+    }
   }
 }

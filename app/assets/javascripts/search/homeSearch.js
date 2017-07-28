@@ -4,6 +4,7 @@ function homeSearch() {
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
+    sessionStorage.setItem('place', place.formatted_address );
     $('#search-button').click();
   });
 }

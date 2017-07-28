@@ -25,12 +25,49 @@
     <%= render partial: 'reservations/requests', locals: {status: 'in_progress', property: @property} %>
   </div>
 <% end %>
-<% if @property.reservations.in_progress.count > 0 %>
-<div class="panel panel-default">
+<% if @property.reservations.pending.count > 0 %>
+  <div class="panel panel-default" id="pending-requests">
+    <div class="panel-heading">
+      <h3 class="panel-title">Pending Requests</h3>
+    </div>
+    <div class="panel-body">
+      <%= render partial: 'reservations/requests', locals: {status: 'pending', property: @property} %>
+    </div>
+  </div>
+<% end %>
+<div class="panel panel-default" id="confirmed-requests">
   <div class="panel-heading">
-    <h3 class="panel-title"><%= link_to @property.name, user_property_path(@property.id) %></h3>
+    <h3 class="panel-title">Confirmed Requests</h3>
   </div>
   <div class="panel-body">
+    <% if @property.reservations.confirmed.count > 0 %>
+      <%= render partial: 'reservations/requests', locals: {status: 'confirmed', property: @property} %>
+    <% else %>
+      <p>No Confirmed Requests</p>
+    <% end %>
   </div>
 </div>
-<% end %>
+<div class="panel panel-default" id="finished-requests">
+  <div class="panel-heading">
+    <h3 class="panel-title">Finished Requests</h3>
+  </div>
+  <div class="panel-body">
+    <% if @property.reservations.finished.count > 0 %>
+      <%= render partial: 'reservations/requests', locals: {status: 'finished', property: @property} %>
+    <% else %>
+      <p>No Finished Requests</p>
+    <% end %>
+  </div>
+</div>
+<div class="panel panel-default" id="declined-requests">
+  <div class="panel-heading">
+    <h3 class="panel-title">Declined Requests</h3>
+  </div>
+  <div class="panel-body">
+    <% if @property.reservations.declined.count > 0 %>
+      <%= render partial: 'reservations/requests', locals: {status: 'declined', property: @property} %>
+    <% else %>
+      <p>No Declined Requests</p>
+    <% end %>
+  </div>
+</div>

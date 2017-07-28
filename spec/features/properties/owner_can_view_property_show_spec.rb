@@ -52,6 +52,7 @@ RSpec.feature 'Owner can view properties index' do
       within ('#pending-requests') do
         expect(page).to have_css("#request-#{pending_request.id}")
         expect(page).to have_content "Approve Request"
+        expect(page).to have_content "Decline Request"
         expect(page).to have_content "Message User"
       end
       expect(page).to have_css('#confirmed-requests')

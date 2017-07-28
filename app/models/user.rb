@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   enum role: %w(registered_user admin)
 
-  # validates :username, presence: true, uniqueness: true, case_sensitive: false
+  validates :username, uniqueness: true, allow_nil: true, case_sensitive: false
   validates_format_of :username, with: /\A^[a-zA-Z0-9_\.]*$\z/, multiline: true
 
   def full_name

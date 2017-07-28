@@ -6,36 +6,36 @@ RSpec.feature 'Owner can view properties index' do
     let(:renter) { create(:user) }
     let(:property) { create(:property, owner: owner) }
     let!(:pending_request) { create(:reservation,
-                                          property: property1,
+                                          property: property,
                                           renter: renter,
                                           status: 0,
                                           start_date: Date.today + 10,
                                           end_date: Date.today + 13) }
     let!(:confirmed_request) { create(:reservation,
-                                          property: property1,
+                                          property: property,
                                           renter: renter,
                                           status: 1,
                                           start_date: Date.today + 4,
                                           end_date: Date.today + 5) }
     let!(:in_progress_request) { create(:reservation,
-                                          property: property1,
+                                          property: property,
                                           renter: renter,
                                           status: 2,
                                           start_date: Date.today - 1,
                                           end_date: Date.today + 3) }
     let!(:finished_request) { create(:reservation,
-                                          property: property1,
+                                          property: property,
                                           renter: renter,
                                           status: 3) }
     let!(:declined_request) { create(:reservation,
-                                          property: property1,
+                                          property: property,
                                           renter: renter,
                                           status: 4) }
 
     scenario 'owner can see a single property with details about requests' do
       login(owner)
 
-      visit user_properties_path(property)
+      visit user_property_path(property)
 
       expect(page).to have_content property.name
 

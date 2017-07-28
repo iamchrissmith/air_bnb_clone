@@ -17,7 +17,5 @@
 //= require jquery.validate
 //= require bootstrap/dropdown
 //= require_tree ./channels
-//= require maps/searchMap
-//= require search/homeSearch
 //= require reservations/submit
 //= require homepage/property_search

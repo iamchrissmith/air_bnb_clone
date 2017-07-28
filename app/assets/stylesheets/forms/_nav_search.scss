@@ -1,61 +1,71 @@
 .override-bootstrap-nav {
   display: flex;
-  flex-direction: row;
   align-items: center;
 
-  .nav-search {
+  padding-left: 10px;
+
+  .nav-search-bar {
     display: flex;
     flex-direction: row;
-    align-self: flex-start;
-    max-width: max-content;
-    margin: 0;
 
-    form {
+    .nav-search {
       display: flex;
       flex-direction: row;
       align-items: center;
-    }
+      align-self: flex-start;
+      max-width: max-content;
+      margin-left: 20px;
 
-    .form-group {
-      margin: 0;
-    }
+      form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
 
-    input#place_search {
-      max-width: 200px;
-      min-width: 200px;
-      text-align: center;
-      color: #b7b7b7
-    }
+      .form-group {
+        margin: 0;
+      }
 
-    input#date_range {
-      max-width: 200px;
-      min-width: 200px;
-      text-align: center;
-      color: #b7b7b7
-    }
+      input#place_search {
+        max-width: 200px;
+        min-width: 200px;
+        text-align: center;
+        color: #b7b7b7;
+      }
 
-    input#guests {
-      max-width: 50px;
-      min-width: 50px;
-      text-align: center;
-      color: #b7b7b7
-    }
+      input#date_range {
+        max-width: 200px;
+        min-width: 200px;
+        text-align: center;
+        color: #b7b7b7;
+        border-left: none;
+      }
 
-    input, select, option {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
+      input#guests {
+        max-width: 50px;
+        min-width: 50px;
+        text-align: center;
+        color: #b7b7b7;
+        border-left: none;
+      }
 
-    input, select {
-      width: 100px;
-      border: 1px #ccc solid;
-      vertical-align: middle;
-    }
+      input#search-button {
+        width: 100px;
+        border-radius: 0;
+        border-left: none;
+      }
 
-    .search_bar {
-      margin-left: 50px;
-      text-align: left;
+      input, select, option {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      input, select {
+        height: 35px;
+        border: 1px #ccc solid;
+        vertical-align: middle;
+      }
     }
   }
 
@@ -66,9 +76,11 @@
 
     justify-content: flex-end;
     align-items: center;
+    margin-right: 10px;
 
     a {
       padding: 10px;
+      color: #555555;
     }
   }
 }

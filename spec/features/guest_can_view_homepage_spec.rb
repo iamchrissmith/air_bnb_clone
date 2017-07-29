@@ -14,8 +14,7 @@ feature "a guest can view homepage" do
 
     within(".search_bar") do
       expect(page).to have_field("place_search")
-      expect(page).to have_field("check_in")
-      expect(page).to have_field("check_out")
+      expect(page).to have_field("date_range")
       expect(page).to have_field("guests")
       expect(page).to have_selector(:link_or_button, 'Search')
     end

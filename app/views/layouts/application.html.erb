@@ -29,7 +29,10 @@
     </div>
 
     <%= yield :top_content %>
-    <%= render partial: 'index_map' %>
+    
+    <% if request.path == properties_path %> <!-- This is really hacky. Sorry. I'll fix it later. -->
+      <%= render partial: 'index_map' %>
+    <% end %>
 
     <div class="container">
       <%= yield :header %>

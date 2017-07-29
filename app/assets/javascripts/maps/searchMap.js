@@ -2,6 +2,7 @@ let map;
 let addressCoords;
 let geocoder;
 let address;
+let place;
 
 // Populates search fields if they exist in the session
 
@@ -17,7 +18,7 @@ function placeAutoComplete() {
   let autocomplete = new google.maps.places.Autocomplete(place_search);
 
   autocomplete.addListener('place_changed', function() {
-    let place = autocomplete.getPlace();
+    place = autocomplete.getPlace();
 
     sessionStorage.setItem('place', place.formatted_address );
     searchMap();

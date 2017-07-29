@@ -14,8 +14,9 @@ RSpec.describe User, type: :model do
   context "relationships" do
       it { should have_many :reservations }
       it { should have_many :properties }
+      it { should have_many :authored_conversations }
+      it { should have_many :received_conversations }
       it { should have_many :messages }
-      it { should have_many :conversations }
   end
 
   context "full_name" do

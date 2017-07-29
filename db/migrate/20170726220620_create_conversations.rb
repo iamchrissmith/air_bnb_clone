@@ -2,8 +2,8 @@ class CreateConversations < ActiveRecord::Migration[5.0]
   def change
     create_table :conversations do |t|
       t.string :title
-      t.references :user, index: true, foreing_key: true
-      t.references :message, index: true, foreign_key: true
+      t.integer :author_id, index: true
+      t.integer :receiver_id, index: true
 
       t.timestamps
     end

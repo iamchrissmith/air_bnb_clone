@@ -1,6 +1,6 @@
 class Message < ApplicationRecord
-  has_many :conversations
-  has_many :users, through: :conversations
+  belongs_to :user
+  belongs_to :conversation
   validates :content, presence: true
   # scope :for_display, -> { order(:created_at).last(50) }
 

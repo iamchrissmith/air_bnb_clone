@@ -26,7 +26,7 @@ RSpec.describe 'Properties API', type: :request do
       expect(response[4]).to be_falsey
     end
 
-    it 'can return properties wthin a radius of city state search' do
+    xit 'can return properties wthin a radius of city state search' do
       valid1 = create(:property, name: 'Lakewood', city: 'Lakewood', state: 'CO')
       valid2 = create(:property, name: 'Aurora', city: 'Aurora', state: 'CO')
       valid3 = create(:property, name: 'Boulder', city: 'Boulder', state: 'CO')
@@ -49,7 +49,7 @@ RSpec.describe 'Properties API', type: :request do
     end
   end
 
-  describe 'can return results within a date range' do
+  xdescribe 'can return results within a date range' do
 
     it 'can return properties with no reservations within date_range' do
       valid1 = create(:property, name: 'Lakewood')
@@ -82,7 +82,7 @@ RSpec.describe 'Properties API', type: :request do
     end
   end
 
-  describe 'can return results by number of guests' do
+  xdescribe 'can return results by number of guests' do
 
     it 'can return properties that can handle number of guests' do
       valid1 = create(:property, name: 'Lakewood', number_of_guests: 8)

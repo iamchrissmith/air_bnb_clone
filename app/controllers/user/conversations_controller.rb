@@ -4,7 +4,7 @@ class User::ConversationsController < ApplicationController
   end
 
   def show
-    # @conversation = current_user.conversations.includes(:messages).find(params[:id])
+    @conversation = Conversation.participating(current_user).find(params[:id])
   end
 
   def new

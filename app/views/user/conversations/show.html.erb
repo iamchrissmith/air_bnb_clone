@@ -1,7 +1,9 @@
 <h1><%= @conversation.title %></h1>
 
 <div id="messages">
-  <%= render partial: '/user/conversations/messages/message' %>
+  <% @conversation.messages.each do |message| %>
+    <%= render partial: '/user/conversations/messages/message', locals: {message: message} %>
+  <% end %>
 </div>
 
 <%= form_for @conversation.messages.new, url: '#' do |f| %>

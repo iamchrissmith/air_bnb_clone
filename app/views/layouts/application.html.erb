@@ -29,12 +29,15 @@
     </div>
 
     <%= yield :top_content %>
+    <%= render partial: 'index_map' %>
 
     <div class="container">
-        <h1><%= yield :header %></h1>
+      <%= yield :header %>
+
       <%= yield %>
     </div>
 
   </body>
+
   <%= yield :foot %>
 </html>

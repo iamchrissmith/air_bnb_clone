@@ -76,7 +76,7 @@ class Property < ApplicationRecord
   end
 
   def self.search_city(params)
-    where('city LIKE ?', "%#{params[:city]}%")
+    where('city LIKE ?', "%#{params[:place_search]}%")
   end
 
   def self.search_guests(params)

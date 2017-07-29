@@ -12,4 +12,8 @@ class Conversation < ApplicationRecord
   def date
     created_at.strftime('%d %B %Y')
   end
+
+  def participates?(user)
+    author == user || receiver == user
+  end
 end

@@ -1,4 +1,8 @@
-#map {
-  height: 400px;
-  width: 600px;
+.index_map {
+  position: fixed !important;
+  width: 500px;
+  height: 100vh;
+
+  top: 0;
+  right: 0;
 }

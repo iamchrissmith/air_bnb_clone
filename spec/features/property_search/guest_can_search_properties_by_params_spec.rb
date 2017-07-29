@@ -1,21 +1,35 @@
 require 'rails_helper'
 
-xfeature "a guest can search" do
-  scenario "properties by location" do
-    property = create(:property)
+RSpec.describe "anyone can search properties" do
 
-    property2 = create(:property, name: "cabin in the woods", city: "Milford")
+  before(:all) do
+    @property1 = create(:property, name: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO')
+    @property2 = create(:property, name: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO')
+    @property3 = create(:property, name: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO')
+    @property4 = create(:property, name: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO')
+    @property5 = create(:property, name: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO')
+  end
+
+  let(:property1) { @property1.reload }
+  let(:property2) { @property2.reload }
+  let(:property3) { @property3.reload }
+  let(:property4) { @property4.reload }
+  let(:property5) { @property5.reload }
+
+  describe "and search by location" do
     visit root_path
 
-    fill_in "place_search", with: property.city
+    fill_in "place_search", with: 'Denver, Co, USA'
     click_on "Search"
+
     expect(current_path).to eq(properties_path)
-    expect(page).to have_content("Search Results")
 
     within(".results") do
-      expect(page).to have_content(property.name)
-      expect(page).to have_css("img[src*='#{property.image_url}']")
-      expect(page).to_not have_content(property2.name)
+      expect(page).to have_content(property1.name)
+      expect(page).to have_content(property2.name)
+      expect(page).to have_content(property3.name)
+      expect(page).to_not have_content(property4.name)
+      expect(page).to_not have_content(property5.name)
     end
   end
 

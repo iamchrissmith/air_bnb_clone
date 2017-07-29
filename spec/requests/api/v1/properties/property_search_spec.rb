@@ -47,9 +47,9 @@ RSpec.describe 'Properties API', type: :request do
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(result.count).to eq(3)
-      expect(result[0].name).to eq('Lakewood')
-      expect(result[1].name).to eq('Aurora')
-      expect(result[2].name).to eq('Boulder')
+      expect(result[0][:name]).to eq('Lakewood')
+      expect(result[1][:name]).to eq('Aurora')
+      expect(result[2][:name]).to eq('Boulder')
 
       expect(result[3]).to be_falsey
       expect(result[4]).to be_falsey

@@ -17,7 +17,11 @@ class Property < ApplicationRecord
   enum status: %w(pending active archived)
 
   def self.search(params)
-    location = [params[:lat], params[:long]] || "#{params[:city]}, #{params[:state]}"
+    if params[:lat].nil? || params[:long].nil?
+      location = "#{params[:city]}, #{params[:state]}"
+    else
+      location = [params[:lat], params[:long]]
+    end
 
     Property.near(location, params[:radius])
   end

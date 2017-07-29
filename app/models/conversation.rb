@@ -16,4 +16,15 @@ class Conversation < ApplicationRecord
   def participates?(user)
     author == user || receiver == user
   end
+
+  def self.create_trip_conversation(params)
+    author = User.find(params[:reservation][:renter_id])
+    receiver = User.joins(:properties)
+                .joins("INNER JOIN reservations ON reservations.property_id = properties.id")
+                .where("reservations.property_id = ?", params[:property_id]).first
+    property = Property.joins(:reservations).find(params[:property_id])
+    conversation = Conversation.where(author_id: author.id, receiver_id: receiver.id).first ||
+                   Conversation.new(title: "Trip to #{property.name}.", author_id: author.id, receiver_id: receiver.id)
+    conversation.save
+  end
 end

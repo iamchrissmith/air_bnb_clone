@@ -31,19 +31,10 @@ describe 'Create Reservation API' do
           renter_id: user.id
         }}
 
-        post "/api/v1/properties/#{property.id}/reservations",
-              params: params
+        post "/api/v1/properties/#{property.id}/reservations", params: params
         expect(response).not_to be_success
         expect(JSON.parse(response.body)["error"]).to eq "Missing Parameters"
       end
-    end
-
-    context 'when the property is not available' do
-      it 'returns an error that the property is not available'
-    end
-
-    context 'when the user is not logged in' do
-      it 'displays a not authorized message'
     end
   end
 end

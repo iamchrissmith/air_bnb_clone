@@ -5,13 +5,15 @@
     <title>FairBnb</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'https://www.authy.com/form.authy.min.css' %>
+    <%= stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Khula' %>
+    <%= stylesheet_link_tag '//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css' %>
+
     <%= javascript_include_tag 'application' %>
-  
-
-
-    <link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet">
-
+    <%= javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js' %>
+    <%= javascript_include_tag 'https://www.authy.com/form.authy.min.js '%>
   </head>
 
   <body>
@@ -27,12 +29,18 @@
     </div>
 
     <%= yield :top_content %>
+    
+    <% if request.path == properties_path %> <!-- This is really hacky. Sorry. I'll fix it later. -->
+      <%= render partial: 'index_map' %>
+    <% end %>
 
     <div class="container">
-        <h1><%= yield :header %></h1>
+      <%= yield :header %>
+
       <%= yield %>
     </div>
 
   </body>
+
   <%= yield :foot %>
 </html>

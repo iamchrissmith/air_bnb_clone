@@ -1,4 +1,4 @@
-<div hidden id="location"><%= @presenter.params[:city]%> </div>
 <div id='map' class='index_map'></div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAP_KEY']%>&callback=indexMap" async defer></script>
+<%= javascript_include_tag 'maps/searchMap.js' %>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_KEY']}&libraries=places&callback=searchMap", async: true, defer: true %>

@@ -1,10 +1,10 @@
 class User::ConversationsController < ApplicationController
   def index
-    @conversations = current_user.conversations
+    @conversations = Conversation.participating(current_user)
   end
 
   def show
-    @conversation = current_user.conversations.includes(:messages).find(params[:id])
+    # @conversation = current_user.conversations.includes(:messages).find(params[:id])
   end
 
   def new

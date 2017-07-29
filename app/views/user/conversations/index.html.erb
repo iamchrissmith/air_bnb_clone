@@ -2,6 +2,8 @@
 
 <div class='panel'>
   <ul class='list-layout'>
-    <%= render @conversations %>
+    <% @conversations.each do |conversation| %>
+      <%= render conversation %>
+    <% end %>
   </ul>
 </div>

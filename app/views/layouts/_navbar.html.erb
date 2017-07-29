@@ -49,6 +49,16 @@
                 <li><%= link_to 'Messages', user_conversations_path %></li>
               </ul>
             </li>
+          <% else %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Menu <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Profile', user_path(current_user) %></li>
+                <li><%= link_to 'My Properties', user_properties_path %></li>
+                <li><%= link_to 'My Reservations', dashboard_path %></li>
+                <li><%= link_to 'Messages', user_conversations_path %></li>
+              </ul>
+            </li>
           <% end %>
         </ul>
       </div>

@@ -16,6 +16,12 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
+  def self.search(params)
+    location = [params[:lat], params[:long]] || "#{params[:city]}, #{params[:state]}"
+
+    Property.near(location, params[:radius])
+  end
+
   def prepare_address
     [address, city, state, zip].compact.join('+')
   end

@@ -2,31 +2,39 @@ require 'rails_helper'
 
 RSpec.describe 'Properties API', type: :request do
 
-  describe 'can return results within radius' do
+  before(:all) do
+    @property1 = create(:property, name: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO')
+    @property2 = create(:property, name: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO')
+    @property3 = create(:property, name: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO')
+    @property4 = create(:property, name: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO')
+    @property5 = create(:property, name: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO')
+  end
+
+  let(:property1) { @property1.reload }
+  let(:property2) { @property2.reload }
+  let(:property3) { @property3.reload }
+  let(:property4) { @property4.reload }
+  let(:property5) { @property5.reload }
+
+  describe 'can return results within a radius' do
 
     it 'can return properties wthin a radius of lat/long search' do
-      valid1 = create(:property, name: 'Lakewood', lat: 39.7047095, long: -105.0813734)
-      valid2 = create(:property, name: 'Aurora', lat: 39.7294319, long: -104.8319195)
-      valid3 = create(:property, name: 'Boulder', lat: 40.0149856, long: -105.2705456)
-      invalid1 = create(:property, name: 'Vail', lat: 39.6402638, long: -106.3741955)
-      invalid2 = create(:property, name: 'Colorado Springs', lat: 38.8338816, long: -104.8213634)
-
       get "/api/v1/properties/search?lat=39.7392&long=-104.9903&radius=25"
       expect(response.status).to eq(200)
 
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(200)
-      expect(response.count).to eq(3)
-      expect(response[0].name).to eq('Lakewood')
-      expect(response[1].name).to eq('Aurora')
-      expect(response[2].name).to eq('Boulder')
+      expect(result.count).to eq(3)
+      expect(result[0][:name]).to eq('Lakewood')
+      expect(result[1][:name]).to eq('Aurora')
+      expect(result[2][:name]).to eq('Boulder')
 
-      expect(response[3]).to be_falsey
-      expect(response[4]).to be_falsey
+      expect(result[3]).to be_falsey
+      expect(result[4]).to be_falsey
     end
 
-    xit 'can return properties wthin a radius of city state search' do
+    it 'can return properties wthin a radius of city state search' do
       valid1 = create(:property, name: 'Lakewood', city: 'Lakewood', state: 'CO')
       valid2 = create(:property, name: 'Aurora', city: 'Aurora', state: 'CO')
       valid3 = create(:property, name: 'Boulder', city: 'Boulder', state: 'CO')
@@ -38,14 +46,13 @@ RSpec.describe 'Properties API', type: :request do
 
       result = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response).to have_http_status(200)
-      expect(response.count).to eq(3)
-      expect(response[0].name).to eq('Lakewood')
-      expect(response[1].name).to eq('Aurora')
-      expect(response[2].name).to eq('Boulder')
+      expect(result.count).to eq(3)
+      expect(result[0].name).to eq('Lakewood')
+      expect(result[1].name).to eq('Aurora')
+      expect(result[2].name).to eq('Boulder')
 
-      expect(response[3]).to be_falsey
-      expect(response[4]).to be_falsey
+      expect(result[3]).to be_falsey
+      expect(result[4]).to be_falsey
     end
   end
 

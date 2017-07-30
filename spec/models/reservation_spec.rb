@@ -15,6 +15,7 @@ RSpec.describe Reservation, type: :model do
     it { should validate_presence_of(:status) }
     it { should belong_to :property }
     it { should belong_to :renter }
+    it { should have_one :property_review }
   end
 
     # it "is invalid without total_price" do

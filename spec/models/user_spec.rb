@@ -14,6 +14,7 @@ RSpec.describe User, type: :model do
   context "relationships" do
       it { should have_many :reservations }
       it { should have_many :properties }
+      it { should have_many :property_reviews }
   end
 
   context "full_name" do
@@ -21,6 +22,23 @@ RSpec.describe User, type: :model do
       user = create(:user)
 
       expect(user.full_name).to eq("#{user.first_name} #{user.last_name}")
+    end
+  end
+
+  describe '.has_reviewed?' do
+    let!(:user) { create(:user) }
+    let(:reservation) { create(:reservation, renter: user) }
+    context 'when there is a reservation with no review' do
+      it 'returns false' do
+        expect(user.has_reviewed?(reservation)).to be false
+      end
+    end
+
+    context 'when there is a reservation with a review' do
+      let!(:review) { create(:property_review, reservation: reservation, property: reservation.property, user: user) }
+      it 'returns true' do
+        expect(user.has_reviewed?(reservation)).to be true
+      end
     end
   end
 

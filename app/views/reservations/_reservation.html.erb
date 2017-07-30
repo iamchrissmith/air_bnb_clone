@@ -4,4 +4,5 @@
   <td><%= link_to reservation.property.name, reservation.property %></td>
   <td><%= number_to_currency reservation.total_price %></td>
   <td>Requested: <%= reservation.created_at.to_formatted_s(:short) %></td>
+  <td><%= render partial: "reservations/reservation_actions/action_#{reservation.status}", locals: {reservation: reservation} %></td>
 </tr>

@@ -1,0 +1,11 @@
+<%= form_for [:reservations, @property_review] do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :body, "Comments" %>
+  <%= f.text_area :body %>
+  <%= f.radio_button "rating", 1 %>
+  <%= f.radio_button "rating", 2 %>
+  <%= f.radio_button "rating", 3 %>
+  <%= f.radio_button "rating", 4 %>
+  <%= f.radio_button "rating", 5 %>
+  <%= f.submit "Submit Review" %>
+<% end %>

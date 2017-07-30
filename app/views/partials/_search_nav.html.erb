@@ -1,19 +1,14 @@
 <div class="nav-search-bar">
   <div class="nav-search">
-    <%= form_tag("/properties", :method => "get") do %>
       <div class="form-group">
-        <%= text_field_tag(:place_search, nil, placeholder: 'location') %>
+        <%= text_field_tag(:location, nil, placeholder: 'Anywhere') %>
       </div>
       <div class="form-group">
         <%= text_field_tag :date_range %>
       </div>
       <div class="form-group">
-        <%= text_field_tag(:guests, nil, placeholder: 'guests')%>
+        <%= text_field_tag(:guests, nil, placeholder: '1 Guest')%>
       </div>
-      <div class="form-group">
-        <%= submit_tag "Search", name: nil, class: "btn btn-custom", id: 'search-button' %>
-      </div>
-    <% end %>
   </div>
 </div>
 

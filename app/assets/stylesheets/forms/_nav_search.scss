@@ -26,24 +26,21 @@
         margin: 0;
       }
 
-      input#place_search {
-        max-width: 200px;
-        min-width: 200px;
+      input#location {
+        width: 200px;
         text-align: center;
         color: #b7b7b7;
       }
 
       input#date_range {
-        max-width: 200px;
-        min-width: 200px;
+        width: 200px;
         text-align: center;
         color: #b7b7b7;
         border-left: none;
       }
 
       input#guests {
-        max-width: 50px;
-        min-width: 50px;
+        width: 100px;
         text-align: center;
         color: #b7b7b7;
         border-left: none;
@@ -83,4 +80,8 @@
       color: #555555;
     }
   }
+}
+
+.pac-container {
+  z-index: 1031;
 }

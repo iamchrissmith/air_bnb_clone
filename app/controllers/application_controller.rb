@@ -36,7 +36,6 @@ class ApplicationController < ActionController::Base
   end
 
   def searching
-    binding.pry
     request.path! == '/'
   end
 end

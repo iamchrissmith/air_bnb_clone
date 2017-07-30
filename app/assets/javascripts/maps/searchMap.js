@@ -121,9 +121,9 @@ function searchMap() {
 const propertyCard = function(datum) {
   return `
   <div class='property-card'>
+    <img src='${datum.image_url}'>
     <div class='info'>
-      <img src='${datum.image_url}'>
-      <span>From ${datum.price_per_night} - ${datum.description}</span>
+      <h3>From $${datum.price_per_night} - ${datum.description}</h3>
       <span>${datum.number_of_beds} Beds
     </div>
   </div>

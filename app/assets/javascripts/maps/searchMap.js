@@ -93,9 +93,37 @@ function initializeProperties(mapCenter) {
   clearProperties();
 
   function makeProperties(data) {
+
+    // Build property cards and stick them in property frame
     data.forEach(function(datum){
       $('.property-frame').append(propertyCard(datum));
-    })
+    });
+
+    // Build markers to place on map
+    let markers = data.map(function(datum) {
+      return new google.maps.Marker({
+        position: {lat: datum.lat, lng: datum.long},
+        customInfo: propertyCard(datum),
+        id: datum.id,
+        data_object: datum
+      });
+    });
+
+    // Add markers to the map
+    markers.forEach(function(marker) {
+      marker.setMap(map);
+    });
+
+    let infoWindow = new google.maps.InfoWindow()
+
+    // Give each marker a listener to open infoWindow when clicked
+    markers.forEach(function(marker) {
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.setContent(this.customInfo)
+        infoWindow.open(map, marker);
+      });
+    }, this);
+
   };
 }
 

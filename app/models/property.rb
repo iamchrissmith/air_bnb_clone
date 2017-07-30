@@ -44,7 +44,7 @@ class Property < ApplicationRecord
   end
 
   def average_rating
-    property_reviews.average(:rating)
+    property_reviews.average(:rating).round(2)
   end
 
   def get_weather

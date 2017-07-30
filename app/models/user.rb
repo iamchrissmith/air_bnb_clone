@@ -20,6 +20,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def owner?
+    !properties.empty?
+  end
+
+  def is_owner_of?(property)
+    properties.includes? property
+  end
+
   def self.from_omniauth(auth_info)
     return from_google_omniauth(auth_info) if auth_info.provider == "google_oauth2"
     return from_fb_omniauth(auth_info) if auth_info.provider == "facebook"

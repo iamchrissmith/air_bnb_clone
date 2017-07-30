@@ -1,5 +1,61 @@
-My Properties<br>
-
+<h1>My Properties</h1>
 <% @properties.each do |property| %>
-<%= link_to property.name, property_path(property.id) %><br>
+  <div class="panel panel-default" id="property-<%= property.id %>">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to property.name, user_property_path(property.id) %></h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-6">
+        <p>Status: <%= property.status %></p>
+        <p>Price per Night: <%= number_to_currency(property.price_per_night) %></p>
+        <p>Number of:</p>
+        <ul>
+          <li>Guests: <%= property.number_of_guests %></li>
+          <li>Beds: <%= property.number_of_beds %></li>
+          <li>Rooms: <%= property.number_of_rooms %></li>
+          <li>Bathrooms: <%= property.number_of_bathrooms %></li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h3>Location:</h3>
+        <p><%= property.address %></p>
+        <p><%= property.city %>, <%= property.state %> <%= property.zip %></p>
+      </div>
+      <div class="col-md-12">
+        <hr/>
+        <h4>Total Reservation Requests: <%= property.reservations.count %></h4>
+        <ul class="nav nav-pills" role="tablist">
+          <% if property.reservations.in_progress.count > 0 %>
+            <li role="presentation" class="active">
+              <%= link_to user_property_path(property.id) do %>
+                In Progress <span class='badge'><%= property.reservations.in_progress.count %></span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if property.reservations.pending.count > 0 %>
+            <li role="presentation" class="active">
+              <%= link_to user_property_path(property.id) do %>
+                Pending <span class="badge"><%= property.reservations.pending.count %></span>
+              <% end %>
+            </li>
+          <% end %>
+          <li role="presentation" >
+            <%= link_to user_property_path(property.id) do %>
+              Confirmed <span class="badge"><%= property.reservations.confirmed.count %></span>
+            <% end %>
+          </li>
+          <li role="presentation" >
+            <%= link_to user_property_path(property.id) do %>
+              Past <span class="badge"><%= property.reservations.finished.count %></span>
+            <% end %>
+          </li>
+          <li role="presentation" >
+            <%= link_to user_property_path(property.id) do %>
+              Declined <span class="badge"><%= property.reservations.declined.count %></span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 <% end %>

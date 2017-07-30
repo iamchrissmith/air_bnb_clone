@@ -50,7 +50,7 @@
         <div class="tab-pane" id="reviews" role="tabpanel">
           <%= render partial: 'property_header' %>
           <hr>
-          <h3>Reviews</h3>
+          <%= render partial: 'reviews/reviews', locals: { target: @property } %>
         </div>
 
         <div class="tab-pane" id="host" role="tabpanel">

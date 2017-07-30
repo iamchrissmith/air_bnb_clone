@@ -39,6 +39,14 @@ class Property < ApplicationRecord
     '%.2f' % price_per_night.to_f
   end
 
+  def reviews
+    property_reviews
+  end
+
+  def average_rating
+    property_reviews.average(:rating)
+  end
+
   def get_weather
     service = WeatherService.new({city: city, state: state})
     raw_weather = service.find_by_location

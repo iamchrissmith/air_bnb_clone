@@ -23,7 +23,7 @@ RSpec.feature 'User can review a property' do
         end
 
         fill_in "Comments", with: 'Lorem Ipsum'
-        choose 'property_review_rating_4'
+        choose 'property_review_rating_1'
         click_on 'Submit Review'
 
         expect(current_path).to eq property_path(reservation.property)

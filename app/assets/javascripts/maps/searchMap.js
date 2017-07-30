@@ -1,24 +1,20 @@
 let map;
-let addressCoords;
-let geocoder;
-let address;
-let place;
 
 // Populates search fields if they exist in the session
 
 function persistSearchData() {
-  if (sessionStorage.place) { $('#place_search').val(sessionStorage.place) };
+  if (sessionStorage.place) { $('#location').val(sessionStorage.place) };
   if (sessionStorage.guests) { $('#guests').val(sessionStorage.guests) };
 };
 
 // Autocompletes location search input
 
 function placeAutoComplete() {
-  let place_search = document.getElementById('place_search');
-  let autocomplete = new google.maps.places.Autocomplete(place_search);
+  let location = document.getElementById('location');
+  let autocomplete = new google.maps.places.Autocomplete(location);
 
   autocomplete.addListener('place_changed', function() {
-    place = autocomplete.getPlace();
+    let place = autocomplete.getPlace();
 
     sessionStorage.setItem('place', place.formatted_address );
     searchMap();
@@ -27,7 +23,7 @@ function placeAutoComplete() {
 
 // Date range picker
 
- function dateRangePicker() {
+function dateRangePicker() {
   if (sessionStorage.date_range) {
     $('input[name="date_range"]').daterangepicker({
       "startDate": sessionStorage.date_range.split(' - ')[0],
@@ -56,25 +52,54 @@ function guestListener() {
   });
 };
 
-// Main GoogleMap.js API callback function
+// Property search and map location are based on a geocoded result from the
+// autocomplete place field. Geocoder wraps map and ajax call so they have
+// access to the geocoded results
+
+function initializeGeocoder() {
+  let geocoder = new google.maps.Geocoder();
+
+  let address = document.getElementById('location').value;
+  geocoder.geocode( { 'address': address }, function(results, status) {
+
+
+    initializeMap(results[0].geometry.location);
+    initializeProperties(results[0].geometry.location);
+  });
+}
+
+// Googlemap initializer
+
+function initializeMap(mapCenter) {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: mapCenter,
+    mapTypeId: 'roadmap',
+    zoom: 10
+  });
+}
+
+// Properties initializer
+
+function initializeProperties(mapCenter) {
+  let properties = $.get("/api/v1/properties/search", {
+    lat: mapCenter.lat(),
+    long: mapCenter.lng(),
+    radius: 25 }, makeProperties
+  );
+
+  function makeProperties(data) {
+    // Finally! I can make property objects!!!
+  }
+}
+
+// Function called in googlemap API request
 
 function searchMap() {
-  geocoder = new google.maps.Geocoder();
-
   persistSearchData();
-  placeAutoComplete();
+
   dateRangePicker();
   guestListener();
+  placeAutoComplete();
 
-  address = $('#place_search').val();
-
-  geocoder.geocode( { 'address': address }, function(results, status) {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: results[0].geometry.location,
-      mapTypeId: 'roadmap',
-      zoom: 10
-    });
-  });
-
-  let properties = $.get("/api/v1/properties/properties", { city: address } );
+  initializeGeocoder();
 };

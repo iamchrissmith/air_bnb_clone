@@ -6,8 +6,6 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @presenter = PropertyPresenter.new(params)
-    @presenter.set_attributes
   end
 
   def new

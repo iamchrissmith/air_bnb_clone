@@ -61,8 +61,6 @@ function initializeGeocoder() {
 
   let address = document.getElementById('location').value;
   geocoder.geocode( { 'address': address }, function(results, status) {
-
-
     initializeMap(results[0].geometry.location);
     initializeProperties(results[0].geometry.location);
   });
@@ -81,18 +79,34 @@ function initializeMap(mapCenter) {
 // Properties initializer
 
 function initializeProperties(mapCenter) {
+  let dateRange = document.getElementById('date_range').value;
+  let guests = document.getElementById('guests').value;
+
   let properties = $.get("/api/v1/properties/search", {
     lat: mapCenter.lat(),
     long: mapCenter.lng(),
-    radius: 25 }, makeProperties
+    radius: 25,
+    date_range: dateRange,
+    guests: guests }, makeProperties
   );
 
+  clearProperties();
+
   function makeProperties(data) {
-    // Finally! I can make property objects!!!
-  }
+    data.forEach(function(datum){
+      $('.property-frame').append(propertyCard(datum));
+    })
+  };
 }
 
-// Function called in googlemap API request
+// Clears all properties from the view.
+
+function clearProperties() {
+  $('.property-frame').empty();
+}
+
+// Main page function called in googlemap API request. Sort of like refreshing
+// the page except you're not refreshing the page.
 
 function searchMap() {
   persistSearchData();
@@ -102,4 +116,16 @@ function searchMap() {
   placeAutoComplete();
 
   initializeGeocoder();
+};
+
+const propertyCard = function(datum) {
+  return `
+  <div class='property-card'>
+    <div class='info'>
+      <img src='${datum.image_url}'>
+      <span>From ${datum.price_per_night} - ${datum.description}</span>
+      <span>${datum.number_of_beds} Beds
+    </div>
+  </div>
+  `
 };

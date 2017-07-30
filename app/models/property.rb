@@ -6,6 +6,7 @@ class Property < ApplicationRecord
 
   has_many :reservations
   has_many :property_availabilities
+  has_many :property_reviews
 
   validates :name, :number_of_guests, :number_of_beds, :number_of_rooms,
             :description, :price_per_night, :address, :city, :state, :zip,

@@ -5,6 +5,7 @@
     <th>Property</th>
     <th>Total Price</th>
     <th>Status</th>
+    <th>Action</th>
   </tr>
   <tbody>
     <%= render partial: 'reservations/reservation', collection: user.reservations.send(status) %>

@@ -1,5 +1,5 @@
 class User::ConversationsController < ApplicationController
-  before_action :set_conversation, only: [:show, :create]
+  before_action :set_conversation, only: [:show]
   before_action :check_participating!, only: [:show]
 
   def index
@@ -9,18 +9,10 @@ class User::ConversationsController < ApplicationController
   def show
   end
 
-  def new
-  end
-
   def create
+    conversation = Conversation.message_host(current_user, params)
     binding.pry
-    "hello"
-    # @conversation = current_user.conversations.build(conversation_params)
-    # if @conversation.save
-    #   redirect_to user_conversations_path
-    # else
-    #   redirect_to '/'
-    # end
+    redirect_to user_conversation_path(conversation)
   end
 
   private

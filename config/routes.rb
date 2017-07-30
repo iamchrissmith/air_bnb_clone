@@ -64,7 +64,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :properties, only: [:index]
-    resources :conversations, only: [:index, :show, :new, :create] do
+    resources :conversations, only: [:index, :show, :create] do
       resources :messages, only: [:create]
     end
   end

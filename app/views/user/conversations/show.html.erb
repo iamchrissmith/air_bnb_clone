@@ -1,6 +1,6 @@
 <h1><%= @conversation.title %></h1>
 
-<div id="messages">
+<div id="messages-box">
   <% @conversation.messages.each do |message| %>
     <%= render partial: '/user/conversations/messages/message', locals: {message: message} %>
   <% end %>

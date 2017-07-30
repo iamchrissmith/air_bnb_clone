@@ -91,7 +91,6 @@ RSpec.describe Property, type: :model do
   context "Relationships" do
     it { should belong_to :owner }
     it { should belong_to :room_type }
-    it { should have_many :property_reservations }
   end
 
   describe 'Callbacks' do

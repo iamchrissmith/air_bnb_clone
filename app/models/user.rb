@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :reservations, foreign_key: "renter_id"
 
   has_many :properties, foreign_key: "owner_id"
+  has_many :property_reviews
 
   enum role: %w(registered_user admin)
 
@@ -23,6 +24,10 @@ class User < ApplicationRecord
 
   def is_owner_of?(property)
     properties.includes? property
+  end
+
+  def has_reviewed?(reservation)
+    reservation.id.in? property_reviews.pluck(:reservation_id)
   end
 
   def self.from_omniauth(auth_info)

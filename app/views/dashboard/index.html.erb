@@ -53,14 +53,21 @@
               YOU HAVE (x) new messages (LINK TO MESSAGE INDEX)<br>
               YOU HAVE (x) pending requests (LINK TO personal reservations, my properties' reservations)
             </div>
+            <div class="tab-pane" id="pending" role="tabpanel">
+              <%= render partial: 'reservations/reservations', locals: {status: 'pending', user: @user} %>
+            </div>
 
-            <%= render partial: 'reservations/reservations', locals: {status: 'pending', user: @user} %>
+            <div class="tab-pane" id="confirmed" role="tabpanel">
+              <%= render partial: 'reservations/reservations', locals: {status: 'confirmed', user: @user} %>
+            </div>
 
-            <%= render partial: 'reservations/reservations', locals: {status: 'confirmed', user: @user} %>
+            <div class="tab-pane" id="finished" role="tabpanel">
+              <%= render partial: 'reservations/reservations', locals: {status: 'finished', user: @user} %>
+            </div>
 
-            <%= render partial: 'reservations/reservations', locals: {status: 'finished', user: @user} %>
-
-            <%= render partial: 'reservations/reservations', locals: {status: 'declined', user: @user} %>
+            <div class="tab-pane" id="declined" role="tabpanel">
+              <%= render partial: 'reservations/reservations', locals: {status: 'declined', user: @user} %>
+            </div>
           </div>
         </div>
       </div>

@@ -11,13 +11,17 @@ class Property < ApplicationRecord
             :description, :price_per_night, :address, :city, :state, :zip,
             :image_url, :status, presence: true
 
-  geocoded_by :prepare_address,  :latitude  => :lat, :longitude => :long
+  geocoded_by :geocode_address,  :latitude  => :lat, :longitude => :long
   after_validation :geocode
 
   enum status: %w(pending active archived)
 
   def prepare_address
     [address, city, state, zip].compact.join('+')
+  end
+
+  def geocode_address
+    [address, city, state, zip].compact.join(', ')
   end
 
   def two_digit_price
@@ -76,7 +80,7 @@ class Property < ApplicationRecord
   end
 
   def self.search_city(params)
-    where('city LIKE ?', "%#{params[:city]}%")
+    where('city LIKE ?', "%#{params[:place_search]}%")
   end
 
   def self.search_guests(params)

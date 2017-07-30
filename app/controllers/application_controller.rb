@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :resource_name, :resoure, :devise_mapping, :resource_class
 
+  helper_method :searching?
+
   protected
 
   def configure_permitted_parameters
@@ -31,5 +33,10 @@ class ApplicationController < ActionController::Base
 
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  def searching
+    binding.pry
+    request.path! == '/'
   end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           resources :reservations, only: [:create]
         end
 
+        resources :search, only: [:index]
         resources :properties, only: [:index]
       end
       namespace :reservations do

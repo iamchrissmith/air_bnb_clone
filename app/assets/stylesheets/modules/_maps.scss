@@ -1,8 +1,29 @@
 .index_map {
   position: fixed !important;
-  width: 500px;
+  width: 33.33333%;
   height: 100vh;
 
   top: 0;
   right: 0;
+
+  .property-card {
+    width: 200px;
+
+    img {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .info {
+      h3, span {
+        white-space: nowrap;
+      }
+
+      h3 {
+        font-size: 12px;
+        font-weight: 600;
+      }
+      overflow: hidden;
+    }
+  }
 }

@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "anyone can search properties" do
 
+  # Can't run these untill a javascript test driver is installed.
+
   before(:all) do
-    @property1 = create(:property, name: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO')
-    @property2 = create(:property, name: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO')
-    @property3 = create(:property, name: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO')
-    @property4 = create(:property, name: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO')
-    @property5 = create(:property, name: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO')
+    @property1 = create(:property, description: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO')
+    @property2 = create(:property, description: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO')
+    @property3 = create(:property, description: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO')
+    @property4 = create(:property, description: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO')
+    @property5 = create(:property, description: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO')
   end
 
   let(:property1) { @property1.reload }
@@ -20,20 +22,22 @@ RSpec.describe "anyone can search properties" do
     visit root_path
 
     fill_in "place_search", with: 'Denver, Co, USA'
-    click_on "Search"
+    find('.place_search>input').send_keys(:return)
 
     expect(current_path).to eq(properties_path)
 
-    within(".results") do
-      expect(page).to have_content(property1.name)
-      expect(page).to have_content(property2.name)
-      expect(page).to have_content(property3.name)
-      expect(page).to_not have_content(property4.name)
-      expect(page).to_not have_content(property5.name)
+    expect(page).to have_selector('.property-card', :count => 3)
+
+    within(".property-frame") do
+      expect(page).to have_content(property1.description)
+      expect(page).to have_content(property2.description)
+      expect(page).to have_content(property3.description)
+      expect(page).to_not have_content(property4.description)
+      expect(page).to_not have_content(property5.description)
     end
   end
 
-  xscenario "properties by range of dates" do
+  xit "can search by range of dates" do
     property = create(:property, name: "airstream")
     property2 = create(:property)
 
@@ -55,7 +59,7 @@ RSpec.describe "anyone can search properties" do
     end
   end
 
-  xscenario "properties by number of guests allowed" do
+  xit "can search by number of guests allowed" do
     property = create(:property, name: "cabin in the woods", number_of_guests: 5)
     property2 = create(:property)
     visit root_path
@@ -73,7 +77,7 @@ RSpec.describe "anyone can search properties" do
     end
   end
 
-  xscenario "properties by city and number of guests allowed" do
+  xit "can search by city and number of guests allowed" do
     property = create(:property, name: "cabin in the woods", city: "Denver", number_of_guests: 5)
     property2 = create(:property)
     visit root_path
@@ -93,11 +97,7 @@ RSpec.describe "anyone can search properties" do
     end
   end
 
-  xscenario 'can see number of guests' do
-    # expect(page).to have_content(property.number_of_guests)
-  end
-
-  xscenario "properties by city and date range" do
+  xit "can search by city and date range" do
     property = create(:property, name: "airstream", city: "Denver")
     property2 = create(:property)
     property3 = create(:property, name: "cabin in the woods")
@@ -127,7 +127,7 @@ RSpec.describe "anyone can search properties" do
     end
   end
 
-  xscenario "properties by date range and number of guests" do
+  xit "search by date range and number of guests" do
     property = create(:property, name: "airstream", city: "Denver", number_of_guests: 4)
     property2 = create(:property)
     property3 = create(:property, name: "cabin in the woods", number_of_guests: 10)
@@ -159,7 +159,7 @@ RSpec.describe "anyone can search properties" do
     end
   end
 
-  xscenario "properties by city, date range and number of guests" do
+  xit "can serch by city, date range and number of guests" do
     property = create(:property, name: "airstream", city: "St. Louis", number_of_guests: 4)
     property2 = create(:property)
     property3 = create(:property, name: "cabin in the woods", number_of_guests: 10)

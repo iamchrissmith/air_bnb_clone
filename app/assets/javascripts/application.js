@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require bootstrap
 //= require jquery.turbolinks
-//= require jquery_ujs
 //= require jquery.validate
 //= require bootstrap/dropdown
 //= require cable

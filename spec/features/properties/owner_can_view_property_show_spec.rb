@@ -63,7 +63,7 @@ RSpec.feature 'Owner can view properties index' do
       expect(page).to have_css('#finished-requests')
       within ('#finished-requests') do
         expect(page).to have_css("#request-#{finished_request.id}")
-        expect(page).to have_content "Review User"
+        expect(page).to have_content "Review Renter"
       end
       expect(page).to have_css('#declined-requests')
       within ('#declined-requests') do

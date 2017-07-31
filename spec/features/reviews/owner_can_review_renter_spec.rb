@@ -21,20 +21,19 @@ RSpec.feature 'User can review a property' do
 
         visit user_property_path(property)
 
-        within ('.tab-content #finished-requests') do
-          expect(page).to have_link "Review Renter"
-          click_on "Review Renter"
+        within('.panel#finished-requests') do
+          expect(page).to have_link 'Review Renter'
+          click_on 'Review Renter'
         end
 
-        fill_in "Comments", with: 'Lorem Ipsum'
+        fill_in 'Comments', with: 'Lorem Ipsum'
         choose 'user_review_rating_4'
         click_on 'Submit Review'
 
         expect(current_path).to eq user_property_path(property)
 
-        expect(page).to have_css('#reviews')
-        within ('.tab-content #finished-requests') do
-          expect(page).not_to have_link "Review Renter"
+        within('.panel#finished-requests') do
+          expect(page).not_to have_link 'Review Renter'
         end
       end
     end

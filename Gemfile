@@ -23,6 +23,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2', '<= 0.5.0'
 gem 'simplecov', :require => false, :group => :test
 gem 'geocoder'
+gem 'chart-js-rails'
 # gem 'bcrypt', '~> 3.1.7'
 
 # , :git => 'git://github.com/stympy/faker.git', :branch => 'master'

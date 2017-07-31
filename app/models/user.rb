@@ -91,48 +91,48 @@ class User < ApplicationRecord
   end
 
   def self.reservations_by_night(limit = 10)
-    self.find_by_sql(["SELECT users.*, sum(reservations.end_date - reservations.start_date) AS nights
+    self.find_by_sql(["SELECT users.*, sum(reservations.end_date - reservations.start_date) AS total
                       FROM users
                       JOIN reservations on users.id = reservations.renter_id
                       GROUP BY users.id
-                      ORDER BY nights DESC
+                      ORDER BY total DESC
                       LIMIT ?;", limit])
   end
 
   def self.reservations_by_bookings(limit = 10)
-    self.find_by_sql(["SELECT users.*, sum(reservations.id) AS bookings
+    self.find_by_sql(["SELECT users.*, sum(reservations.id) AS total
                       FROM users
                       JOIN reservations on users.id = reservations.renter_id
                       GROUP BY users.id
-                      ORDER BY bookings DESC
+                      ORDER BY total DESC
                       LIMIT ?", limit])
   end
 
   def self.most_properties(limit = 10)
-    self.find_by_sql(["SELECT users.*, sum(properties.id) AS props
+    self.find_by_sql(["SELECT users.*, sum(properties.id) AS total
                       FROM users
                       JOIN properties ON users.id = properties.owner_id
                       GROUP BY users.id
-                      ORDER BY props DESC
+                      ORDER BY total DESC
                       LIMIT(?);", limit])
   end
 
   def self.most_money_spent(limit = 10)
-    self.find_by_sql(["SELECT users.*, sum(reservations.total_price) AS cost
+    self.find_by_sql(["SELECT users.*, sum(reservations.total_price) AS total
                       FROM users
                       JOIN reservations ON users.id = reservations.renter_id
                       GROUP BY users.id
-                      ORDER BY cost DESC
+                      ORDER BY total DESC
                       LIMIT(?);", limit])
   end
 
   def self.most_revenue(limit = 10)
-    self.find_by_sql(["SELECT users.*, sum(reservations.total_price) AS cost
+    self.find_by_sql(["SELECT users.*, sum(reservations.total_price) AS total
                       FROM users
                       JOIN properties ON users.id = properties.owner_id
                       JOIN reservations ON properties.id = reservations.property_id
                       GROUP BY users.id
-                      ORDER BY cost DESC
+                      ORDER BY total DESC
                       LIMIT(?);", limit])
   end
 

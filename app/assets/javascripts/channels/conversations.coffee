@@ -23,8 +23,8 @@ App.global_chat = App.cable.subscriptions.create {
     @perform 'send_message', message: message, conversation_id: conversation_id
 
 # jQuery(document).on 'turbolinks:load', ->
-#   messages = $('#messages-box')
-#   if messages.length > 0
-#     messages_to_bottom = -> messages.scrollTop(messages.prop("scrollHeight"))
+  # messages = $('#messages-box')
+  # if messages.length > 0
+  #   messages_to_bottom = -> messages.scrollTop(messages.prop("scrollHeight"))
 
-#     messages_to_bottom()
+  #   messages_to_bottom()

@@ -4,12 +4,13 @@ class User < ApplicationRecord
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :database_authenticatable
 
-  has_many :reservations, foreign_key: "renter_id"
+  has_many :reservations, foreign_key: 'renter_id'
 
-  has_many :properties, foreign_key: "owner_id"
+  has_many :properties, foreign_key: 'owner_id'
   has_many :property_reviews
+  has_many :user_reviews
 
-  enum role: %w(registered_user admin)
+  enum role: %w[registered_user admin]
 
   validates :username, uniqueness: true, allow_nil: true, case_sensitive: false
   validates_format_of :username, with: /\A^[a-zA-Z0-9_\.]*$\z/, multiline: true
@@ -22,12 +23,16 @@ class User < ApplicationRecord
     !properties.empty?
   end
 
-  def is_owner_of?(property)
+  def owner_of?(property)
     properties.includes? property
   end
 
-  def has_reviewed?(reservation)
+  def reviewed_property?(reservation)
     reservation.id.in? property_reviews.pluck(:reservation_id)
+  end
+
+  def reviewed_renter?(request)
+    request.id.in? user_reviews.pluck(:reservation_id)
   end
 
   def self.from_omniauth(auth_info)

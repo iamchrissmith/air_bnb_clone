@@ -25,19 +25,42 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.has_reviewed?' do
+  describe '.reviewed_property?' do
     let!(:user) { create(:user) }
     let(:reservation) { create(:reservation, renter: user) }
     context 'when there is a reservation with no review' do
       it 'returns false' do
-        expect(user.has_reviewed?(reservation)).to be false
+        expect(user.reviewed_property?(reservation)).to be false
       end
     end
 
     context 'when there is a reservation with a review' do
       let!(:review) { create(:property_review, reservation: reservation, property: reservation.property, user: user) }
       it 'returns true' do
-        expect(user.has_reviewed?(reservation)).to be true
+        expect(user.reviewed_property?(reservation)).to be true
+      end
+    end
+  end
+
+  describe '.reviewed_renter?' do
+    let!(:user) { create(:user) }
+    let!(:owner) { create(:user) }
+    let!(:property) { create(:property, owner: owner) }
+    let!(:reservation) { create(:reservation,
+                          renter: user,
+                          status: 3,
+                          property: property
+                        )}
+    context 'when there is a reservation with no review' do
+      it 'returns false' do
+        expect(owner.reviewed_renter?(reservation)).to be false
+      end
+    end
+
+    context 'when there is a reservation with a review' do
+      let!(:review) { create(:user_review, reservation: reservation, renter: reservation.renter, user: owner) }
+      it 'returns true' do
+        expect(owner.reviewed_renter?(reservation)).to be true
       end
     end
   end

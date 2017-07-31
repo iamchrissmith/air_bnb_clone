@@ -7,7 +7,6 @@ class Reservations::PropertyReviewsController < ApplicationController
   end
 
   def create
-    # binding.pry
     if @reservation.create_property_review(review_params)
       redirect_to @reservation.property, success: "Review Successfully Added"
     else

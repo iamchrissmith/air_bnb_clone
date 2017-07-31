@@ -31,6 +31,7 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
+gem 'redis', '~>3.2'
 
 group :development, :test do
   gem 'byebug', platform: :mri

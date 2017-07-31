@@ -1,0 +1,22 @@
+<li class='panel-body thread'>
+  <div class='row'>
+    <div class='col-sm-9 col-md-4 thread-author'>
+      <div class='row row-table'>
+        <div class='thread-avatar col-md-5'>
+          <%= image_tag(conversation.author.image_url, size: "16x10") %>
+        </div>
+        <div class='col-sm-7 thread-name text-truncate'>
+          <div >
+            <%= conversation.author.full_name %>
+          </div>
+        <time class='thread-date'>
+          <%= conversation.date %>
+        </time>
+        </div>
+      </div>
+    </div>
+    <div class='thread-link'>
+      <%= link_to "#{conversation.title}", user_conversation_path(conversation) %>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,17 @@
+<h1><%= @conversation.title %></h1>
+
+<div id="messages-box">
+  <% @conversation.messages.each do |message| %>
+    <%= render partial: '/user/conversations/messages/message', locals: {message: message} %>
+  <% end %>
+</div>
+
+<%= form_for @conversation.messages.new(user_id: current_user.id), url: user_conversation_messages_path(@conversation) do |f| %>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' %>
+    <small class="text-muted">From 2 to 1000 characters</small>
+  </div>
+
+  <%= f.submit "Send message", class: 'btn btn-primary btn-lg', id: 'submit-message' %>
+<% end %>

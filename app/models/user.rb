@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_many :reservations, foreign_key: 'renter_id'
 
+  has_many :properties, foreign_key: "owner_id"
+  has_many :messages
+  has_many :authored_conversations, class_name: 'Conversation', foreign_key: 'author_id'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'receiver_id'
   has_many :properties, foreign_key: 'owner_id'
   has_many :property_reviews
   has_many :user_reviews

@@ -98,14 +98,4 @@ feature "as a logged in user" do
       end
     end
   end
-  #Need to figure out messages...
-  context "Within my notifications" do
-
-    xscenario "I see the number of new messages with a link to messages" do
-
-    end
-
-    xscenario "I see the number of pending request with a link to pending reservations" do
-    end
-  end
 end

@@ -5,6 +5,7 @@ class Api::V1::Properties::ReservationsController < ApiController
   def create
     reservation = @property.reservations.new(reservation_params)
     if reservation.save
+      Conversation.create_trip_conversation(params)
       render json: {success:"Reservation Created", reservation: reservation}, status: 201
     else
       render json: {error: "Missing Parameters"}, status: 401

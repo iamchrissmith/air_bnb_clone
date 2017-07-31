@@ -71,7 +71,11 @@ Rails.application.routes.draw do
   resources :reservations, only: [:new, :update]
 
   namespace :user do
+    resources :conversations, only: [:index, :show, :create] do
+      resources :messages, only: [:create]
+    end
     resources :properties, only: [:index, :show]
   end
 
+  mount ActionCable.server => '/cable'
 end

@@ -10,21 +10,17 @@ App.global_chat = App.cable.subscriptions.create {
 
   received: (data) ->
     # Data received
-    unless data.content.blank?
+    if data.content
       $('#messages-box').append '<div class="card">' +
         '<div class="card-block">' + '<div class="row">'+ 
         '<div class="col-md-11">' + '<p class="card-text">' +
-        '<span class="text-muted">' + data.user.first_name + 
-        " at " + data.timestamp + "says " + '</span><br>' +
         data.content + '</p>' + '</div>' + '</div>' + '</div>' +
         '</div>'
+      $('#submit-message').removeAttr("disabled")
+      $('#message_content').val('')
+      box = $('#messages-box')
+      if box.length > 0
+        box[0].scrollTop = box[0].scrollHeight;
 
   send_message: (message, conversation_id) ->
     @perform 'send_message', message: message, conversation_id: conversation_id
-
-# jQuery(document).on 'turbolinks:load', ->
-  # messages = $('#messages-box')
-  # if messages.length > 0
-  #   messages_to_bottom = -> messages.scrollTop(messages.prop("scrollHeight"))
-
-  #   messages_to_bottom()

@@ -1,3 +1,3 @@
-$('.form-group').submit(function() {
-  alert("hello");
+$('input[name="commit"]').on('click', function() {
+  debugger;
 });

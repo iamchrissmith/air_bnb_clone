@@ -57,6 +57,13 @@ Rails.application.routes.draw do
 
   resources :users, only: [:edit, :update, :show]
 
+  namespace :reservations do
+    scope ':reservation_id' do
+      resources :property_reviews, only: [:new, :create]
+      resources :user_reviews, only: [:new, :create]
+    end
+  end
+
   resources :properties,  only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :property_availabilities, only: [:index, :new, :create, :edit, :update, :destroy]
   end

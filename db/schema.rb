@@ -79,6 +79,19 @@ ActiveRecord::Schema.define(version: 20170729175835) do
     t.index ["property_id"], name: "index_property_availabilities_on_property_id", using: :btree
   end
 
+  create_table "property_reviews", force: :cascade do |t|
+    t.integer  "property_id"
+    t.integer  "user_id"
+    t.integer  "rating"
+    t.string   "body"
+    t.integer  "reservation_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["property_id"], name: "index_property_reviews_on_property_id", using: :btree
+    t.index ["reservation_id"], name: "index_property_reviews_on_reservation_id", using: :btree
+    t.index ["user_id"], name: "index_property_reviews_on_user_id", using: :btree
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.decimal  "total_price"
     t.date     "start_date"
@@ -97,6 +110,19 @@ ActiveRecord::Schema.define(version: 20170729175835) do
     t.integer  "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "rating"
+    t.string   "body"
+    t.integer  "reservation_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "renter_id"
+    t.index ["renter_id"], name: "index_user_reviews_on_renter_id", using: :btree
+    t.index ["reservation_id"], name: "index_user_reviews_on_reservation_id", using: :btree
+    t.index ["user_id"], name: "index_user_reviews_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -141,6 +167,11 @@ ActiveRecord::Schema.define(version: 20170729175835) do
   add_foreign_key "properties", "room_types"
   add_foreign_key "properties", "users", column: "owner_id"
   add_foreign_key "property_availabilities", "properties"
+  add_foreign_key "property_reviews", "properties"
+  add_foreign_key "property_reviews", "reservations"
+  add_foreign_key "property_reviews", "users"
   add_foreign_key "reservations", "properties"
   add_foreign_key "reservations", "users", column: "renter_id"
+  add_foreign_key "user_reviews", "reservations"
+  add_foreign_key "user_reviews", "users"
 end

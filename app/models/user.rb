@@ -26,8 +26,12 @@ class User < ApplicationRecord
     properties.includes? property
   end
 
-  def has_reviewed?(reservation)
+  def has_reviewed_property?(reservation)
     reservation.id.in? property_reviews.pluck(:reservation_id)
+  end
+
+  def has_reviewed_renter?(request)
+    request.id.in? user_reviews.pluck(:reservation_id)
   end
 
   def self.from_omniauth(auth_info)

@@ -1,1 +1,3 @@
-Review User
+<% if !current_user.has_reviewed_renter?(request) %>
+  <%= link_to "Review Renter", new_reservations_user_review_path(request) %>
+<% end %>

@@ -1,9 +1,15 @@
 hello <%= current_user.first_name %>!
 
 <div class="row">
-  <div class="col-md-4"><%= render partial: 'admin/dashboard/charts/owner_most_revenue' %></div>
-  <div class="col-md-4"></div>
-  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <%= render partial: 'admin/dashboard/charts/owner_most_revenue' %>
+  </div>
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+
+  </div>
 </div>
 
 <div class="row">
@@ -11,6 +17,18 @@ hello <%= current_user.first_name %>!
 </div>
 
 <div class="row">
-  <div class="col-md-4"><%= render partial: 'admin/dashboard/charts/reservations_by_month' %></div>
-  <div class="col-md-4"><%= render partial: 'admin/dashboard/charts/user_most_spent' %></div>
+  <div class="col-md-4">
+    <%= render partial: 'admin/dashboard/charts/reservations_by_month' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <%= render partial: 'admin/dashboard/charts/user_most_spent' %>
+  </div>
+  <div class="col-md-4">
+    <%= render partial: 'admin/dashboard/charts/user_most_bookings' %>
+  </div>
+  <div class="col-md-4">
+  </div>
 </div>

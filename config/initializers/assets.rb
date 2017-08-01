@@ -13,4 +13,5 @@ Rails.application.config.assets.precompile += %w( reservations/submit.js
                                                   maps/searchMap.js
                                                   admin/dashboard/charts/owner_most_revenue.js
                                                   admin/dashboard/charts/reservations_by_month.js
-                                                  admin/dashboard/charts/user_most_spent.js )
+                                                  admin/dashboard/charts/user_most_spent.js
+                                                  admin/dashboard/charts/user_most_bookings.js )

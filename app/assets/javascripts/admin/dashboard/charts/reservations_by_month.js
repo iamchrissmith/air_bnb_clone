@@ -1,10 +1,10 @@
-var ctx = document.getElementById("usersMostRevenue").getContext('2d');
-const chartOptions = {
-    type: 'bar',
+var reservationsByMonthChart = document.getElementById("reservationsByMonth").getContext('2d');
+const chartReservationsByMonth = {
+    type: 'line',
     data: {
         labels: [],
         datasets: [{
-            label: 'Total Revenue',
+            label: 'Total Reservations',
             data: [],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -35,16 +35,15 @@ const chartOptions = {
 }
 $.ajax({
   method: 'GET',
-  url: '/api/v1/users/money/most_revenue?limit=5',
-  success: function(response){ renderChart(response) },
+  url: '/api/v1/reservations/by_month',
+  success: function(response){ renderReservationsByMonth(response) },
   error: function(xhr,textStatus,errorThrown) { console.log(xhr,textStatus,errorThrown) }
 });
-const renderChart = function(users_most_revenue){
-  console.log(chartOptions)
-  for(var i = 0, len = users_most_revenue.length; i < len; i++) {
-    let user = users_most_revenue[i];
-    chartOptions.data.labels.push(user.first_name + " " + user.last_name);
-    chartOptions.data.datasets[0].data.push(user.total);
+const renderReservationsByMonth = function(reservations_by_month){
+  for(var i = 0, len = reservations_by_month.length; i < len; i++) {
+    let month = reservations_by_month[i];
+    chartReservationsByMonth.data.labels.push(month.month);
+    chartReservationsByMonth.data.datasets[0].data.push(month.count);
   }
-  var myChart = new Chart(ctx, chartOptions);
+  var myChart = new Chart(reservationsByMonthChart, chartReservationsByMonth);
 }

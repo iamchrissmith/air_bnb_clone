@@ -1,7 +1,7 @@
 class Seed
   def initialize
-    generate_users
-    generate_room_types
+    # generate_users
+    # generate_room_types
     generate_properties_for_users
     generate_reservations_for_users
   end
@@ -49,7 +49,8 @@ class Seed
     n = 1
     CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       num = Random.new.rand(1..10)
-      user = User.find(n)
+      # user = User.find(n)
+      user = User.find(Random.new.rand(1..User.count))
       user.properties.create!(
         name: Faker::Company.name,
         number_of_guests: (num * 2),
@@ -82,7 +83,7 @@ class Seed
       property = Property.find(Random.new.rand(1..Property.count))
       length_of_stay = Random.new.rand(1..5)
       total = (property.price_per_night * length_of_stay)
-      begin_date = Faker::Date.forward(23)
+      begin_date = Faker::Date.between(1.year.ago, 1.year.from_now)
       user.reservations.create!(
         total_price: total,
         start_date: begin_date,

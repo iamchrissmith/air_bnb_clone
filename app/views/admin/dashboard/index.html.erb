@@ -2,13 +2,14 @@ hello <%= current_user.first_name %>!
 
 <div class="row">
   <div class="col-md-4"><%= render partial: 'admin/dashboard/charts/owner_most_revenue' %></div>
-  <div class="col-md-4">  </div>
-  <div class="col-md-4">  </div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
 </div>
 
-<div class="row"></div>
-<div class="row"></div>
+<div class="row">
 
-<%= content_for :foot do %>
-  <%= javascript_include_tag 'admin/dashboard/charts/owner_most_revenue' %>
-<% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-4"><%= render partial: 'admin/dashboard/charts/reservations_by_month' %></div>
+</div>

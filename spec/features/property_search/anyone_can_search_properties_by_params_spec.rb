@@ -21,9 +21,6 @@ RSpec.describe "anyone can search properties" do
   it "and can search by location", :js => true do
     visit root_path
 
-    # page.execute_script("document.getElementById('place_search').focus();")
-    # find('#place_search').focus
-    # sleep(5)
     find('#place_search').send_keys('denver')
     sleep(2)
     find('#place_search').send_keys(:down)
@@ -31,10 +28,9 @@ RSpec.describe "anyone can search properties" do
     find('#place_search').send_keys(:tab)
 
     expect(current_path).to eq('/properties')
-
-    sleep(10)
     expect(page).to have_selector('.property-card', :count => 3)
 
+    sleep(10)
     within(".property-frame") do
       expect(page).to have_content(property1.description)
       expect(page).to have_content(property2.description)

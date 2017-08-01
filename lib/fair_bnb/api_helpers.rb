@@ -54,5 +54,11 @@ module FairBnb
         .limit(params[:limit])
         .map(&:city)
     end
+
+    def by_state
+      Property.select("properties.state, COUNT(properties.id) AS total")
+        .group(:state)
+        .order(state: :asc)
+    end
   end
 end

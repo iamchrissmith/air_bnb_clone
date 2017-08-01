@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       namespace :properties do
         get 'most_guests', to: 'most_guests#index'
         get 'most_expensive', to: 'most_expensive#index'
+        get 'by_state', to: 'by_state#index'
         scope ':property_id' do
           resources :reservations, only: [:create]
         end

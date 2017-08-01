@@ -1,15 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # describe "validations" do
-  #   context "user is valid with all attributes" do
-  #     xit { should validate_presence_of(:first_name) }
-  #     xit { should validate_presence_of(:last_name) }
-  #     xit { should validate_presence_of(:email) }
-  #     xit { should validate_presence_of(:phone_number) }
-  #     xit { should validate_presence_of(:image_url) }
-  #   end
-  # end
+  describe "validations" do
+    context "user is valid with all attributes" do
+      it { should validate_presence_of(:username) }
+      it { should validate_uniqueness_of(:username) }
+    end
+  end
 
   context "relationships" do
       it { should have_many :reservations }

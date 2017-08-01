@@ -50,9 +50,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
 
   namespace :admin do
-    resources :dashboard, only: [:index]
     resources :properties, only: [:index, :edit, :update]
-    resources :users, only: [:index]
   end
 
   resources :users, only: [:edit, :update, :show]

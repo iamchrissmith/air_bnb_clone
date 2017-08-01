@@ -6,11 +6,8 @@ RSpec.feature "as an admin " do
     property = create(:property, status: 0)
     login(admin)
 
-    visit admin_dashboard_index_path
-
-    within (".collapse") do
-      click_on "Admin Menu"
-      click_on "Properties"
+    within (".session-nav") do
+      click_on "Administer Properties"
     end
 
     expect(current_path).to eq(admin_properties_path)

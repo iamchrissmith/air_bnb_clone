@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get '/by_month', to: 'month#index'
         get '/revenue_by_month', to: 'revenue_by_month#index'
         get '/highest_revenue_cities', to: 'cities_revenue#index'
+        get '/revenue_by_state', to: 'revenue_by_state#index'
       end
       namespace :users do
         namespace :reservations do

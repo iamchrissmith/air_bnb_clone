@@ -16,6 +16,13 @@ module FairBnb
       group("TO_CHAR(start_date, 'MM-YYYY')").sum(:total_price)
     end
 
+    def revenue_by_state
+      select("properties.state, sum(reservations.total_price) AS total")
+        .joins(:property)
+        .group("properties.state")
+        .order("properties.state asc")
+    end
+
   end
 
   module PropertyApiHelpers
@@ -56,7 +63,7 @@ module FairBnb
     end
 
     def by_state
-      Property.select("properties.state, COUNT(properties.id) AS total")
+      select("properties.state, COUNT(properties.id) AS total")
         .group(:state)
         .order(state: :asc)
     end

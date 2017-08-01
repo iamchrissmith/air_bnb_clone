@@ -10,7 +10,7 @@ RSpec.describe 'Properties by State API', type: :request do
       expect(response).to be_success
       expect(response.status).to eq(200)
 
-      states = JSON.parse(response.body, symbolize_names: true)
+      states = JSON.parse(response.body, symbolize_names: true)[:results]
 
       expect(states.count).to eq(2)
       expect(states[0][:state]).to eq("CO")

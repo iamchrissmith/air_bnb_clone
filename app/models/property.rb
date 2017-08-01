@@ -18,6 +18,24 @@ class Property < ApplicationRecord
   enum status: %w(pending active archived)
 
   def self.search(params)
+    binding.pry
+
+    checkin = DateTime.strptime(params[:dates].split('-')[0], '%d/%m/%Y')
+    checkout = DateTime.strptime(params[:dates].split('-')[1], '%d/%m/%Y')
+
+    Property.joins(:property_availabilities).merge(PropertyAvailability.where(:date => checkin..checkout))
+
+    Property.find_by_sql [
+      "SELECT properties.* FROM properties JOIN property_availabilities ON property_availabilities.property_id = properties.id
+        EXCEPT
+        JOIN property_availabilities ON property_availabilities.property_id = properties.id
+          AND property_availabilities.date >= ? AND property_availabilities.date <= ?", checkin, checkout ]
+
+    # Property.includes(:property_availabilities).where('property_availabilities.date': checkin..checkout )
+
+
+    # :where('created_at BETWEEN ? AND ?', @selected_date.beginning_of_day, @selected_date.end_of_day)
+
     if params[:lat].nil? || params[:long].nil?
       location = "#{params[:city]}, #{params[:state]}"
     else

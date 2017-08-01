@@ -18,7 +18,7 @@ RSpec.describe 'Properties API', type: :request do
 
   describe 'can return results within a radius' do
 
-    it 'can return properties wthin a radius of lat/long search' do
+    xit 'can return properties wthin a radius of lat/long search' do
       get "/api/v1/properties/search?lat=39.7392&long=-104.9903&radius=25"
       expect(response.status).to eq(200)
 
@@ -34,7 +34,7 @@ RSpec.describe 'Properties API', type: :request do
       expect(result[4]).to be_falsey
     end
 
-    it 'can return properties wthin a radius of city state search' do
+    xit 'can return properties wthin a radius of city state search' do
       valid1 = create(:property, name: 'Lakewood', city: 'Lakewood', state: 'CO')
       valid2 = create(:property, name: 'Aurora', city: 'Aurora', state: 'CO')
       valid3 = create(:property, name: 'Boulder', city: 'Boulder', state: 'CO')
@@ -56,25 +56,25 @@ RSpec.describe 'Properties API', type: :request do
     end
   end
 
-  xdescribe 'can return results within a date range' do
+  describe 'can return results within a date range' do
 
     it 'can return properties with no reservations within date_range' do
       valid1 = create(:property, name: 'Lakewood')
-      create(:property_availability, date: '1/07/2016', property: valid1)
+      create(:property_availability, date: DateTime.new(2016,7,1), property: valid1)
 
       valid2 = create(:property, name: 'Aurora')
-      create(:property_availability, date: '12/31/2016', property: valid2)
+      create(:property_availability, date: DateTime.new(2016,12,31), property: valid2)
 
       invalid1 = create(:property, name: 'Boulder')
-      create(:property_availability, date: '01/04/2017', property: invalid1)
+      create(:property_availability, date: DateTime.new(2017,4,1), property: invalid1)
 
       invalid2 = create(:property, name: 'Vail')
-      create(:property_availability, date: '01/06/2017', property: invalid2)
+      create(:property_availability, date: DateTime.new(2017,6,1), property: invalid2)
 
       invalid3 = create(:property, name: 'Colorado Springs')
-      create(:property_availability, date: '01/01/2017', property: invalid3)
+      create(:property_availability, date: DateTime.new(2017,1,1), property: invalid3)
 
-      get "/api/v1/properties/search?dates=01/01/2017-01/6/2017"
+      get "/api/v1/properties/search?dates=01/01/2017-01/06/2017"
       expect(response.status).to eq(200)
 
       result = JSON.parse(response.body, symbolize_names: true)

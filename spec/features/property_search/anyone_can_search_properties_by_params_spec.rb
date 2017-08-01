@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "anyone can search properties" do
 
-  # Can't run these untill a javascript test driver is installed.
-
   before(:all) do
     @property1 = create(:property, description: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO')
     @property2 = create(:property, description: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO')
@@ -22,15 +20,15 @@ RSpec.describe "anyone can search properties" do
     visit root_path
 
     find('#place_search').send_keys('denver')
-    sleep(2)
+    sleep(1)
     find('#place_search').send_keys(:down)
-    sleep(2)
+    sleep(1)
     find('#place_search').send_keys(:tab)
 
     expect(current_path).to eq('/properties')
     expect(page).to have_selector('.property-card', :count => 3)
 
-    sleep(10)
+    sleep(1)
     within(".property-frame") do
       expect(page).to have_content(property1.description)
       expect(page).to have_content(property2.description)

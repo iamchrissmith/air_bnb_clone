@@ -29,7 +29,8 @@ const chartReservationsByMonth = {
                 ticks: {
                     beginAtZero:true
                 }
-            }]
+            }],
+            xAxes: [{ticks:{autoSkip: false}}]
         }
     }
 }

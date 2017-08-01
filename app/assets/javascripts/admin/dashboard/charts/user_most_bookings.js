@@ -27,9 +27,10 @@ const chartsUsersMostBookings = {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero:true
+                  beginAtZero:true
                 }
-            }]
+            }],
+            xAxes: [{ticks:{autoSkip: false}}]
         }
     }
 }

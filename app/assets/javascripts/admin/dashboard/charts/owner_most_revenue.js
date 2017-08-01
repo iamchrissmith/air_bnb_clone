@@ -29,7 +29,8 @@ const chartOptions = {
                 ticks: {
                     beginAtZero:true
                 }
-            }]
+            }],
+            xAxes: [{ticks:{autoSkip: false}}]
         }
     }
 }

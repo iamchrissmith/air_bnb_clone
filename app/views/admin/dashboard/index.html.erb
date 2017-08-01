@@ -5,20 +5,26 @@ hello <%= current_user.first_name %>!
     <%= render partial: 'admin/dashboard/charts/owner_most_revenue' %>
   </div>
   <div class="col-md-4">
-
+    <p>Owner Revenue by Month for Top X Owners</p>
   </div>
   <div class="col-md-4">
-
+    <p>Owner Most Properties</p>
   </div>
 </div>
 
 <div class="row">
-
+<h2>Individual Owner Page</h2>
+<p>Single Owner Revenue by Month</p>
+<p>Single Owner Revenue by Property</p>
+<p>Single Owner Average Reservation Stay by Property</p>
 </div>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-6">
     <%= render partial: 'admin/dashboard/charts/reservations_by_month' %>
+  </div>
+  <div class="col-md-6">
+    <p>Reservation by month with City Dropdown</p>
   </div>
 </div>
 
@@ -31,5 +37,15 @@ hello <%= current_user.first_name %>!
   </div>
   <div class="col-md-4">
     <%= render partial: 'admin/dashboard/charts/user_most_nights' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <p>Heatmap</p>
+    Number of Properties
+    Revenue Per Night
+    Reservations Per month
+    Total Revenue
   </div>
 </div>

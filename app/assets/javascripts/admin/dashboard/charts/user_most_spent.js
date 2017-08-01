@@ -29,7 +29,8 @@ const chartUsersMostSpent = {
                 ticks: {
                     beginAtZero:true
                 }
-            }]
+            }],
+            xAxes: [{ticks:{autoSkip: false}}]
         }
     }
 }

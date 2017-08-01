@@ -29,7 +29,8 @@ const chartUsersMostNights = {
                 ticks: {
                     beginAtZero:true
                 }
-            }]
+            }],
+            xAxes: [{ticks:{autoSkip: false}}]
         }
     }
 }

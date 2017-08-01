@@ -19,8 +19,8 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-    '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+  this._div.innerHTML = '<h4>Properties By State</h4>' +  (props ?
+    '<b>' + props.name + '</b><br />' + props.density + ' properties'
     : 'Hover over a state');
 };
 
@@ -85,14 +85,14 @@ function onEachFeature(feature, layer) {
   });
 }
 
-var propertyData = [ {state: "Alabama", total: 1000}, {state:"Colorado", total:50} ];
-var propertyData1 = [ {state: "Alabama", total: 0}, {state:"Colorado", total:1000} ];
+var propertyData1 = [ {state: "WY", total: 0}, {state:"CO", total:1000} ];
 var updateStatesData = function (data) {
   for(var i = 0, len = statesData.features.length; i < len; i++) {
     let state = statesData.features[i].properties;
     for(var j = 0, dataLen = data.length; j < dataLen; j++) {
       let property = data[j];
-      if (property.state === state.name) {
+      // console.log(property.state, state.name)
+      if (state_keys[property.state] === state.name) {
         state.density = property.total;
       }
     }
@@ -100,10 +100,25 @@ var updateStatesData = function (data) {
   return statesData;
 }
 
-geojson = L.geoJson(updateStatesData(propertyData), {
-  style: style,
-  onEachFeature: onEachFeature
-}).addTo(map);
+const loadGeodata = function(data){
+  geojson = L.geoJson(updateStatesData(data), {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
+}
+const getPropertiesByState = function() {
+  $.ajax({
+    method: 'GET',
+    url: '/api/v1/properties/by_state',
+    success: function(response){
+      loadGeodata(response);
+    },
+    errors: function(xhr, textStatus, errorThrown){
+      console.log(xhr, textStatus, errorThrown)
+    }
+  });
+}
+getPropertiesByState();
 
 var legend = L.control({position: 'bottomright'});
 
@@ -129,16 +144,19 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
-$('.reset_map_zoom').on('click', function(ev) {
+$('#reset_map_zoom').on('click', function(ev) {
   ev.preventDefault();
   map.setView([37.8, -96], 4)
 });
-$('.revenue_per_night').on('click', function(ev){
+$('#revenue_per_night').on('click', function(ev){
   ev.preventDefault();
 
   geojson.remove();
-  geojson = L.geoJson(updateStatesData(propertyData1), {
-    style: style,
-    onEachFeature: onEachFeature
-  }).addTo(map);
+  loadGeodata(propertyData1);
+});
+$('#properties_by_state').on('click', function(ev){
+  ev.preventDefault();
+
+  geojson.remove();
+  getPropertiesByState();
 });

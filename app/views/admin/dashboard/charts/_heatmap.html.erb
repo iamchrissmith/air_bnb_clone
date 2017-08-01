@@ -9,8 +9,9 @@
 <% end %>
 
 <div id='mapid' style='width: 1200px; height: 400px;'></div>
-<p><a href="#" class="reset_map_zoom">Reset Zoom</a></p>
-<p><a href="#" class="revenue_per_night">Revenue Per Night</a></p>
+<p><a href="#" id="reset_map_zoom">Reset Zoom</a></p>
+<p><a href="#" id="properties_by_state">Properties By State</a></p>
+<p><a href="#" id="revenue_per_night">Revenue Per Night</a></p>
 
 <%= content_for :foot do %>
   <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script> -->
@@ -18,5 +19,6 @@
   integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
   crossorigin=""></script>
   <%= javascript_include_tag 'admin/dashboard/maps/us-states' %>
+  <%= javascript_include_tag 'admin/dashboard/maps/state_keys' %>
   <%= javascript_include_tag 'admin/dashboard/maps/heatmap' %>
 <% end %>

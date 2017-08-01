@@ -11,7 +11,6 @@ class User::ConversationsController < ApplicationController
 
   def create
     conversation = Conversation.message_host(current_user, params)
-    binding.pry
     redirect_to user_conversation_path(conversation)
   end
 

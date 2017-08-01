@@ -8,6 +8,8 @@ require 'support/factory_girl'
 require 'database_cleaner'
 require 'stub_helper'
 require 'support/login_helper'
+require 'capybara/rails'
+require 'capybara/rspec'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -55,4 +57,8 @@ RSpec.configure do |config|
   config.filter_gems_from_backtrace("omniauth", "warden", "rack-test", "rack", "railties", "capybara", "webmock", "vcr", "faraday")
 end
 
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
 
+Capybara.javascript_driver = :chrome

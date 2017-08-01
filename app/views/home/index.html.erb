@@ -13,7 +13,7 @@
         <div class="card">
           <%= image_tag property.image_url, class: "card-img-top", size: "250x250" %>
           <div class="card-block">
-            <p class="card-text"> <a href="<%= property_path(property.id) %>">  <%= property.name[0..28] %></a></p>
+            <p class="card-text"> <a href="<%= property_path(property.id) %>"><%= property.name[0..28] %></a></p>
           </div>
         </div>&nbsp;&nbsp;&nbsp;&nbsp;
         <% end %>

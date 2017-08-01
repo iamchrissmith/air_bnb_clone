@@ -41,7 +41,6 @@ $.ajax({
   error: function(xhr,textStatus,errorThrown) { console.log(xhr,textStatus,errorThrown) }
 });
 const renderChart = function(users_most_revenue){
-  console.log(chartOptions)
   for(var i = 0, len = users_most_revenue.length; i < len; i++) {
     let user = users_most_revenue[i];
     chartOptions.data.labels.push(user.first_name + " " + user.last_name);

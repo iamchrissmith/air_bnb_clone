@@ -18,14 +18,21 @@ RSpec.describe "anyone can search properties" do
   let(:property4) { @property4.reload }
   let(:property5) { @property5.reload }
 
-  xit "and can search by location" do
+  it "and can search by location", :js => true do
     visit root_path
 
-    fill_in "place_search", with: 'Denver, Co, USA'
-    find('.place_search>input').send_keys(:return)
+    # page.execute_script("document.getElementById('place_search').focus();")
+    # find('#place_search').focus
+    # sleep(5)
+    find('#place_search').send_keys('denver')
+    sleep(2)
+    find('#place_search').send_keys(:down)
+    sleep(2)
+    find('#place_search').send_keys(:tab)
 
-    expect(current_path).to eq(properties_path)
+    expect(current_path).to eq('/properties')
 
+    sleep(10)
     expect(page).to have_selector('.property-card', :count => 3)
 
     within(".property-frame") do

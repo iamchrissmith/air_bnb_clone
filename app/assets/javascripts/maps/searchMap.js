@@ -11,6 +11,7 @@ function persistSearchData() {
 
 function placeAutoComplete() {
   let location = document.getElementById('location');
+
   let autocomplete = new google.maps.places.Autocomplete(location);
 
   autocomplete.addListener('place_changed', function() {

@@ -32,6 +32,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 gem 'redis', '~>3.2'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -44,6 +45,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem 'bullet'
 end
 
 group :test do

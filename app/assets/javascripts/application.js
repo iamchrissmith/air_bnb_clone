@@ -21,4 +21,3 @@
 //= require reservations/submit
 //= require homepage/property_search
 //= require channels/conversations
-//= require messages/message

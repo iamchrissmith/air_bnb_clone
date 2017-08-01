@@ -4,12 +4,11 @@ class User::MessagesController < ApplicationController
   def create
     message = @conversation.messages.build(message_params)
     message.user_id = current_user.id
-    # message.save
-    # redirect_to user_conversation_path(@conversation)
     if message.save
-      ActionCable.server.broadcast 'conversation_channel',
+      ActionCable.server.broadcast "conversation_channel_#{params[:conversation_id]}",
                                    content:  message.content,
-                                   username: message.user.username
+                                   first_name: message.user.first_name,
+                                   timestamp: message.timestamp
     end
   end
 

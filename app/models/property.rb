@@ -18,35 +18,34 @@ class Property < ApplicationRecord
   enum status: %w(pending active archived)
 
   def self.search(params)
-
-    if params[:lat].nil? || params[:long].nil?
-      location = "#{params[:city]}, #{params[:state]}"
-    else
-      location = [params[:lat], params[:long]]
-    end
-
-    near(location, params[:radius])
   end
 
   def self.within_zone(params)
-    if params[:lat].nil? || params[:long].nil?
-      location = "#{params[:city]}, #{params[:state]}"
-    else
-      location = [params[:lat], params[:long]]
-    end
-
-    near(location, params[:radius])
+    near(location_method(params), params[:radius])
   end
 
   def self.available(params)
-    checkin = DateTime.strptime(params[:dates].split('-')[0], '%m/%d/%Y')
-    checkout = DateTime.strptime(params[:dates].split('-')[1], '%m/%d/%Y')
-
-    joins(:property_availabilities).where.not(:property_availabilities => {:date => checkin..checkout, reserved?: false}).distinct
+    joins(:property_availabilities)
+      .where.not(:property_availabilities =>
+        {:date => date_range(params)[:checkin]..date_range(params)[:checkout], reserved?: false})
+        .distinct
   end
 
   def self.with_guests(params)
     where("number_of_guests >= ?", params[:guests])
+  end
+
+  def self.location_method(params)
+    if params[:lat].nil? || params[:long].nil?
+      "#{params[:city]}, #{params[:state]}"
+    else
+      [params[:lat], params[:long]]
+    end
+  end
+
+  def self.date_range(params)
+    { checkin: DateTime.strptime(params[:dates].split('-')[0], '%m/%d/%Y'),
+      checkout: DateTime.strptime(params[:dates].split('-')[1], '%m/%d/%Y') }
   end
 
   def prepare_address

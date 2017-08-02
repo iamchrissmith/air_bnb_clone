@@ -4,7 +4,7 @@ RSpec.describe Property do
 
   describe 'sql queries' do
 
-    xit ".available" do
+    it ".available" do
       valid1 = create(:property, name: 'Lakewood')
       valid2 = create(:property, name: 'Aurora')
       invalid1 = create(:property, name: 'Boulder')
@@ -43,7 +43,7 @@ RSpec.describe Property do
       expect(results.include?(invalid3)).to be_falsey
     end
 
-    xit '.within_zone' do
+    it '.within_zone' do
       property1 = create(:property, name: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO')
       property2 = create(:property, name: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO')
       property3 = create(:property, name: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO')

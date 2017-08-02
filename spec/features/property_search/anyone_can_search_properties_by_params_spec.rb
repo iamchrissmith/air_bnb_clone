@@ -4,7 +4,7 @@ unless ENV['TRAVIS']
   RSpec.describe "anyone can search properties" do
 
     before(:all) do
-      @property1 = create(:property, description: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO')
+      @property1 = create(:property, description: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO', number_of_guests: )
       @property2 = create(:property, description: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO')
       @property3 = create(:property, description: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO')
       @property4 = create(:property, description: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO')
@@ -39,7 +39,7 @@ unless ENV['TRAVIS']
       end
     end
 
-    xit "can search by number of guests allowed" do
+    it "can search by number of guests allowed", :js => true  do
       property = create(:property, name: "cabin in the woods", number_of_guests: 5)
       property2 = create(:property)
       visit root_path

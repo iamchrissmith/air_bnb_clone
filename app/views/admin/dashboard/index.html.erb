@@ -2,33 +2,36 @@ hello <%= current_user.first_name %>!
 
 <div class="row">
   <div class="col-md-4">
-    <%= render partial: 'admin/dashboard/charts/owner_most_revenue' %>
+    <!-- <p>Reservation by month with City Dropdown</p> -->
   </div>
   <div class="col-md-4">
-    <p>Owner Revenue by Month for Top X Owners</p>
+    <!-- <p>Owner Revenue by Month for Top X Owners</p> -->
   </div>
   <div class="col-md-4">
-    <p>Owner Most Properties</p>
+    <!-- <p>Owner Most Properties</p> -->
   </div>
 </div>
-
+<!--
 <div class="row">
 <h2>Individual Owner Page</h2>
 <p>Single Owner Revenue by Month</p>
 <p>Single Owner Revenue by Property</p>
 <p>Single Owner Average Reservation Stay by Property</p>
-</div>
+</div> -->
 
 <div class="row">
   <div class="col-md-6">
+    <div class="col-md-12"><h2>Reservations by Month</h2></div>
     <%= render partial: 'admin/dashboard/charts/reservations_by_month' %>
   </div>
   <div class="col-md-6">
-    <p>Reservation by month with City Dropdown</p>
+    <div class="col-md-12"><h2>Owners with the most Revenue</h2></div>
+    <%= render partial: 'admin/dashboard/charts/owner_most_revenue' %>
   </div>
 </div>
 
 <div class="row">
+  <div class="col-md-12"><h2>User Data</h2></div>
   <div class="col-md-4">
     <%= render partial: 'admin/dashboard/charts/user_most_spent' %>
   </div>
@@ -42,11 +45,11 @@ hello <%= current_user.first_name %>!
 
 <div class="row">
   <div class="col-md-12">
+    <h2>By State Comparisons</h2>
     <%= render partial: 'admin/dashboard/charts/heatmap' %>
-    <p>Heatmap</p>
-    Number of Properties
+    <!-- Number of Properties
     Revenue Per Night
     Reservations Per month
-    Total Revenue
+    Total Revenue -->
   </div>
 </div>

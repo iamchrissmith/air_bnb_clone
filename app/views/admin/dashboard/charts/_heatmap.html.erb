@@ -9,9 +9,11 @@
 <% end %>
 
 <div id='mapid' style='width: 1200px; height: 400px;'></div>
-<p><a href="#" id="reset_map_zoom">Reset Zoom</a></p>
-<p><a href="#" id="properties_by_state">Properties By State</a></p>
-<p><a href="#" id="revenue_by_state">Revenue By State</a></p>
+<div class="btn-group" role="group" aria-label="...">
+  <a class="btn btn-default" href="#" id="reset_map_zoom">Reset Zoom</a>
+  <a class="btn btn-default" href="#" id="properties_by_state">Properties By State</a>
+  <a class="btn btn-default" href="#" id="revenue_by_state">Revenue By State</a>
+</div>
 
 <%= content_for :foot do %>
   <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script> -->

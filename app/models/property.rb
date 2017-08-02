@@ -48,8 +48,8 @@ class Property < ApplicationRecord
   end
 
   def self.date_range(params)
-    { checkin: DateTime.strptime(params[:dates].split('-')[0], '%m/%d/%Y'),
-      checkout: DateTime.strptime(params[:dates].split('-')[1], '%m/%d/%Y') }
+    { checkin: DateTime.strptime(params[:dates].split('-')[0].strip, '%m/%d/%Y'),
+      checkout: DateTime.strptime(params[:dates].split('-')[1].strip, '%m/%d/%Y') }
   end
 
   def prepare_address

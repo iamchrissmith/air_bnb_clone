@@ -13,6 +13,8 @@ class Seed
     RoomType.destroy_all
     Property.destroy_all
     Reservation.destroy_all
+    Conversation.destroy_all
+    Message.destroy_all
   end
 
   def generate_users

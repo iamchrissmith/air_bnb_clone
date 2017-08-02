@@ -10,4 +10,12 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w( reservations/submit.js
                                                   search/homeSearch.js
-                                                  maps/searchMap.js )
+                                                  maps/searchMap.js
+                                                  admin/dashboard/charts/owner_most_revenue.js
+                                                  admin/dashboard/charts/reservations_by_month.js
+                                                  admin/dashboard/charts/user_most_spent.js
+                                                  admin/dashboard/charts/user_most_bookings.js
+                                                  admin/dashboard/charts/user_most_nights.js
+                                                  admin/dashboard/maps/us-states.js
+                                                  admin/dashboard/maps/heatmap.js
+                                                  admin/dashboard/maps/state_keys.js )

@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'Reservations by month' do
   it 'returns number of reservations for each month' do
     Timecop.freeze(Time.local(2017, 7, 1, 10, 00, 00)) do
-      reservation1 = create(:reservation, start_date: Date.today)
-      reservation2 = create(:reservation, start_date: Date.today+1.month)
-      reservation3 = create(:reservation, start_date: Date.today+3)
-      reservation4 = create(:reservation, start_date: Date.tomorrow)
+      reservation1 = create(:reservation, start_date: Date.today) #July
+      reservation2 = create(:reservation, start_date: Date.today+1.month) #August
+      reservation3 = create(:reservation, start_date: Date.today+3.days) #July
+      reservation4 = create(:reservation, start_date: Date.tomorrow) #July
 
       get "/api/v1/reservations/by_month"
 
@@ -16,8 +16,8 @@ describe 'Reservations by month' do
       next_month = (Date.today+1.month).strftime("%B")
 
       expect(reservations.count).to eq(2)
-      expect(reservations.first['month']).to eq(next_month)
-      expect(reservations.first['count']).to eq(1)
+      expect(reservations.first['month']).to eq("July")
+      expect(reservations.first['count']).to eq(3)
     end
   end
 

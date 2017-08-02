@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       namespace :properties do
         get 'most_guests', to: 'most_guests#index'
         get 'most_expensive', to: 'most_expensive#index'
+        get 'by_state', to: 'by_state#index'
         scope ':property_id' do
           resources :reservations, only: [:create]
         end
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
         get '/by_month', to: 'month#index'
         get '/revenue_by_month', to: 'revenue_by_month#index'
         get '/highest_revenue_cities', to: 'cities_revenue#index'
+        get '/revenue_by_state', to: 'revenue_by_state#index'
       end
       namespace :users do
         namespace :reservations do
@@ -36,7 +38,7 @@ Rails.application.routes.draw do
 
   get '/sign_up', to: 'signup#index'
   get '/log_in', to: 'login#index'
-  get  '/dashboard', to: 'dashboard#index'
+  get '/dashboard', to: 'dashboard#index'
   delete '/logout', to: 'sessions#destroy'
 
   devise_for :users,
@@ -50,6 +52,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
 
   namespace :admin do
+    get '/dashboard', to: 'dashboard#index'
     resources :properties, only: [:index, :edit, :update]
   end
 

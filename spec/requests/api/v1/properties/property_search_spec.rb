@@ -60,26 +60,39 @@ RSpec.describe 'Properties API', type: :request do
 
     it 'can return properties with no reservations within date_range' do
       valid1 = create(:property, name: 'Lakewood')
-      create(:property_availability, date: DateTime.new(2016,7,1), property: valid1)
-
       valid2 = create(:property, name: 'Aurora')
-      create(:property_availability, date: DateTime.new(2016,12,31), property: valid2)
-
       invalid1 = create(:property, name: 'Boulder')
-      create(:property_availability, date: DateTime.new(2017,4,1), property: invalid1)
-
       invalid2 = create(:property, name: 'Vail')
-      create(:property_availability, date: DateTime.new(2017,6,1), property: invalid2)
-
       invalid3 = create(:property, name: 'Colorado Springs')
-      create(:property_availability, date: DateTime.new(2017,1,1), property: invalid3)
+
+      [valid1, valid2, invalid1, invalid2, invalid3].each do |property|
+        property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
+      end
+
+      prop_as = valid1.property_availabilities
+      prop_as[3].update(reserved?: true)
+      prop_as[10].update(reserved?: true)
+
+      prop_as = valid2.property_availabilities
+      prop_as[0..2].each { |pa| pa.update(reserved?: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved?: true) }
+
+      prop_as = invalid1.property_availabilities
+      prop_as[4].update(reserved?: true)
+
+      prop_as = invalid2.property_availabilities
+      prop_as[9].update(reserved?: true)
+
+      prop_as = invalid3.property_availabilities
+      prop_as[7].update(reserved?: true)
 
       get "/api/v1/properties/search?dates=01/01/2017-01/06/2017"
       expect(response.status).to eq(200)
 
-      result = JSON.parse(response.body, symbolize_names: true)
+      results = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.count).to eq(2)
+
       expect(response[0][:name]).to eq('Lakewood')
       expect(response[1][:name]).to eq('Aurora')
 

@@ -4,6 +4,7 @@ class Seed
     generate_users
     generate_room_types
     generate_properties_for_users
+    generate_property_availability
     generate_reservations_for_users
   end
 
@@ -55,6 +56,7 @@ class Seed
 
     user_count = User.count
     n = 1
+
     CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       num = Random.new.rand(1..10)
       # user = User.find(n)
@@ -82,6 +84,13 @@ class Seed
       if n == user_count
         break
       end
+    end
+  end
+
+  def generate_property_availability
+    Property.all.each do |property|
+      property.property_availabilities << PropertyAvailability.set_availability(DateTime.now, DateTime.now + 1.month)
+      printf("\rProperty Availabilities: %d", PropertyAvailability.count)
     end
   end
 

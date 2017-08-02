@@ -93,6 +93,7 @@ function initializeMap(mapCenter) {
 
 function initializeProperties(mapCenter) {
 
+
   let dateRange = document.getElementById('date_range').value;
   let guests = document.getElementById('guests').value;
 
@@ -104,6 +105,7 @@ function initializeProperties(mapCenter) {
 
   function makeProperties(data) {
     clearProperties();
+
     // Build property cards, stick them in property frame, and add Listeners
     // for when a user clicks on the property-card
     data.forEach(function(datum){

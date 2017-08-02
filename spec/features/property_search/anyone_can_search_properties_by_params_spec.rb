@@ -83,7 +83,7 @@ RSpec.describe "anyone can search properties" do
     property2 = create(:property)
     visit root_path
 
-    fill_in :place_search, with:"#{property.city}"
+    fill_in :location, with:"#{property.city}"
     fill_in :guests, with:"#{property.number_of_guests}"
     click_on "Search"
 
@@ -112,7 +112,7 @@ RSpec.describe "anyone can search properties" do
     property_availability = create(:property_availability, property: property4, date: Date.tomorrow, reserved?: false)
     visit root_path
 
-    fill_in :place_search, with:"#{property.city}"
+    fill_in :location, with:"#{property.city}"
     fill_in :check_in, with:"#{Date.today}"
     fill_in :check_out, with:"#{Date.tomorrow}"
     click_on "Search"
@@ -173,7 +173,7 @@ RSpec.describe "anyone can search properties" do
     property_availability = create(:property_availability, property: property4, date: Date.tomorrow, reserved?: false)
     visit root_path
 
-    fill_in :place_search, with:"#{property4.city}"
+    fill_in :location, with:"#{property4.city}"
     fill_in :check_in, with:"#{Date.today}"
     fill_in :check_out, with:"#{Date.tomorrow}"
     fill_in :guests, with:"#{property4.number_of_guests}"

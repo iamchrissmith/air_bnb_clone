@@ -26,12 +26,12 @@ RSpec.describe 'Properties API', type: :request do
 
       expect(response).to have_http_status(200)
       expect(result.count).to eq(3)
-      expect(result[0][:name]).to eq('Lakewood')
-      expect(result[1][:name]).to eq('Aurora')
-      expect(result[2][:name]).to eq('Boulder')
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Boulder' } ).to be_truthy
 
-      expect(result[3]).to be_falsey
-      expect(result[4]).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
 
     it 'can return properties wthin a radius of city state search' do
@@ -47,12 +47,12 @@ RSpec.describe 'Properties API', type: :request do
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(result.count).to eq(3)
-      expect(result[0][:name]).to eq('Lakewood')
-      expect(result[1][:name]).to eq('Aurora')
-      expect(result[2][:name]).to eq('Boulder')
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Boulder' } ).to be_truthy
 
-      expect(result[3]).to be_falsey
-      expect(result[4]).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
   end
 
@@ -89,16 +89,16 @@ RSpec.describe 'Properties API', type: :request do
       get "/api/v1/properties/search?dates=01/05/2017-01/10/2017"
       expect(response.status).to eq(200)
 
-      results = JSON.parse(response.body, symbolize_names: true)
+      result = JSON.parse(response.body, symbolize_names: true)
 
-      expect(results.count).to eq(2)
+      expect(result.count).to eq(2)
 
-      expect(results[0][:name]).to eq('Lakewood')
-      expect(results[1][:name]).to eq('Aurora')
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
 
-      expect(results[2]).to be_falsey
-      expect(results[3]).to be_falsey
-      expect(results[4]).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Boulder' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
   end
 
@@ -117,12 +117,12 @@ RSpec.describe 'Properties API', type: :request do
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(result.count).to eq(3)
-      expect(result.one? { |prop| prop[:name] == 'Aurora'} ).to be_truthy
-      expect(result.one? { |prop| prop[:name] == 'Lakewood'} ).to be_truthy
-      expect(result.one? { |prop| prop[:name] == 'Boulder'} ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Boulder' } ).to be_truthy
 
-      expect(result.any? { |prop| prop[:name] == 'Vail'} ).to be_falsey
-      expect(result.any? { |prop| prop[:name] == 'Colorado Springs'} ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
   end
 end

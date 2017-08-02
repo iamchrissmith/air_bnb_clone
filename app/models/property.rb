@@ -45,6 +45,10 @@ class Property < ApplicationRecord
     joins(:property_availabilities).where.not(:property_availabilities => {:date => checkin..checkout, reserved?: false}).distinct
   end
 
+  def self.with_guests(params)
+    where("number_of_guests >= ?", params[:guests])
+  end
+
   def prepare_address
     [address, city, state, zip].compact.join('+')
   end

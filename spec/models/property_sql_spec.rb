@@ -32,7 +32,8 @@ RSpec.describe Property do
       prop_as = invalid3.property_availabilities
       prop_as[7].update(reserved?: true)
 
-      results = Property.available({dates: '01/05/2017-01/10/2017'})
+      params = { dates: '01/05/2017-01/10/2017' }
+      results = Property.available(params)
 
       expect(results.count).to eq(2)
 
@@ -50,7 +51,8 @@ RSpec.describe Property do
       property4 = create(:property, name: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO')
       property5 = create(:property, name: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO')
 
-      results = Property.within_zone( {lat: 39.7392, long: -104.9903, radius: 25} )
+      params = { location: { lat: 39.7392, long: -104.9903, radius: 25 } }
+      results = Property.within_zone(params)
 
       expect(results.to_a.count).to eq(3)
       expect(results[0]).to eq(property1)
@@ -68,7 +70,8 @@ RSpec.describe Property do
       property4 = create(:property, name: 'Vail', number_of_guests: 2)
       property5 = create(:property, name: 'Colorado Springs', number_of_guests: 5)
 
-      results = Property.with_guests( {guests: 5} )
+      params = { guests: 5 }
+      results = Property.with_guests(params)
 
       expect(results.to_a.count).to eq(3)
       expect(results.to_a.include?(property1)).to be_truthy

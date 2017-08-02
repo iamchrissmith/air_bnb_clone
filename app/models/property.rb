@@ -17,22 +17,21 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
+  scope :within_zone, -> (params) { near(location_method(params[:location]), params[:location][:radius]) }
+  scope :available, -> (params) { joins(:property_availabilities)
+                        .where.not(:property_availabilities =>
+                          {:date => date_range(params)[:checkin]..date_range(params)[:checkout], reserved?: false})
+                        .distinct }
+
+  scope :with_guests, -> (params) { where("number_of_guests >= ?", params[:guests]) }
+
   def self.search(params)
-  end
+    methods = []
+    methods << :with_quests if params[:guests]
+    methods << :available if params[:dates]
+    methods << :within_zone if params[:location]
 
-  def self.within_zone(params)
-    near(location_method(params), params[:radius])
-  end
-
-  def self.available(params)
-    joins(:property_availabilities)
-      .where.not(:property_availabilities =>
-        {:date => date_range(params)[:checkin]..date_range(params)[:checkout], reserved?: false})
-        .distinct
-  end
-
-  def self.with_guests(params)
-    where("number_of_guests >= ?", params[:guests])
+    methods.inject(self) { |chain, method| chain.send(method, params) }
   end
 
   def self.location_method(params)

@@ -19,11 +19,11 @@ RSpec.describe "anyone can search properties" do
   it "and can search by location", :js => true do
     visit root_path
 
-    find('#place_search').send_keys('denver')
+    find('#location').send_keys('denver')
     sleep(1)
-    find('#place_search').send_keys(:down)
+    find('#location').send_keys(:down)
     sleep(1)
-    find('#place_search').send_keys(:tab)
+    find('#location').send_keys(:tab)
 
     expect(current_path).to eq('/properties')
     expect(page).to have_selector('.property-card', :count => 3)

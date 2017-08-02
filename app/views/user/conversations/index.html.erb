@@ -1,0 +1,9 @@
+<h1>Conversations</h1>
+
+<div class='panel'>
+  <ul class='list-layout'>
+    <% @conversations.each do |conversation| %>
+      <%= render conversation %>
+    <% end %>
+  </ul>
+</div>

@@ -50,9 +50,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
 
   namespace :admin do
-    resources :dashboard, only: [:index]
     resources :properties, only: [:index, :edit, :update]
-    resources :users, only: [:index]
   end
 
   resources :users, only: [:edit, :update, :show]
@@ -71,7 +69,11 @@ Rails.application.routes.draw do
   resources :reservations, only: [:new, :update]
 
   namespace :user do
+    resources :conversations, only: [:index, :show, :create] do
+      resources :messages, only: [:create]
+    end
     resources :properties, only: [:index, :show]
   end
 
+  mount ActionCable.server => '/cable'
 end

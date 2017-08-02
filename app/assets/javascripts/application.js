@@ -16,6 +16,8 @@
 //= require jquery_ujs
 //= require jquery.validate
 //= require bootstrap/dropdown
+//= require cable
 //= require_tree ./channels
 //= require reservations/submit
 //= require homepage/property_search
+//= require channels/conversations

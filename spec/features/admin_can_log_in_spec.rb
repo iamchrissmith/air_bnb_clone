@@ -15,6 +15,6 @@ RSpec.feature "as an admin" do
     click_on "Log in"
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content("Admin Dashboard")
+    expect(page).to have_content("Administer Properties")
   end
 end

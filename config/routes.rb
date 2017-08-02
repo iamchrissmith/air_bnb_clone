@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   get '/sign_up', to: 'signup#index'
   get '/log_in', to: 'login#index'
-  get  '/dashboard', to: 'dashboard#index'
+  get '/dashboard', to: 'dashboard#index'
   delete '/logout', to: 'sessions#destroy'
 
   devise_for :users,
@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
 
   namespace :admin do
+    get '/dashboard', to: 'dashboard#index'
     resources :properties, only: [:index, :edit, :update]
   end
 

@@ -9,6 +9,7 @@
       <div class='session-nav'>
         <% if user_signed_in? %>
           <% if current_user.admin? %>
+            <div><%= link_to "Admin Dashboard", admin_dashboard_path %></div>
             <div><%= link_to "Administer Properties", admin_properties_path %></div>
             <div><%= link_to 'Profile', user_path(current_user) %></div>
             <div><%= link_to 'My Properties', user_properties_path %></div>

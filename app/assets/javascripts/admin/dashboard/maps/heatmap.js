@@ -1,44 +1,116 @@
-var map = L.map('mapid').setView([37.8, -96], 4);
+const map = L.map('mapid').setView([37.8, -96], 4);
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-  maxZoom: 18,
-  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-  id: 'mapbox.light'
-}).addTo(map);
+const buildMap = () => {
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'mapbox.light'
+  }).addTo(map);
 
+}
 
-// control that shows state info on hover
-var info = L.control();
+var geojson;
 
-info.onAdd = function (map) {
-  this._div = L.DomUtil.create('div', 'info');
-  this.update();
-  return this._div;
-};
+let custom_grades = [0, 1, 2, 5, 10, 20, 50, 100];
 
-info.update = function (props) {
-  this._div.innerHTML = '<h4>Properties By State</h4>' +  (props ?
-    '<b>' + props.name + '</b><br />' + props.density + ' properties'
-    : 'Hover over a state');
-};
-
-info.addTo(map);
-
-// get color depending on population density value
-function getColor(d) {
-  return d > 1000 ? '#800026' :
-      d > 500  ? '#BD0026' :
-      d > 200  ? '#E31A1C' :
-      d > 100  ? '#FC4E2A' :
-      d > 50   ? '#FD8D3C' :
-      d > 20   ? '#FEB24C' :
-      d > 10   ? '#FED976' :
+const getColor = (d) => {
+  return d > custom_grades[7] ? '#800026' :
+      d > custom_grades[6] ? '#BD0026'    :
+      d > custom_grades[5] ? '#E31A1C'    :
+      d > custom_grades[4] ? '#FC4E2A'    :
+      d > custom_grades[3] ? '#FD8D3C'    :
+      d > custom_grades[2] ? '#FEB24C'    :
+      d > custom_grades[1] ? '#FED976'    :
             '#FFEDA0';
 }
 
-function style(feature) {
+let legend;
+
+const addLegendtoMap = () => {
+  legend = L.control({position: 'bottomright'});
+
+  legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+      grades = custom_grades,
+      labels = [],
+      from, to;
+
+    for (var i = 0; i < grades.length; i++) {
+      from = grades[i];
+      to = grades[i + 1];
+
+      labels.push(
+        '<i style="background:' + getColor(from + 1) + '"></i> ' +
+        from + (to ? '&ndash;' + to : '+'));
+    }
+
+    div.innerHTML = labels.join('<br>');
+    return div;
+  };
+
+  legend.addTo(map);
+}
+
+const setBounds = (results) => {
+  let low = Number.POSITIVE_INFINITY;
+  let high = Number.NEGATIVE_INFINITY;
+  let tmp;
+  for (let i=results.length-1; i>=0; i--) {
+      tmp = parseFloat(results[i].total);
+      if (tmp < low) low = tmp;
+      if (tmp > high) high = tmp;
+  }
+  return [high, low]
+}
+
+const setGrades = (results) => {
+  let [high, low] = setBounds(results);
+  const difference = high - low;
+  custom_grades = [0, 1, 2, 5, 10, 20, 50, 100];
+
+  while (high > (custom_grades[custom_grades.length - 1] * 2)) {
+    custom_grades = custom_grades.map( (x) => x *2 );
+  }
+  addLegendtoMap();
+}
+
+const updateStatesData = (data) => {
+  setGrades(data);
+  for(var i = 0, len = statesData.features.length; i < len; i++) {
+    let state = statesData.features[i].properties;
+    for(var j = 0, dataLen = data.length; j < dataLen; j++) {
+      let property = data[j];
+      if (state_keys[property.state] === state.name) {
+        state.density = property.total;
+      }
+    }
+  }
+  return statesData;
+}
+
+const info = L.control();
+
+const buildInfo = (label, currency = '', data_label = label) => {
+
+  info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+
+  info.update = function (props) {
+    this._div.innerHTML = '<h4>'+ label +' By State</h4>' +  (props ?
+      '<b>' + props.name + '</b><br />' + currency + props.density + ' ' + data_label
+      : 'Hover over a state');
+  };
+
+  info.addTo(map);
+}
+
+
+const style = (feature) => {
   return {
     weight: 2,
     opacity: 1,
@@ -66,8 +138,6 @@ function highlightFeature(e) {
   info.update(layer.feature.properties);
 }
 
-var geojson;
-
 function resetHighlight(e) {
   geojson.resetStyle(e.target);
   info.update();
@@ -85,64 +155,12 @@ function onEachFeature(feature, layer) {
   });
 }
 
-var propertyData1 = [ {state: "WY", total: 0}, {state:"CO", total:1000} ];
-var updateStatesData = function (data) {
-  for(var i = 0, len = statesData.features.length; i < len; i++) {
-    let state = statesData.features[i].properties;
-    for(var j = 0, dataLen = data.length; j < dataLen; j++) {
-      let property = data[j];
-      // console.log(property.state, state.name)
-      if (state_keys[property.state] === state.name) {
-        state.density = property.total;
-      }
-    }
-  }
-  return statesData;
-}
-
 const loadGeodata = function(data){
   geojson = L.geoJson(updateStatesData(data), {
     style: style,
     onEachFeature: onEachFeature
   }).addTo(map);
 }
-const getPropertiesByState = function() {
-  $.ajax({
-    method: 'GET',
-    url: '/api/v1/properties/by_state',
-    success: function(response){
-      loadGeodata(response.results);
-    },
-    errors: function(xhr, textStatus, errorThrown){
-      console.log(xhr, textStatus, errorThrown)
-    }
-  });
-}
-getPropertiesByState();
-
-var legend = L.control({position: 'bottomright'});
-
-legend.onAdd = function (map) {
-
-  var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-    labels = [],
-    from, to;
-
-  for (var i = 0; i < grades.length; i++) {
-    from = grades[i];
-    to = grades[i + 1];
-
-    labels.push(
-      '<i style="background:' + getColor(from + 1) + '"></i> ' +
-      from + (to ? '&ndash;' + to : '+'));
-  }
-
-  div.innerHTML = labels.join('<br>');
-  return div;
-};
-
-legend.addTo(map);
 
 const getRevenueByState = function() {
   $.ajax({
@@ -150,6 +168,7 @@ const getRevenueByState = function() {
     url: '/api/v1/reservations/revenue_by_state',
     success: function(response){
       loadGeodata(response.results);
+      buildInfo('Revenue', '$', '');
     },
     errors: function(xhr, textStatus, errorThrown){
       console.log(xhr, textStatus, errorThrown)
@@ -157,19 +176,40 @@ const getRevenueByState = function() {
   });
 }
 
-$('#reset_map_zoom').on('click', function(ev) {
-  ev.preventDefault();
-  map.setView([37.8, -96], 4)
-});
-$('#revenue_by_state').on('click', function(ev){
-  ev.preventDefault();
+const getPropertiesByState = function() {
+  $.ajax({
+    method: 'GET',
+    url: '/api/v1/properties/by_state',
+    success: function(response){
+      loadGeodata(response.results);
+      buildInfo('Properties');
+    },
+    errors: function(xhr, textStatus, errorThrown){
+      console.log(xhr, textStatus, errorThrown)
+    }
+  });
+}
 
-  geojson.remove();
-  getRevenueByState();
-});
-$('#properties_by_state').on('click', function(ev){
-  ev.preventDefault();
-
-  geojson.remove();
+$(document).ready( () => {
+  buildMap();
   getPropertiesByState();
+
+  $('#reset_map_zoom').on('click', function(ev) {
+    ev.preventDefault();
+    map.setView([37.8, -96], 4)
+  });
+  $('#revenue_by_state').on('click', function(ev){
+    ev.preventDefault();
+
+    geojson.remove();
+    legend.remove();
+    getRevenueByState();
+  });
+  $('#properties_by_state').on('click', function(ev){
+    ev.preventDefault();
+
+    geojson.remove();
+    legend.remove();
+    getPropertiesByState();
+  });
 });

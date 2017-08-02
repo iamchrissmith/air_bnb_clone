@@ -3,6 +3,8 @@ let map;
 // Populates search fields if they exist in the session
 
 function persistSearchData() {
+  if (!sessionStorage.guests) { sessionStorage.setItem('guests', 1) }
+
   if (sessionStorage.place) { $('#location').val(sessionStorage.place) };
   if (sessionStorage.guests) { $('#guests').val(sessionStorage.guests) };
 };
@@ -11,8 +13,11 @@ function persistSearchData() {
 
 function placeAutoComplete() {
   let location = document.getElementById('location');
+  let options = {
+    types: ['(cities)']
+  }
 
-  let autocomplete = new google.maps.places.Autocomplete(location);
+  let autocomplete = new google.maps.places.Autocomplete(location, options);
 
   autocomplete.addListener('place_changed', function() {
     let place = autocomplete.getPlace();
@@ -35,6 +40,13 @@ function dateRangePicker() {
   };
 
   $('input[name="date_range"]').on('apply.daterangepicker', function() {
+    let date = document.getElementById('date_range');
+
+    sessionStorage.setItem('date_range', date.value);
+    searchMap();
+  });
+
+  $('input[name="date_range"]').on('hide.daterangepicker', function() {
     let date = document.getElementById('date_range');
 
     sessionStorage.setItem('date_range', date.value);
@@ -80,25 +92,48 @@ function initializeMap(mapCenter) {
 // Properties initializer
 
 function initializeProperties(mapCenter) {
+
+
   let dateRange = document.getElementById('date_range').value;
   let guests = document.getElementById('guests').value;
 
   let properties = $.get("/api/v1/properties/search", {
-    lat: mapCenter.lat(),
-    long: mapCenter.lng(),
-    radius: 25,
+    location: {lat: mapCenter.lat(), long: mapCenter.lng(), radius: 25 },
     date_range: dateRange,
     guests: guests }, makeProperties
   );
 
-  clearProperties();
-
   function makeProperties(data) {
+    clearProperties();
 
-    // Build property cards and stick them in property frame
+    // Build property cards, stick them in property frame, and add Listeners
+    // for when a user clicks on the property-card
     data.forEach(function(datum){
       $('.property-frame').append(propertyCard(datum));
+      $('#property' + datum.id).on('click', function(){
+        window.location.href = ('/properties/' + datum.id)
+      });
     });
+
+    let defaultIcon = {
+          url: 'property-map-icon.png',
+          // This marker is 35 pixels wide by 35 pixels high.
+          size: new google.maps.Size(50, 30),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 35)
+        };
+
+    let highlightIcon = {
+          url: 'property-map-icon-highlight.png',
+          // This marker is 35 pixels wide by 35 pixels high.
+          size: new google.maps.Size(50, 30),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 32)
+        };
 
     // Build markers to place on map
     let markers = data.map(function(datum) {
@@ -106,7 +141,12 @@ function initializeProperties(mapCenter) {
         position: {lat: datum.lat, lng: datum.long},
         customInfo: propertyCard(datum),
         id: datum.id,
-        data_object: datum
+        data_object: datum,
+        icon: defaultIcon,
+        label: {
+          text: '$' + datum.price_per_night,
+          fontSize: "10px",
+        }
       });
     });
 
@@ -122,9 +162,20 @@ function initializeProperties(mapCenter) {
       google.maps.event.addListener(marker, 'click', function() {
         infoWindow.setContent(this.customInfo)
         infoWindow.open(map, marker);
+
+        $('#property' + marker.id).on('click', function(){
+          window.location.href = ('/properties/' + marker.id)
+        });
       });
     }, this);
 
+    markers.forEach(function(marker) {
+      $('#property' + marker.id).hover(function(){
+        marker.setIcon(highlightIcon)
+      }, function(){
+        marker.setIcon(defaultIcon)
+      });
+    });
   };
 }
 
@@ -149,7 +200,7 @@ function searchMap() {
 
 const propertyCard = function(datum) {
   return `
-  <div class='property-card'>
+  <div class='property-card' id='property${datum.id}'>
     <img src='${datum.image_url}'>
     <div class='info'>
       <h3>From $${datum.price_per_night} - ${datum.description}</h3>

@@ -9,6 +9,27 @@ unless ENV['TRAVIS']
       @property3 = create(:property, description: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO', number_of_guests: 6)
       @property4 = create(:property, description: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO', number_of_guests: 1)
       @property5 = create(:property, description: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO', number_of_guests: 2)
+
+      [@property1, @property2, @property3, @property4, @property5].each do |property|
+        property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
+      end
+
+      prop_as = @property1.property_availabilities
+      prop_as[3].update(reserved?: true)
+      prop_as[10].update(reserved?: true)
+
+      prop_as = @property2.property_availabilities
+      prop_as[0..2].each { |pa| pa.update(reserved?: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved?: true) }
+
+      prop_as = @property3.property_availabilities
+      prop_as[4].update(reserved?: true)
+
+      prop_as = @property4.property_availabilities
+      prop_as[9].update(reserved?: true)
+
+      prop_as = @property5.property_availabilities
+      prop_as[7].update(reserved?: true)
     end
 
     let(:property1) { @property1.reload }
@@ -17,7 +38,7 @@ unless ENV['TRAVIS']
     let(:property4) { @property4.reload }
     let(:property5) { @property5.reload }
 
-    it "and can search by location", :js => true do
+    xit "and can search by location", :js => true do
       visit root_path
 
       find('#location').send_keys('denver')
@@ -37,6 +58,12 @@ unless ENV['TRAVIS']
         expect(page).to_not have_content(property4.description)
         expect(page).to_not have_content(property5.description)
       end
+
+      find('#guests').click
+      find('#guests').send_keys(:back)
+      find('#guests').send_keys(:delete)
+      find('#guests').send_keys(5)
+      sleep(1)
     end
 
     xit "can search by number of guests allowed", :js => true  do

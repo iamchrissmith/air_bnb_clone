@@ -95,7 +95,6 @@ RSpec.describe 'Properties API', type: :request do
 
       expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
       expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
-
       expect(result.any? { |prop| prop[:name] == 'Boulder' } ).to be_falsey
       expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
       expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey

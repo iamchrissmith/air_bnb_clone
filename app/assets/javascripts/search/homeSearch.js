@@ -6,7 +6,7 @@ function homeSearch() {
 }
 
 function persistSearchData() {
-  if (sessionStorage.place) { $('#place_search').val(sessionStorage.place) };
+  if (sessionStorage.place) { $('#location').val(sessionStorage.place) };
   if (sessionStorage.guests) { $('#guests').val(sessionStorage.guests) };
   if (sessionStorage.date_range) {
     $('input[name="date_range"]').daterangepicker({
@@ -19,8 +19,8 @@ function persistSearchData() {
 };
 
 function placeAutoComplete() {
-  let place_search = document.getElementById('place_search');
-  let autocomplete = new google.maps.places.Autocomplete(place_search);
+  let location = document.getElementById('location');
+  let autocomplete = new google.maps.places.Autocomplete(location);
 
   autocomplete.addListener('place_changed', function() {
     let place = autocomplete.getPlace();

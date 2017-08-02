@@ -12,5 +12,10 @@
   </div>
 </div>
 
+<% unless request.path == properties_path %>
+  <%= javascript_include_tag 'search/homeSearch.js' %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_KEY']}&libraries=places&callback=homeSearch", async: true, defer: true %>
+<% end %>
+
 <%= javascript_include_tag '//cdn.jsdelivr.net/momentjs/latest/moment.min.js' %>
 <%= javascript_include_tag'//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js' %>

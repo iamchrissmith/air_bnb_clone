@@ -19,19 +19,19 @@ RSpec.describe 'Properties API', type: :request do
   describe 'can return results within a radius' do
 
     it 'can return properties wthin a radius of lat/long search' do
-      get "/api/v1/properties/search?lat=39.7392&long=-104.9903&radius=25"
+      get "/api/v1/properties/search?location[lat=39.7392&location[long=-104.9903&location[radius=25"
       expect(response.status).to eq(200)
 
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(200)
       expect(result.count).to eq(3)
-      expect(result[0][:name]).to eq('Lakewood')
-      expect(result[1][:name]).to eq('Aurora')
-      expect(result[2][:name]).to eq('Boulder')
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Boulder' } ).to be_truthy
 
-      expect(result[3]).to be_falsey
-      expect(result[4]).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
 
     it 'can return properties wthin a radius of city state search' do
@@ -41,55 +41,68 @@ RSpec.describe 'Properties API', type: :request do
       invalid1 = create(:property, name: 'Vail', city: 'Vail', state: 'CO')
       invalid2 = create(:property, name: 'Colorado Springs', city: 'Colorado Springs', state: 'CO')
 
-      get "/api/v1/properties/search?city=Denver&state=CO&radius=25"
+      get "/api/v1/properties/search?location[city=Denver&location[state=CO&location[radius=25"
       expect(response.status).to eq(200)
 
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(result.count).to eq(3)
-      expect(result[0][:name]).to eq('Lakewood')
-      expect(result[1][:name]).to eq('Aurora')
-      expect(result[2][:name]).to eq('Boulder')
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Boulder' } ).to be_truthy
 
-      expect(result[3]).to be_falsey
-      expect(result[4]).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
   end
 
-  xdescribe 'can return results within a date range' do
+  describe 'can return results within a date range' do
 
     it 'can return properties with no reservations within date_range' do
-      valid1 = create(:property, name: 'Lakewood')
-      create(:property_availability, date: '1/07/2016', property: valid1)
+      property1 = create(:property, name: 'Lakewood')
+      property2 = create(:property, name: 'Aurora')
+      property3 = create(:property, name: 'Boulder')
+      property4 = create(:property, name: 'Vail')
+      property5 = create(:property, name: 'Colorado Springs')
 
-      valid2 = create(:property, name: 'Aurora')
-      create(:property_availability, date: '12/31/2016', property: valid2)
+      [property1, property2, property3, property4, property5].each do |property|
+        property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
+      end
 
-      invalid1 = create(:property, name: 'Boulder')
-      create(:property_availability, date: '01/04/2017', property: invalid1)
+      prop_as = property1.property_availabilities
+      prop_as[3].update(reserved?: true)
+      prop_as[10].update(reserved?: true)
 
-      invalid2 = create(:property, name: 'Vail')
-      create(:property_availability, date: '01/06/2017', property: invalid2)
+      prop_as = property2.property_availabilities
+      prop_as[0..2].each { |pa| pa.update(reserved?: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved?: true) }
 
-      invalid3 = create(:property, name: 'Colorado Springs')
-      create(:property_availability, date: '01/01/2017', property: invalid3)
+      prop_as = property3.property_availabilities
+      prop_as[4].update(reserved?: true)
 
-      get "/api/v1/properties/search?dates=01/01/2017-01/6/2017"
+      prop_as = property4.property_availabilities
+      prop_as[9].update(reserved?: true)
+
+      prop_as = property5.property_availabilities
+      prop_as[7].update(reserved?: true)
+
+      get "/api/v1/properties/search?dates=01/05/2017-01/10/2017"
       expect(response.status).to eq(200)
 
       result = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response.count).to eq(2)
-      expect(response[0][:name]).to eq('Lakewood')
-      expect(response[1][:name]).to eq('Aurora')
+      expect(result.count).to eq(2)
 
-      expect(response[2]).to be_falsey
-      expect(response[3]).to be_falsey
-      expect(response[4]).to be_falsey
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
+
+      expect(result.any? { |prop| prop[:name] == 'Boulder' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
   end
 
-  xdescribe 'can return results by number of guests' do
+  describe 'can return results by number of guests' do
 
     it 'can return properties that can handle number of guests' do
       valid1 = create(:property, name: 'Lakewood', number_of_guests: 8)
@@ -103,13 +116,13 @@ RSpec.describe 'Properties API', type: :request do
 
       result = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response.count).to eq(3)
-      expect(response[0][:name]).to eq('Aurora')
-      expect(response[1][:name]).to eq('Lakewood')
-      expect(response[2][:name]).to eq('Boulder')
+      expect(result.count).to eq(3)
+      expect(result.one? { |prop| prop[:name] == 'Lakewood' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Aurora' } ).to be_truthy
+      expect(result.one? { |prop| prop[:name] == 'Boulder' } ).to be_truthy
 
-      expect(response[3]).to be_falsey
-      expect(response[4]).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Colorado Springs' } ).to be_falsey
+      expect(result.any? { |prop| prop[:name] == 'Vail' } ).to be_falsey
     end
   end
 end

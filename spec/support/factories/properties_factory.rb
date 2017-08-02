@@ -12,7 +12,7 @@ FactoryGirl.define do
     state 'TN'
     zip '37912'
     room_type
-    image_url 'app/assets/images/beach_house.jpg'
+    image_url 'http://modelosdefachadasdecasas.com/wp-content/uploads/2015/11/modelo-fachada-de-casas-bonitas.jpg'
     check_in_time "14:00:00"
     check_out_time "11:00:00"
     status 1

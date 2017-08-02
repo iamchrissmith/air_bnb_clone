@@ -17,14 +17,39 @@ class Property < ApplicationRecord
 
   enum status: %w(pending active archived)
 
-  def self.search(params)
-    if params[:lat].nil? || params[:long].nil?
-      location = "#{params[:city]}, #{params[:state]}"
-    else
-      location = [params[:lat], params[:long]]
-    end
+  scope :within_zone, -> (params) { near(location_method(params[:location]), params[:location][:radius]) }
+  scope :available, -> (params) { joins(:property_availabilities)
+                        .where.not(:property_availabilities =>
+                          {:date => date_range(params)[:checkin]..date_range(params)[:checkout], reserved?: false})
+                        .distinct }
 
-    Property.near(location, params[:radius])
+  scope :with_guests, -> (params) { where("number_of_guests >= ?", params[:guests]) }
+
+  def self.search(params)
+    scopes = []
+    scopes << 'with_guests' if params[:guests]
+    scopes << 'available' if params[:dates]
+    scopes << 'within_zone' if params[:location]
+
+    chain_scopes(scopes, params)
+  end
+
+  def self.chain_scopes(scopes, params)
+    return nil if scopes.empty?
+    scopes.inject(self) { |chain, scope| chain.send(scope, params) }
+  end
+
+  def self.location_method(params)
+    if params[:lat].nil? || params[:long].nil?
+      "#{params[:city]}, #{params[:state]}"
+    else
+      [params[:lat], params[:long]]
+    end
+  end
+
+  def self.date_range(params)
+    { checkin: DateTime.strptime(params[:dates].split('-')[0], '%m/%d/%Y'),
+      checkout: DateTime.strptime(params[:dates].split('-')[1], '%m/%d/%Y') }
   end
 
   def prepare_address
@@ -65,52 +90,4 @@ class Property < ApplicationRecord
   def format_check_out_time
     DateTime.parse(check_out_time).strftime("%l:%M%P")
   end
-
-  def self.search_city_dates_guests(params)
-    check_in_date, check_out_date, number_of_dates = dates(params)
-    prop_avails = joins(:property_availabilities).merge(PropertyAvailability.available).where("number_of_guests >= ? AND city LIKE ? AND property_availabilities.date >= ? AND property_availabilities.date <= ?", params[:guests], "%#{params[:city]}%", check_in_date, check_out_date)
-    array = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date).pluck(:id)
-    (prop_avails.select {|pa| array.count(pa.id) == number_of_dates}).uniq
-  end
-
-  def self.search_city_guests(params)
-    where('city LIKE ? AND number_of_guests >= ?', "%#{params[:city]}%", params[:guests])
-  end
-
-  def self.search_dates_guests(params)
-    check_in_date, check_out_date, number_of_dates = dates(params)
-    prop_avails = joins(:property_availabilities).merge(PropertyAvailability.available).where("number_of_guests >= ? AND property_availabilities.date >= ? AND property_availabilities.date <= ?", params[:guests], check_in_date, check_out_date)
-    array = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date).pluck(:id)
-    (prop_avails.select {|pa| array.count(pa.id) == number_of_dates}).uniq
-  end
-
-  def self.search_dates_city(params)
-    check_in_date, check_out_date, number_of_dates = dates(params)
-    prop_avails = joins(:property_availabilities).merge(PropertyAvailability.available).where('city LIKE ? AND property_availabilities.date >= ? AND property_availabilities.date <= ?', "%#{params[:city]}%", check_in_date, check_out_date)
-    array = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date).pluck(:id)
-    (prop_avails.select {|pa| array.count(pa.id) == number_of_dates}).uniq
-  end
-
-  def self.search_dates(params)
-    check_in_date, check_out_date, number_of_dates = dates(params)
-    prop_avails = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date)
-    array = joins(:property_availabilities).merge(PropertyAvailability.available).where('property_availabilities.date >= ? AND property_availabilities.date <= ?', check_in_date, check_out_date).pluck(:id)
-    (prop_avails.select {|pa| array.count(pa.id) == number_of_dates}).uniq
-  end
-
-  def self.search_city(params)
-    where('city LIKE ?', "%#{params[:place_search]}%")
-  end
-
-  def self.search_guests(params)
-    where("number_of_guests >= ?", params[:guests])
-  end
-
-  def self.dates(params)
-    check_in_date = params[:check_in].to_date
-    check_out_date = params[:check_out].to_date
-    number_of_dates = check_out_date - check_in_date + 1
-    return check_in_date, check_out_date, number_of_dates
-  end
-
 end

@@ -14,11 +14,9 @@ feature "as a logged in user" do
       expect(page).to have_link('Edit Profile')
     end
 
-    xscenario "I see my pending reservations" do
+    scenario "I see my pending reservations" do
       reservation = create(:reservation, renter: user, status: 0)
       confirmed_res = create(:reservation, renter: user)
-      create(:conversation, author_id: user.id, receiver_id: reservation.property.owner.id)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       login(user)
       visit dashboard_path
 
@@ -36,12 +34,10 @@ feature "as a logged in user" do
       end
     end
 
-    xscenario "I see my confirmed reservations" do
+    scenario "I see my confirmed reservations" do
       reservation = create(:reservation, renter: user, status: 0)
       confirmed_res = create(:reservation, renter: user)
-      create(:conversation, author_id: user.id, receiver_id: reservation.property.owner.id)
       login(user)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit dashboard_path
 
@@ -59,12 +55,10 @@ feature "as a logged in user" do
       end
     end
 
-    xscenario "I see my finished reservations" do
+    scenario "I see my finished reservations" do
       reservation = create(:reservation, renter: user, status: 3)
       confirmed_res = create(:reservation, renter: user)
-      create(:conversation, author_id: user.id, receiver_id: reservation.property.owner.id)
       login(user)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit dashboard_path
 
@@ -82,12 +76,10 @@ feature "as a logged in user" do
       end
     end
 
-    xscenario "I see my declined reservations" do
+    scenario "I see my declined reservations" do
       reservation = create(:reservation, renter: user, status: 4)
       confirmed_res = create(:reservation, renter: user)
-      create(:conversation, author_id: user.id, receiver_id: reservation.property.owner.id)
       login(user)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit dashboard_path
 

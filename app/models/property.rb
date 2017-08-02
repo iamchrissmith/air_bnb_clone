@@ -27,9 +27,9 @@ class Property < ApplicationRecord
 
   def self.search(params)
     methods = []
-    methods << :with_quests if params[:guests]
-    methods << :available if params[:dates]
-    methods << :within_zone if params[:location]
+    methods << 'with_guests' if params[:guests]
+    methods << 'available' if params[:dates]
+    methods << 'within_zone' if params[:location]
 
     methods.inject(self) { |chain, method| chain.send(method, params) }
   end

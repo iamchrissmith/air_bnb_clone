@@ -8,4 +8,4 @@ test:
   
 production:
   adapter: redis
-  url: ENV["REDISTOGO_URL"] || "redis://localhost:6379/"
+  url: ENV["REDISTOGO_URL"]

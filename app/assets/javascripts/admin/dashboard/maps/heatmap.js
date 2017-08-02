@@ -111,7 +111,7 @@ const getPropertiesByState = function() {
     method: 'GET',
     url: '/api/v1/properties/by_state',
     success: function(response){
-      loadGeodata(response);
+      loadGeodata(response.results);
     },
     errors: function(xhr, textStatus, errorThrown){
       console.log(xhr, textStatus, errorThrown)
@@ -144,15 +144,28 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
+const getRevenueByState = function() {
+  $.ajax({
+    method: 'GET',
+    url: '/api/v1/reservations/revenue_by_state',
+    success: function(response){
+      loadGeodata(response.results);
+    },
+    errors: function(xhr, textStatus, errorThrown){
+      console.log(xhr, textStatus, errorThrown)
+    }
+  });
+}
+
 $('#reset_map_zoom').on('click', function(ev) {
   ev.preventDefault();
   map.setView([37.8, -96], 4)
 });
-$('#revenue_per_night').on('click', function(ev){
+$('#revenue_by_state').on('click', function(ev){
   ev.preventDefault();
 
   geojson.remove();
-  loadGeodata(propertyData1);
+  getRevenueByState();
 });
 $('#properties_by_state').on('click', function(ev){
   ev.preventDefault();

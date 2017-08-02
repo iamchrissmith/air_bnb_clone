@@ -1,2 +1,1 @@
-<div class="btn-group btn-group-lg" role="group">
-</div>
+<%= button_to "Message #{reservation.property.owner.first_name}", user_conversation_path(set_conversation(reservation)), method: :get, class: 'btn btn-small btn-primary'%>

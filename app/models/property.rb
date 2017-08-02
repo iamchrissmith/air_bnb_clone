@@ -26,12 +26,17 @@ class Property < ApplicationRecord
   scope :with_guests, -> (params) { where("number_of_guests >= ?", params[:guests]) }
 
   def self.search(params)
-    methods = []
-    methods << 'with_guests' if params[:guests]
-    methods << 'available' if params[:dates]
-    methods << 'within_zone' if params[:location]
+    scopes = []
+    scopes << 'with_guests' if params[:guests]
+    scopes << 'available' if params[:dates]
+    scopes << 'within_zone' if params[:location]
 
-    methods.inject(self) { |chain, method| chain.send(method, params) }
+    chain_scopes(scopes, params)
+  end
+
+  def self.chain_scopes(scopes, params)
+    return nil if scopes.empty?
+    scopes.inject(self) { |chain, scope| chain.send(scope, params) }
   end
 
   def self.location_method(params)

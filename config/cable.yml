@@ -1,10 +1,10 @@
 development:
-  adapter: redis
-  url: redis://localhost:6379/1
+  adapter: async
 
 test:
   adapter: async
   
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  # url: ENV['REDISTOGO_URL']
+  url: redis://redistogo:8abd4713016bfcc07678119f5775d576@barreleye.redistogo.com:11611/

@@ -18,7 +18,6 @@ feature "as a logged in user" do
       reservation = create(:reservation, renter: user, status: 0)
       confirmed_res = create(:reservation, renter: user)
       login(user)
-
       visit dashboard_path
 
       expect(page).to have_content("Pending Reservations")

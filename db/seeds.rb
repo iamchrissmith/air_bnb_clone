@@ -19,6 +19,8 @@ class Seed
     RoomType.destroy_all
     Property.destroy_all
     Reservation.destroy_all
+    Conversation.destroy_all
+    Message.destroy_all
   end
 
   def generate_users
@@ -130,8 +132,36 @@ class Seed
         renter_id: user.id,
         status: Random.new.rand(0..2) )
       puts "#{i} reservation created"
+      generate_conversation(user, property)
+      puts "#{i} conversation set"
+    end
+  end
 
-      PropertyAvailability.set_reserved(property.id, start_date, end_date)
+  def generate_conversation(user, property)
+    host = property.owner
+    conversation = Conversation.find_by(author_id: user.id, receiver_id: host.id) ||
+                   Conversation.find_by(author_id: host.id, receiver_id: user.id)
+    if conversation
+      conversation.title = "Trip to #{property.name}."
+      conversation.save
+    else
+      conversation = Conversation.find_or_create_by(author_id: host.id, receiver_id: user.id)
+      generate_messages(conversation)
+    end
+  end
+
+  def generate_messages(conversation)
+    3.times do |n|
+      Message.create!(
+        content: "Hi, I am the visitor. This is message number #{n}.",
+        conversation_id: conversation.id,
+        user_id: conversation.author_id
+        )
+      Message.create!(
+        content: "Hi, I am the property owner. This is message number #{n}.",
+        conversation_id: conversation.id,
+        user_id: conversation.receiver_id
+        )
     end
 
     puts "#{PropertyAvailability.available.count} Days Reserved"

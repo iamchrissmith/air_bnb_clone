@@ -19,7 +19,7 @@ class Property < ApplicationRecord
 
   scope :within_zone, -> (params) { near(location_method(params[:location]), params[:location][:radius]) }
   scope :available, -> (params) { joins(:property_availabilities)
-                        .where.not(:property_availabilities =>
+                        .where(:property_availabilities =>
                           {:date => date_range(params)[:checkin]..date_range(params)[:checkout], reserved?: false})
                         .distinct }
 
@@ -28,7 +28,7 @@ class Property < ApplicationRecord
   def self.search(params)
     scopes = []
     scopes << 'with_guests' if params[:guests]
-    scopes << 'available' if params[:dates]
+    scopes << 'available' if params[:date_range]
     scopes << 'within_zone' if params[:location]
 
     chain_scopes(scopes, params)
@@ -48,8 +48,8 @@ class Property < ApplicationRecord
   end
 
   def self.date_range(params)
-    { checkin: DateTime.strptime(params[:dates].split('-')[0].strip, '%m/%d/%Y'),
-      checkout: DateTime.strptime(params[:dates].split('-')[1].strip, '%m/%d/%Y') }
+    { checkin: DateTime.strptime(params[:date_range].split('-')[0].strip, '%m/%d/%Y'),
+      checkout: DateTime.strptime(params[:date_range].split('-')[1].strip, '%m/%d/%Y') }
   end
 
   def prepare_address
@@ -79,7 +79,7 @@ class Property < ApplicationRecord
     if raw_weather == nil
       "Invalid city name; no weather information available."
     else
-    Weather.new(raw_weather)
+      Weather.new(raw_weather)
     end
   end
 

@@ -10,4 +10,13 @@ class PropertyAvailability < ApplicationRecord
       PropertyAvailability.create(date: date)
     end
   end
+
+  def self.set_reserved(property_id, check_in, check_out)
+    property = Property.find(property_id)
+    availabilities = property.property_availabilities.where(:property_availabilities => { date: check_in..check_out })
+    availabilities.map do |avail|
+      avail.update(reserved?: true)
+      avail.save
+    end
+  end
 end

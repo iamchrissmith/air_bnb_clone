@@ -1,0 +1,27 @@
+<div class="col-md-12">
+  <h4>Show Top
+    <select id="user-limit" class="chart-limit">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+    <select id="user-filter" class="chart-filter">
+      <option value="getUsersMostBookings">Users by Most Bookings</option>
+      <option value="getUserMostSpent">Users by Most Spent</option>
+      <option value="getUserMostNights">Users by Most Nights</option>
+      <option value="getOwnersMostRevenue">Owner by Most Revenue</option>
+    </select>
+  </h4>
+</div>
+
+<canvas id="userMost" width="1000" height="300"></canvas>
+
+<%= content_for :foot do %>
+  <%= javascript_include_tag 'admin/dashboard/charts/common_charts' %>
+  <%= javascript_include_tag 'admin/dashboard/charts/user_most_bookings' %>
+  <%= javascript_include_tag 'admin/dashboard/charts/user_most_spent' %>
+  <%= javascript_include_tag 'admin/dashboard/charts/user_most_nights' %>
+  <%= javascript_include_tag 'admin/dashboard/charts/owner_most_revenue' %>
+<% end %>

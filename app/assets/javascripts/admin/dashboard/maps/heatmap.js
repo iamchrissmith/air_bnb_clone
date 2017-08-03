@@ -73,7 +73,6 @@ const setGrades = (results) => {
 
   while (high > (custom_grades[custom_grades.length - 1] * golden_ratio)) {
     custom_grades = custom_grades.map( (x) => x * 2 );
-    console.log(custom_grades)
   }
   addLegendtoMap();
 }

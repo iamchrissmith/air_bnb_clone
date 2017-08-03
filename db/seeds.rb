@@ -1,6 +1,7 @@
 class Seed
   def initialize
     destroy_models
+    generate_admin
     generate_users
     generate_room_types
     generate_properties_for_users
@@ -17,8 +18,24 @@ class Seed
     Message.destroy_all
   end
 
+  def generate_admin
+    User.create!(
+      username: "admin",
+      email: 'admin@gmail.com',
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      image_url: Faker::Avatar.image,
+      phone_number: Faker::PhoneNumber.cell_phone,
+      description: Faker::Lorem.paragraph,
+      hometown: Faker::Address.city,
+      role: 0,
+      active?: true,
+      password: "password"
+    )
+  end
+
   def generate_users
-    1000.times do |i|
+    100.times do |i|
       User.create!(
         username: "username#{i}",
         email: Faker::Internet.email,
@@ -97,7 +114,7 @@ class Seed
   end
 
   def generate_reservations_for_users
-    500.times do |i|
+    100.times do |i|
       user = User.find(Random.new.rand(User.first.id..User.count))
       property = Property.find(Random.new.rand(Property.first.id..Property.count))
       length_of_stay = Random.new.rand(1..5)

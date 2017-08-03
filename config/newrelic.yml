@@ -46,3 +46,4 @@ staging:
 production:
   <<: *default_settings
   monitor_mode: true
+  app_name: AirBnB_me_a_river (Production)

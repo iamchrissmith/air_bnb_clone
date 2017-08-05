@@ -18,24 +18,36 @@ class Property < ApplicationRecord
   enum status: %w(pending active archived)
 
   scope :within_zone, -> (params) { near(location_method(params[:location]), params[:location][:radius]) }
-  scope :available, -> (params) { joins(:property_availabilities)
-                        .where(:property_availabilities =>
-                          {:date => date_range(params)[:checkin]..date_range(params)[:checkout], reserved?: false})
-                        .distinct }
-
   scope :with_guests, -> (params) { where("number_of_guests >= ?", params[:guests]) }
 
   def self.search(params)
+    return nil if params[:guests].nil? && params[:location].nil? && params[:dates].nil?
     scopes = []
     scopes << 'with_guests' if params[:guests]
-    scopes << 'available' if params[:date_range]
     scopes << 'within_zone' if params[:location]
 
-    chain_scopes(scopes, params)
+    scoped = chain_scopes(scopes, params)
+    scoped = available(params, scoped) if params[:dates]
+    scoped
+  end
+
+  def self.available(params, scoped = Property.all)
+    checkin = date_range(params)[:checkin]
+    checkout = date_range(params)[:checkout]
+
+    scoped.merge(find_by_sql([
+      "SELECT properties.* FROM properties
+      JOIN property_availabilities ON property_availabilities.property_id = properties.id
+      WHERE property_availabilities.date BETWEEN ? AND ?
+      EXCEPT
+      SELECT properties.* FROM properties
+      INNER JOIN property_availabilities ON property_availabilities.property_id = properties.id
+      WHERE property_availabilities.reserved = TRUE AND property_availabilities.date BETWEEN ? AND ?",
+      checkin, checkout, checkin, checkout ]))
   end
 
   def self.chain_scopes(scopes, params)
-    return nil if scopes.empty?
+    return Property.all if scopes.empty?
     scopes.inject(self) { |chain, scope| chain.send(scope, params) }
   end
 
@@ -48,8 +60,8 @@ class Property < ApplicationRecord
   end
 
   def self.date_range(params)
-    { checkin: DateTime.strptime(params[:date_range].split('-')[0].strip, '%m/%d/%Y'),
-      checkout: DateTime.strptime(params[:date_range].split('-')[1].strip, '%m/%d/%Y') }
+    { checkin: DateTime.strptime(params[:dates].split('-')[0].strip, '%m/%d/%Y'),
+      checkout: DateTime.strptime(params[:dates].split('-')[1].strip, '%m/%d/%Y') }
   end
 
   def prepare_address

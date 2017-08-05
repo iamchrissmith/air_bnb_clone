@@ -99,7 +99,7 @@ function initializeProperties(mapCenter) {
 
   let properties = $.get("/api/v1/properties/search", {
     location: {lat: mapCenter.lat(), long: mapCenter.lng(), radius: 25 },
-    date_range: dateRange,
+    dates: dateRange,
     guests: guests }, makeProperties
   );
 

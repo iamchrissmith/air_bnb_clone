@@ -11,24 +11,25 @@ unless ENV['TRAVIS']
       @property5 = create(:property, description: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO', number_of_guests: 2)
 
       [@property1, @property2, @property3, @property4, @property5].each do |property|
-        property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
+        property.property_availabilities << PropertyAvailability.set_availability(DateTime.now, DateTime.now + 13.day)
       end
 
       prop_as = @property1.property_availabilities
-      prop_as[3..10].each { |pa| pa.update(reserved?: true) }
+      prop_as[3].update(reserved: true)
+      prop_as[10].update(reserved: true)
 
       prop_as = @property2.property_availabilities
-      prop_as[0..2].each { |pa| pa.update(reserved?: true) }
-      prop_as[12..13].each { |pa| pa.update(reserved?: true) }
+      prop_as[1..2].each { |pa| pa.update(reserved: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved: true) }
 
       prop_as = @property3.property_availabilities
-      prop_as[4].update(reserved?: true)
+      prop_as[4].update(reserved: true)
 
       prop_as = @property4.property_availabilities
-      prop_as[9].update(reserved?: true)
+      prop_as[9].update(reserved: true)
 
       prop_as = @property5.property_availabilities
-      prop_as[7].update(reserved?: true)
+      prop_as[7].update(reserved: true)
     end
 
     let(:property1) { @property1.reload }
@@ -45,6 +46,7 @@ unless ENV['TRAVIS']
       find('#location').send_keys(:down)
       sleep(1)
       find('#location').send_keys(:tab)
+      sleep(1)
 
       expect(current_path).to eq('/properties')
       expect(page).to have_selector('.property-card', :count => 3)
@@ -78,18 +80,22 @@ unless ENV['TRAVIS']
       find('#date_range').click
       sleep(1)
       fill_in('daterangepicker_start', with: "")
-      find('input[name=daterangepicker_start]').send_keys('01/01/2017')
+
+      checkin = (DateTime.now + 4.day).strftime("%m/%d/%Y")
+      checkout = (DateTime.now + 10.day).strftime("%m/%d/%Y")
+
+      find('input[name=daterangepicker_start]').send_keys(checkin)
       sleep(1)
       fill_in('daterangepicker_end', with: "")
-      find('input[name=daterangepicker_end]').send_keys('01/13/2017')
+      find('input[name=daterangepicker_end]').send_keys(checkout)
       sleep(1)
       find('#date_range').click
       find('#date_range').send_keys(:enter)
       sleep(5)
 
       within(".property-frame") do
-        expect(page).to have_content(property1.description)
         expect(page).to have_content(property2.description)
+        expect(page).to_not have_content(property1.description)
         expect(page).to_not have_content(property3.description)
         expect(page).to_not have_content(property4.description)
         expect(page).to_not have_content(property5.description)

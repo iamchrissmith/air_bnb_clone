@@ -3,7 +3,7 @@ class PropertyAvailability < ApplicationRecord
   validates_uniqueness_of :date, :scope => :property_id
   belongs_to :property
 
-  scope :available, -> {PropertyAvailability.where(reserved?: false)}
+  scope :available, -> {where(reserved: false)}
 
   def self.set_availability(first_available_date, last_available_date)
     (first_available_date..last_available_date).map do |date|
@@ -15,7 +15,7 @@ class PropertyAvailability < ApplicationRecord
     property = Property.find(property_id)
     availabilities = property.property_availabilities.where(:property_availabilities => { date: check_in..check_out })
     availabilities.map do |avail|
-      avail.update(reserved?: true)
+      avail.update(reserved: true)
       avail.save
     end
   end

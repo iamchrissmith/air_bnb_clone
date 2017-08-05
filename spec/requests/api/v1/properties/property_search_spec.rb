@@ -70,21 +70,21 @@ RSpec.describe 'Properties API', type: :request do
       end
 
       prop_as = property1.property_availabilities
-      prop_as[3].update(reserved?: true)
-      prop_as[10].update(reserved?: true)
+      prop_as[3].update(reserved: true)
+      prop_as[10].update(reserved: true)
 
       prop_as = property2.property_availabilities
-      prop_as[0..2].each { |pa| pa.update(reserved?: true) }
-      prop_as[12..13].each { |pa| pa.update(reserved?: true) }
+      prop_as[0..2].each { |pa| pa.update(reserved: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved: true) }
 
       prop_as = property3.property_availabilities
-      prop_as[4].update(reserved?: true)
+      prop_as[4].update(reserved: true)
 
       prop_as = property4.property_availabilities
-      prop_as[9].update(reserved?: true)
+      prop_as[9].update(reserved: true)
 
       prop_as = property5.property_availabilities
-      prop_as[7].update(reserved?: true)
+      prop_as[7].update(reserved: true)
 
       get "/api/v1/properties/search?dates=01/05/2017-01/10/2017"
       expect(response.status).to eq(200)

@@ -24,7 +24,7 @@ class Seed
   end
 
   def generate_users
-    100.times do |i|
+    50.times do |i|
       User.create!(
         username: "username#{i}",
         email: Faker::Internet.email,
@@ -71,7 +71,7 @@ class Seed
     user_count = User.count
     n = 1
 
-    CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
+    CSV.foreach("db/small_sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       number_of_guests = rand(1..10)
       user = User.order("RANDOM()").last
 
@@ -135,6 +135,7 @@ class Seed
       generate_conversation(user, property)
       puts "#{i} conversation set"
     end
+    puts "#{PropertyAvailability.available.count} Days Reserved"
   end
 
   def generate_conversation(user, property)
@@ -163,8 +164,6 @@ class Seed
         user_id: conversation.receiver_id
         )
     end
-
-    puts "#{PropertyAvailability.available.count} Days Reserved"
   end
 
   def images

@@ -23,9 +23,13 @@ class  PropertyAvailabilitiesController < ApplicationController
     end
   end
 
+  def edit
+    @property_availability = @property.property_availabilities.find(params[:id])
+  end
+
   def update
     if params[:reserved] == "true"
-      @property_availability.update(reserved?: true)
+      @property_availability.update(reserved: true)
       if @property_availability.save
         flash[:success] = "Your available dates have been changed."
         redirect_to property_property_availability_path(@property)

@@ -17,13 +17,11 @@ RSpec.feature "Messaging", type: :feature do
       click_on "#{property.name}"
     end
 
-    binding.pry
     within '.card_header' do
       click_on 'The Host'
     end
 
     click_on "Message #{host.first_name}"
-    binding.pry
     expect(page).to have_content("Trip to #{property.name}")
   end
 end

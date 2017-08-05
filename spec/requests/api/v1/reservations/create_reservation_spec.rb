@@ -4,8 +4,8 @@ describe 'Create Reservation API' do
   context 'POST /api/v1/reservations' do
     let(:user) { create(:user) }
     let(:property) { create(:property) }
-    let(:availability_start) { create(:property_availability, reserved?: false, property: property) }
-    let(:availability_end) { create(:property_availability, reserved?: false, property: property, date: availability_start.date+1) }
+    let(:availability_start) { create(:property_availability, reserved: false, property: property) }
+    let(:availability_end) { create(:property_availability, reserved: false, property: property, date: availability_start.date+1) }
 
     it 'creates a new reservation' do
       params = {reservation: {

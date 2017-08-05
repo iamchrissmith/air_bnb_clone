@@ -16,9 +16,9 @@ RSpec.describe PropertyAvailability, type: :model do
   describe 'sql queries' do
 
     it "can scope to all property availabilities that are not reserved" do
-      pa = create(:property_availability, reserved?: false)
+      pa = create(:property_availability, reserved: false)
       pa2 = create(:property_availability)
-      pa3 = create(:property_availability, reserved?: false)
+      pa3 = create(:property_availability, reserved: false)
 
       pas = PropertyAvailability.available
 

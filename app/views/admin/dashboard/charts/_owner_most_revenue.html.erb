@@ -1,5 +1,18 @@
+<div class="col-md-12">
+  <h2>Top
+    <select id="user-most-revenue-limit" style="width:100px;">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+    Owners by Revenue
+  </h2>
+</div>
 <canvas id="usersMostRevenue" width="600" height="400"></canvas>
 
 <%= content_for :foot do %>
+  <%= javascript_include_tag 'admin/dashboard/charts/common_charts' %>
   <%= javascript_include_tag 'admin/dashboard/charts/owner_most_revenue' %>
 <% end %>

@@ -6,6 +6,7 @@ class Seed
     @end_date = start_date + 1.month
 
     destroy_models
+    generate_admin
     generate_users
     generate_admin
     generate_room_types
@@ -23,8 +24,24 @@ class Seed
     Message.destroy_all
   end
 
+  def generate_admin
+    User.create!(
+      username: "admin",
+      email: 'admin@gmail.com',
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      image_url: Faker::Avatar.image,
+      phone_number: Faker::PhoneNumber.cell_phone,
+      description: Faker::Lorem.paragraph,
+      hometown: Faker::Address.city,
+      role: 0,
+      active?: true,
+      password: "password"
+    )
+  end
+
   def generate_users
-    50.times do |i|
+    200.times do |i|
       User.create!(
         username: "username#{i}",
         email: Faker::Internet.email,
@@ -71,7 +88,7 @@ class Seed
     user_count = User.count
     n = 1
 
-    CSV.foreach("db/small_sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
+    CSV.foreach("db/sample_target_addresses.csv", {:headers => true, :header_converters => :symbol}) do |row|
       number_of_guests = rand(1..10)
       user = User.order("RANDOM()").last
 
@@ -108,12 +125,12 @@ class Seed
   end
 
   def generate_reservations_for_users
-    50.times do |i|
+    100.times do |i|
       user = User.order("RANDOM()").last
 
       guests = rand(1..10)
 
-      length_of_stay = Random.new.rand(1..5)
+      length_of_stay = rand(1..5)
       check_in = start_date + rand(15).day
       check_out = check_in + length_of_stay.day
 

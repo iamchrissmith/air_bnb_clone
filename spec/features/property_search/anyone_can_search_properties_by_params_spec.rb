@@ -42,16 +42,15 @@ unless ENV['TRAVIS']
       visit root_path
 
       find('#location').send_keys('denver')
-      sleep(1)
+      sleep(0.5)
       find('#location').send_keys(:down)
-      sleep(1)
+      sleep(0.5)
       find('#location').send_keys(:tab)
       sleep(1)
 
       expect(current_path).to eq('/properties')
       expect(page).to have_selector('.property-card', :count => 3)
 
-      sleep(1)
       within(".property-frame") do
         expect(page).to have_content(property1.description)
         expect(page).to have_content(property2.description)
@@ -65,10 +64,11 @@ unless ENV['TRAVIS']
       find('#guests').send_keys(:left)
       find('#guests').send_keys(:delete)
       find('#guests').send_keys(7)
-      sleep(1)
+      sleep(0.5)
       find('#guests').send_keys(:tab)
       sleep(1)
 
+      expect(page).to have_selector('.property-card', :count => 2)
       within(".property-frame") do
         expect(page).to have_content(property1.description)
         expect(page).to have_content(property2.description)
@@ -78,21 +78,22 @@ unless ENV['TRAVIS']
       end
 
       find('#date_range').click
-      sleep(1)
+      sleep(0.5)
       fill_in('daterangepicker_start', with: "")
 
       checkin = (DateTime.now + 4.day).strftime("%m/%d/%Y")
       checkout = (DateTime.now + 10.day).strftime("%m/%d/%Y")
 
       find('input[name=daterangepicker_start]').send_keys(checkin)
-      sleep(1)
+      sleep(0.5)
       fill_in('daterangepicker_end', with: "")
       find('input[name=daterangepicker_end]').send_keys(checkout)
-      sleep(1)
+      sleep(0.5)
       find('#date_range').click
       find('#date_range').send_keys(:enter)
-      sleep(5)
+      sleep(1)
 
+      expect(page).to have_selector('.property-card', :count => 1)
       within(".property-frame") do
         expect(page).to have_content(property2.description)
         expect(page).to_not have_content(property1.description)

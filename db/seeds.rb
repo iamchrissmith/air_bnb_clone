@@ -6,7 +6,6 @@ class Seed
     @end_date = start_date + 1.month
 
     destroy_models
-    generate_admin
     generate_users
     generate_admin
     generate_room_types
@@ -22,22 +21,6 @@ class Seed
     Reservation.destroy_all
     Conversation.destroy_all
     Message.destroy_all
-  end
-
-  def generate_admin
-    User.create!(
-      username: "admin",
-      email: 'admin@gmail.com',
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      image_url: Faker::Avatar.image,
-      phone_number: Faker::PhoneNumber.cell_phone,
-      description: Faker::Lorem.paragraph,
-      hometown: Faker::Address.city,
-      role: 0,
-      active?: true,
-      password: "password"
-    )
   end
 
   def generate_users

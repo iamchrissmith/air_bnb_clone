@@ -9,7 +9,7 @@
 <% @property_availabilities.each do |pa| %>
   <h4><%= pa.date.strftime('%b %d, %Y') %></h4>
   <% if pa.property.owner == current_user %>
-  <%= button_to "Make unavailable", property_property_availability_path(@property, pa), method: :delete, class: 'btn btn-warning' %><br><br>
+  <%= link_to "Make unavailable", edit_property_property_availability_path(@property, pa, :reserved => true), class: 'btn btn-warning' %><br><br>
   <% end %>
 <% end %>
 <div>

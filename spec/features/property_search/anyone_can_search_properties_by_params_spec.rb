@@ -11,25 +11,25 @@ unless ENV['TRAVIS']
       @property5 = create(:property, description: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO', number_of_guests: 2)
 
       [@property1, @property2, @property3, @property4, @property5].each do |property|
-        property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
+        property.property_availabilities << PropertyAvailability.set_availability(DateTime.now, DateTime.now + 13.day)
       end
 
       prop_as = @property1.property_availabilities
-      prop_as[3].update(reserved?: true)
-      prop_as[10].update(reserved?: true)
+      prop_as[3].update(reserved: true)
+      prop_as[10].update(reserved: true)
 
       prop_as = @property2.property_availabilities
-      prop_as[0..2].each { |pa| pa.update(reserved?: true) }
-      prop_as[12..13].each { |pa| pa.update(reserved?: true) }
+      prop_as[1..2].each { |pa| pa.update(reserved: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved: true) }
 
       prop_as = @property3.property_availabilities
-      prop_as[4].update(reserved?: true)
+      prop_as[4].update(reserved: true)
 
       prop_as = @property4.property_availabilities
-      prop_as[9].update(reserved?: true)
+      prop_as[9].update(reserved: true)
 
       prop_as = @property5.property_availabilities
-      prop_as[7].update(reserved?: true)
+      prop_as[7].update(reserved: true)
     end
 
     let(:property1) { @property1.reload }
@@ -38,19 +38,19 @@ unless ENV['TRAVIS']
     let(:property4) { @property4.reload }
     let(:property5) { @property5.reload }
 
-    xit "and can search by location", :js => true do
+    it "and can search by location", :js => true do
       visit root_path
 
       find('#location').send_keys('denver')
-      sleep(1)
+      sleep(0.5)
       find('#location').send_keys(:down)
-      sleep(1)
+      sleep(0.5)
       find('#location').send_keys(:tab)
+      sleep(1)
 
       expect(current_path).to eq('/properties')
       expect(page).to have_selector('.property-card', :count => 3)
 
-      sleep(1)
       within(".property-frame") do
         expect(page).to have_content(property1.description)
         expect(page).to have_content(property2.description)
@@ -60,159 +60,46 @@ unless ENV['TRAVIS']
       end
 
       find('#guests').click
-      find('#guests').send_keys(:back)
+      sleep(0.5)
+      find('#guests').send_keys(:left)
       find('#guests').send_keys(:delete)
-      find('#guests').send_keys(5)
+      find('#guests').send_keys(7)
+      sleep(0.5)
+      find('#guests').send_keys(:tab)
       sleep(1)
-    end
 
-    xit "can search by number of guests allowed", :js => true  do
-      visit root_path
-
-      fill_in :guests, with:"#{property.number_of_guests}"
-      click_on "Search"
-
-      expect(current_path).to eq(properties_path)
-      expect(page).to have_content(property.number_of_guests)
-
-      within(".results") do
-        expect(page).to have_content(property.name)
-        expect(page).to have_css("img[src*='#{property.image_url}']")
-        expect(page).to_not have_content(property2.name)
+      expect(page).to have_selector('.property-card', :count => 2)
+      within(".property-frame") do
+        expect(page).to have_content(property1.description)
+        expect(page).to have_content(property2.description)
+        expect(page).to_not have_content(property3.description)
+        expect(page).to_not have_content(property4.description)
+        expect(page).to_not have_content(property5.description)
       end
-    end
 
-    xit "can search by range of dates" do
-      property = create(:property, name: "airstream")
-      property2 = create(:property)
+      find('#date_range').click
+      sleep(0.5)
+      fill_in('daterangepicker_start', with: "")
 
-      property_availability = create(:property_availability, property: property, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property, date: Date.tomorrow, reserved?: false)
-      property_availability = create(:property_availability, property: property2, date: Date.today, reserved?: true)
-      property_availability = create(:property_availability, property: property2, date: Date.tomorrow, reserved?: false)
-      visit root_path
+      checkin = (DateTime.now + 4.day).strftime("%m/%d/%Y")
+      checkout = (DateTime.now + 10.day).strftime("%m/%d/%Y")
 
-      fill_in :check_in, with:"#{Date.today}"
-      fill_in :check_out, with:"#{Date.tomorrow}"
+      find('input[name=daterangepicker_start]').send_keys(checkin)
+      sleep(0.5)
+      fill_in('daterangepicker_end', with: "")
+      find('input[name=daterangepicker_end]').send_keys(checkout)
+      sleep(0.5)
+      find('#date_range').click
+      find('#date_range').send_keys(:enter)
+      sleep(1)
 
-      click_on "Search"
-      expect(current_path).to eq(properties_path)
-      within(".results") do
-        expect(page).to have_content(property.name)
-        expect(page).to have_css("img[src*='#{property.image_url}']")
-        expect(page).to_not have_content(property2.name)
-      end
-    end
-
-    xit "can search by city and number of guests allowed" do
-      property = create(:property, name: "cabin in the woods", city: "Denver", number_of_guests: 5)
-      property2 = create(:property)
-      visit root_path
-
-      fill_in :location, with:"#{property.city}"
-      fill_in :guests, with:"#{property.number_of_guests}"
-      click_on "Search"
-
-      expect(current_path).to eq(properties_path)
-      expect(page).to have_content(property.city)
-
-
-      within(".results") do
-        expect(page).to have_content(property.name)
-        expect(page).to have_css("img[src*='#{property.image_url}']")
-        expect(page).to_not have_content(property2.name)
-      end
-    end
-
-    xit "can search by city and date range" do
-      property = create(:property, name: "airstream", city: "Denver")
-      property2 = create(:property)
-      property3 = create(:property, name: "cabin in the woods")
-      property4 = create(:property, name: "cabin", city: "Denver", number_of_guests: 5)
-
-      property_availability = create(:property_availability, property: property, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property, date: Date.tomorrow, reserved?: false)
-      property_availability = create(:property_availability, property: property2, date: Date.today, reserved?: true)
-      property_availability = create(:property_availability, property: property3, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property4, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property4, date: Date.tomorrow, reserved?: false)
-      visit root_path
-
-      fill_in :location, with:"#{property.city}"
-      fill_in :check_in, with:"#{Date.today}"
-      fill_in :check_out, with:"#{Date.tomorrow}"
-      click_on "Search"
-
-      expect(current_path).to eq(properties_path)
-
-      within(".results") do
-        expect(page).to have_content(property.name)
-        expect(page).to have_css("img[src*='#{property.image_url}']")
-        expect(page).to have_content(property4.name)
-        expect(page).to have_css("img[src*='#{property4.image_url}']")
-        expect(page).to_not have_content(property2.name)
-      end
-    end
-
-    xit "search by date range and number of guests" do
-      property = create(:property, name: "airstream", city: "Denver", number_of_guests: 4)
-      property2 = create(:property)
-      property3 = create(:property, name: "cabin in the woods", number_of_guests: 10)
-      property4 = create(:property, name: "cabin", city: "Denver", number_of_guests: 5)
-
-      property_availability = create(:property_availability, property: property, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property2, date: Date.today, reserved?: true)
-      property_availability = create(:property_availability, property: property3, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property3, date: Date.tomorrow, reserved?: false)
-      property_availability = create(:property_availability, property: property4, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property4, date: Date.tomorrow, reserved?: false)
-      visit root_path
-
-      fill_in :check_in, with:"#{Date.today}"
-      fill_in :check_out, with:"#{Date.tomorrow}"
-      fill_in :guests, with:"#{property4.number_of_guests}"
-
-      click_on "Search"
-      expect(current_path).to eq(properties_path)
-
-      within(".results") do
-        expect(page).to have_content(property4.city)
-        expect(page).to have_content(property4.name)
-        expect(page).to have_css("img[src*='#{property4.image_url}']")
-        expect(page).to have_content(property3.city)
-        expect(page).to have_content(property3.name)
-        expect(page).to have_css("img[src*='#{property3.image_url}']")
-        expect(page).to_not have_content(property.name)
-      end
-    end
-
-    xit "can serch by city, date range and number of guests" do
-      property = create(:property, name: "airstream", city: "St. Louis", number_of_guests: 4)
-      property2 = create(:property)
-      property3 = create(:property, name: "cabin in the woods", number_of_guests: 10)
-      property4 = create(:property, name: "cabin", city: "Denver", number_of_guests: 5)
-
-      property_availability = create(:property_availability, property: property, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property2, date: Date.today, reserved?: true)
-      property_availability = create(:property_availability, property: property3, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property4, date: Date.today, reserved?: false)
-      property_availability = create(:property_availability, property: property4, date: Date.tomorrow, reserved?: false)
-      visit root_path
-
-      fill_in :location, with:"#{property4.city}"
-      fill_in :check_in, with:"#{Date.today}"
-      fill_in :check_out, with:"#{Date.tomorrow}"
-      fill_in :guests, with:"#{property4.number_of_guests}"
-
-      click_on "Search"
-
-      expect(current_path).to eq(properties_path)
-
-      within(".results") do
-        expect(page).to have_content(property4.name)
-        expect(page).to have_css("img[src*='#{property4.image_url}']")
-        expect(page).to_not have_content(property2.name)
-        expect(page).to_not have_content(property.name)
+      expect(page).to have_selector('.property-card', :count => 1)
+      within(".property-frame") do
+        expect(page).to have_content(property2.description)
+        expect(page).to_not have_content(property1.description)
+        expect(page).to_not have_content(property3.description)
+        expect(page).to_not have_content(property4.description)
+        expect(page).to_not have_content(property5.description)
       end
     end
   end

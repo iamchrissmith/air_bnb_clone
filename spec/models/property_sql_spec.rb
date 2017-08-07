@@ -10,35 +10,37 @@ RSpec.describe Property do
       property3 = create(:property, name: 'Boulder')
       property4 = create(:property, name: 'Vail')
       property5 = create(:property, name: 'Colorado Springs')
+      property6 = create(:property, name: 'Broomfield')
 
-      [property1, property2, property3, property4, property5].each do |property|
+      [property1, property2, property3, property4, property5, property6].each do |property|
         property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
       end
 
       prop_as = property1.property_availabilities
-      prop_as[3].update(reserved?: true)
-      prop_as[10].update(reserved?: true)
+      prop_as[3].update(reserved: true)
+      prop_as[10].update(reserved: true)
 
       prop_as = property2.property_availabilities
-      prop_as[0..2].each { |pa| pa.update(reserved?: true) }
-      prop_as[12..13].each { |pa| pa.update(reserved?: true) }
+      prop_as[0..2].each { |pa| pa.update(reserved: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved: true) }
 
       prop_as = property3.property_availabilities
-      prop_as[4].update(reserved?: true)
+      prop_as[4].update(reserved: true)
 
       prop_as = property4.property_availabilities
-      prop_as[9].update(reserved?: true)
+      prop_as[9].update(reserved: true)
 
       prop_as = property5.property_availabilities
-      prop_as[7].update(reserved?: true)
+      prop_as[7].update(reserved: true)
 
       params = { dates: '01/05/2017-01/10/2017' }
       results = Property.available(params)
 
-      expect(results.count).to eq(2)
+      expect(results.count).to eq(3)
 
       expect(results.include?(property1)).to be_truthy
       expect(results.include?(property2)).to be_truthy
+      expect(results.include?(property6)).to be_truthy
 
       expect(results.include?(property3)).to be_falsey
       expect(results.include?(property4)).to be_falsey
@@ -82,103 +84,110 @@ RSpec.describe Property do
       expect(results.to_a.include?(property3)).to be_falsey
       expect(results.to_a.include?(property4)).to be_falsey
     end
+  end
 
-    describe '.search' do
+  describe '.search' do
 
-      before(:each) do
-        @property1 = create(:property, name: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO', number_of_guests: 10)
-        @property2 = create(:property, name: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO', number_of_guests: 6)
-        @property3 = create(:property, name: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO', number_of_guests: 1)
-        @property4 = create(:property, name: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO', number_of_guests: 2)
-        @property5 = create(:property, name: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO', number_of_guests: 5)
+    before(:each) do
+      @property1 = create(:property, name: 'Lakewood', address: '9227 W Mississippi Ave', city: 'Lakewood', state: 'CO', number_of_guests: 10)
+      @property2 = create(:property, name: 'Aurora', address: '19599 E Bails Pl', city: 'Aurora', state: 'CO', number_of_guests: 6)
+      @property3 = create(:property, name: 'Boulder', address: '880 33rd St', city: 'Boulder', state: 'CO', number_of_guests: 1)
+      @property4 = create(:property, name: 'Vail', address: '245 Forest Rd', city: 'Vail', state: 'CO', number_of_guests: 2)
+      @property5 = create(:property, name: 'Colorado Springs', address: '1 Olympic Plaza', city: 'Colorado Springs', state: 'CO', number_of_guests: 5)
 
-        [property1, property2, property3, property4, property5].each do |property|
-          property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
-        end
-
-        prop_as = property1.property_availabilities
-        prop_as[3].update(reserved?: true)
-        prop_as[10].update(reserved?: true)
-
-        prop_as = property2.property_availabilities
-        prop_as[0..2].each { |pa| pa.update(reserved?: true) }
-        prop_as[12..13].each { |pa| pa.update(reserved?: true) }
-
-        prop_as = property3.property_availabilities
-        prop_as[4].update(reserved?: true)
-
-        prop_as = property4.property_availabilities
-        prop_as[9].update(reserved?: true)
-
-        prop_as = property5.property_availabilities
-        prop_as[7].update(reserved?: true)
+      [@property1, @property2, @property3, @property4, @property5].each do |property|
+        property.property_availabilities << PropertyAvailability.set_availability(DateTime.new(2017,1,1), DateTime.new(2017,1,14))
       end
 
-      let(:property1) { @property1.reload }
-      let(:property2) { @property2.reload }
-      let(:property3) { @property3.reload }
-      let(:property4) { @property4.reload }
-      let(:property5) { @property5.reload }
+      prop_as = @property1.property_availabilities
+      prop_as[3].update(reserved: true)
+      prop_as[10].update(reserved: true)
 
-      it 'can chain all scopes together' do
-        params = { location: { lat: 39.7392, long: -104.9903, radius: 25 }, guests: 5, dates: '01/05/2017-01/10/2017' }
+      prop_as = @property2.property_availabilities
+      prop_as[1..2].each { |pa| pa.update(reserved: true) }
+      prop_as[12..13].each { |pa| pa.update(reserved: true) }
 
-        results = Property.search(params)
+      prop_as = @property3.property_availabilities
+      prop_as[4].update(reserved: true)
 
-        expect(results.to_a.include?(property1)).to be_truthy
-        expect(results.to_a.include?(property2)).to be_truthy
+      prop_as = @property4.property_availabilities
+      prop_as[9].update(reserved: true)
 
-        expect(results.to_a.include?(property3)).to be_falsey
-        expect(results.to_a.include?(property4)).to be_falsey
-        expect(results.to_a.include?(property5)).to be_falsey
-      end
+      prop_as = @property5.property_availabilities
+      prop_as[7].update(reserved: true)
+    end
 
-      it 'can search when dates param is nil' do
-        params = { location: { lat: 39.7392, long: -104.9903, radius: 25 }, guests: 5, dates: nil }
+    it 'can chain all scopes together' do
+      params = { location: { lat: 39.7392, long: -104.9903, radius: 25 }, guests: 5, dates: '01/05/2017-01/10/2017' }
 
-        results = Property.search(params)
+      results = Property.search(params)
 
-        expect(results.to_a.include?(property1)).to be_truthy
-        expect(results.to_a.include?(property2)).to be_truthy
+      expect(results.to_a.include?(@property1)).to be_truthy
+      expect(results.to_a.include?(@property2)).to be_truthy
 
-        expect(results.to_a.include?(property3)).to be_falsey
-        expect(results.to_a.include?(property4)).to be_falsey
-        expect(results.to_a.include?(property5)).to be_falsey
-      end
+      expect(results.to_a.include?(@property3)).to be_falsey
+      expect(results.to_a.include?(@property4)).to be_falsey
+      expect(results.to_a.include?(@property5)).to be_falsey
+    end
 
-      it 'can search when guests param is nil' do
-        params = { location: { lat: 39.7392, long: -104.9903, radius: 25 }, guests: nil, dates: nil }
+    it 'can find available of chained scopes' do
+      params = { location: { lat: 39.7392, long: -104.9903, radius: 25 }, guests: 5, dates: '01/01/2017-01/01/2017' }
 
-        results = Property.search(params)
+      results = Property.search(params)
 
-        expect(results.to_a.include?(property1)).to be_truthy
-        expect(results.to_a.include?(property2)).to be_truthy
-        expect(results.to_a.include?(property3)).to be_truthy
+      expect(results.to_a.include?(@property1)).to be_truthy
+      expect(results.to_a.include?(@property2)).to be_truthy
 
-        expect(results.to_a.include?(property4)).to be_falsey
-        expect(results.to_a.include?(property5)).to be_falsey
-      end
+      expect(results.to_a.include?(@property3)).to be_falsey
+      expect(results.to_a.include?(@property4)).to be_falsey
+      expect(results.to_a.include?(@property5)).to be_falsey
+    end
 
-      it 'can search when location param is nil' do
-        params = { location: nil, guests: 5, dates: nil }
+    it 'can search when dates param is nil' do
+      params = { location: { lat: 39.7392, long: -104.9903, radius: 25 }, guests: 5, dates: nil }
 
-        results = Property.search(params)
+      results = Property.search(params)
 
-        expect(results.to_a.include?(property1)).to be_truthy
-        expect(results.to_a.include?(property2)).to be_truthy
-        expect(results.to_a.include?(property5)).to be_truthy
+      expect(results.to_a.include?(@property1)).to be_truthy
+      expect(results.to_a.include?(@property2)).to be_truthy
 
-        expect(results.to_a.include?(property3)).to be_falsey
-        expect(results.to_a.include?(property4)).to be_falsey
-      end
+      expect(results.to_a.include?(@property3)).to be_falsey
+      expect(results.to_a.include?(@property4)).to be_falsey
+      expect(results.to_a.include?(@property5)).to be_falsey
+    end
 
-      it 'will return nil if all params are nil' do
-        params = { location: nil, guests: nil, dates: nil }
+    it 'can search when guests param is nil' do
+      params = { location: { lat: 39.7392, long: -104.9903, radius: 25 }, guests: nil, dates: nil }
 
-        results = Property.search(params)
+      results = Property.search(params)
 
-        expect(results).to be_falsey
-      end
+      expect(results.to_a.include?(@property1)).to be_truthy
+      expect(results.to_a.include?(@property2)).to be_truthy
+      expect(results.to_a.include?(@property3)).to be_truthy
+
+      expect(results.to_a.include?(@property4)).to be_falsey
+      expect(results.to_a.include?(@property5)).to be_falsey
+    end
+
+    it 'can search when location param is nil' do
+      params = { location: nil, guests: 5, dates: nil }
+
+      results = Property.search(params)
+
+      expect(results.to_a.include?(@property1)).to be_truthy
+      expect(results.to_a.include?(@property2)).to be_truthy
+      expect(results.to_a.include?(@property5)).to be_truthy
+
+      expect(results.to_a.include?(@property3)).to be_falsey
+      expect(results.to_a.include?(@property4)).to be_falsey
+    end
+
+    it 'will return nil if all params are nil' do
+      params = { location: nil, guests: nil, dates: nil }
+
+      results = Property.search(params)
+
+      expect(results).to be_falsey
     end
   end
 end

@@ -7,7 +7,13 @@ function homeSearch() {
 
 function persistSearchData() {
   if (sessionStorage.place) { $('#location').val(sessionStorage.place) };
-  if (sessionStorage.guests) { $('#guests').val(sessionStorage.guests) };
+  if (sessionStorage.guests) {
+    $('#guests').val(sessionStorage.guests)
+    sessionStorage.setItem('guests', $('#guests').val());
+  } else {
+    $('#guests').val(1)
+  };
+
   if (sessionStorage.date_range) {
     $('input[name="date_range"]').daterangepicker({
       "startDate": sessionStorage.date_range.split(' - ')[0],

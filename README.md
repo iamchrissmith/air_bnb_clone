@@ -82,6 +82,7 @@ All tests are currently run with the rspec command.
 * **Beth Knight** - *Initial work First Sprint* - https://github.com/BethKnight1234
 * **Colleen Ward** - *Initial work First Sprint* - https://github.com/caward12
 * **Erin Bassity** - *Initial work First Sprint* - https://github.com/somedayrainbows
+* **Stephanie Bentley** - *Initial work First Sprint* - https://github.com/slague
 
 * **Chris Smith** - *Second Sprint* - https://github.com/iamchrissmith
 * **Bao Nguyen** - *Second Sprint* - https://github.com/rongxanh88

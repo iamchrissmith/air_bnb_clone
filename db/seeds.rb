@@ -11,7 +11,7 @@ class Seed
     generate_room_types
     generate_properties_for_users
     generate_property_availability
-    # generate_reservations_for_users
+    generate_reservations_for_users
   end
 
   def destroy_models
@@ -75,7 +75,7 @@ class Seed
       number_of_guests = rand(1..10)
       user = User.order("RANDOM()").last
 
-      prop = Property.create!(
+      Property.create!(
         name: Faker::Company.name,
         number_of_guests: number_of_guests,
         number_of_beds: number_of_guests / 2,
@@ -95,6 +95,10 @@ class Seed
         owner_id: user.id )
 
       puts "#{row} property created for user_id: #{user.id}"
+      if n >= user_count
+        break
+      end
+      n += 1
     end
   end
 
@@ -111,16 +115,18 @@ class Seed
     100.times do |i|
       user = User.order("RANDOM()").last
 
-      guests = rand(1..10)
+      property = nil
+      while property.nil?
+        guests = rand(1..10)
+        length_of_stay = rand(1..5)
+        check_in = start_date + rand(15).day
+        check_out = check_in + length_of_stay.day
 
-      length_of_stay = rand(1..5)
-      check_in = start_date + rand(15).day
-      check_out = check_in + length_of_stay.day
+        params = { dates: "#{check_in.strftime("%m/%d/%Y")}-#{check_out.strftime("%m/%d/%Y")}", guests: guests }
 
-      params = { dates: "#{check_in.strftime("%m/%d/%Y")}-#{check_out.strftime("%m/%d/%Y")}", guests: guests }
-
-      property = Property.search(params).first
-      break unless property
+        property = Property.search(params).first
+      end
+      
       total = (property.price_per_night * length_of_stay)
 
       user.reservations.create!(

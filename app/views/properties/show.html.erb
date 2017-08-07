@@ -57,7 +57,9 @@
           <%= render partial: 'property_header' %>
           <hr>
           <h3>Hosted by <%= @property.owner.full_name %></h3>
-          <%= button_to "Message #{@property.owner.first_name}", user_conversations_path(property_id: @property.id), method: :post, class: 'btn btn-medium btn-info' %>
+          <% if current_user %>
+            <%= button_to "Message #{@property.owner.first_name}", user_conversations_path(property_id: @property.id), method: :post, class: 'btn btn-medium btn-info' %>
+          <% end %>
         </div>
       </div>
     </div>

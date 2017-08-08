@@ -1,0 +1,1180 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE ar_internal_metadata OWNER TO nguyenb;
+
+--
+-- Name: conversations; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE conversations (
+    id integer NOT NULL,
+    title character varying,
+    author_id integer,
+    receiver_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE conversations OWNER TO nguyenb;
+
+--
+-- Name: conversations_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE conversations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE conversations_id_seq OWNER TO nguyenb;
+
+--
+-- Name: conversations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE conversations_id_seq OWNED BY conversations.id;
+
+
+--
+-- Name: identities; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE identities (
+    id integer NOT NULL,
+    user_id integer,
+    uid character varying,
+    provider character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE identities OWNER TO nguyenb;
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE identities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE identities_id_seq OWNER TO nguyenb;
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE identities_id_seq OWNED BY identities.id;
+
+
+--
+-- Name: messages; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE messages (
+    id integer NOT NULL,
+    content text,
+    conversation_id integer,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE messages OWNER TO nguyenb;
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE messages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE messages_id_seq OWNER TO nguyenb;
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE messages_id_seq OWNED BY messages.id;
+
+
+--
+-- Name: properties; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE properties (
+    id integer NOT NULL,
+    name character varying,
+    number_of_guests integer,
+    number_of_beds integer,
+    number_of_rooms integer,
+    description text,
+    price_per_night numeric,
+    address character varying,
+    city character varying,
+    state character varying,
+    zip character varying,
+    lat double precision,
+    long double precision,
+    image_url character varying,
+    check_in_time character varying,
+    check_out_time character varying,
+    status integer DEFAULT 0,
+    owner_id integer,
+    room_type_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    number_of_bathrooms integer
+);
+
+
+ALTER TABLE properties OWNER TO nguyenb;
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE properties_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE properties_id_seq OWNER TO nguyenb;
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE properties_id_seq OWNED BY properties.id;
+
+
+--
+-- Name: property_availabilities; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE property_availabilities (
+    id integer NOT NULL,
+    date date,
+    reserved boolean DEFAULT false,
+    property_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE property_availabilities OWNER TO nguyenb;
+
+--
+-- Name: property_availabilities_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE property_availabilities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE property_availabilities_id_seq OWNER TO nguyenb;
+
+--
+-- Name: property_availabilities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE property_availabilities_id_seq OWNED BY property_availabilities.id;
+
+
+--
+-- Name: property_reviews; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE property_reviews (
+    id integer NOT NULL,
+    property_id integer,
+    user_id integer,
+    rating integer,
+    body character varying,
+    reservation_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE property_reviews OWNER TO nguyenb;
+
+--
+-- Name: property_reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE property_reviews_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE property_reviews_id_seq OWNER TO nguyenb;
+
+--
+-- Name: property_reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE property_reviews_id_seq OWNED BY property_reviews.id;
+
+
+--
+-- Name: reservations; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE reservations (
+    id integer NOT NULL,
+    total_price numeric,
+    start_date date,
+    end_date date,
+    number_of_guests integer,
+    property_id integer,
+    renter_id integer,
+    status integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE reservations OWNER TO nguyenb;
+
+--
+-- Name: reservations_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE reservations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE reservations_id_seq OWNER TO nguyenb;
+
+--
+-- Name: reservations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE reservations_id_seq OWNED BY reservations.id;
+
+
+--
+-- Name: room_types; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE room_types (
+    id integer NOT NULL,
+    name integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE room_types OWNER TO nguyenb;
+
+--
+-- Name: room_types_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE room_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE room_types_id_seq OWNER TO nguyenb;
+
+--
+-- Name: room_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE room_types_id_seq OWNED BY room_types.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE schema_migrations OWNER TO nguyenb;
+
+--
+-- Name: user_reviews; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE user_reviews (
+    id integer NOT NULL,
+    user_id integer,
+    rating integer,
+    body character varying,
+    reservation_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    renter_id integer
+);
+
+
+ALTER TABLE user_reviews OWNER TO nguyenb;
+
+--
+-- Name: user_reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE user_reviews_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE user_reviews_id_seq OWNER TO nguyenb;
+
+--
+-- Name: user_reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE user_reviews_id_seq OWNED BY user_reviews.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: nguyenb
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    first_name character varying,
+    last_name character varying,
+    image_url character varying,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    phone_number character varying,
+    description text,
+    hometown character varying,
+    role integer DEFAULT 0,
+    "active?" boolean DEFAULT true,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    google_uid character varying,
+    google_oauth_token character varying,
+    google_oauth_expires_at timestamp without time zone,
+    facebook_uid character varying,
+    facebook_token character varying,
+    authy_id character varying,
+    last_sign_in_with_authy timestamp without time zone,
+    authy_enabled boolean DEFAULT false,
+    username character varying
+);
+
+
+ALTER TABLE users OWNER TO nguyenb;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: nguyenb
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO nguyenb;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nguyenb
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: conversations id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY conversations ALTER COLUMN id SET DEFAULT nextval('conversations_id_seq'::regclass);
+
+
+--
+-- Name: identities id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY identities ALTER COLUMN id SET DEFAULT nextval('identities_id_seq'::regclass);
+
+
+--
+-- Name: messages id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY messages ALTER COLUMN id SET DEFAULT nextval('messages_id_seq'::regclass);
+
+
+--
+-- Name: properties id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY properties ALTER COLUMN id SET DEFAULT nextval('properties_id_seq'::regclass);
+
+
+--
+-- Name: property_availabilities id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_availabilities ALTER COLUMN id SET DEFAULT nextval('property_availabilities_id_seq'::regclass);
+
+
+--
+-- Name: property_reviews id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_reviews ALTER COLUMN id SET DEFAULT nextval('property_reviews_id_seq'::regclass);
+
+
+--
+-- Name: reservations id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY reservations ALTER COLUMN id SET DEFAULT nextval('reservations_id_seq'::regclass);
+
+
+--
+-- Name: room_types id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY room_types ALTER COLUMN id SET DEFAULT nextval('room_types_id_seq'::regclass);
+
+
+--
+-- Name: user_reviews id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY user_reviews ALTER COLUMN id SET DEFAULT nextval('user_reviews_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	test	2017-08-08 18:32:28.353184	2017-08-08 18:32:28.353184
+\.
+
+
+--
+-- Data for Name: conversations; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY conversations (id, title, author_id, receiver_id, created_at, updated_at) FROM stdin;
+1	\N	7	3	2017-08-08 18:32:32.824763	2017-08-08 18:32:32.824763
+3	\N	7	5	2017-08-08 18:32:32.956505	2017-08-08 18:32:32.956505
+2	Trip to Heathcote and Sons.	7	6	2017-08-08 18:32:32.889224	2017-08-08 18:32:33.015454
+4	\N	7	4	2017-08-08 18:32:33.057128	2017-08-08 18:32:33.057128
+\.
+
+
+--
+-- Name: conversations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('conversations_id_seq', 4, true);
+
+
+--
+-- Data for Name: identities; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY identities (id, user_id, uid, provider, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('identities_id_seq', 1, false);
+
+
+--
+-- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY messages (id, content, conversation_id, user_id, created_at, updated_at) FROM stdin;
+1	Hi, I am the visitor. This is message number 0.	1	7	2017-08-08 18:32:32.835305	2017-08-08 18:32:32.835305
+2	Hi, I am the property owner. This is message number 0.	1	3	2017-08-08 18:32:32.840593	2017-08-08 18:32:32.840593
+3	Hi, I am the visitor. This is message number 1.	1	7	2017-08-08 18:32:32.842806	2017-08-08 18:32:32.842806
+4	Hi, I am the property owner. This is message number 1.	1	3	2017-08-08 18:32:32.844953	2017-08-08 18:32:32.844953
+5	Hi, I am the visitor. This is message number 2.	1	7	2017-08-08 18:32:32.84724	2017-08-08 18:32:32.84724
+6	Hi, I am the property owner. This is message number 2.	1	3	2017-08-08 18:32:32.849701	2017-08-08 18:32:32.849701
+7	Hi, I am the visitor. This is message number 0.	2	7	2017-08-08 18:32:32.892184	2017-08-08 18:32:32.892184
+8	Hi, I am the property owner. This is message number 0.	2	6	2017-08-08 18:32:32.894563	2017-08-08 18:32:32.894563
+9	Hi, I am the visitor. This is message number 1.	2	7	2017-08-08 18:32:32.896893	2017-08-08 18:32:32.896893
+10	Hi, I am the property owner. This is message number 1.	2	6	2017-08-08 18:32:32.899217	2017-08-08 18:32:32.899217
+11	Hi, I am the visitor. This is message number 2.	2	7	2017-08-08 18:32:32.902232	2017-08-08 18:32:32.902232
+12	Hi, I am the property owner. This is message number 2.	2	6	2017-08-08 18:32:32.905182	2017-08-08 18:32:32.905182
+13	Hi, I am the visitor. This is message number 0.	3	7	2017-08-08 18:32:32.958656	2017-08-08 18:32:32.958656
+14	Hi, I am the property owner. This is message number 0.	3	5	2017-08-08 18:32:32.963612	2017-08-08 18:32:32.963612
+15	Hi, I am the visitor. This is message number 1.	3	7	2017-08-08 18:32:32.971242	2017-08-08 18:32:32.971242
+16	Hi, I am the property owner. This is message number 1.	3	5	2017-08-08 18:32:32.974439	2017-08-08 18:32:32.974439
+17	Hi, I am the visitor. This is message number 2.	3	7	2017-08-08 18:32:32.978015	2017-08-08 18:32:32.978015
+18	Hi, I am the property owner. This is message number 2.	3	5	2017-08-08 18:32:32.982282	2017-08-08 18:32:32.982282
+19	Hi, I am the visitor. This is message number 0.	4	7	2017-08-08 18:32:33.060684	2017-08-08 18:32:33.060684
+20	Hi, I am the property owner. This is message number 0.	4	4	2017-08-08 18:32:33.065269	2017-08-08 18:32:33.065269
+21	Hi, I am the visitor. This is message number 1.	4	7	2017-08-08 18:32:33.070689	2017-08-08 18:32:33.070689
+22	Hi, I am the property owner. This is message number 1.	4	4	2017-08-08 18:32:33.074714	2017-08-08 18:32:33.074714
+23	Hi, I am the visitor. This is message number 2.	4	7	2017-08-08 18:32:33.07791	2017-08-08 18:32:33.07791
+24	Hi, I am the property owner. This is message number 2.	4	4	2017-08-08 18:32:33.081892	2017-08-08 18:32:33.081892
+\.
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('messages_id_seq', 24, true);
+
+
+--
+-- Data for Name: properties; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY properties (id, name, number_of_guests, number_of_beds, number_of_rooms, description, price_per_night, address, city, state, zip, lat, long, image_url, check_in_time, check_out_time, status, owner_id, room_type_id, created_at, updated_at, number_of_bathrooms) FROM stdin;
+1	Cormier, Hamill and Schiller	8	4	4	Gastropub bespoke sustainable twee selfies flexitarian paleo. Banh mi diy truffaut hoodie heirloom. Post-ironic next level truffaut yuccie helvetica fanny pack austin. Aesthetic viral poutine freegan.	89.64	8900 Highway 7	Saint Louis Park	MN	55426	44.9360605999999976	-93.3932479999999998	https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iGLAXAV9HfdY/v0/1200x750.jpg	14:00:00	11:00:00	1	10	1	2017-08-08 18:32:30.59509	2017-08-08 18:32:30.59509	2
+2	Medhurst, McLaughlin and Dibbert	3	1	2	Fashion axe wes anderson chia pabst taxidermy. Farm-to-table freegan yolo stumptown poutine squid literally. Mumblecore disrupt 3 wolf moon loko. Chillwave semiotics chicharrones portland master banjo health freegan.	67.97	5537 W Broadway Ave	Crystal	MN	55428	45.0521539000000004	-93.3648540000000082	http://clv.h-cdn.co/assets/cm/15/09/54eb98794d090_-_windriver-house.jpg	14:00:00	11:00:00	1	1	1	2017-08-08 18:32:30.753021	2017-08-08 18:32:30.753021	1
+3	Tremblay Inc	4	2	2	Letterpress before they sold out fingerstache kombucha. Gluten-free typewriter listicle hammock migas vhs vegan. Wolf echo vinegar master roof trust fund etsy occupy. Etsy twee photo booth. Art party etsy master carry 90's whatever brunch small batch.	29.85	1902 Miller Trunk Hwy	Duluth	MN	55811	46.8086139999999986	-92.1681478999999939	https://upload.wikimedia.org/wikipedia/commons/1/15/Castel_Telvana_Borgo.jpg	14:00:00	11:00:00	1	7	2	2017-08-08 18:32:30.824514	2017-08-08 18:32:30.824514	1
+4	Osinski-Cartwright	1	0	1	Chillwave austin flannel bushwick photo booth xoxo bitters. Semiotics blue bottle ugh paleo selfies cleanse kombucha. Kale chips blog xoxo pickled ethical. Vegan you probably haven't heard of them occupy yuccie celiac put a bird on it photo booth.	24.69	2555 W 79th St	Bloomington	MN	55431	44.8595041000000023	-93.3112746999999985	http://www.newyorker.com/wp-content/uploads/2016/04/Manley-SoYoureaDudeWhoWantstoBuildaTreeHouse-1200.jpg	14:00:00	11:00:00	1	6	1	2017-08-08 18:32:31.210483	2017-08-08 18:32:31.210483	0
+5	Schinner-Lehner	1	0	1	Health occupy photo booth knausgaard art party phlogiston quinoa celiac. Lomo pug bespoke. Drinking you probably haven't heard of them hoodie readymade mixtape austin scenester hashtag.	29.27	755 53rd Ave NE	Minneapolis	MN	55421	45.0660882000000029	-93.251683799999995	http://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2013/5/1/0/RX-HGMAG011_Brooks-Beachhouse-135-b-4x3.jpg.rend.hgtvcom.1280.960.jpeg	14:00:00	11:00:00	1	6	3	2017-08-08 18:32:31.590927	2017-08-08 18:32:31.590927	0
+6	O'Conner, Friesen and Nicolas	8	4	4	Pitchfork direct trade plaid pabst flexitarian mlkshk. Pickled franzen microdosing ugh keffiyeh. Slow-carb dreamcatcher carry park. Meditation crucifix pinterest whatever 8-bit pug irony. Lo-fi readymade sriracha muggle magic irony artisan.	80.69	12275 Saint Charles Rock Rd	Bridgeton	MO	63044	38.753990899999998	-90.4258019000000104	http://www.yurts.com/wp-content/uploads/2015/07/24-Pacific-Yurt-With-Picnic-Table.jpg	14:00:00	11:00:00	1	8	2	2017-08-08 18:32:31.664484	2017-08-08 18:32:31.664484	2
+7	Ebert-Bosco	5	2	2	Etsy mixtape pork belly helvetica fashion axe flexitarian williamsburg polaroid. Lo-fi salvia venmo aesthetic. Microdosing vinyl slow-carb wayfarers normcore kombucha. Pabst cred hoodie.	41.73	13131 Montfort Dr	Dallas	TX	75240	32.9279597000000024	-96.8135362000000015	http://www.newyorker.com/wp-content/uploads/2016/04/Manley-SoYoureaDudeWhoWantstoBuildaTreeHouse-1200.jpg	14:00:00	11:00:00	1	3	2	2017-08-08 18:32:31.738205	2017-08-08 18:32:31.738205	1
+8	Gulgowski-Kshlerin	4	2	2	Green juice tote bag lo-fi selvage tattooed migas tofu. Raw denim asymmetrical austin scenester semiotics five dollar toast shoreditch hammock. Deep v artisan roof wes anderson fixie typewriter mlkshk cred. Put a bird on it cray tote bag vegan tumblr. +1 normcore sartorial cred humblebrag raw denim.	15.46	1122 W Centerville Rd	Garland	TX	75041	32.8550836000000004	-96.6438804000000005	https://www.mohonk.com/wp-content/uploads/2017/01/Fact-Sheets-1680x1260.jpg	14:00:00	11:00:00	1	5	1	2017-08-08 18:32:32.074239	2017-08-08 18:32:32.074239	1
+9	Barrows, Schultz and Brown	9	4	4	Green juice whatever lumbersexual photo booth gluten-free. Stumptown vinegar meditation shabby chic marfa. Pinterest mlkshk cronut sriracha cold-pressed fingerstache.	92.06	7051 Southwest Fwy	Houston	TX	77074	29.7065957000000012	-95.5072837999999962	http://modelosdefachadasdecasas.com/wp-content/uploads/2015/11/modelo-fachada-de-casas-bonitas.jpg	14:00:00	11:00:00	1	2	3	2017-08-08 18:32:32.147834	2017-08-08 18:32:32.147834	3
+10	Heathcote and Sons	2	1	1	Lomo meh artisan shoreditch knausgaard umami +1 flannel. Thundercats artisan narwhal keffiyeh yolo etsy williamsburg. Tumblr blog organic. Street 90's swag. Forage tousled letterpress leggings.	71.33	335 N Academy Blvd	Colorado Springs	CO	80909	38.8381820999999974	-104.756185200000004	http://www.newyorker.com/wp-content/uploads/2016/04/Manley-SoYoureaDudeWhoWantstoBuildaTreeHouse-1200.jpg	14:00:00	11:00:00	1	7	2	2017-08-08 18:32:32.224103	2017-08-08 18:32:32.224103	0
+11	Bayer Inc	1	0	1	Pour-over church-key marfa pbr&b pickled locavore lomo bespoke. Small batch tilde blue bottle health keffiyeh mlkshk deep v taxidermy. Muggle magic 8-bit cronut whatever. Offal tousled helvetica dreamcatcher. Typewriter hashtag migas 3 wolf moon cornhole pinterest paleo polaroid.	68.26	1701 S Yale Ave	Tulsa	OK	74112	36.1375535000000028	-95.9200046999999927	http://www.yurts.com/wp-content/uploads/2015/07/24-Pacific-Yurt-With-Picnic-Table.jpg	14:00:00	11:00:00	1	4	1	2017-08-08 18:32:32.326174	2017-08-08 18:32:32.326174	0
+\.
+
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('properties_id_seq', 11, true);
+
+
+--
+-- Data for Name: property_availabilities; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY property_availabilities (id, date, reserved, property_id, created_at, updated_at) FROM stdin;
+1	2017-08-01	f	10	2017-08-08 18:32:32.583612	2017-08-08 18:32:32.696678
+2	2017-08-02	f	10	2017-08-08 18:32:32.588405	2017-08-08 18:32:32.699614
+3	2017-08-03	f	10	2017-08-08 18:32:32.591497	2017-08-08 18:32:32.702107
+4	2017-08-04	f	10	2017-08-08 18:32:32.594613	2017-08-08 18:32:32.704388
+5	2017-08-05	f	10	2017-08-08 18:32:32.597733	2017-08-08 18:32:32.706693
+6	2017-08-06	f	10	2017-08-08 18:32:32.600894	2017-08-08 18:32:32.709161
+7	2017-08-07	f	10	2017-08-08 18:32:32.604115	2017-08-08 18:32:32.711647
+8	2017-08-08	f	10	2017-08-08 18:32:32.607264	2017-08-08 18:32:32.714089
+9	2017-08-09	f	10	2017-08-08 18:32:32.610924	2017-08-08 18:32:32.716517
+10	2017-08-10	f	10	2017-08-08 18:32:32.614592	2017-08-08 18:32:32.71937
+11	2017-08-11	f	10	2017-08-08 18:32:32.622817	2017-08-08 18:32:32.721811
+12	2017-08-12	f	10	2017-08-08 18:32:32.626094	2017-08-08 18:32:32.724308
+13	2017-08-13	f	10	2017-08-08 18:32:32.631003	2017-08-08 18:32:32.726884
+14	2017-08-14	f	10	2017-08-08 18:32:32.633815	2017-08-08 18:32:32.729336
+15	2017-08-15	f	10	2017-08-08 18:32:32.636686	2017-08-08 18:32:32.731811
+16	2017-08-16	f	10	2017-08-08 18:32:32.639718	2017-08-08 18:32:32.734336
+17	2017-08-17	f	10	2017-08-08 18:32:32.642715	2017-08-08 18:32:32.736825
+18	2017-08-18	f	10	2017-08-08 18:32:32.645701	2017-08-08 18:32:32.73928
+19	2017-08-19	f	10	2017-08-08 18:32:32.648753	2017-08-08 18:32:32.741718
+20	2017-08-20	f	10	2017-08-08 18:32:32.651854	2017-08-08 18:32:32.744317
+21	2017-08-21	f	10	2017-08-08 18:32:32.655108	2017-08-08 18:32:32.746791
+22	2017-08-22	f	10	2017-08-08 18:32:32.658196	2017-08-08 18:32:32.749304
+23	2017-08-23	f	10	2017-08-08 18:32:32.66138	2017-08-08 18:32:32.752177
+24	2017-08-24	f	10	2017-08-08 18:32:32.6645	2017-08-08 18:32:32.754738
+25	2017-08-25	f	10	2017-08-08 18:32:32.667625	2017-08-08 18:32:32.757239
+26	2017-08-26	f	10	2017-08-08 18:32:32.670699	2017-08-08 18:32:32.759683
+27	2017-08-27	f	10	2017-08-08 18:32:32.673698	2017-08-08 18:32:32.762983
+28	2017-08-28	f	10	2017-08-08 18:32:32.676635	2017-08-08 18:32:32.765513
+29	2017-08-29	f	10	2017-08-08 18:32:32.679483	2017-08-08 18:32:32.768026
+30	2017-08-30	f	10	2017-08-08 18:32:32.682351	2017-08-08 18:32:32.770542
+31	2017-08-31	f	10	2017-08-08 18:32:32.685197	2017-08-08 18:32:32.772955
+32	2017-09-01	f	10	2017-08-08 18:32:32.688315	2017-08-08 18:32:32.775493
+\.
+
+
+--
+-- Name: property_availabilities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('property_availabilities_id_seq', 32, true);
+
+
+--
+-- Data for Name: property_reviews; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY property_reviews (id, property_id, user_id, rating, body, reservation_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: property_reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('property_reviews_id_seq', 1, false);
+
+
+--
+-- Data for Name: reservations; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY reservations (id, total_price, start_date, end_date, number_of_guests, property_id, renter_id, status, created_at, updated_at) FROM stdin;
+1	213.99	2017-08-10	2017-08-13	1	10	3	2	2017-08-08 18:32:32.799809	2017-08-08 18:32:32.799809
+2	142.66	2017-08-02	2017-08-04	3	10	6	2	2017-08-08 18:32:32.871951	2017-08-08 18:32:32.871951
+3	71.33	2017-08-02	2017-08-03	5	10	5	2	2017-08-08 18:32:32.945806	2017-08-08 18:32:32.945806
+4	213.99	2017-08-12	2017-08-15	3	10	6	0	2017-08-08 18:32:32.999618	2017-08-08 18:32:32.999618
+5	213.99	2017-08-02	2017-08-05	1	10	4	1	2017-08-08 18:32:33.040877	2017-08-08 18:32:33.040877
+\.
+
+
+--
+-- Name: reservations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('reservations_id_seq', 5, true);
+
+
+--
+-- Data for Name: room_types; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY room_types (id, name, created_at, updated_at) FROM stdin;
+1	0	2017-08-08 18:32:30.501354	2017-08-08 18:32:30.501354
+2	1	2017-08-08 18:32:30.503495	2017-08-08 18:32:30.503495
+3	2	2017-08-08 18:32:30.505275	2017-08-08 18:32:30.505275
+\.
+
+
+--
+-- Name: room_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('room_types_id_seq', 3, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY schema_migrations (version) FROM stdin;
+20170517011703
+20170517011840
+20170517012219
+20170517014214
+20170517014705
+20170517015516
+20170517015637
+20170517015838
+20170517020118
+20170517203901
+20170517212301
+20170517234157
+20170517234338
+20170518161141
+20170518161522
+20170518164526
+20170518174831
+20170518175245
+20170518181648
+20170518213103
+20170518213240
+20170520212653
+20170520213351
+20170520214016
+20170523185123
+20170524163616
+20170726220620
+20170727033621
+20170729175835
+20170729213239
+20170730231259
+20170804161352
+\.
+
+
+--
+-- Data for Name: user_reviews; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY user_reviews (id, user_id, rating, body, reservation_id, created_at, updated_at, renter_id) FROM stdin;
+\.
+
+
+--
+-- Name: user_reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('user_reviews_id_seq', 1, false);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: nguyenb
+--
+
+COPY users (id, first_name, last_name, image_url, email, phone_number, description, hometown, role, "active?", created_at, updated_at, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, google_uid, google_oauth_token, google_oauth_expires_at, facebook_uid, facebook_token, authy_id, last_sign_in_with_authy, authy_enabled, username) FROM stdin;
+1	Herminio	Hauck	https://robohash.org/estharumconsequuntur.png?size=300x300&set=set1	grant.leannon@faheyhagenes.com	1-710-871-2183	Et et numquam dolore dolorem omnis consectetur. Qui repellat blanditiis. Consectetur dolorem mollitia veritatis doloremque aut non illum.	Armaniberg	0	t	2017-08-08 18:32:29.117229	2017-08-08 18:32:29.117229	$2a$11$ssgzMgK6eE3qCEgNPgzuiuEgxp0yuD5mTA5Au5017kL3hBhixjI8W	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username0
+2	Noble	Walker	https://robohash.org/impeditundeaspernatur.png?size=300x300&set=set1	tom.dietrich@leffler.net	1-567-798-6839	Numquam omnis eveniet incidunt. Eos non vitae iste voluptatem reiciendis veniam veritatis. Eos voluptatibus cumque molestiae nesciunt quo blanditiis quis. Molestiae fugiat quas officiis nemo. Perferendis ut excepturi qui magnam distinctio impedit repellendus.	West Kobemouth	0	t	2017-08-08 18:32:29.25953	2017-08-08 18:32:29.25953	$2a$11$HklNvKmuQ.5WhlZtb80G5OMXgQWKAUntJzvpx7FiWhfgICwbyK3qO	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username1
+3	Enoch	Kreiger	https://robohash.org/liberoestullam.png?size=300x300&set=set1	otis@gleichner.com	(702) 954-9488	Ut aut minima atque. Doloribus eveniet fuga voluptate omnis et ad id. Praesentium sint repudiandae dolorem. Eligendi distinctio est in totam numquam suscipit.	Clydeside	0	t	2017-08-08 18:32:29.397579	2017-08-08 18:32:29.397579	$2a$11$kqwSyt4U1Q4iDWoDIy/m.u1T13SqCcWxo0s/B1oekGS0fDns2k75O	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username2
+4	Kirk	Lowe	https://robohash.org/earumquiaut.png?size=300x300&set=set1	katarina@bergnaum.org	(703) 094-3662	Sit nobis labore rerum accusantium rerum dolores. Quod id reiciendis molestias incidunt quia voluptatem nihil. Nam et nulla optio mollitia.	Willville	0	t	2017-08-08 18:32:29.532687	2017-08-08 18:32:29.532687	$2a$11$ot8Lyc2Zs/Z8ZlKj7lFEeOb2mwLHUyuN/GWRXQZZ.OXXYK0bVJ/Km	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username3
+5	Kari	Kris	https://robohash.org/reprehenderitvoluptatemomnis.png?size=300x300&set=set1	ronny.strosin@larsonferry.co	(348) 166-1421	Est voluptatibus sunt vero rem sit totam suscipit. Dolorem sapiente asperiores et eius harum. Aut exercitationem autem ut necessitatibus. Corporis sit ipsam. Quia laboriosam eos et aut.	Kutchmouth	0	t	2017-08-08 18:32:29.676718	2017-08-08 18:32:29.676718	$2a$11$d2ojN3GvVXFIAq/X/KNMjOUTYhyolDmPsrPz7teCRuG4zEBh00bqu	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username4
+6	Keyon	Goldner	https://robohash.org/nonintempore.png?size=300x300&set=set1	kenyon_kuhic@schmeler.com	305.124.6576	Atque officia quod porro aut deserunt. Aut eos enim veritatis deleniti. Quisquam commodi labore.	South Pansyshire	0	t	2017-08-08 18:32:29.811413	2017-08-08 18:32:29.811413	$2a$11$vYLYBa2hxaGId2.lrdVxgerQA0ji/6Q5rtnOFGQOh0X/SGCSfwB06	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username5
+7	Cole	Klocko	https://robohash.org/sitdignissimosquia.png?size=300x300&set=set1	ilene@dubuquehagenes.biz	293-374-1950	Dicta beatae quaerat aut. Temporibus non aut magnam modi velit. Facilis voluptatibus harum tenetur animi expedita. Eos est laudantium sed veritatis dolores ut et. Atque illum voluptatem recusandae.	Walshberg	0	t	2017-08-08 18:32:29.944643	2017-08-08 18:32:29.944643	$2a$11$EBZ4Y4TvHISqCaJEsiKv3.yW2eHaCe76axogkrZ7EEqJkOUABeauS	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username6
+8	Reese	Friesen	https://robohash.org/distinctiovoluptatemdolores.png?size=300x300&set=set1	alene@batz.org	284-625-6028	Asperiores fugit recusandae praesentium culpa expedita harum. Eveniet assumenda mollitia voluptatem eum et. Ducimus ipsum atque pariatur dolorem unde nostrum et.	Zulaufbury	0	t	2017-08-08 18:32:30.081182	2017-08-08 18:32:30.081182	$2a$11$.LT3L6RCEUXbOK2Hwv/HHOeVK.kV/54peW.GXt91hndhMOLKp4K6W	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username7
+9	Leif	Breitenberg	https://robohash.org/asperioresdistinctiorepellendus.png?size=300x300&set=set1	fiona@moriettegrimes.com	1-336-147-3797	Voluptate quia ipsum ut. Sed est architecto. Aut molestiae vel.	West Johnathanville	0	t	2017-08-08 18:32:30.220989	2017-08-08 18:32:30.220989	$2a$11$J2ceTDL3UZ/1CvjBh2hf1uW89FMK4hQzqchtldTijy6pKx8N0WTwm	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username8
+10	Jayson	Grant	https://robohash.org/earumdistinctiofugit.png?size=300x300&set=set1	nia.jerde@grant.io	1-371-741-2995	Recusandae voluptas consequatur hic exercitationem praesentium perferendis. Nemo voluptas non assumenda ad facere. Possimus voluptate exercitationem dolorum tempora. Et quia nihil et commodi fuga.	Yesenialand	0	t	2017-08-08 18:32:30.356512	2017-08-08 18:32:30.356512	$2a$11$NUpR.Wc/jFUn7uCDmCZQ6OjgiDZ6ZooBGX18w1UR13rilv6oJfI0O	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	username9
+11	Neil	Diamond	images/niel_diamond.jpg	admin@gmail.com	555-555-555	Hands, touching hands, reaching out, touching me, touching you.	Brooklyn	1	t	2017-08-08 18:32:30.495017	2017-08-08 18:32:30.495017	$2a$11$Yn/HsKV0gJVPSmRPsfyDeupxopoPRRPauPXtAX6lx03gM9cxMNfOe	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	Admin
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nguyenb
+--
+
+SELECT pg_catalog.setval('users_id_seq', 11, true);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: conversations conversations_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY conversations
+    ADD CONSTRAINT conversations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: identities identities_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY identities
+    ADD CONSTRAINT identities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: messages messages_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: properties properties_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY properties
+    ADD CONSTRAINT properties_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: property_availabilities property_availabilities_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_availabilities
+    ADD CONSTRAINT property_availabilities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: property_reviews property_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_reviews
+    ADD CONSTRAINT property_reviews_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reservations reservations_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY reservations
+    ADD CONSTRAINT reservations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: room_types room_types_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY room_types
+    ADD CONSTRAINT room_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: user_reviews user_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY user_reviews
+    ADD CONSTRAINT user_reviews_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_conversations_on_author_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_conversations_on_author_id ON conversations USING btree (author_id);
+
+
+--
+-- Name: index_conversations_on_receiver_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_conversations_on_receiver_id ON conversations USING btree (receiver_id);
+
+
+--
+-- Name: index_identities_on_user_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_identities_on_user_id ON identities USING btree (user_id);
+
+
+--
+-- Name: index_messages_on_conversation_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_messages_on_conversation_id ON messages USING btree (conversation_id);
+
+
+--
+-- Name: index_messages_on_user_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_messages_on_user_id ON messages USING btree (user_id);
+
+
+--
+-- Name: index_properties_on_owner_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_properties_on_owner_id ON properties USING btree (owner_id);
+
+
+--
+-- Name: index_properties_on_room_type_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_properties_on_room_type_id ON properties USING btree (room_type_id);
+
+
+--
+-- Name: index_property_availabilities_on_property_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_property_availabilities_on_property_id ON property_availabilities USING btree (property_id);
+
+
+--
+-- Name: index_property_reviews_on_property_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_property_reviews_on_property_id ON property_reviews USING btree (property_id);
+
+
+--
+-- Name: index_property_reviews_on_reservation_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_property_reviews_on_reservation_id ON property_reviews USING btree (reservation_id);
+
+
+--
+-- Name: index_property_reviews_on_user_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_property_reviews_on_user_id ON property_reviews USING btree (user_id);
+
+
+--
+-- Name: index_reservations_on_property_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_reservations_on_property_id ON reservations USING btree (property_id);
+
+
+--
+-- Name: index_reservations_on_renter_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_reservations_on_renter_id ON reservations USING btree (renter_id);
+
+
+--
+-- Name: index_user_reviews_on_renter_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_user_reviews_on_renter_id ON user_reviews USING btree (renter_id);
+
+
+--
+-- Name: index_user_reviews_on_reservation_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_user_reviews_on_reservation_id ON user_reviews USING btree (reservation_id);
+
+
+--
+-- Name: index_user_reviews_on_user_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_user_reviews_on_user_id ON user_reviews USING btree (user_id);
+
+
+--
+-- Name: index_users_on_authy_id; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE INDEX index_users_on_authy_id ON users USING btree (authy_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: nguyenb
+--
+
+CREATE UNIQUE INDEX index_users_on_username ON users USING btree (username);
+
+
+--
+-- Name: reservations fk_rails_0e95ce621b; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY reservations
+    ADD CONSTRAINT fk_rails_0e95ce621b FOREIGN KEY (property_id) REFERENCES properties(id);
+
+
+--
+-- Name: property_reviews fk_rails_226e56e74f; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_reviews
+    ADD CONSTRAINT fk_rails_226e56e74f FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: messages fk_rails_273a25a7a6; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT fk_rails_273a25a7a6 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: properties fk_rails_2bbbe844db; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY properties
+    ADD CONSTRAINT fk_rails_2bbbe844db FOREIGN KEY (room_type_id) REFERENCES room_types(id);
+
+
+--
+-- Name: property_availabilities fk_rails_3ed6743e0f; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_availabilities
+    ADD CONSTRAINT fk_rails_3ed6743e0f FOREIGN KEY (property_id) REFERENCES properties(id);
+
+
+--
+-- Name: reservations fk_rails_48a92fce51; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY reservations
+    ADD CONSTRAINT fk_rails_48a92fce51 FOREIGN KEY (renter_id) REFERENCES users(id);
+
+
+--
+-- Name: identities fk_rails_5373344100; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY identities
+    ADD CONSTRAINT fk_rails_5373344100 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: messages fk_rails_7f927086d2; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT fk_rails_7f927086d2 FOREIGN KEY (conversation_id) REFERENCES conversations(id);
+
+
+--
+-- Name: property_reviews fk_rails_c007f1ac9e; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_reviews
+    ADD CONSTRAINT fk_rails_c007f1ac9e FOREIGN KEY (reservation_id) REFERENCES reservations(id);
+
+
+--
+-- Name: property_reviews fk_rails_c7e5681c40; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY property_reviews
+    ADD CONSTRAINT fk_rails_c7e5681c40 FOREIGN KEY (property_id) REFERENCES properties(id);
+
+
+--
+-- Name: user_reviews fk_rails_d21bd0d63e; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY user_reviews
+    ADD CONSTRAINT fk_rails_d21bd0d63e FOREIGN KEY (reservation_id) REFERENCES reservations(id);
+
+
+--
+-- Name: properties fk_rails_e41321a67c; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY properties
+    ADD CONSTRAINT fk_rails_e41321a67c FOREIGN KEY (owner_id) REFERENCES users(id);
+
+
+--
+-- Name: user_reviews fk_rails_f526f8a17a; Type: FK CONSTRAINT; Schema: public; Owner: nguyenb
+--
+
+ALTER TABLE ONLY user_reviews
+    ADD CONSTRAINT fk_rails_f526f8a17a FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

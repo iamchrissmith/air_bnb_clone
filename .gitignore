@@ -26,3 +26,6 @@ coverage
 
 #make your own cassettes!
 spec/fixtures/vcr_cassettes
+
+#ignore precompiled assets
+/public/assets/*

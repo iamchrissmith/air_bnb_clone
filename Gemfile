@@ -8,7 +8,7 @@ end
 gem 'rails', '~> 5.0.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 gem 'uglifier', '= 3.2.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'active_model_serializers', '~> 0.10.0'
@@ -29,7 +29,7 @@ gem 'chart-js-rails'
 # , :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'faker'
 gem 'devise'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '>= 3.3.7'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 gem 'redis', '~>3.2'
@@ -46,7 +46,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '>= 3.4.4'
   gem 'newrelic_rpm'
 end
 
@@ -58,7 +58,7 @@ end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.0.8'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
